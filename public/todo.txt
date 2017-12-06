@@ -4,7 +4,7 @@
 - decide what’s most important things to publish prototype
 
 
-
+- enable auto deleting old caches
 
 - done but tst with kris - make font for iphones even smaller
 
