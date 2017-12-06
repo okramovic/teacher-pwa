@@ -21,11 +21,9 @@ $(function(){
     var fonter = document.getElementById('fontTester')
     //var styl = window.getComputedStyle( fonter, null ).getPropertyValue( )
     console.log("header", parseFloat(  window.getComputedStyle( fonter, null ).getPropertyValue( "width") ) )
-    if ( parseFloat(  window.getComputedStyle( fonter, null ).getPropertyValue( "width") ) > 22){
-
-var fonter = document.getElementById('fontTester')
-//var styl = window.getComputedStyle( fonter, null ).getPropertyValue( )
-//console.log("fonter", fonter )  //document.querySelector('body')))
+  
+    //if ( parseFloat(  window.getComputedStyle( fonter, null ).getPropertyValue( "width") ) > 22){}
+})
 
 
 /*$(function(){
