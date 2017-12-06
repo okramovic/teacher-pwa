@@ -1,11 +1,8 @@
-test raz raz
+
 
 - - - - - - - - - Teacher - TO DO  - - - - - - - — - - - -
 - decide what’s most important things to publish prototype
 
-
-
-if browser doesnt speak, test cant be taken!
 
 
 - enable auto deleting old caches
@@ -100,3 +97,4 @@ not neccessary
 - check on site load whether browser is mozilla 
       (or other that also disables custom fonts)
       => in such case replace custom font with unicode chars.
+- if browser doesnt speak, test cant be taken
