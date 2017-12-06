@@ -4,10 +4,12 @@
 - decide what’s most important things to publish prototype
 
 
+- voice on/off switching sometimes doesnt react (?change event onclick to onchange?)
+- word rating changes wierdly
 
+- make Practice button much larger font
 
-- mozilla fallback solution when material-icons dont work
-
+- remove non-used code
 
 
 
@@ -69,3 +71,4 @@ not neccessary
 - autochoose voices and langs for cz, de, eng  ||  or save them in local storage
 - select on active or focus or what has some outline
 - last round with zen mode ignores wrong answers and quits the test
+- mozilla fallback solution when material-icons dont work

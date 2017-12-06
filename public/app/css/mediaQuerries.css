@@ -7,6 +7,11 @@
   .size1{
     font-size: 30px;
   }
+  .size1-5{
+      
+      font-size: 26px;
+      /*text-decoration: underline;*/
+  }
   .size2{
       font-size: 23px;
   }

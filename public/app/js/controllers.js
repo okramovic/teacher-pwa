@@ -581,10 +581,11 @@ function($scope, $rootScope, $timeout,
             })}
             $scope.voice1Select = function(v){
                 
-                                console.log("v", v)
+                                //console.log("v", v)
                                 $timeout(function(){
                                         $scope.voice1 = getVoiceIndex(v)
                                         console.log("new voice1\n\n",v, $scope.voice1)
+                                        alert("on? " + $scope.voice1On +" v1 " + $scope.voice1)
                                 })                                
             }
             $scope.voice2Select = function(v){
@@ -594,6 +595,7 @@ function($scope, $rootScope, $timeout,
                                         $scope.voice2 = getVoiceIndex(v)
                                         console.log("new voice2\n\n",v, $scope.voice2)
                                         //alert($scope.voice2 + " " + $scope.voices[$scope.voice2].name)
+                                        alert("on2 " + $scope.voice2On +" v2 " + $scope.voice2)
                                 })
             }
             function getVoiceIndex(name){

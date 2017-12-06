@@ -17,8 +17,8 @@
     /*'Frank Ruhl Libre';*/
 }
 body {
-    /*display-flex;
-    height: 100vh;*/
+    
+    min-height: 100vh;
 
 }
 
@@ -246,13 +246,3 @@ textarea::placeholder{
     margin: 0px;
     
 }
-/*
-.size2{
-    font-size: 23px;
-}
-.size3{
-    font-size: 18px;
-}
-.size4{
-    font-size: 15px;
-}*/

@@ -11,10 +11,12 @@ var shellFiles = [
   "/app/css/mediaQuerries.css",
   "/app/css/testDiv.css",
   "/app/css/Frank_Ruhl_Libre/FrankRuhlLibre-Medium.ttf",
+  
   "/app/js/controllers.js",
   "/app/js/directives.js",
   "/app/js/services.js",
   "/app/js/teacherApp.js",
+
   "/app/libs/angular-animate.1.5.5.min.js",
   "/app/libs/angular-materialize.0.2.2.min.js",
   "/app/libs/jquery-3.1.1.min.js",
