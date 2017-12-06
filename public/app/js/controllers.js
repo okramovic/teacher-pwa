@@ -86,6 +86,8 @@ function($scope, $rootScope, $timeout,
 
             $scope.$timeout = $timeout
         
+            $scope.defaultVoiceIndexes = [null, null]
+            
             function loadVoices(){
                 if (window.speechSynthesis) {
 
@@ -94,7 +96,7 @@ function($scope, $rootScope, $timeout,
 
                                 // promisify this
                                 $timeout(function(){
-                                        $scope.defaultVoiceIndexes = [null, null]
+                                        
                                         $scope.voices = []
                                         $scope.voices = synth.getVoices();    
                                         console.log($scope.voices)
