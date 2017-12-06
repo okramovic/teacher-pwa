@@ -16,14 +16,16 @@ if ('serviceWorker' in navigator){
     alert('serviceWorker not available in this browser');
 }
 
+$(function(){
+  
+    var fonter = document.getElementById('fontTester')
+    //var styl = window.getComputedStyle( fonter, null ).getPropertyValue( )
+    //console.log("header", styl )  //document.querySelector('body'))
+    if ( parseFloat(  window.getComputedStyle( fonter, null ).getPropertyValue( "width") ) > 22){
 
-var fonter = document.getElementById('fontTester')
-//var styl = window.getComputedStyle( fonter, null ).getPropertyValue( )
-//console.log("header", styl )  //document.querySelector('body'))
-if ( parseFloat(  window.getComputedStyle( fonter, null ).getPropertyValue( "width") ) > 22){
-
-            alert("mat. icons not loaded")
-} else alert('font ok')
+                alert("mat. icons not loaded")
+    } else alert('font ok')
+})
 /*getfont().then(res=>{
             console.log("result",res, "\n",res.ok, res.status)
             alert("font loaded?  " + res.status + " " + res.ok)
