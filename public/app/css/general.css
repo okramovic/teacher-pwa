@@ -51,16 +51,18 @@ body {
     align-items: center;
 
     border: none;
+
+    margin: 5px 0px 0px;
 }
 .collection-item{
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    width: 80%;
+    width: 95%;
     margin: auto;
 
-    border-top: 1px dashed;
+    border-top: 1px solid;
 }
 .collection-item .thumb-sized{
     
@@ -147,7 +149,7 @@ a, button {
     user-select: none;
     -webkit-user-select: none;
 
-    height: 30px;
+    min-height: 30px;
     /*margin: 5px; padding: 20px;*/
     text-decoration: none;
     

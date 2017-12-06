@@ -347,6 +347,13 @@ app/*.directive('checkB',function(){
         }
 
 }])
+// this is for locally stored dictionary names at initial screen
+.filter('replace_',function(){
+        return function(name){
+                return name.replace(/_/g," ")
+        }
+})
+
 function clearNotes(text){
 
         text = text.slice(

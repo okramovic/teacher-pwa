@@ -2,13 +2,96 @@
       btn (mtrlz class)
 
 */
+/* for (mini) iphones  */
+@media screen and (max-width: 330px){
+  .size1{
+    font-size: 24px;
+  }
+  .size1-5{
+      
+      font-size: 21px;
+      /*text-decoration: underline;*/
+  }
+  .size2{
+      font-size: 18px;
+  }
+  .size3{
+      font-size: 15px;
+  }
+  .size4{
+      font-size: 13px;
+  }
+  .size5{
+    font-size: 11px;
+  }
+  .size6{
+    font-size: 7px;
+  }
+  .material-icons{
+    font-size: 21px;
+  }
 
-@media screen and (max-width: 400px){
+  .marginTop15{
+    margin-top: 15px;
+  }
+  .marginTop10{
+    margin-top: 10px;
+  }
+  /*  these two are for icons in testscreen  */
+  .margBot3{
+    margin-bottom: 3px;
+  }
+  /**/
+  .margBot5{
+      margin-bottom: 3px;
+  }
+  .margBot8{
+     margin-bottom: 8px;
+  }
+  .myNav{
+    height: 65px;
+  }
+  #mainScreen{
+    /*height: calc(100vh - 65px);*/
+  }
+  
+
+  input[type="file"]{
+    font-size: 13px;
+  }
+  /* to have test input same like .size2 */
+  form input[type="text"]{
+    font-size: 18px;
+  }
+  textarea, textarea::placeholder {
+    font-size: 13px;
+  }
+  a, button{
+    font-size: 16px;
+  }
+  select{
+    font-size: 16px;
+  }
+
+  #vocab .word{
+    font-size: 14px;
+  }  
+}
+
+/**
+
+ for mobile screens larger than (mini) iphone 
+
+*/
+
+
+
+
+@media screen and (min-width: 331px) and (max-width: 400px){
   .size1{
     font-size: 30px;
   }
   .size1-5{
-      
       font-size: 26px;
       /*text-decoration: underline;*/
   }
@@ -70,7 +153,7 @@
     font-size: 20px;
   }
   select{
-    font-size: 20px;
+    font-size: 15px;
   }
 
   #vocab .word{
@@ -140,7 +223,7 @@
     font-size: 20px;
   }
   select{
-    font-size: 20px;
+    font-size: 19px;
   }
 
   #vocab .word{

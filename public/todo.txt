@@ -4,12 +4,17 @@
 - decide what’s most important things to publish prototype
 
 
-- voice on/off switching sometimes doesnt react (?change event onclick to onchange?)
-- word rating changes wierdly
 
-- make Practice button much larger font
+
+- done but tst with kris - make font for iphones even smaller
+
+
+- word rating changes wierdly
+(later hide word rating number)
+
 
 - remove non-used code
+
 
 
 
@@ -72,3 +77,10 @@ not neccessary
 - select on active or focus or what has some outline
 - last round with zen mode ignores wrong answers and quits the test
 - mozilla fallback solution when material-icons dont work
+
+
+6 dec 2017
+- make Practice button much larger font
+- voice on/off switching sometimes doesnt react (?change event onclick to onchange?)
+- fix example words to not be cz + eng
+- dictionary words div must be wider

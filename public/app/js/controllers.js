@@ -173,7 +173,7 @@ function($scope, $rootScope, $timeout,
                 return  fns !== null && fns !== undefined
             }
             
-
+            loadLocalStorage()
             function loadLocalStorage(){
                 "use strict"
                         
@@ -196,11 +196,7 @@ function($scope, $rootScope, $timeout,
                                 console.log("storage dicts\n",$scope.storedDicts)
                                 //console.log('dict names', names)
                         })
-
-                        
-            }
-            loadLocalStorage()
-
+            }            
 
             $scope.loadLSDict = function(dict){
                         "use strict"
@@ -442,7 +438,6 @@ function($scope, $rootScope, $timeout,
                         console.log("new data")
                         // get fileName and store it into local storage under key userFileNames
 
-                        //alert('oh ma')
                         //,e, "\ndata\n", "is array?",Array.isArray(d.words))
 
                         
@@ -502,6 +497,7 @@ function($scope, $rootScope, $timeout,
                     
             })
 
+
             $scope.loadExample = function(){ 
                 $timeout(function(){
                         $scope.words = $scope.example2
@@ -511,7 +507,7 @@ function($scope, $rootScope, $timeout,
                         loadVoices();
 
                         $scope.setWords($scope.words)
-                        console.log("set words  >\n",$scope.getWords());
+                        //console.log("set words  >\n",$scope.getWords());
                         
                         userFile.currentFilename = "_words_en_-_de"
                         $scope.currentFilename = userFile.currentFilename
@@ -525,6 +521,7 @@ function($scope, $rootScope, $timeout,
                 })
                 
             }
+            
 
             $scope.screenChange = function(screen){
 
@@ -542,19 +539,16 @@ function($scope, $rootScope, $timeout,
 
                         //if (screen ==='test') $scope.$parent.$broadcast('testScreen')
             }
-            
-
 
             $scope.onSelect = function(ev){
                 
-                        console.log('ev', ev)
+                        //console.log('ev', ev)
             }
 
             $scope.parseText = vocabfile.parseText
             //$scope.storedDicts = []
             $scope.loadDictWay = ""
 
-            
 
             $scope.mainScreen = true
 
@@ -614,7 +608,7 @@ function($scope, $rootScope, $timeout,
             $scope.dir = testShare.direction
             $scope.showWords = false
 
-            $scope.zen = false
+            $scope.zen = true
 
             $scope.lengths = [1,3,5,10,15,20,30,40,50]
             $scope.defaultLength = $scope.lengths[1]
@@ -624,8 +618,6 @@ function($scope, $rootScope, $timeout,
             $scope.selectedType = $scope.testTypes[2]
             $scope.prevType = $scope.testTypes[2]
 
-            //$scope.testType = $scope.selectedType
-            //console.log('$scope.selectedType', $scope.selectedType)
 
             $scope.updateWord = testShare.updateWord
             $scope.prepareExam = exam.prepareExam
@@ -642,6 +634,7 @@ function($scope, $rootScope, $timeout,
 
                                 //alert('ascen')
                 })
+                /* nope
                 $scope.example = [
                         {fr:'ahoj',   to:'hallo', lev: 4},
                         {fr:'neděle', to:'sontag',lev:2},
@@ -651,22 +644,22 @@ function($scope, $rootScope, $timeout,
                         {fr:'salát',  to:'Salat',lev:3},
                         {fr:'sladký', to:'süß'},
                         {fr:'kyselý', to:'sauer',lev:6}
-                ]
+                ]*/
 
                 $scope.example2 = [
                         ['hi','hallo',1],
-                        ['sunday','sontag',2],
-                        ['já','ich',1],
-                        ['nůž', 'Messer',0],
-                        ['ostře', 'scharf'],
-                        ['salát', 'Salat',3],
-                        ['sladký', 'süß'],
-                        ['kyselý', 'sauer',6],
-                        ['poledne', 'mittag'],
-                        ['slaný', 'salzig',4],
-                        ['snídaně', 'Frühstück',5],
-                        ['džem', 'Marmelade'],
-                        ['jak', 'wie']
+                        ['sunday','der Sonntag',2],
+                        ['I, me','ich',1],
+                        ['knife', 'der Messer',0],
+                        ['sharp', 'scharf'],
+                        ['salad', 'der Salat',3],
+                        ['sweet', 'süss'],
+                        ['sour', 'sauer',6],
+                        ['midday', 'der Mittag'],
+                        ['salty', 'salzig',4],
+                        ['breakfast', 'das Frühstück',5],
+                        ['marmelade', 'die Marmelade'],
+                        ['how', 'wie']
                         ]
                 //$scope.words = ["a","b","c"] //$scope.example
 
@@ -713,7 +706,7 @@ function($scope, $rootScope, $timeout,
                 $scope.zenSwitch = function(){
                         console.log('zenSwitched')
                         $timeout(function(){
-                                $scope.zen = !$scope.zen
+                                //$scope.zen = !$scope.zen
                                 $scope.$parent.$broadcast('zenSwitch', $scope.zen)
                                 console.log("scope1.zen", $scope.zen)
                         })
@@ -1032,7 +1025,7 @@ function($scope, $rootScope, $timeout,
                 },1000)
         }
 
-        $scope.zen = false, $scope.showTest = false
+        $scope.zen = true, $scope.showTest = false
         
         $scope.dir = testShare.direction
         $scope.direction = 'ab'

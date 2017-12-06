@@ -51,6 +51,11 @@ h4{
     user-select: none;
     -webkit-user-select: none;
 }
+.forWords{
+    /*border: 2px solid;*/
+    width: 95%;
+    margin: auto;
+}
 .picked{ 
     /*position: relative;
     left: 20px;*/

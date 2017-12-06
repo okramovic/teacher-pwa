@@ -137,10 +137,10 @@
                             
                             
                             <label for="zen">
-                                <input id="zen" type="checkbox"         
+                                <input id="zen" type="checkbox" ng-model="zen"   
                                    class="browser-default" ng-click="zenSwitch()"
                                    ng-disabled="screen=='test'">
-                                <!-- --></label>
+                            <!-- --></label>
                         </div>
                     </div>
                 </div>
@@ -174,22 +174,23 @@
 
                                     <div class="collection-item">
                                         <button ng-click="loadLSDict(dict.name)">
-                                            <div class="size3">{{dict.name}}</div>
-                                            <span class="size5 date">{{dict.date}}</span>
+                                            <div class="size3">{{dict.name | replace_}}</div>
+                                            <div class="size5 date">{{dict.date}}</div>
                                         </button>
-                                        <button class="thumb-sized" 
+                                        <button class="thumb-sized alignCenter" 
                                             ng-click="deleteLSDict(dict.name, $index)">
                                             <i class="material-icons">delete</i>
                                         </button>
                                     </div> 
                             </div>
                             <br>
-                            <h5 class="size3">or</h5>
+                            <!--h5 class="size3">or</h5-->
                         </div>
                     </div>
                     
                     <!-- load new words -->
                     <div class="center vertical">
+                            <br/>
                             <button ng-click="chooseNew = !chooseNew" 
                                     class="size2">load new words</button>
                             <br class="size4">
