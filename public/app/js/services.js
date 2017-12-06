@@ -740,11 +740,11 @@ function newRound(string){
         this.testWord = this.testQuestions[this.round].word[this.from] 
         this.corrAnswer = this.testQuestions[this.round].word[this.to] 
         this.answerHide = true
-
+        alert('check 1')
         this.user.input = ""
-
+        
         if (this.round===0) this.$apply()
-
+        alert('check 2')
         console.log('this.voice1On', this.testWord)
         
         if (window.speechSynthesis && this.voice1On){
@@ -757,6 +757,7 @@ function newRound(string){
                         //utterThis.onstart = function(){}
                         this.synth.speak(utterThis);
         }
+        alert('check 3')
         
 }
 

@@ -41,7 +41,7 @@ window.addEventListener('load',(ev)=>{
         console.log("||||||||| loaded 2", ev)
         let tester = document.getElementById('fontTester')
         let wid = parseFloat(  window.getComputedStyle( tester, null ).getPropertyValue( "width") )
-        alert("icon wid  " + wid)                             
+        //alert("icon wid  " + wid)                             
                              
         // it tests the envelope icon for width
                              

@@ -1087,6 +1087,7 @@ function($scope, $rootScope, $timeout,
 
         //let newTestCounter = 0
         $scope.$on('newTest',function(ev, voiceData){
+                alert('new test')
                 //newTestCounter++
                 //console.log('newTestCounter', newTestCounter)
                 console.log("\n\n\nlistener count", $scope.$$listenerCount['newTest']) 
