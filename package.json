@@ -1,0 +1,25 @@
+{
+  "//1": "describes your app and its dependencies",
+  "//2": "https://docs.npmjs.com/files/package.json",
+  "//3": "updating this file will download and update your packages",
+  "name": "vocab-pwa",
+  "version": "0.0.1",
+  "description": "vocabulary tester",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.16.2"
+  },
+  "engines": {
+    "node": "*"
+  },
+  "repository": {
+    "url": "https://github.com/okramovic/breathe1"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node"
+  ]
+}

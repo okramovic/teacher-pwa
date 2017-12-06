@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html >
+    <head>
+        <meta charset="utf8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>teacher v1</title>
+        
+        <!-- Compiled and minified CSS -->
+        <!--link rel="stylesheet"       
+        href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"-->
+        <!--link rel="stylesheet"  href="./app/libs/materialize.0.100.2.min.css"-->
+        <link rel="stylesheet"  href="./app/libs/materialize.0.98.1.min.css">
+
+        <link rel="stylesheet"  href="./app/css/general.css" >
+        <link rel="stylesheet"  href="./app/css/testDiv.css" >
+        <link rel="stylesheet"  href="./app/css/mainScreen.css" >
+        <link rel="stylesheet"  href="./app/css/animations.css" >
+        <link rel="stylesheet"  href="./app/css/mediaQuerries.css" >
+        
+        <!--link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"-->
+        <link rel="stylesheet" type="text/css" href="./app/css/material-icons.css" >
+                
+        <script type="text/javascript" src="./app/js/service-register.js"></script>
+
+
+        <!--script src="https://opensource.keycdn.com/angularjs/1.6.6/angular.min.js"></script-->        
+        <!--script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script-->
+        <!--script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script-->        
+                
+        
+        <!--script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script-->
+        <script type="text/javascript" src="./app/libs/jquery-3.1.1.min.js"></script>
+
+                <script src="./app/libs/angular.1.5.5.min.js"></script>
+                <!--script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script-->
+
+                <!--script type="text/javascript" 
+                    src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script-->
+                <script src="./app/libs/materialize.0.98.1.min.js"></script>
+
+
+                <!--script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script-->
+                <script src="./app/libs/angular-materialize.0.2.2.min.js"></script>
+
+                <!--script src="./app/libs/angular.1.6.6.min.js"></script-->
+                <script src="./app/libs/angular-animate.1.5.5.min.js" ></script>
+                <!--script src="https://code.angularjs.org/1.5.5/angular-animate.min.js" ></script-->
+                
+                <!--script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script-->
+
+        
+                <script src="./app/js/teacherApp.js"></script>
+                <script src="./app/js/services.js"></script>
+                <script src="./app/js/controllers.js"></script>
+                
+                <script src="./app/js/directives.js"></script>
+
+        
+                
+    </head>
+<body ng-app='teacherApp' style="border: 0px solid red"
+    ng-class='{"forWords": screen == "words" || screen=== undefined, "fullVH": screen === "main",
+             }'>
+        
+    <div class="row" style="">
+        <div class="col m2 l3"></div>
+        <div class="col s12 m8 l6" 
+            style=" 
+                    display: flex; 
+                    flex-direction: column; 
+                    
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 0px;
+                    "
+                    ng-class="{'forWords': screen=='words'}">
+            
+            
+            <div id="mainScreen" ng-controller="teacherCtr" style="border: none;"
+                ng-class="{'forWords': screen=='words' || screen == 'initial' ||
+                            screen === undefined, 
+                           'fullVH': screen=='main' }">
+
+
+                <!-- "navbar" -->
+                <div class="myNav row in_row full_width" style="border: 0px dashed">
+
+                    <div class="col sm2" style="display:flex; align-items: center; 
+                                                border: 0px solid; width: 15%">
+                        <div ng-show="screen =='main'" 
+                            ng-click="screenChange('initial')"
+                            class="alignCenter size2">
+                                <i class="material-icons hvrb">first_page</i>    
+                        </div>
+
+                        <div ng-show="screen =='words'" 
+                            ng-click="screenChange('main')"
+                            class="alignCenter size2">
+                                <i class="material-icons hvrb">keyboard_arrow_left</i>
+                        </div>
+
+                        <div ng-show="screen == 'test'" 
+                            ng-click="screenChange('test')"
+                            class="alignCenter size2">
+                                <i class="material-icons hvrb">keyboard_arrow_left</i>
+                        </div>
+                    </div>
+
+                    <!--  the teacher -->
+                    <h4 class="col sm8 size1" style="width: 65%; border: 0px dashed" 
+                        ng-class="{test: 'titleDisabled', undefined: 'titleEnabled', 
+                                    initial: 'titleEnabled', words: 'titleEnabled', 
+                                    main: 'titleEnabled'}[screen]">the Teacher</h4>
+
+
+                    <!--  zen & modal -->
+                    <div class="col sm2" style="width: 15%; border: 0px dashed;
+                                            display: flex; justify-content: center; align-items: center">
+                        <div ng-show="screen == undefined || screen == 'initial'">
+                                <a class='btn btn-sm' data-target='introModal' modal>
+                                <i class="medium material-icons">local_post_office</i></a>
+                                <!-- flight_takeoff, pets, weekend -->
+                        </div>
+                        <div ng-hide="screen == undefined || screen == 'initial'"    
+                             style="display: flex; align-items: center;">
+                             <!--label for="checkbox"></label-->
+                             <i ng-show="!zen" class="material-icons size2"
+                                ng-class="{test: 'titleDisabled'}[screen]" >location_city</i>
+                             <!--i class="material-icons">brightness_2</i-->
+                             <i ng-show="zen" class="material-icons size2"
+                                ng-class="{test: 'titleDisabled'}[screen]">terrain</i>
+                            
+                            
+                            <label for="zen">
+                                <input id="zen" type="checkbox"         
+                                   class="browser-default" ng-click="zenSwitch()"
+                                   ng-disabled="screen=='test'">
+                                <!-- --></label>
+                        </div>
+                    </div>
+                </div>
+            
+                <!--  loading words  -->
+                <div ng-show="screen ==undefined || screen == 'initial'" 
+                     style="width: 100%">
+
+                            <div id="introModal" class="modal">
+                                    <div class="modal-content">
+                                        <div class="center vertical">
+                                            <h4 class="size1">Welcome</h4>
+                                            <p  class="size3">This app was made so everyone can practice vocabulary when learning new languages. 
+                                                              You can actually practice any word or text pairs you can think of! </br></br>
+                                                              May the force be with you.</p>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="https://twitter.com/okram_ovic" target="_blank" class="size2 modal-action modal-close waves-effect waves-green btn-flat">@</a>
+                                        <a href="#!" class="size2 modal-action modal-close waves-effect waves-green btn-flat">ok</a>
+                                    </div>
+                            </div>
+                    <div style="width: 100%; display: flex; justify-content: center;">
+                        <!--a class='btn blue' data-target='introModal' modal>?</a-->
+                    </div>
+                    <div ng-show="hasLocalStorage() == true">
+                        <div class="center vertical">
+                                <h5 class="size2">previous dictionaries</h5>
+                                <div ng-repeat="dict in storedDicts" ng-model="dict" 
+                                     class="collection">
+
+                                    <div class="collection-item">
+                                        <button ng-click="loadLSDict(dict.name)">
+                                            <div class="size3">{{dict.name}}</div>
+                                            <span class="size5 date">{{dict.date}}</span>
+                                        </button>
+                                        <button class="thumb-sized" 
+                                            ng-click="deleteLSDict(dict.name, $index)">
+                                            <i class="material-icons">delete</i>
+                                        </button>
+                                    </div> 
+                            </div>
+                            <br>
+                            <h5 class="size3">or</h5>
+                        </div>
+                    </div>
+                    
+                    <!-- load new words -->
+                    <div class="center vertical">
+                            <button ng-click="chooseNew = !chooseNew" 
+                                    class="size2">load new words</button>
+                            <br class="size4">
+                            <div ng-show="chooseNew">
+                                    <div class="center vertical">
+                                        <button ng-click="loadExample()"
+                                            class="size3"
+                                            style="margin: 10px 0px;"
+                                            >try example</button>
+
+                                        <button ng-click="loadDictWay = 'file'"  
+                                                style="margin: 10px 0px;"
+                                                class="size3"
+                                            >open file</button>
+
+                                        <!-- input type file div -->
+                                        <div class="center" 
+                                            style="width: 100%; border:0px dashed; 
+                                                    display: flex; 
+                                                    flex-direction: column;
+                                                    justify-content: flex-start;
+                                                    align-items: center">
+
+                                                <span class="size4 example" 
+                                                    style="color: rgb(181, 181, 181); padding-top: 5px;"
+                                                    ng-show="loadDictWay == 'file'">
+                                                    (only .txt files accepted)</span>
+                                                <input type="file" accept=".txt"
+                                                    ng-show="loadDictWay == 'file'"
+                                                    ng-model="file.data" file-select="data"
+                                                    style="width: 80px; margin: auto; 
+                                                        margin-top: 20px; 
+                                                        margin-bottom: 10px;
+                                                        display: flex; 
+                                                        flex-wrap: wrap;
+                                                        flex-direction: column; 
+                                                        justify-content: center;
+                                                        align-items: center;">
+
+                                        </div>
+
+                                        <!-- copy/paste -->
+                                        <button ng-click="loadDictWay ='copyPaste'"
+                                                style="margin: 10px 0px 10px;"
+                                                class="size3"
+                                                >copy/paste</button>
+                                    </div>
+
+                                    <!-- copy/paste div -->
+                                    <div ng-if="loadDictWay == 'copyPaste'" class="center vertical">
+                                            <textarea type="text" 
+                                                    ng-model="txt"  cols="80" rows="10"
+                                                    style="height: 150px; width: 80%; 
+                                                           margin: 20px 10px;"
+                                                    placeholder="paste in content from another file (check the hint)"
+                                                    ></textarea>
+
+                                            <div class="" 
+                                                style="width: 80%; margin: auto;
+                                                display: flex; justify-content: space-around; align-items: center;">
+
+                                                <a class='btn btn-sm size2' style="padding-left: 20px; padding-right: 20px"
+                                                   data-target='instructionsModal' modal>?</a>
+
+                                                <button class="size2"
+                                                        ng-click="uploadPasted(txt)">Go</button>
+                                            </div>
+                                            <br class="size4">
+                                            <br class="size4">
+                                    </div>
+                                    
+                                    <!-- instructions Modal -->
+                                    <div id="instructionsModal" class="modal" style="width: 90%">
+                                            <div class="modal-content">
+                                                <div class="" style="display: flex; 
+                                                                     flex-direction: column; 
+                                                                     align-items: center;
+                                                                     justify-content: flex-start">
+                                                    <h4 class="size1">example:</h4>
+                                                    <p class="size4 example">eng.de</p>
+                                                    <p class="size4 example">good morning. guten morgen</p>
+                                                    <p class="size4 example">spring. der Frühling</p>
+                                                    <p class="size4 example">strong. stark, kräftig</p>
+                                                    <p class="size4 example">calm, quiet. ruhig</p>
+                                                    <!--br-->
+                                                    <span class="size3 example" 
+                                                          style="color: rgb(181, 181, 181); padding-top: 10px;">
+                                                          (first line stands for languages)</span>
+                                                    <span class="size3 example" 
+                                                          style="color: rgb(181, 181, 181); margin-bottom: 0px">
+                                                          (each word pair must be on separate line)</span>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer size2" style="padding-bottom: 20px;">
+                                                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">ok</a>
+                                            </div>
+                                    </div>
+                                    
+                            </div>
+                    </div>
+                    
+                </div>
+
+
+
+                <!-- words && mainScreen  -->
+                <div ng-show="screen == 'main'" 
+                     style="height: 87vh;
+                            display: flex; 
+                            flex-direction: column;
+                            justify-content: space-between;
+                            align-items: center;">
+                    <div style="width: 100%;">
+                        <div class="butRow row marginTop15" style="border: 0px solid gray">
+                            <div class="col s6 center">
+                                    <div>
+                                        <button ng-show="screen=='main'" 
+                                                ng-click="showVocab(true)">show vocab</button> 
+                                    </div>
+                                        
+                                    <div ng-show="screen == 'words'" ng-click="reverse()"> <!-- wAscen = !wAscen -->
+                                                <button>switch order</button> 
+                                    </div>
+                            </div>
+                            <div class="col s6">
+                                    <!-- test length selection -->
+                                    <select class="browser-default"
+                                            ng-model="defaultLength" 
+                                            ng-options="l + ' rounds' disable when words.length < l
+                                                        for l in lengths"
+                                            ng-disabled="(slct.length>0 && selectedType === 'checked ones') || 
+                                                          selectedType == 'repeat previous'"
+                                            ng-change="lengthSelect(defaultLength)"
+                                            >
+                                    </select>    
+                            </div>
+                        </div>
+                        
+                        <div class="butRow row marginTop15" ng-show="screen == 'main'">
+                                <div class="col s6 center">
+                                            <button ng-show="screen == 'main'" 
+                                                    ng-click="changeDir()"
+                                                    >{{lang1}} to {{lang2}}</button>
+                                </div>
+                                <div class="col s6 center">
+                                        <!-- test length selection -->
+                                        <select ng-model="selectedType" 
+                                            ng-options="t disable when (t ==='repeat previous' && getPrevTest()=== null) ||
+                                                        (t==='checked ones' && slct.length<1) for t in testTypes"
+                                            class="browser-default"
+                                            ng-change="typeSelection(selectedType)">
+                                        </select>                
+                                </div>
+                                
+                            </div>
+                    </div>
+                    <div class="single_center" ng-show="screen == 'main'">
+                            <button ng-click="practice()" class="size2">practice</button>
+                    </div>
+                    <div ng-show="screen == 'main'" class="">
+                        
+                        
+                        
+                        
+                    <!-- voices settings -->
+                    <div ng-show="screen == 'main'" class="center vertical" style="">
+                            <div ng-show="voices ===undefined || voices.length===0">
+                                <h6 class="center gray size5">your browser doesn't support Speech ability</h6>
+                            </div>
+                            <div ng-show="voices && voices.length>0" style="width: 80%;">
+                                <!--div class="center" style="margin-top: 15px;"-->
+                                <div class="flexend margBot5">
+                                    <label class="size5 gray">voice for {{lang1}}</label>
+                                    <input type="checkbox" ng-checked="voice1On"
+                                           ng-model="xxx" 
+                                           ng-change="voice1On = !voice1On"
+                                           class="margBot3">
+                                </div>    
+                                <select class="browser-default" ng-model="defaultVoice1"
+                                        ng-options="voi.name +' '+ voi.lang for voi in voices"
+                                        ng-change="voice1Select(defaultVoice1.name)" >
+                                </select>
+                                
+                                <br>
+                                <div class="flexend margBot5">
+                                    <label class="size5 gray">voice for {{lang2}}</label>
+                                    <input type="checkbox" ng-checked="voice2On" 
+                                            ng-model="yyy" 
+                                            ng-click="voice2On = !voice2On"
+                                            class="margBot3">
+                                    
+                                </div>
+                                <select class="browser-default" ng-model="defaultVoice2"
+                                        ng-options="voi.name + ' ' + voi.lang for voi in voices"
+                                        ng-change="voice2Select(defaultVoice2.name)">
+                                </select>
+                            </div>
+                    </div>
+                        
+                    </div>
+                </div>
+
+                <!-- showing vocab -->
+                <div ng-show="screen == 'words'" ng-class="{'forWords': screen==='words'}">
+                        
+                        <!-- ng-show="!showWords" -->
+                        <div class="butRow center" style="border: 0px dashed black">
+                            <button ng-show="screen=='words'" 
+                                    ng-click="showVocab(false)">hide vocab
+                            </button>
+                            <button ng-model="showUserNotes" ng-click="showUserNotes=!showUserNotes">back-up</button>
+                        </div>
+                        <div ng-show="showUserNotes" 
+                             class="center vertical" 
+                             style="margin: 20px 0px 30px;">
+                            
+                            <textarea cols="80" rows="10" 
+                                      ng-model="userNotes"
+                                      style="width:90%; height: 80px; font-size:15px;" 
+                                      placeholder="Add your notes to the file here:">ahoj</textarea>
+                            <div style="margin: 20px 0px;">
+                                <a href="#" download-file 
+                                    actionzz="downloadDict(userNotes)"
+                                    ng-click="downloadDict(userNotes)"
+                                    ng-href="{{myURL}}"  download="{{currentFilename}}"
+                                     >download the file</a>
+                                     <!--download-file></download-file-->
+                            </div>
+                        </div>
+                        
+                        <h4 class="size2">vocabulary:</h4>
+                    
+                        <vocabulary ascen="wAscen" words="words" al="al"
+                            slct="slct" max="words.length" len="words.length" 
+                            class="dictionary"
+                            ch="change"
+                            ></vocabulary>
+                        <div style="height: 30px">&nbsp;</div>
+        
+                        <!--pre>{{ slct }}</pre-->
+                        <!--pre>{{ xx }}</pre-->
+                        <!--input ng-model="someM" value="ohmygodnness herewjglůwknwlk">
+                        <button ng-click="submit()">submit</button-->
+                </div>
+                
+            </div>
+
+            <!--  test Screen -->
+            <div id="testScreen" ng-controller="testCtrl" ng-show="screen == 'test'" class="marginTop10">
+                    
+                <div id="testField" ng-show="showTest" class="animate-show animate-hide">
+                            
+                            <!--input ng-model="shared.string"-->
+                            <!--div><h6>{{test}}</h6></div-->
+                            
+                                <!--h7 ng-model="currIndex" ng-show="false">index {{currIndex}}</h7-->
+                                
+                            <div class="butRow row centered size3">
+                                    <div class="col s4 centered">
+                                            <div ng-model="anim_Bads" ng-class="anim_Bads" class="centered">
+                                                    <h7  >{{bads}}</h7>
+                                                    <!--span></span-->
+                                                    <i class="material-icons margBot3">close</i>
+                                            </div>
+                                    </div>
+                                    <div class="col s4 centered">
+                                            <h7># {{round+1}} / {{testQuestions.length}}</h7>
+                                    </div>
+                                    <div class="col s4 centered">
+                                            <div ng-model="anim_Oks" ng-class="anim_Oks" class="centered">
+                                                    <h7>{{oks}}</h7>
+                                                    <!--span></span-->
+                                                    <i class="material-icons margBot3">check</i>
+                                            </div>
+                                    </div>
+                                    
+                            </div>
+                            
+                            <div class="single marginTop10" >
+                                    <div>
+                                        <h6 class="size2">{{testWord}}</h6>
+                                        <h6 class="size3" ng-class="{true: 'corrAnswer-hide', false: 'corrAnswer-show'}[answerHide]">
+                                            {{corrAnswer}}</h6>
+                                    </div>
+                            </div>
+                            
+                            <form name="test" ng-submit="submit(currIndex, user.input,round)">
+                                <input type="text" name="input"
+                                    ng-model="user.input" ng-value="inpVal" 
+                                    inp-focus   data-myfocus="true"   autocomplete="off" 
+                                    ng-disabled="nextGo =='next'" >
+                                
+                            </form>    
+                            <div class="butRow" ng-model="nextGo"> 
+                                    <button ng-click="submit(currIndex,user.input,round,'idk')" 
+                                            ng-disabled="nextGo == 'next'">idk
+                                    </button>
+
+                                    <button ng-show="nextGo == 'go'" 
+                                        ng-click="submit(currIndex,user.input,round)">go</button>
+                                    <button ng-show="nextGo == 'next'"
+                                        ng-click="next()"
+                                        ng-disabled="finalResult"
+                                        >next</button>
+                            </div>
+                            
+                            
+                </div>
+
+                <!-- final results -->
+                <div ng-show="finalResult" class="animate-show animate-hide" class="center vertical">
+                        <h5 class="size3 five" style="text-align: center">congrats you had {{oks}} of {{testQuestions.length}} correct</h5>
+                        <div>
+                            <div ng-show="feedback.length>0" class="center vertical marginTop15" style="width: 80%; margin: auto;border-bottom: 1px solid gray">
+                                <div class="size3" style="margin-bottom: 20px">incorrect answers:</div>
+
+                                <div  ng-repeat="word in feedback" class="">                        
+                                        <div class="size3" 
+                                             style="margin-top: 0px">{{word.original.word[0]}}. {{word.original.word[1]}}</div>
+                                        <div class="size4" 
+                                             style="margin-bottom: 15px">your answer: {{word.input}}</div>
+                                </div>
+                                
+                            </div>
+                            <button class="single marginTop15" ng-click="home()">home</button>
+                        </div>
+                </div>
+                            
+            </div>
+
+        
+        </div>     
+        <div class="col m2 l3"></div>    
+    </div>
+    
+
+
+        
+</body>
+</html>
