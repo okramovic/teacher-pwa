@@ -12,6 +12,7 @@ var shellFiles = [
   "/app/css/testDiv.css",
   "/app/css/Frank_Ruhl_Libre/FrankRuhlLibre-Medium.ttf",
   
+  "/app/js/service-register.js",
   "/app/js/controllers.js",
   "/app/js/directives.js",
   "/app/js/services.js",
