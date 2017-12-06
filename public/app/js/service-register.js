@@ -16,6 +16,12 @@ if ('serviceWorker' in navigator){
     alert('serviceWorker not available in this browser');
 }
 
+$(function(){
+  
+    var fonter = document.getElementById('fontTester')
+    //var styl = window.getComputedStyle( fonter, null ).getPropertyValue( )
+    console.log("header", parseFloat(  window.getComputedStyle( fonter, null ).getPropertyValue( "width") ) )
+    if ( parseFloat(  window.getComputedStyle( fonter, null ).getPropertyValue( "width") ) > 22){
 
 var fonter = document.getElementById('fontTester')
 //var styl = window.getComputedStyle( fonter, null ).getPropertyValue( )
@@ -56,12 +62,12 @@ window.addEventListener('load',(ev)=>{
             
                                     if (fb) icon.innerHTML=fb
             
-                                    icon.style.fontSize = "35px";
+                                    icon.style.fontSize = "35px"
                                     icon.style.paddingBottom = "15px"
                             }
                             
         } else {
-            console.log('font ok')
+            console.log('icons loaded ok')
                 
         }
 })
