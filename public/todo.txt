@@ -5,13 +5,15 @@
 
 
 
-- check on site load, check whether browser is mozilla 
-  (or other that also disables custom fonts)
-  => in such case replace custom font with unicode chars.
+if browser doesnt speak, test cant be taken!
 
 
 - enable auto deleting old caches
 - enable auto-updating cached files to newest version
+
+- do styling for safari as well
+- do styling for IE (it could be gotcha) - they'd see i didnt finish my work
+- desktop safari gives me trouble
 
 
 - done but tst with kris - make font for iphones even smaller
@@ -95,3 +97,6 @@ not neccessary
 - voice on/off switching sometimes doesnt react (?change event onclick to onchange?)
 - fix example words to not be cz + eng
 - dictionary words div must be wider
+- check on site load whether browser is mozilla 
+      (or other that also disables custom fonts)
+      => in such case replace custom font with unicode chars.

@@ -124,7 +124,7 @@ app.service('exam', ['$timeout','$window',function($timeout,$window){
 
 
                 console.log("voice2On?", this.voice2On )
-                if (this.voice2On){
+                if (window.speechSynthesis && this.voice2On){
 
                         let toSay = curWord.word[to]
                         let utterThis = new SpeechSynthesisUtterance(toSay);
@@ -747,7 +747,7 @@ function newRound(string){
 
         console.log('this.voice1On', this.testWord)
 
-        if (this.voice1On){
+        if (window.speechSynthesis && this.voice1On){
 
                         let toSay = this.testWord
                         let utterThis = new SpeechSynthesisUtterance(toSay);

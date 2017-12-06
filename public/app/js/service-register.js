@@ -13,7 +13,7 @@ if ('serviceWorker' in navigator){
         })
   
 } else {
-    alert('serviceWorker not available in this browser');
+    alert("storing this app offline isn't going to be possible");
 }
 
 /*$(function(){
