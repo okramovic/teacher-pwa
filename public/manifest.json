@@ -9,14 +9,19 @@
       "density": 1
 
     },
-    {"src": "resources/icons/icon96.png",
-      "sizes": "96x96",
+    {"src": "resources/icons/icon144.png",
+      "sizes": "144x144",
       "type": "image/png",
       "density": 1
     },
     {
-      "src": "resources/icons/icon144.png",
-      "sizes": "144x144",
+      "src": "resources/icons/icon192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "resources/icons/icon512.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ],
