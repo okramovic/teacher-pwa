@@ -4,7 +4,15 @@
 - decide what’s most important things to publish prototype
 
 
+
+- check on site load, check whether browser is mozilla 
+  (or other that also disables custom fonts)
+  => in such case replace custom font with unicode chars.
+
+
 - enable auto deleting old caches
+- enable auto-updating cached files to newest version
+
 
 - done but tst with kris - make font for iphones even smaller
 
@@ -19,6 +27,7 @@
 
 
 not that important? try when fresh
+- when user clicks on word (test Q / A or in dict), it's copied to clipboard and small anouncement pops up
 
 
 - if there’s duplicates in newly added dict, clear them
@@ -28,6 +37,8 @@ not that important? try when fresh
 
 not neccessary
 - change initial menu “load new words” - make it a material. dropdown so it looks better and is organized
+- ?? voice says hi on every app start to check voice availability
+  https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis
 
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - -

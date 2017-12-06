@@ -59,7 +59,7 @@ self.addEventListener('install', function(e) {
 
 
 self.addEventListener('activate', function(e) {
-
+      
       console.log('sw activated');
   
       e.waitUntil(
@@ -75,6 +75,7 @@ self.addEventListener('activate', function(e) {
             );
           })
       );
+      //alert('activate event');
 })
 
 

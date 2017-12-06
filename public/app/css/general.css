@@ -191,12 +191,15 @@ select:focus{
     outline: none;
 }
 
-h3, h4, h5, h6{
+h3, h4, h5{
     cursor: initial;
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
     
+}
+h6{
+    cursor: initial;
 }
 textarea{
     padding: 8px;

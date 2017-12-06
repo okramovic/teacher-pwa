@@ -25,7 +25,7 @@
         <!--link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"-->
         <link rel="stylesheet" type="text/css" href="./app/css/material-icons.css" >
                 
-        <script type="text/javascript" src="./app/js/service-register.js"></script>
+        
 
 
         <!--script src="https://opensource.keycdn.com/angularjs/1.6.6/angular.min.js"></script-->        
@@ -112,7 +112,7 @@
                     </div>
 
                     <!--  the teacher -->
-                    <h4 class="col sm8 size1" style="width: 65%; border: 0px dashed" 
+                    <h4 id="header" class="col sm8 size1" style="width: 65%; border: 0px dashed" 
                         ng-class="{test: 'titleDisabled', undefined: 'titleEnabled', 
                                     initial: 'titleEnabled', words: 'titleEnabled', 
                                     main: 'titleEnabled'}[screen]">the Teacher</h4>
@@ -123,7 +123,7 @@
                                             display: flex; justify-content: center; align-items: center">
                         <div ng-show="screen == undefined || screen == 'initial'">
                                 <a class='btn btn-sm' data-target='introModal' modal>
-                                <i class="medium material-icons">local_post_office</i></a>
+                                <i id="fontTester" class="medium material-icons">local_post_office</i></a>
                                 <!-- flight_takeoff, pets, weekend -->
                         </div>
                         <div ng-hide="screen == undefined || screen == 'initial'"    
@@ -447,7 +447,8 @@
                             <!--div><h6>{{test}}</h6></div-->
                             
                                 <!--h7 ng-model="currIndex" ng-show="false">index {{currIndex}}</h7-->
-                                
+
+                            <!-- score & round -->   
                             <div class="butRow row centered size3">
                                     <div class="col s4 centered">
                                             <div ng-model="anim_Bads" ng-class="anim_Bads" class="centered">
@@ -523,11 +524,12 @@
 
         
         </div>     
-        <div class="col m2 l3"></div>    
-    </div>
-    
-
-
+        <div class="col m2 l3"></div> 
         
+    </div>
+    <!--div id="fontTest" style="display: none;">test</div-->   
+
+
+    <script type="text/javascript" src="./app/js/service-register.js"></script>
 </body>
 </html>

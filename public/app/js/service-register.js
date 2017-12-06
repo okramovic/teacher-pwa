@@ -15,3 +15,25 @@ if ('serviceWorker' in navigator){
 } else {
     alert('serviceWorker not available in this browser');
 }
+
+
+var fonter = document.getElementById('fontTester')
+//var styl = window.getComputedStyle( fonter, null ).getPropertyValue( )
+//console.log("header", styl )  //document.querySelector('body'))
+
+getfont().then(res=>{
+            console.log("result",res, "\n",res.ok, res.status)
+            alert("font loaded?  " + res.status + " " + res.ok)
+}).catch(er=>{
+    alert("rejected\n", er)
+})
+function getfont(){
+
+    return new Promise((res,rej)=>{
+        var font = fetch("../app/css/material-icons.css")
+        res(font)
+        rej("nope")
+    })
+
+//console.log(fetch("../app/css/material-icons.woff"))
+}
