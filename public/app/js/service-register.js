@@ -20,7 +20,7 @@ $(function(){
   
     var fonter = document.getElementById('fontTester')
     //var styl = window.getComputedStyle( fonter, null ).getPropertyValue( )
-    //console.log("header", styl )  //document.querySelector('body'))
+    console.log("header", parseFloat(  window.getComputedStyle( fonter, null ).getPropertyValue( "width") ) )
     if ( parseFloat(  window.getComputedStyle( fonter, null ).getPropertyValue( "width") ) > 22){
 
                 alert("mat. icons not loaded")
