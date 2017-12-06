@@ -20,8 +20,11 @@ if ('serviceWorker' in navigator){
 var fonter = document.getElementById('fontTester')
 //var styl = window.getComputedStyle( fonter, null ).getPropertyValue( )
 //console.log("header", styl )  //document.querySelector('body'))
+if ( parseFloat(  window.getComputedStyle( fonter, null ).getPropertyValue( "width") ) > 22){
 
-getfont().then(res=>{
+            alert("mat. icons not loaded")
+} else alert('font ok')
+/*getfont().then(res=>{
             console.log("result",res, "\n",res.ok, res.status)
             alert("font loaded?  " + res.status + " " + res.ok)
 }).catch(er=>{
@@ -36,4 +39,4 @@ function getfont(){
     })
 
 //console.log(fetch("../app/css/material-icons.woff"))
-}
+}*/
