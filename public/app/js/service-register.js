@@ -1,4 +1,4 @@
-console.log('serviceWorker registerer');
+//console.log('serviceWorker registerer');
 
 if ('serviceWorker' in navigator){
   
@@ -16,14 +16,6 @@ if ('serviceWorker' in navigator){
     alert("storing this app offline isn't going to be possible");
 }
 
-/*$(function(){
-  
-    var fonter = document.getElementById('fontTester')
-    //var styl = window.getComputedStyle( fonter, null ).getPropertyValue( )
-    console.log("header", parseFloat(  window.getComputedStyle( fonter, null ).getPropertyValue( "width") ) )
-  
-    //if ( parseFloat(  window.getComputedStyle( fonter, null ).getPropertyValue( "width") ) > 22){}
-})*/
 
 document.addEventListener('DOMContentLoaded',()=>{
     console.log('DOMload')
@@ -33,14 +25,14 @@ document.addEventListener('DOMContentLoaded',()=>{
     /*if ( parseFloat(  window.getComputedStyle( fonter, null ).getPropertyValue( "width") ) > 22){
 
                 //alert("mat. icons not loaded")
-    } else {}//alert('font ok')*/
+    } else alert('font ok')*/
 })
 
 
 window.addEventListener('load',(ev)=>{
-        console.log("||||||||| loaded 2", ev)
-        let tester = document.getElementById('fontTester')
-        let wid = parseFloat(  window.getComputedStyle( tester, null ).getPropertyValue( "width") )
+        console.log("||||||||| loaded 2", ev);
+        let tester = document.getElementById('fontTester');
+        let wid = parseFloat(  window.getComputedStyle( tester, null ).getPropertyValue( "width") );
         //alert("icon wid  " + wid)                             
                              
         // it tests the envelope icon for width
@@ -60,7 +52,7 @@ window.addEventListener('load',(ev)=>{
             
                                     if (fb) icon.innerHTML=fb
             
-                                    icon.style.fontSize = "35px"
+                                    icon.style.fontSize = "35px";
                                     icon.style.paddingBottom = "15px"
                             }
                             
@@ -69,20 +61,3 @@ window.addEventListener('load',(ev)=>{
                 
         }
 })
-
-
-// attempt by detecting loading error
-/*getfont().then(res=>{
-            console.log("result",res, "\n",res.ok, res.status)
-            alert("font loaded?  " + res.status + " " + res.ok)
-}).catch(er=>{
-    alert("rejected\n", er)
-})
-function getfont(){
-
-    return new Promise((res,rej)=>{
-        var font = fetch("../app/css/material-icons.css")
-        res(font)
-        rej("nope")
-    })
-}*/

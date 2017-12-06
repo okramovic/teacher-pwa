@@ -86,6 +86,8 @@ function($scope, $rootScope, $timeout,
 
             $scope.$timeout = $timeout
         
+            $scope.defaultVoiceIndexes = [null, null]
+            
             function loadVoices(){
                 if (window.speechSynthesis) {
 
@@ -94,7 +96,7 @@ function($scope, $rootScope, $timeout,
 
                                 // promisify this
                                 $timeout(function(){
-                                        $scope.defaultVoiceIndexes = [null, null]
+                                        
                                         $scope.voices = []
                                         $scope.voices = synth.getVoices();    
                                         console.log($scope.voices)
@@ -1031,9 +1033,6 @@ function($scope, $rootScope, $timeout,
         $scope.direction = 'ab'
         $scope.from = 0; $scope.to = 1
 
-        $timeout(function(){
-                //console.log('------ check - - ----- ')
-        },1000)
         $scope.timeout = $timeout
 
         $scope.anim_Bads = 'anim-bad', $scope.anim_Oks = 'anim-ok'
@@ -1081,19 +1080,12 @@ function($scope, $rootScope, $timeout,
                 $scope.blur = false; 
                                    
         })
-        //console.log($scope)
-        //console.log("\n\n\nlistener count", $scope.$$listenerCount['newTest']) 
-        //if ($scope.$$listenerCount['newTest']===2) $scope.$$listenerCount['newTest']=1
-
-        //let newTestCounter = 0
+        
+        
         $scope.$on('newTest',function(ev, voiceData){
-                alert('new test')
-                //newTestCounter++
-                //console.log('newTestCounter', newTestCounter)
+                //alert('new test')
                 console.log("\n\n\nlistener count", $scope.$$listenerCount['newTest']) 
-                //if ($scope.$$listenerCount['newTest']>1) {
-                //        $scope.$$listenerCount['newTest']=1
-                //}
+
                         console.log('--------------------------------------')
 
                         if (window.speechSynthesis){
@@ -1140,38 +1132,10 @@ function($scope, $rootScope, $timeout,
                         })
                         
                         console.log('|||||    zen? ',$scope.zen)
-
-                //}
-
-                
-
-
-                
-                
-                //alert(JSON.stringify(data))
-                
-                //console.log('|||||||||| scope 2:')
-                //console.log('dir',$scope.direction)
-                
-                //$scope.$apply()
-                //  
-                
-                //console.log('$scope.currIndex',$scope.currIndex)
-                //$scope.curr = $scope.testQuestions
-                
-
-                //console.log("---round now1>>>", $scope.round)
-                /*setTimeout(function(){
-                        console.log("---round now2>>> ", $scope.round)
-                },10000)*/
         })
         
         $scope.changeNextGo = exam.changeNextGo
         $scope.getNextGo = exam.getNextGo
-
-        $timeout(function(){
-                    //console.log("||||||||||||",$scope.changeNextGo,"<<<")
-        },2000)
         
         //new Promise(
         $scope.endCheck = function(/*resolve, reject*/ cb ){
@@ -1191,18 +1155,5 @@ function($scope, $rootScope, $timeout,
         $scope.changeLevel = changeLevel
         $scope.updateWord = testShare.updateWord
         $scope.getWords = testShare.getWords
-        //console.log('$scope.getWords', $scope.getWords)
-        //var t = setInterval(function(){
-
-                //        $scope.testQuestions = $scope.getQuestions()
-                //        console.log(bbb)//$scope.testQuestions)
-                //},1000)
-                //$scope.shared = exam.shared
-                //$scope.shared = testShare.shrd
+        
 }])
-
-
-
-/*function startTest(){
-        console.log(' ---- -  test started - ---- ')
-}*/

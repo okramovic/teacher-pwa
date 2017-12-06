@@ -78,11 +78,6 @@ app.service('exam', ['$timeout','$window',function($timeout,$window){
         this.submit = function submit(ind,input, round, idk){
                 console.log('     - - - -  new answ - - - - ')
                 //console.log('>>>', ind, input,"round", round)
-                //this.changeNextGo('mamuska')
-                //$timeout(function(){
-                        //console.log('this.nextgo',this.nextGo)
-                //},1000)
-                
                 
                 
                 this.okAnswer = okAnswer; this.badAnswer = badAnswer
@@ -94,7 +89,6 @@ app.service('exam', ['$timeout','$window',function($timeout,$window){
                 this.blur= false
 
                 this.correct = correct
-                //console.log("this", this)
 
                 let zis = this
 
@@ -135,30 +129,11 @@ app.service('exam', ['$timeout','$window',function($timeout,$window){
                         //utterThis.onstart = function(){}
                         
                         this.synth.speak(utterThis);
-                }
-                /*else if (idk && !this.zen){
-                       // console.log('idk 1, no zen')
-                        // speak, bad point ++, change rating, next round
-                        //this.badAnswer(false,curWord)
-                        //return
-
-                } else if (idk && this.zen){
-                        //console.log('idk 2')
-
-                        // speak, bad point ++, change rating, keep same round
-
-                        //zis.badAnswer(true,curWord)
-                        //return
-
-                }*/
-                                
+                }               
 
                 this.p2 = new Promise(function(resolve, reject){
                             
                         //console.log("zis? >>", zis)
-
-                        
-
 
                             var res = { dir: dir}
                             res.res = zis.correct(input,curWord,round,to,from) 
@@ -567,7 +542,7 @@ function animateBad(cb){
                 
                 zis.anim_Bads = 'anim-bad'
         },3500)
-        //this.$apply(function(){})
+    
         if (cb) cb()
 }
 function correct(input, word, round, to, from){
@@ -622,13 +597,7 @@ function correct(input, word, round, to, from){
                                                 return w.toString().toLowerCase().trim() 
                                                         === word.toString().toLowerCase().trim()
                                         })
-
-                                        //return dictWord.includes(word)
                                     })
-
-                        
-
-
 
                         if (fits){
 
@@ -676,13 +645,6 @@ function correct(input, word, round, to, from){
                 
         }
         else alert("correct fn Error")
-
-    //let i = this.round
-        //console.log( this)//testQuestions[i])
-        /*console.log( this.testQuestions[i][0].includes(
-                this.testQuestions[i][1]
-        ))*/
-
     
 }
 function changeLevel(word, change){
@@ -740,13 +702,13 @@ function newRound(string){
         this.testWord = this.testQuestions[this.round].word[this.from] 
         this.corrAnswer = this.testQuestions[this.round].word[this.to] 
         this.answerHide = true
-        alert('check 1')
+
         this.user.input = ""
         
         if (this.round===0) this.$apply()
-        alert('check 2')
-        console.log('this.voice1On', this.testWord)
 
+        console.log('this.voice1On', this.testWord)
+        
         if (window.speechSynthesis && this.voice1On){
 
                         let toSay = this.testWord
@@ -757,7 +719,6 @@ function newRound(string){
                         //utterThis.onstart = function(){}
                         this.synth.speak(utterThis);
         }
-        alert('check 3')
         
 }
 
