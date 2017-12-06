@@ -95,19 +95,19 @@
                         <div ng-show="screen =='main'" 
                             ng-click="screenChange('initial')"
                             class="alignCenter size2">
-                                <i class="material-icons hvrb">first_page</i>    
+                                <i class="material-icons hvrb" data-fallback="&#8592;">first_page</i>    
                         </div>
 
                         <div ng-show="screen =='words'" 
                             ng-click="screenChange('main')"
                             class="alignCenter size2">
-                                <i class="material-icons hvrb">keyboard_arrow_left</i>
+                                <i class="material-icons hvrb" data-fallback="&#8592;">keyboard_arrow_left</i>
                         </div>
 
                         <div ng-show="screen == 'test'" 
                             ng-click="screenChange('test')"
                             class="alignCenter size2">
-                                <i class="material-icons hvrb">keyboard_arrow_left</i>
+                                <i class="material-icons hvrb" data-fallback="&#8592;">keyboard_arrow_left</i>
                         </div>
                     </div>
 
@@ -123,16 +123,16 @@
                                             display: flex; justify-content: center; align-items: center">
                         <div ng-show="screen == undefined || screen == 'initial'">
                                 <a class='btn btn-sm' data-target='introModal' modal>
-                                <i id="fontTester" class="medium material-icons">local_post_office</i></a>
+                                <i id="fontTester" class="medium material-icons" data-fallback="&#9993;">local_post_office</i></a>
                                 <!-- flight_takeoff, pets, weekend -->
                         </div>
                         <div ng-hide="screen == undefined || screen == 'initial'"    
                              style="display: flex; align-items: center;">
                              <!--label for="checkbox"></label-->
-                             <i ng-show="!zen" class="material-icons size2"
+                             <i ng-show="!zen" class="material-icons size2" data-fallback="&#9975;"
                                 ng-class="{test: 'titleDisabled'}[screen]" >location_city</i>
-                             <!--i class="material-icons">brightness_2</i-->
-                             <i ng-show="zen" class="material-icons size2"
+
+                             <i ng-show="zen" class="material-icons size2"  data-fallback="&#9969;" data-or="&#9749;"
                                 ng-class="{test: 'titleDisabled'}[screen]">terrain</i>
                             
                             
@@ -179,7 +179,7 @@
                                         </button>
                                         <button class="thumb-sized alignCenter" 
                                             ng-click="deleteLSDict(dict.name, $index)">
-                                            <i class="material-icons">delete</i>
+                                            <i class="material-icons" data-fallback="&#9940;" data-or="&#10054;">delete</i>
                                         </button>
                                     </div> 
                             </div>
@@ -454,7 +454,7 @@
                                             <div ng-model="anim_Bads" ng-class="anim_Bads" class="centered">
                                                     <h7  >{{bads}}</h7>
                                                     <!--span></span-->
-                                                    <i class="material-icons margBot3">close</i>
+                                                    <i class="material-icons margBot3" data-fallback="&#215;" data-or="&#10060;">close</i>
                                             </div>
                                     </div>
                                     <div class="col s4 centered">
@@ -464,7 +464,7 @@
                                             <div ng-model="anim_Oks" ng-class="anim_Oks" class="centered">
                                                     <h7>{{oks}}</h7>
                                                     <!--span></span-->
-                                                    <i class="material-icons margBot3">check</i>
+                                                    <i class="material-icons margBot3" data-fallback="&#10003;">check</i>
                                             </div>
                                     </div>
                                     

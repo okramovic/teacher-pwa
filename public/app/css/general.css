@@ -95,6 +95,7 @@ body {
     float: left;
 }
 i{
+    content: attr(data-fallback);
     user-select: none;
     -webkit-user-select: none;
 }

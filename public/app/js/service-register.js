@@ -19,9 +19,56 @@ if ('serviceWorker' in navigator){
 
 var fonter = document.getElementById('fontTester')
 //var styl = window.getComputedStyle( fonter, null ).getPropertyValue( )
-//console.log("header", styl )  //document.querySelector('body'))
+//console.log("fonter", fonter )  //document.querySelector('body')))
 
-getfont().then(res=>{
+
+/*$(function(){
+    
+      
+})*/
+document.addEventListener('DOMContentLoaded',()=>{
+    console.log('DOMload')
+    
+    //var styl = window.getComputedStyle( fonter, null ).getPropertyValue( )
+    //console.log("header", parseFloat(  window.getComputedStyle( fonter, null ).getPropertyValue( "width") ) )
+    /*if ( parseFloat(  window.getComputedStyle( fonter, null ).getPropertyValue( "width") ) > 22){
+
+                //alert("mat. icons not loaded")
+    } else {}//alert('font ok')*/
+})
+window.addEventListener('load',(ev)=>{
+        console.log("||||||||| loaded 2", ev)
+        let tester = document.getElementById('fontTester')
+
+        // it tests the envelope icon for width
+        if ( parseFloat(  window.getComputedStyle( tester, null ).getPropertyValue( "width") ) > 22){
+            
+                            console.log("mat. icons not loaded")
+
+                            let icons = document.querySelectorAll('i')
+                            //console.log("icons", icons)
+
+                            for (let i=0; i<icons.length;i++){
+                                    let icon = icons[i]
+
+                                    let fb = icon.getAttribute('data-fallback')
+                                    //console.log("fallback? ", fb)
+            
+                                    if (fb) icon.innerHTML=fb
+            
+                                    icon.style.fontSize = "35px";
+                                    icon.style.paddingBottom = "15px"
+                            }
+                            
+        } else {
+            console.log('font ok')
+                
+        }
+})
+
+
+// attempt by detecting loading error
+/*getfont().then(res=>{
             console.log("result",res, "\n",res.ok, res.status)
             alert("font loaded?  " + res.status + " " + res.ok)
 }).catch(er=>{
@@ -34,6 +81,4 @@ function getfont(){
         res(font)
         rej("nope")
     })
-
-//console.log(fetch("../app/css/material-icons.woff"))
-}
+}*/

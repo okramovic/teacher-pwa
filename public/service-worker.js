@@ -12,6 +12,7 @@ var shellFiles = [
   "/app/css/testDiv.css",
   "/app/css/Frank_Ruhl_Libre/FrankRuhlLibre-Medium.ttf",
   
+  "/app/js/service-register.js",
   "/app/js/controllers.js",
   "/app/js/directives.js",
   "/app/js/services.js",
@@ -27,6 +28,7 @@ var shellFiles = [
 self.addEventListener('install', function(e) {
       console.log('[ServiceWorker] Install');
 
+      // https://stackoverflow.com/questions/44375494/uncaught-in-promise-domexception-quota-exceeded/
       // delete old caches
       //function delete(cb){
           /*caches.keys().then(ckeys=>{
