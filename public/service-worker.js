@@ -1,5 +1,5 @@
 var shellName = "teacher_v01";
-var origin = "https://teacher.herokuapp.com"
+var origin = "https://theteacher.herokuapp.com"
 //"/",
 var shellFiles = [
   "/index.html",
