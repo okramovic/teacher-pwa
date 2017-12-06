@@ -45,7 +45,7 @@ window.addEventListener('load',(ev)=>{
                              
         // it tests the envelope icon for width
                              
-        if ( wid ) > 22){   
+        if ( wid > 22){   
             
                             console.log("mat. icons not loaded")
 
