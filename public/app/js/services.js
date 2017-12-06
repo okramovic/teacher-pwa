@@ -746,7 +746,7 @@ function newRound(string){
         if (this.round===0) this.$apply()
 
         console.log('this.voice1On', this.testWord)
-
+        
         if (window.speechSynthesis && this.voice1On){
 
                         let toSay = this.testWord
