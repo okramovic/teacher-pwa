@@ -16,20 +16,15 @@ if ('serviceWorker' in navigator){
     alert('serviceWorker not available in this browser');
 }
 
-$(function(){
+/*$(function(){
   
     var fonter = document.getElementById('fontTester')
     //var styl = window.getComputedStyle( fonter, null ).getPropertyValue( )
     console.log("header", parseFloat(  window.getComputedStyle( fonter, null ).getPropertyValue( "width") ) )
   
     //if ( parseFloat(  window.getComputedStyle( fonter, null ).getPropertyValue( "width") ) > 22){}
-})
-
-
-/*$(function(){
-    
-      
 })*/
+
 document.addEventListener('DOMContentLoaded',()=>{
     console.log('DOMload')
     
@@ -40,12 +35,17 @@ document.addEventListener('DOMContentLoaded',()=>{
                 //alert("mat. icons not loaded")
     } else {}//alert('font ok')*/
 })
+
+
 window.addEventListener('load',(ev)=>{
         console.log("||||||||| loaded 2", ev)
         let tester = document.getElementById('fontTester')
-
+        let wid = parseFloat(  window.getComputedStyle( tester, null ).getPropertyValue( "width")
+        alert("icon wid  " + wid)                             
+                             
         // it tests the envelope icon for width
-        if ( parseFloat(  window.getComputedStyle( tester, null ).getPropertyValue( "width") ) > 22){
+                             
+        if ( wid ) > 22){   
             
                             console.log("mat. icons not loaded")
 
