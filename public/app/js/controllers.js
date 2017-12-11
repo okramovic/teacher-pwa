@@ -1119,7 +1119,7 @@ function($scope, $rootScope, $timeout,
                                 $scope.newRound('first')
                         })
                         
-                        console.log('|||||    zen? ',$scope.zen)
+                        //console.log('|||||    zen? ',$scope.zen)
         })
         
         $scope.changeNextGo = exam.changeNextGo

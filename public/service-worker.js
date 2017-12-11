@@ -12,11 +12,14 @@ var shellFiles = [
   "/app/css/testDiv.css",
   "/app/css/Frank_Ruhl_Libre/FrankRuhlLibre-Medium.ttf",
 
-  "/app/libs/angular-animate.1.5.5.min.js",
-  "/app/libs/angular-materialize.0.2.2.min.js",
   "/app/libs/jquery-3.1.1.min.js",
-  "/app/libs/materialize.0.98.1.min.css",
   "/app/libs/angular.1.5.5.min.js",
+  "/app/libs/materialize.0.98.1.min.js",
+  "/app/libs/materialize.0.98.1.min.css",  
+  "/app/libs/angular-materialize.0.2.2.min.js",
+  "/app/libs/angular-animate.1.5.5.min.js",
+  
+
 
   "/app/js/service-register.js",
   "/app/js/controllers.js",
