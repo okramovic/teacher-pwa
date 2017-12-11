@@ -86,7 +86,7 @@ self.addEventListener('fetch', function(e) {
 
       //console.log('[ServiceWorker] Fetch for ', e.request.url,"\n",e.request)
 
-      e.respondWith(fromNetwork(e.request.url, 400).catch(function () {
+      e.respondWith(fromNetwork(e.request.url, 1200).catch(function () {
           return fromCache(e.request);
       }));
   
