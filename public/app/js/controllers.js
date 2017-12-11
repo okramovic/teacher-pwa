@@ -65,7 +65,7 @@ function($scope, $rootScope, $timeout,
                 $window,//fileReader//,teacherService,
         exam,vocabfile, testShare){
 
-                // add dropbox get file and upload file functionality to show off
+                // add dropbox get file and upload file functionality
                 
     
                         //$window.localStorage.removeItem("_words_en_-_est")
@@ -662,8 +662,8 @@ function($scope, $rootScope, $timeout,
                         ['breakfast', 'das Frühstück',5],
                         ['marmelade', 'die Marmelade'],
                         ['how', 'wie']
-                        ]
-                //$scope.words = ["a","b","c"] //$scope.example
+                ]
+                
 
                 $scope.lastGroup = function(index){
 
@@ -775,10 +775,6 @@ function($scope, $rootScope, $timeout,
                 $scope.shared = testShare.testQuestions
                 $scope.setTest = testShare.setVal
 
-                setInterval(function(){
-                        //console.log($scope.screen)
-                },2000)
-
                 //  main button
                 $scope.practice = function practice(){
                         
@@ -793,8 +789,8 @@ function($scope, $rootScope, $timeout,
                         })
                         .then(function(test){
                                 console.log('- - - - - - - - - - - - - -')
-                                console.log('new test questions arrived')
-                                console.log(test)
+                                console.log('new test')
+                                //console.log(test)
                                 
                                 
 
@@ -1084,11 +1080,12 @@ function($scope, $rootScope, $timeout,
         
         $scope.$on('newTest',function(ev, voiceData){
                 //alert('new test')
-                console.log("\n\n\nlistener count", $scope.$$listenerCount['newTest']) 
+                //console.log("\n\n\nlistener count", $scope.$$listenerCount['newTest']) 
 
                         console.log('--------------------------------------')
 
                         if (window.speechSynthesis){
+                                        console.log("voice settings", voiceData)
                                 $timeout(function(){
                                         $scope.voice1On = voiceData.v1on
                                         $scope.voice2On = voiceData.v2on
