@@ -794,21 +794,17 @@ function($scope, $rootScope, $timeout,
                                 
                                 
 
-                                let voiceToSend = {
+                                /*let voiceToSend = {
                                                 // defaultVoice1Index
                                                 v1on: $scope.voice1On,
                                                 v2on: $scope.voice2On,
                                                 v1: ($scope.voice1) ? $scope.voice1 : $scope.defaultVoiceIndexes[0],
                                                 v2: ($scope.voice2) ? $scope.voice2 : $scope.defaultVoiceIndexes[1]
                                 }
-                                console.log('voiceToSend', voiceToSend)
+                                console.log('voiceToSend', voiceToSend)*/
                                 //alert(JSON.stringify(voiceToSend))
 
                                 
-
-
-                                //console.log('$scope.screen', $scope.screen)
-                                //$scope.$apply()
                                 $timeout(function(){
                                         $scope.screen = "test"
                                         $scope.shared = test
@@ -816,12 +812,12 @@ function($scope, $rootScope, $timeout,
                                         $scope.mainScreen = false
                                 })
                                 $rootScope//.$parent
-                                .$broadcast('newTest', voiceToSend)
-                                        
-                                        //testShare.testQuestions
-                                        //testShare.testQuestions = test
-                                        //console.log('$scope.shared')
-                                        //console.log(testShare.testQuestions)
+                                .$broadcast('newTest', {
+                                                v1on: $scope.voice1On,
+                                                v2on: $scope.voice2On,
+                                                v1: ($scope.voice1) ? $scope.voice1 : $scope.defaultVoiceIndexes[0],
+                                                v2: ($scope.voice2) ? $scope.voice2 : $scope.defaultVoiceIndexes[1]
+                                           })//voiceToSend)
 
                         })
                 }
@@ -998,7 +994,7 @@ function($scope, $rootScope, $timeout,
                         
                 }
                 $scope.submit = function(){
-                        console.log('subm')
+                        //console.log('subm')
                         
                         $scope.xx = teacherService.makeTest($scope.words, $scope.slct)
                     
@@ -1083,28 +1079,23 @@ function($scope, $rootScope, $timeout,
                 //console.log("\n\n\nlistener count", $scope.$$listenerCount['newTest']) 
 
                         console.log('--------------------------------------')
-
-                        if (window.speechSynthesis){
-                                        console.log("voice settings", voiceData)
-                                $timeout(function(){
-                                        $scope.voice1On = voiceData.v1on
-                                        $scope.voice2On = voiceData.v2on
-                                        $scope.voice1 = $scope.voices[voiceData.v1]
-                                        $scope.voice2 = $scope.voices[voiceData.v2]
-                                })
-                                
-                        }
-                        
-
-                        console.log("speeches: \n", $scope.voice1On, $scope.voice2On, 
-                                        $scope.voice1, $scope.voice2)
-
                         
 
                         $timeout(function(){
                                 //console.log('localWords', $scope.localWords)
                                 $scope.localWords = $scope.getWords()
 
+                                if (window.speechSynthesis){
+                                        console.log("voice settings", voiceData)
+                                
+                                        $scope.voice1On = voiceData.v1on
+                                        $scope.voice2On = voiceData.v2on
+                                        $scope.voice1 = $scope.voices[voiceData.v1]
+                                        $scope.voice2 = $scope.voices[voiceData.v2]
+                                
+                                        console.log("speeches: \n", $scope.voice1On, $scope.voice2On, 
+                                        $scope.voice1, $scope.voice2)
+                                }
 
                                 $scope.oks = 0, $scope.bads = 0, $scope.feedback = []
                                 $scope.round = 0
@@ -1123,7 +1114,7 @@ function($scope, $rootScope, $timeout,
 
                                 $scope.currIndex = $scope.testQuestions[$scope.round].ind
 
-                                console.log($scope.round+1, " vs ", $scope.testQuestions.length)
+                                //console.log($scope.round+1, " vs ", $scope.testQuestions.length)
                                 
                                 $scope.newRound('first')
                         })

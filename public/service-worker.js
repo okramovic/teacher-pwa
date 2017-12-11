@@ -11,18 +11,18 @@ var shellFiles = [
   "/app/css/mediaQuerries.css",
   "/app/css/testDiv.css",
   "/app/css/Frank_Ruhl_Libre/FrankRuhlLibre-Medium.ttf",
-  
-  "/app/js/service-register.js",
-  "/app/js/controllers.js",
-  "/app/js/directives.js",
-  "/app/js/services.js",
-  "/app/js/teacherApp.js",
 
   "/app/libs/angular-animate.1.5.5.min.js",
   "/app/libs/angular-materialize.0.2.2.min.js",
   "/app/libs/jquery-3.1.1.min.js",
   "/app/libs/materialize.0.98.1.min.css",
-  "/app/libs/angular.1.5.5.min.js"/*,*/
+  "/app/libs/angular.1.5.5.min.js",
+
+  "/app/js/service-register.js",
+  "/app/js/controllers.js",
+  "/app/js/directives.js",
+  "/app/js/services.js",
+  "/app/js/teacherApp.js",
 ]
 
 self.addEventListener('install', function(e) {
@@ -86,7 +86,7 @@ self.addEventListener('fetch', function(e) {
 
       //console.log('[ServiceWorker] Fetch for ', e.request.url,"\n",e.request)
 
-      e.respondWith(fromNetwork(e.request.url, 1200).catch(function () {
+      e.respondWith(fromNetwork(e.request.url, 2000).catch(function () {
           return fromCache(e.request);
       }));
   
