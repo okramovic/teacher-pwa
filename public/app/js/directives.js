@@ -268,25 +268,18 @@ app/*.directive('checkB',function(){
 
                                r.onloadend = function(e){
 
-                                /*$timeout(function(){
-                                })*/
-                                        //let noNotes = clearNotes(e.target.result)
-                                        //console.log("file content\n", noNotes)
                                         //scope.words = noNotes
-                                        
+                                        let withoutNotes = clearNotes(e.target.result)
 
                                         //scope.upload( clearNotes(e.target.result) )
-                                        console.log('load end  -->  broadcast')
+                                        //console.log('load end  -->  broadcast')
                                         scope./*$parent.*/$emit('newDict', 
                                                 {
                                                         filename: filename, 
-                                                        words: parseText( clearNotes(e.target.result) ),
-                                                        langs: getLangs ( clearNotes(e.target.result) )
+                                                        words: parseText( withoutNotes ),
+                                                        langs: getLangs ( withoutNotes )
                                                 }
                                         )
-                                        //scope.words= parseText( clearNotes(e.target.result) )
-                                        //console.log("words loaded\n", parseText( clearNotes(e.target.result)  ) )
-                                        
                                }
                                r.onerror = function(e){
                                        alert("error reading file")
@@ -347,7 +340,7 @@ app/*.directive('checkB',function(){
         }
 
 }])
-// this is for locally stored dictionary names at initial screen
+// this is for locally stored dictionary names on initial screen
 .filter('replace_',function(){
         return function(name){
                 return name.replace(/_/g," ")
@@ -359,8 +352,6 @@ function clearNotes(text){
         text = text.slice(
 
                 text.indexOf("- - - (do not remove this line) - - -") + 
-                "- - - (do not remove this line) - - -".length
-        )
+                "- - - (do not remove this line) - - -".length )
         return text
-
 }

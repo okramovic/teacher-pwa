@@ -2,8 +2,6 @@ app.service('exam', ['$timeout','$window',function($timeout,$window){
     
         this.prepareExam = prepareExam
         this.downloadDict = function downloadDict(notes){
-                
-                        //let x = this.userNotes
 
                         if (!notes) notes = ""
 
@@ -61,8 +59,7 @@ app.service('exam', ['$timeout','$window',function($timeout,$window){
                             res2 = res.filter(function(el){
                                     return el!== undefined
                             })
-                            console.log('------  res  ------')
-                            //console.log(res)
+                            //console.log('------  res  ------')
                             return res2
         }
         this.newRound = newRound
@@ -104,11 +101,7 @@ app.service('exam', ['$timeout','$window',function($timeout,$window){
 
                 }  else if (idk){
 
-                        //alert('idk')
                         this.changeNextGo('next')
-
-                        //console.log(this)
-
                 }
 
                 let from, to;
@@ -122,7 +115,7 @@ app.service('exam', ['$timeout','$window',function($timeout,$window){
 
                         let toSay = curWord.word[to]
                         let utterThis = new SpeechSynthesisUtterance(toSay);
-                        utterThis.voice = this.voice2//zis.voices[64];
+                        utterThis.voice = this.voice2
                         utterThis.lang = this.voice2.lang
                         //alert(JSON.stringify(this.voice2) + "\n" +
                         //utterThis.voice.localService + " "+ utterThis.voice.lang + "\n\n " + utterThis.voice.name + " " + utterThis.voice.voiceURI)
@@ -131,7 +124,8 @@ app.service('exam', ['$timeout','$window',function($timeout,$window){
                         this.synth.speak(utterThis);
                 }               
 
-                this.p2 = new Promise(function(resolve, reject){
+                //this.p2 = 
+                new Promise(function(resolve, reject){
                             
                         //console.log("zis? >>", zis)
 
@@ -170,7 +164,7 @@ app.service('exam', ['$timeout','$window',function($timeout,$window){
                                                 zis.timeout(function(){
                                                         zis.addRound = true;
                                                         resolve(res.res)
-                                                },500)
+                                                },200)
                                                 
                                         //}
                                         
@@ -197,7 +191,7 @@ app.service('exam', ['$timeout','$window',function($timeout,$window){
                                                 zis.timeout(function(){
 
                                                         resolve(res.res)
-                                                },500)
+                                                },200)
                                                 
                                         //}
                                 })
@@ -221,53 +215,33 @@ app.service('exam', ['$timeout','$window',function($timeout,$window){
 
                         } else if (res.res === 0 && !zis.zen) {     
                                     console.log('\n\n  idk or 0')
-                                    //console.log('this', this)
-                                    //resolve(res.res)
                                     
                                     zis.animateBad()
 
                                     $timeout(function(){
-                                       zis.changeNextGo('next')// = "next"
+                                       zis.changeNextGo('next')
                                        zis.answerHide = false
                                        zis.addRound = true
+                                       resolve(res.res)
                                     })
-                                    
-                                    resolve(res.res)  
-                                    
-                                    $timeout(function(){
-                                        //alert(zis.getNextGo())
-                                    },1000)
 
-                                    //zis.$apply()
                         } else if (res.res === 0 && zis.zen) {     
                                 console.log('\n\n  idk or 0')
-                                //console.log('this', this)
-                                //resolve(res.res)
                                 
                                 zis.animateBad()
 
                                 $timeout(function(){
-                                   zis.changeNextGo('next')// = "next"
+                                   zis.changeNextGo('next')
                                    zis.answerHide = false
                                    zis.addRound = false
+                                   resolve(res.res)  
                                 })
-                                
-                                resolve(res.res)  
-                                
-                                $timeout(function(){
-                                    //alert(zis.getNextGo())
-                                },1000)
+
                         } else alert('error Promise')
-                        
-
-                        //console.log(utterThis)
-                        //zis.synth.speak(utterThis);
-                            
-                            
-
                 })
                 
-                this.p2.then(function(answer){
+                //this.p2
+                .then(function(answer){
 
                         console.log('correct?', answer)
 
@@ -277,7 +251,7 @@ app.service('exam', ['$timeout','$window',function($timeout,$window){
                         //  3) bad & no zen >>> add bad point, next round, rating down
                         //  4) bad & zen    >>> add bad point, repeat round, rating down
 
-                    var prms = 
+                    //var prms = 
                     new Promise(function(res,rej){
 
                                 if (answer === 2) {
@@ -315,7 +289,7 @@ app.service('exam', ['$timeout','$window',function($timeout,$window){
                                         })
                                 } 
                     })
-                    prms
+                    //prms
                     .then(function(toNextRound){
                         console.log('|||||||    resolved', toNextRound)
 
@@ -342,17 +316,13 @@ app.service('exam', ['$timeout','$window',function($timeout,$window){
                                                                 
                                                                         console.log('zis.feedback',zis.feedback)
                                                                         zis.$parent.$broadcast('endOfTest')
-                                                                                                                }
+                                                                }
                                                         })
                                                         
                                                 }, 1500);
                                         //}
         
-                                } else //if (end === false)
-                                {
-        
-                                        //console.log('res?', res)
-                                        //console.log(' o o o o o zis.nextGo',zis.getNextGo())
+                                } else {
 
                                         if (zis.nextGo === 'go'){
                                                  zis.newRound();
@@ -362,35 +332,23 @@ app.service('exam', ['$timeout','$window',function($timeout,$window){
                                         }
                                         
                                 }
-
                         })  
-
                     })
                 })
         }
-
 }])
 .service('vocabfile', [function(){
 
         //this.upload = upload
         this.parseText = parseText
 }])
-/*var promise = new Promise(function(resolve, reject){
-        let res = correct(input,ind) 
-        resolve(res)
-})*/
 function changeNextGo(str){
 
         //console.log( "this $timeout", $timeout)
         console.log('changing nextGo to=',str)
-        //
         //this.timeout(function(){
 
                 this.nextGo = str
-        //})
-        //let zis = this
-        //this.$apply(function(){
-        //        zis.nextGo = str
         //})
 
 }
@@ -399,14 +357,10 @@ function getNextGo(){
 }
 function next(){
         console.log('\\\\\\\ next  ///////')
-        //alert('\\\\\\\ next  ///////')
-
-        //console.log(this)
 
         this.nextGo = 'go'
         //this.$emit('blurit',true)
         this.newRound()
-
 }
 function home(){
         console.log('home')
@@ -934,113 +888,65 @@ function downloadDict(notes){
         this.myURL = url.createObjectURL(blob);
 }
 
-
-function parseText(string){
-
-        // 1) split str into arr
-        // 2) get rid of empty lines
-        // 3) make it have both "from" word && "to" word so errors 
-        //        in practicing are prevented
-
-        // get only words to vocab
-        //console.log( stringToArr(string).slice(1) )        
-
-        return stringToArr(string).slice(1)
-}
+// get only langs from input data
 function getLangs(string){
 
         let res = stringToArr(string)[0]
-        //res = 
-        //console.log(res)
-        //res = res.slice(0,1)
-
-        // get only langs
-
+        
         return {
                 a: res[0],
                 b: res[1]
-        }
+               }
 }
+function parseText(string){
+
+        // return only words for vocab
+        return stringToArr(string).slice(1)
+}
+
 function stringToArr(str){
 
-        
         let filteredArray = str.split(/\n/g)
         
+        // filter out empty lines
         filteredArray = filteredArray.filter(function(el){        
-                                                   // there's need to check later if both languages were indicated
-                return el.toString().trim() !== "" //&& el.split(".").length > 1
 
+                        return el.toString().trim() !== ""
         })
-        .map(function(el) {
-                        //console.log('el', el)       
+        .map(lineToArray)
 
-                        el = el.split(".")
-                        el.map(function(el) {
-                        
-                                return el.toString().trim()
-
-                        });
-                        
-
-                        return el
-        
-        })
         //console.log('filteredArray\n\n', filteredArray )
         return filteredArray
-
 }
+
+function lineToArray(line){
+
+        line = line.split(".")
+        return line.map(toProperType)
+}
+
+// turn numbers to Integers for proper word-rating changes
+function toProperType(el){
+
+        if ( isNaN(parseInt(el))===true ) return el.toString().trim()
+        
+        else return parseInt(el)
+}
+
+
+
 function mergeToSave(langs, words){
+        
+                let l = words.length
+        
+                let res = new Array(l+1)
+                res[0] = langs
 
-        let l = words.length
-
-        let res = new Array(l+1)
-
-        res[0] = langs
-
-        //words.forEach(function(el,i){
-        for (let i = 0; i< words.length;i++){
-
-                res[i+1] = words[i]
-        }
-
-                
-        //})
-
-        return res
+                for (let i = 0; i< words.length;i++){
+        
+                        res[i+1] = words[i]
+                }
+        
+                return res
 }
 
-
-
-
-/*
-        old garbage
-
-function upload(text){
-
-        alert(' u z š č x p n + č š c í p á š n c p \n\n   link ' + text)
-        
-        //let zis = this
-
-                //somewords = this.parseText(text)//, function(words){
-
-        
-                //this.mainScreen = true
-                //console.log('this',this)
-                //this.$digest()
-
-        //this.
-        /*$timeout(function(){
-                console.log('this ||||/////',this)
-
-                        zis.words = somewords
-                        zis.mainScreen = 'aloha'
-        },0)
-        //this.$apply()
-                /*console.log(this)
-                console.log(zis)
-                /*zis.$timeout(function(){
-                },0)
-        //})
-
-}
-*/

@@ -209,22 +209,28 @@ function($scope, $rootScope, $timeout,
                         
 
                         let data = angular.fromJson( $window.localStorage.getItem(dict) )
-                                        .map(function(item) {
+                        let langs = data[0]
 
-                                                item[0] = item[0].toString().trim()
-                                                item[1] = item[1].toString().trim()
+                        // remove langs from dict
+                        data.splice(0,1)
+                        
+                        //console.log("data", data)
+
+                        data = data.map(function(item) {
+
+                                                item[0] = item[0].trim()
+                                                item[1] = item[1].trim()
                                                 if (item[2]) item[2] = parseInt(item[2])
 
-                                                //console.log(item)
                                                 return item
-                                        });
-
-                        //console.log("data", data)
+                                                }
+                                        );
                         
 
                         $timeout(function(){
-                                $scope.lang1 = data[0][0], $scope.lang2 = data[0][1]
-                                $scope.words = data.slice(1)
+                                $scope.lang1 = langs[0]; $scope.lang2 = langs[1]
+                                $scope.words = data
+
                                 $scope.mainScreen = true
                                 $scope.screen = "main"
                                 $scope.currentFilename = userFile.currentFilename
@@ -409,10 +415,8 @@ function($scope, $rootScope, $timeout,
                         //mergeToSave([ $scope.lang1, $scope.lang2 ],)
 
                         console.log("WORDS", WORDS)
-                        console.log("uploading words fun:", userFile.currentFilename)//,"langs:", langs)
+                        //console.log("uploading words fun:", userFile.currentFilename)//,"langs:", langs)
 
-
-                        $scope.idk = "1 4 2 3"
                         //$scope.$broadcast('newDict', parseText(txt))
                         
                         $timeout(function(){
@@ -427,7 +431,7 @@ function($scope, $rootScope, $timeout,
                                         loadVoices();
                                         
                         },0)
-                        //$scope.
+
                         saveLocSto(userFile.currentFilename, $scope.lang1, $scope.lang2, WORDS)
                         loadLocalStorage()
             }
@@ -440,16 +444,6 @@ function($scope, $rootScope, $timeout,
                         console.log("new data")
                         // get fileName and store it into local storage under key userFileNames
 
-                        //,e, "\ndata\n", "is array?",Array.isArray(d.words))
-
-                        
-                        /*let ts2 = d.words.map(function(el){
-
-                                return el.join(". ")
-                        })
-                        let toStore = '- - - (do not remove this line) - - -' + 
-                                        '\n' + 
-                                        ts2.join("\n")*/
                         const WORDS = d.words
 
                         if (d.langs.a == undefined || d.langs.a == "" || d.langs.a === null 
@@ -467,14 +461,6 @@ function($scope, $rootScope, $timeout,
                         }
 
                         
-                        //$timeout
-                        //(function(){
-
-                                
-                                //console.log('userFile', userFile)
-                                //$scope.idk = ".. 1 4 2 3 .."
-                                
-                        //})
                         console.log(d)
                         $scope.$apply(function(){
                                 userFile.currentFilename = d.filename
