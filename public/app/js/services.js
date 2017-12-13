@@ -104,7 +104,7 @@ app.service('exam', ['$timeout','$window',function($timeout,$window){
                         this.changeNextGo('next')
                 }
 
-                let from, to;
+                let from, to
                 
                 if (dir==='ab'){ from = 0; to = 1
                 } else if (dir==='ba'){ from = 1; to = 0 }  
@@ -114,14 +114,27 @@ app.service('exam', ['$timeout','$window',function($timeout,$window){
                 if (window.speechSynthesis && this.voice2On){
 
                         let toSay = curWord.word[to]
-                        let utterThis = new SpeechSynthesisUtterance(toSay);
+                        let self = this
+                        //let toSay = this.testWord
+                        //let utterThis = new SpeechSynthesisUtterance(toSay);
+                        console.log('submit promise')
+
+                        new Promise((resolve, reject)=>{
+                                resolve( new SpeechSynthesisUtterance(toSay) )
+                        }).then(utterThis=>{
+
+                                utterThis.voice = this.voice2
+                                utterThis.lang = this.voice2.lang
+                                self.synth.speak(utterThis);
+                        })
+                        /*let utterThis = new SpeechSynthesisUtterance(toSay);
                         utterThis.voice = this.voice2
                         utterThis.lang = this.voice2.lang
                         //alert(JSON.stringify(this.voice2) + "\n" +
                         //utterThis.voice.localService + " "+ utterThis.voice.lang + "\n\n " + utterThis.voice.name + " " + utterThis.voice.voiceURI)
                         //utterThis.onstart = function(){}
                         
-                        this.synth.speak(utterThis);
+                        this.synth.speak(utterThis);*/
                 }               
 
                 //this.p2 = 
@@ -654,14 +667,21 @@ function newRound(string){
         console.log('this.voice1On', this.testWord)
         
         if (window.speechSynthesis && this.voice1On){
-
+                        let self = this
                         let toSay = this.testWord
-                        let utterThis = new SpeechSynthesisUtterance(toSay);
-                        utterThis.voice = this.voice1
-                        utterThis.lang = this.voice1.lang
+                        //let utterThis = new SpeechSynthesisUtterance(toSay);
+                        console.log('newRound promise')
+                        new Promise((resolve, reject)=>{
+                                resolve( new SpeechSynthesisUtterance(toSay) )
+                        }).then(utterThis=>{
+
+                                utterThis.voice = this.voice1
+                                utterThis.lang = this.voice1.lang
+                                self.synth.speak(utterThis);
+                        })
                         
                         //utterThis.onstart = function(){}
-                        this.synth.speak(utterThis);
+                        //this.synth.speak(utterThis);
         }
         
 }
