@@ -38,7 +38,7 @@ app.service('exam', ['$timeout','$window',function($timeout,$window){
                         //console.log('--- this 222 \n',this)
         }
 
-        var x// = {a:"a", b:"b"}
+        var x
         this.shared = x
 
         this.makeTest = function(words, indexes){
@@ -602,30 +602,20 @@ function correct(input, word, round, to, from){
     
 }
 function changeLevel(word, change){
-        //console.log('change level')
         //console.log('bef',word.word, change)
-        //console.log( this.words )
 
-        if (word.word[2]=== undefined){
+        if (word.word[2]=== undefined || isNaN( parseInt(word.word[2]) )  ){
                 word.word[2] = 0 + change
-
                 
-
-                //this.words[word.ind][2] = 0
                 //console.log('newly',word.word,'index', word.ind)
-                //this.$parent.$broadcast('updateWord', word)
 
-        } else if (word.word[2]!== undefined){
+                /*if (word.word[2]!== undefined) */
+        } else  word.word[2] = parseInt(word.word[2]) + change
 
-                word.word[2] += change
-                //console.log('newly',word.word,'index', word.ind)
-        }
+        //console.log('newly',word.word,'index', word.ind)
 
         if (word.word[2]<0) word.word[2] = 0
         else if (word.word[2]>6) word.word[2] = 6
-
-        //this.$parent.$broadcast('updateWord', word)
-        
 }
 function newRound(string){
         //console.log('from:',  this.from)
@@ -925,14 +915,13 @@ function lineToArray(line){
         return line.map(toProperType)
 }
 
-// turn numbers to Integers for proper word-rating changes
+// turn string numbers to Integers for proper word-rating changes
 function toProperType(el){
 
         if ( isNaN(parseInt(el))===true ) return el.toString().trim()
         
         else return parseInt(el)
 }
-
 
 
 function mergeToSave(langs, words){
