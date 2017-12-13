@@ -127,7 +127,7 @@ function($scope, $rootScope, $timeout,
                                                         //console.log(voice.lang.toLowerCase().includes('cz'))
                                                         return voice.lang.toLowerCase().includes('cz') || voice.lang.toLowerCase().includes('cs')
                                                         })
-                                        console.log('$scope.defaultVoice1Index', $scope.defaultVoiceIndexes)
+                                        
                 
                                 } else if (lang === 'en'){
                 
@@ -143,10 +143,12 @@ function($scope, $rootScope, $timeout,
                                                                         //console.log(voice.name)
                                                                         return voice.name ==="Google Deutsch"  ||   voice.name === "German Germany"
                                                                         })
-                                        }
-                
+                                }
+                                
                 
                         })
+                        console.log('$scope.defaultVoice1Index', $scope.defaultVoiceIndexes)
+                        
                         $scope.defaultVoice1 = $scope.voices[$scope.defaultVoiceIndexes[0]]
                         $scope.defaultVoice2 = $scope.voices[$scope.defaultVoiceIndexes[1]]
 
