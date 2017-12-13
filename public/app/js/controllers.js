@@ -85,18 +85,85 @@ function($scope, $rootScope, $timeout,
             // alert("width " + window.innerWidth)
 
             $scope.$timeout = $timeout
+            var userFile = {}
+            $scope.chooseNew = false
         
+
             $scope.defaultVoiceIndexes = [null, null]
             
-            function loadVoices(){
-                if (window.speechSynthesis) {
+            function getSynth(){
+                
+                        return new Promise((resolve, reject)=>{
+                                if (window.speechSynthesis) {
+                
+                                        $scope.voices = []
+                                        resolve(window.speechSynthesis)
+                
+                                } else  {
+                                        $scope.voices = null
+                                        reject(' - no voices available - ')
+                                }
+                        })
+            }
+            function loadVoices(synth){
+
+                return new Promise((resolve, reject)=>{
+
+                            resolve(synth.getVoices())
+                })
+            }
+            function autoChooseVoices(voices){
+
+                $scope.voices = voices  // synth.getVoices();
+                console.log('autoChooseVoices =>',$scope.voices)    
+                $timeout(function(){
+
+                        [$scope.lang1, $scope.lang2].forEach(function(lang, ind){
+                                console.log("lang", lang)
+                
+                                if (lang === 'cz' ){
+                                        $scope.defaultVoiceIndexes[ind] = $scope.voices.findIndex(function(voice){
+                        
+                                                        //console.log(voice.lang.toLowerCase().includes('cz'))
+                                                        return voice.lang.toLowerCase().includes('cz') || voice.lang.toLowerCase().includes('cs')
+                                                        })
+                                        console.log('$scope.defaultVoice1Index', $scope.defaultVoiceIndexes)
+                
+                                } else if (lang === 'en'){
+                
+                                        $scope.defaultVoiceIndexes[ind] = $scope.voices.findIndex(function(voice){
+                        
+                                                                        //console.log(voice.lang.toLowerCase().includes('cz'))
+                                                                        return voice.lang.toLowerCase().includes('gb') //|| voice.lang.toLowerCase().includes('cs')
+                                                                        })
+                                } else if (lang === 'de'){
+
+                                        $scope.defaultVoiceIndexes[ind] = $scope.voices.findIndex(function(voice){
+                        
+                                                                        //console.log(voice.name)
+                                                                        return voice.name ==="Google Deutsch"  ||   voice.name === "German Germany"
+                                                                        })
+                                        }
+                
+                
+                        })
+                        $scope.defaultVoice1 = $scope.voices[$scope.defaultVoiceIndexes[0]]
+                        $scope.defaultVoice2 = $scope.voices[$scope.defaultVoiceIndexes[1]]
+
+
+                },0)
+
+            }
+
+            /*function loadVoices(){
+                return new Promise((resolve, reject)=>{
+
+                        if (window.speechSynthesis) {
 
                                 var synth = window.speechSynthesis;
-                        
-
-                                // promisify this
+                                
                                 $timeout(function(){
-                                        
+                                                
                                         $scope.voices = []
                                         $scope.voices = synth.getVoices();    
                                         console.log($scope.voices)
@@ -105,64 +172,88 @@ function($scope, $rootScope, $timeout,
 
                                                 [$scope.lang1, $scope.lang2].forEach(function(lang, ind){
                                                         console.log("lang", lang)
-        
+                
                                                         if (lang === 'cz' ){
                                                                 $scope.defaultVoiceIndexes[ind] = $scope.voices.findIndex(function(voice){
+                        
+                                                                                                                //console.log(voice.lang.toLowerCase().includes('cz'))
+                                                                                                                return voice.lang.toLowerCase().includes('cz') || voice.lang.toLowerCase().includes('cs')
+                                                                                                                })
+                                                                        console.log('$scope.defaultVoice1Index', $scope.defaultVoiceIndexes)
                 
-                                                                                                                        //console.log(voice.lang.toLowerCase().includes('cz'))
-                                                                                                                        return voice.lang.toLowerCase().includes('cz') || voice.lang.toLowerCase().includes('cs')
-                                                                                                                        })
-                                                                console.log('$scope.defaultVoice1Index', $scope.defaultVoiceIndexes)
-        
-                                                        } else if (lang === 'en'){
-        
-                                                                $scope.defaultVoiceIndexes[ind] = $scope.voices.findIndex(function(voice){
+                                                                } else if (lang === 'en'){
                 
-                                                                                                                        //console.log(voice.lang.toLowerCase().includes('cz'))
-                                                                                                                        return voice.lang.toLowerCase().includes('gb') //|| voice.lang.toLowerCase().includes('cs')
-                                                                                                                        })
-                                                        } else if (lang === 'de'){
+                                                                        $scope.defaultVoiceIndexes[ind] = $scope.voices.findIndex(function(voice){
+                        
+                                                                                                                                //console.log(voice.lang.toLowerCase().includes('cz'))
+                                                                                                                                return voice.lang.toLowerCase().includes('gb') //|| voice.lang.toLowerCase().includes('cs')
+                                                                                                                                })
+                                                                } else if (lang === 'de'){
 
-                                                                $scope.defaultVoiceIndexes[ind] = $scope.voices.findIndex(function(voice){
+                                                                        $scope.defaultVoiceIndexes[ind] = $scope.voices.findIndex(function(voice){
+                        
+                                                                                                                                //console.log(voice.name)
+                                                                                                                                return voice.name ==="Google Deutsch"  ||   voice.name === "German Germany"
+                                                                                                                                })
+                                                                }
                 
-                                                                                                                        //console.log(voice.name)
-                                                                                                                        return voice.name ==="Google Deutsch"  ||   voice.name === "German Germany"
-                                                                                                                        })
-                                                        }
+                
+                                                        })
+                                                        $scope.defaultVoice1 = $scope.voices[$scope.defaultVoiceIndexes[0]]
+                                                        $scope.defaultVoice2 = $scope.voices[$scope.defaultVoiceIndexes[1]]
+
+
+                                                }, 500)
+                                                
+                                        }, 1200)
+                        }
+                        else{}
+                })
+            }*/
+
         
-        
-                                                })
-                                                $scope.defaultVoice1 = $scope.voices[$scope.defaultVoiceIndexes[0]]
-                                                $scope.defaultVoice2 = $scope.voices[$scope.defaultVoiceIndexes[1]]
+            // finish loading dictionary, then assign langs and then voices
+            /*function finishLoadingDictionary(lang1, lang2){
+
+                        return new Promise((resolve, reject)=>{
+                                        
+                        })
+            }*/
+            
+
+            
 
 
-                                        }, 500)
-                                        
-                                        
-                                        //$scope.defaultVoice1 = $scope.voices[0]
-                                        //$scope.defaultVoice1Index = 0
-                                        
-                                        //$scope.defaultVoice2Index = 0 //6
-                                        
-                                        //$scope.defaultVoice1 = $scope.voices[$scope.defaultVoice1Index]
+            $scope.loadExample = function(){ 
+                $timeout(function(){
+                        $scope.words = $scope.example2
+                        $scope.lang1 = 'en'
+                        $scope.lang2 = 'de'
+                        $scope.screen = "main"
+                        //loadVoices();
 
+                        $scope.setWords($scope.words)
+                        //console.log("set words  >\n",$scope.getWords());
+                        
+                        userFile.currentFilename = "_words_en_-_de"
+                        $scope.currentFilename = userFile.currentFilename
 
-                                        /*var utterThis = new SpeechSynthesisUtterance('grüss gott grüss gott');
-                                        utterThis.voice = $scope.voices[6];
-                                        utterThis.lang = "de-DE"
-                                        utterThis.onend = function(){
-                                                console.log('end speech')
-                                        }*/
-                                        //console.log(utterThis)
-                                        //synth.speak(utterThis);
-                                }, 1200)
-                }
+                        getSynth()
+                                .then(loadVoices)
+                                .then(autoChooseVoices)
+                                .catch(er=>{
+                                        console.log('------   error   -----', er)
+                                })
+
+                        saveLocSto(userFile.currentFilename,
+                                $scope.lang1, $scope.lang2,$scope.words)
+                        loadLocalStorage()
+
+                        // to hide open file / copy-paste div on initial screen
+                        $scope.chooseNew = false
+                })
+                
             }
-            //console.log('digest check')
-
-            var userFile = {}
-            $scope.chooseNew = false
-
 
             $scope.hasLocalStorage = function(){
 
@@ -211,7 +302,7 @@ function($scope, $rootScope, $timeout,
                         let data = angular.fromJson( $window.localStorage.getItem(dict) )
                         let langs = data[0]
 
-                        // remove langs from dict
+                        // remove langs from dict. data
                         data.splice(0,1)
                         
                         //console.log("data", data)
@@ -224,23 +315,29 @@ function($scope, $rootScope, $timeout,
 
                                                 return item
                                                 }
-                                        );
+                        );
                         
 
                         $timeout(function(){
                                 $scope.lang1 = langs[0]; $scope.lang2 = langs[1]
                                 $scope.words = data
+                                $scope.currentFilename = userFile.currentFilename
+
 
                                 $scope.mainScreen = true
                                 $scope.screen = "main"
-                                $scope.currentFilename = userFile.currentFilename
+                                
 
                                 $scope.setWords(data.slice(1))
 
-                                //console.log("userFile.", $scope.currentFilename)
-                                loadVoices()
+                                getSynth()
+                                .then(loadVoices)
+                                .then(autoChooseVoices)
+                                .catch(er=>{
+                                        console.log('------   error   -----', er)
+                                })
+                                //loadVoices()
                         })
-
             } 
 
             //$scope.
@@ -248,13 +345,13 @@ function($scope, $rootScope, $timeout,
                         "use strict"
 
                         
-                        console.log("\n\n||||||| saving to local",newName, lang1, lang2)
+                        //console.log("\n\n||||||| saving to local",newName, lang1, lang2)
                         //   look for this name in filenames storage
                         //      if its not there set it
                         //      if its there..
                 if (newName && lang1 && lang2 && Array.isArray(save) && save.length>0){
 
-                        console.log(" can save, have all data")
+                        //console.log(" can save, have all data")
 
                         let savedFilenames = $window.localStorage.getItem("userFileNames")
                         
@@ -262,23 +359,23 @@ function($scope, $rootScope, $timeout,
                         const toSave = mergeToSave([lang1, lang2], save)
 
                         //x.splice(0,0, [lang1, lang2] )
-                        console.log('data to save \n\n', toSave)
+                        //console.log('data to save \n\n', toSave)
 
                         if (!savedFilenames){
 
-                                console.log("no stored filenames", savedFilenames)
+                                //console.log("no stored filenames", savedFilenames)
 
                                 let names = [  {name: newName, date: dateIt()}  ]
                                 
                                 $window.localStorage.setItem("userFileNames", angular.toJson(names))
-                                console.log(  angular.toJson(names)  )
+                                //console.log(  angular.toJson(names)  )
 
                                 $window.localStorage.setItem(newName.toString(),
                                         angular.toJson( toSave )
                                 )
                                 // $scope.words.unshift( [lang1, lang2] )
                                 // angular.toJson()
-                                console.log("saving, words" , toSave)
+                                //console.log("saving, words" , toSave)
                                 //console.log("saving, words" , $scope.words)
                                 
 
@@ -290,7 +387,7 @@ function($scope, $rootScope, $timeout,
                                 let isThere = false
 
                                 for (let i=0; i< savedFilenames.length; i++){
-                                        console.log(savedFilenames[i].name ,"vs", newName)
+                                        //console.log(savedFilenames[i].name ,"vs", newName)
 
 
                                         if (savedFilenames[i].name === newName
@@ -298,7 +395,7 @@ function($scope, $rootScope, $timeout,
                                                         isThere = true; break  }
 
                                 }
-                                console.log("is this file there?", isThere)
+                                //console.log("is this file there?", isThere)
                                
 
                                 if (!isThere) {
@@ -311,13 +408,13 @@ function($scope, $rootScope, $timeout,
                                                            )
 
                                         $window.localStorage.setItem("userFileNames", angular.toJson(savedFilenames))
-                                        console.log("new filename saved to local storage", newName.toString() )
+                                        //console.log("new filename saved to local storage", newName.toString() )
 
                                         $window.localStorage.setItem(newName.toString(),
                                                 angular.toJson( toSave )
                                         )
 
-                                        console.log("local storage file updated", newName.toString(),toSave.length)
+                                        //console.log("local storage file updated", newName.toString(),toSave.length)
 
 
                                 } else if (isThere)
@@ -325,10 +422,7 @@ function($scope, $rootScope, $timeout,
                                         $window.localStorage.setItem(newName.toString(),
                                                 angular.toJson( toSave )
                                         )
-                                        console.log("local storage file updated")
-
-
-
+                                        //console.log("local storage file updated")
                         }
                 }
 
@@ -414,7 +508,7 @@ function($scope, $rootScope, $timeout,
                         $scope.currentFilename = userFile.currentFilename
                         //mergeToSave([ $scope.lang1, $scope.lang2 ],)
 
-                        console.log("WORDS", WORDS)
+                        //console.log("WORDS", WORDS)
                         //console.log("uploading words fun:", userFile.currentFilename)//,"langs:", langs)
 
                         //$scope.$broadcast('newDict', parseText(txt))
@@ -428,7 +522,14 @@ function($scope, $rootScope, $timeout,
 
                                         // to hide open file / copy-paste div on initial screen
                                         $scope.chooseNew = false
-                                        loadVoices();
+                                        //loadVoices();
+
+                                        getSynth()
+                                        .then(loadVoices)
+                                        .then(autoChooseVoices)
+                                        .catch(er=>{
+                                                console.log('------   error   -----', er)
+                                        })
                                         
                         },0)
 
@@ -441,10 +542,12 @@ function($scope, $rootScope, $timeout,
             $scope.$on('newDict', function(e,d){
                         "use strict"
 
-                        console.log("new data")
+                        //console.log("new data")
                         // get fileName and store it into local storage under key userFileNames
 
                         const WORDS = d.words
+
+                        // this can be simplified!!
 
                         if (d.langs.a == undefined || d.langs.a == "" || d.langs.a === null 
                             ||
@@ -459,9 +562,9 @@ function($scope, $rootScope, $timeout,
                                       "you'll need some to use this app");
                                 return
                         }
+                        //console.log(d)
 
-                        
-                        console.log(d)
+
                         $scope.$apply(function(){
                                 userFile.currentFilename = d.filename
                                 $scope.currentFilename = userFile.currentFilename
@@ -470,12 +573,19 @@ function($scope, $rootScope, $timeout,
                                 $scope.lang1 = d.langs.a
                                 $scope.lang2 = d.langs.b
                                 $scope.screen = "main"
-                                loadVoices();
+                                //loadVoices();
 
                                 $scope.setWords(d.words)
 
                                 // to hide open file / copy-paste div on initial screen
                                 $scope.chooseNew = false
+
+                                getSynth()
+                                .then(loadVoices)
+                                .then(autoChooseVoices)
+                                .catch(er=>{
+                                        console.log('------   error   -----', er)
+                                })
                         })
 
                         //$scope.
@@ -486,29 +596,7 @@ function($scope, $rootScope, $timeout,
             })
 
 
-            $scope.loadExample = function(){ 
-                $timeout(function(){
-                        $scope.words = $scope.example2
-                        $scope.lang1 = 'en'
-                        $scope.lang2 = 'de'
-                        $scope.screen = "main"
-                        loadVoices();
-
-                        $scope.setWords($scope.words)
-                        //console.log("set words  >\n",$scope.getWords());
-                        
-                        userFile.currentFilename = "_words_en_-_de"
-                        $scope.currentFilename = userFile.currentFilename
-
-                        saveLocSto(userFile.currentFilename,
-                                $scope.lang1, $scope.lang2,$scope.words)
-                        loadLocalStorage()
-
-                        // to hide open file / copy-paste div on initial screen
-                        $scope.chooseNew = false
-                })
-                
-            }
+            
             
 
             $scope.screenChange = function(screen){
