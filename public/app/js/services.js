@@ -116,17 +116,19 @@ app.service('exam', ['$timeout','$window',function($timeout,$window){
                         let toSay = curWord.word[to]
                         let self = this
                         //let toSay = this.testWord
-                        //let utterThis = new SpeechSynthesisUtterance(toSay);
-                        console.log('submit promise')
+                        let utterThis = new SpeechSynthesisUtterance(toSay);
+                        utterThis.voice = this.voice2
+                        utterThis.lang = this.voice2.lang
+                        window.speechSynthesis.speak(utterThis);
 
-                        new Promise((resolve, reject)=>{
+                        /*new Promise((resolve, reject)=>{
                                 resolve( new SpeechSynthesisUtterance(toSay) )
                         }).then(utterThis=>{
 
                                 utterThis.voice = this.voice2
                                 utterThis.lang = this.voice2.lang
                                 self.synth.speak(utterThis);
-                        })
+                        })*/
                         /*let utterThis = new SpeechSynthesisUtterance(toSay);
                         utterThis.voice = this.voice2
                         utterThis.lang = this.voice2.lang
@@ -355,6 +357,103 @@ app.service('exam', ['$timeout','$window',function($timeout,$window){
         //this.upload = upload
         this.parseText = parseText
 }])
+.service('voiceLoader',['$timeout',function($timeout){
+        // getSynth  loadVoices  autoChooseVoices
+        //this.getSynth = getSynth
+        //this.loadVoices = loadVoices
+        //this.attachVoices = attachVoices
+        this.autoChooseVoices = autoChooseVoices
+
+
+}])
+
+function getSynth(){
+        
+                //return new Promise((resolve, reject)=>{
+                        if (window.speechSynthesis) {
+        
+                                //this.voices = []
+                                //var synth = await window.speechSynthesis//.__proto__
+                                setTimeout(()=>{
+                                        
+                                        //console.log('x', synth)
+                                        //resolve (synth.getVoices())
+                                },5000)
+                                //resolve(synth)
+                                //this.synth = synth
+                                //return synth
+        
+                        } else  {
+                                //this.voices = null
+                                //reject(' - no voices available - ')
+                        }
+                //})
+}
+/*function loadVoices(synth){
+                        console.log('x', x)
+                        //let voices = await x.getVoices()
+                        this.voices = voices
+                        return voices
+        }
+        function attachVoices(voices){
+        this.voices = voices
+        //console.log('atach voices', voices)
+        //return voices
+        }*/
+function autoChooseVoices(){
+        //this.voices = []
+        //this.voices = voices  // synth.getVoices();
+        console.log('autoChooseVoices =>',this.voices) 
+        //console.log('this =>',this)    
+        console.log('[this.lang1, this.lang2]',this.lang1, this.lang2)
+        //console.log('this.defaultVoiceIndexes', this.defaultVoiceIndexes)
+        //this.$timeout(function(){
+        var self = this
+        //console.log('self', self)
+        let arr = [this.lang1, this.lang2]
+
+                //[self.lang1, self.lang2]
+                arr.forEach(function(lang, ind){
+                        console.log("lang", lang)
+        
+                        if (lang === 'cz' ){
+                                self.defaultVoiceIndexes[ind] = self.voices.findIndex(function(voice){
+                
+                                                //console.log(voice.lang.toLowerCase().includes('cz'))
+                                                return voice.lang.toLowerCase().includes('cz') || voice.lang.toLowerCase().includes('cs')
+                                                })
+                                
+        
+                        } else if (lang === 'en'){
+        
+                                self.defaultVoiceIndexes[ind] = self.voices.findIndex(function(voice){
+                
+                                                                //console.log(voice.lang.toLowerCase().includes('cz'))
+                                                                return voice.lang.toLowerCase().includes('gb') //|| voice.lang.toLowerCase().includes('cs')
+                                                                })
+                        } else if (lang === 'de'){
+
+                                self.defaultVoiceIndexes[ind] = self.voices.findIndex(function(voice){
+                
+                                                                //console.log(voice.name)
+                                                                return voice.name ==="Google Deutsch"  ||   voice.name === "German Germany"
+                                                                })
+                        }
+                        
+        
+                })
+                console.log('this.defaultVoice1Index', this.defaultVoiceIndexes)
+
+                this.defaultVoice1 = this.voices[this.defaultVoiceIndexes[0]]
+                this.defaultVoice2 = this.voices[this.defaultVoiceIndexes[1]]
+
+
+       // },0)
+
+}
+
+
+
 function changeNextGo(str){
 
         //console.log( "this $timeout", $timeout)
@@ -631,58 +730,53 @@ function changeLevel(word, change){
         else if (word.word[2]>6) word.word[2] = 6
 }
 function newRound(string){
-        //console.log('from:',  this.from)
-        //console.log('this',this);
-        if (string ==='first' ) {this.round=0; string = null;
-                
-        }
-
-        else if (!string){ //this.round ++;
+        
+        /*if (string ==='first' ) {this.round=0; string = null;      
+        } else if (!string){ //this.round ++;
                 //this.blr ++
-                //alert('blr')
-        }
+        }*/
+        //this.blur = true
 
-        if (this.addRound) this.round ++
-
-        this.blur = true//!this.blur
-        this.focusIt = function bb(){
-                //this.$parent.$broadcast('blurit')
-        }
-        //this.focusIt()
+        let self = this
 
         console.log('rounds', this.round)//, this.testQuestions[0].word)
         console.log('current word:  ', this.testQuestions[this.round].word[0],this.testQuestions[this.round].word[1])
         //console.log("inpVal",this.inpVal," || ", this.user.input,"<<<")
-        /*$timeout(function(){                        
-        })*/
 
-        this.testWord = this.testQuestions[this.round].word[this.from] 
+        /*this.testWord = this.testQuestions[this.round].word[this.from] 
         this.corrAnswer = this.testQuestions[this.round].word[this.to] 
         this.answerHide = true
 
-        this.user.input = ""
+        this.user.input = ""*/
         
-        if (this.round===0) this.$apply()
+        //if (this.round===0) //this.$apply()
+                this.timeout(()=>{
+                        if (self.addRound) self.round ++
 
-        console.log('this.voice1On', this.testWord)
+                        self.testWord = self.testQuestions[self.round].word[self.from] 
+                        self.corrAnswer = self.testQuestions[self.round].word[self.to] 
+                        self.answerHide = true
+                
+                        self.user.input = ""
+                        self.blur = true
+
+                        if (window.speechSynthesis && self.voice1On){
+                                //let self = this
+                                let toSay = self.testWord
+                                let utterThis = new SpeechSynthesisUtterance(toSay);
+                                //console.log('this.voices', this.voices[this.voice1])
+                                utterThis.voice = self.voice1
+                                utterThis.lang  = self.voice1.lang
         
-        if (window.speechSynthesis && this.voice1On){
-                        let self = this
-                        let toSay = this.testWord
-                        //let utterThis = new SpeechSynthesisUtterance(toSay);
-                        console.log('newRound promise')
-                        new Promise((resolve, reject)=>{
-                                resolve( new SpeechSynthesisUtterance(toSay) )
-                        }).then(utterThis=>{
+                                window.speechSynthesis.speak(utterThis);
+        
+                                
+                                //utterThis.onstart = function(){}
+                        }
+                })
 
-                                utterThis.voice = this.voice1
-                                utterThis.lang = this.voice1.lang
-                                self.synth.speak(utterThis);
-                        })
-                        
-                        //utterThis.onstart = function(){}
-                        //this.synth.speak(utterThis);
-        }
+        console.log('this.voice1On', this.voice1On)
+        
         
 }
 

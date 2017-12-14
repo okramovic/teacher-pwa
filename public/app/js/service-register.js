@@ -18,7 +18,7 @@ if ('serviceWorker' in navigator){
 
 
 document.addEventListener('DOMContentLoaded',()=>{
-    console.log('DOMload')
+    //console.log('DOMload')
     
     //var styl = window.getComputedStyle( fonter, null ).getPropertyValue( )
     //console.log("header", parseFloat(  window.getComputedStyle( fonter, null ).getPropertyValue( "width") ) )
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 
 window.addEventListener('load',(ev)=>{
-        console.log("||||||||| loaded 2", ev);
+        //console.log("||||||||| loaded 2", ev);
         let tester = document.getElementById('fontTester');
         let wid = parseFloat(  window.getComputedStyle( tester, null ).getPropertyValue( "width") );
         //alert("icon wid  " + wid)                             
