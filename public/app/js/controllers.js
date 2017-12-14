@@ -902,12 +902,14 @@ function($scope, $rootScope, $timeout,
         //console.log('|||  test ctrl  |||')
 
         if (window.speechSynthesis){
-
+                let counter = 0
                 window.speechSynthesis.onvoiceschanged = ()=>{
-                        
+                        counter ++
+
                         if (!$scope.voices){
                                 $scope.voices = window.speechSynthesis.getVoices()
-                                console.log('CTRL 22222', $scope.voices)  
+                                console.log('CTRL 22222', $scope.voices) 
+                                if (counter===1 && $scope.voices.length===0 ) location.reload() 
                                 $rootScope.$broadcast('voicesArrived')
                         }       
                 }
