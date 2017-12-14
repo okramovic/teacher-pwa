@@ -456,12 +456,18 @@ function($scope, $rootScope, $timeout,
 
 
             // voice business
-            $scope.$on('voicesArrived',()=>{
+            if (window.speechSynthesis){
 
-                // $scope must have its voices to be able to show them on main screen
-                $scope.voices = window.speechSynthesis.getVoices()
-                console.log('CTRL 11111', $scope.voices)    
-            })
+                $scope.$on('voicesArrived',()=>{
+                        
+                        // $scope must have its voices to be able to show them on main screen
+                        $scope.voices = window.speechSynthesis.getVoices()                                       
+                        console.log('CTRL 11111', $scope.voices)    
+                })
+
+            } else $scope.voices = null
+
+            
 
             $scope.voice1On = true
             $scope.voice2On = true
@@ -895,14 +901,16 @@ function($scope, $rootScope, $timeout,
                 function($scope,$rootScope, $timeout,exam,testShare,voiceLoader){
         //console.log('|||  test ctrl  |||')
 
-        window.speechSynthesis.onvoiceschanged = ()=>{
-                 
-                if (!$scope.voices){
-                        $scope.voices = window.speechSynthesis.getVoices()
-                        console.log('CTRL 22222', $scope.voices)  
-                        $rootScope.$broadcast('voicesArrived')
-                }       
-                
+        if (window.speechSynthesis){
+
+                window.speechSynthesis.onvoiceschanged = ()=>{
+                        
+                        if (!$scope.voices){
+                                $scope.voices = window.speechSynthesis.getVoices()
+                                console.log('CTRL 22222', $scope.voices)  
+                                $rootScope.$broadcast('voicesArrived')
+                        }       
+                }
         }
         
 
