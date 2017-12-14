@@ -462,7 +462,7 @@ function($scope, $rootScope, $timeout,
                         
                         // $scope must have its voices to be able to show them on main screen
                         $scope.voices = window.speechSynthesis.getVoices()                                       
-                        console.log('CTRL 11111', $scope.voices)    
+                        console.log('CTRL 11111', $scope.voices, 'len',$scope.voices.length)    
                 })
 
             } else $scope.voices = null
