@@ -4,6 +4,11 @@
 */
 /* for (mini) iphones  */
 @media screen and (max-width: 330px){
+  body{
+    width: 100vw;
+    height: 100vh;
+  }
+
   .size1{
     font-size: 24px;
   }
@@ -49,11 +54,12 @@
      margin-bottom: 8px;
   }
   .myNav{
-    min-height: 65px;
+    height: 13vh;/*35px;*/
     padding-top: 10px; 
   }
   #mainScreen{
-    /*height: calc(100vh - 65px);*/
+    /*--height: calc(100vh - 65px);*/
+    height: 87vh;
   }
   
 
@@ -89,6 +95,11 @@
 
 
 @media screen and (min-width: 331px) and (max-width: 400px){
+  body{
+    width: 100vw;
+    height: 100vh;
+  }
+  
   .size1{
     font-size: 30px;
   }
@@ -133,12 +144,14 @@
      margin-bottom: 8px;
   }
   .myNav{
-    min-height: 65px;
-    /*height: 65px;*/
+    /*--min-height: 45px;--height: 65px;*/
+
+    height: 13vh;/*35px;*/
     padding-top: 18px;
   }
   #mainScreen{
-    /*height: calc(100vh - 65px);*/
+    /*--height: calc(100vh - 65px);*/
+    height: 87vh;
   }
   
 
@@ -164,9 +177,21 @@
   }  
 }
 
-@media screen and (min-width: 401px){
+
+
+@media screen and (min-width: 401px) 
+        /*and (max-width: 601px)*/{
+  body{
+    max-width: 480px;
+    margin: auto;
+    height: 100vh;
+  }
+
   .size1{
     font-size: 40px;
+  }
+  .size1-5{
+      font-size: 33px;
   }
   .size2{
       font-size: 30px;
@@ -205,11 +230,13 @@
   }
 
   .myNav{
-    min-height: 65px;
+    /*--min-height: 65px;*/
+    height: 13vh;
     padding-top: 18px;
   }
   #mainScreen{
-    /*height: calc(100vh - 65px);*/
+    /*height: calc(100% - 65px);*/
+    height: 87vh;
   }
   
 
@@ -233,4 +260,38 @@
   #vocab .word{
     font-size: 18px;
   }  
+}
+
+
+@media screen and (min-width: 641px){
+  /*{html{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+  }*/
+  body{
+    max-height: 70vh;
+    
+    /*padding-top: 10vh;
+    margin-bottom: 10vh;*/
+    max-width: 480px;
+    margin: auto;
+    margin-top: 15vh;
+    margin-bottom: 15vh;
+  }
+
+  .myNav{
+    /*--min-height: 65px;*/
+    padding-top: 0px;
+    height: 13vh;
+    
+  }
+  #mainScreen{
+    /*--height: calc(100% - 65px);*/
+    height: 87vh;
+  }
+  #vocab{
+    height: calc(57vh - 15px);
+    overflow: auto;
+  }
 }

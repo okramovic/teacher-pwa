@@ -71,87 +71,75 @@
         
                 
     </head>
-<body ng-app='teacherApp' style="border: 0px solid red"
-    ng-class='{"forWords": screen == "words" || screen=== undefined, "fullVH": screen === "main",
-             }'>
+<body ng-app='teacherApp' style=""
+    ng-class=''>
         
-    <div class="row" style="">
-        <div class="col m2 l3"></div>
-        <div class="col s12 m8 l6" 
-            style=" 
-                    display: flex; 
-                    flex-direction: column; 
-                    
-                    justify-content: space-between;
-                    align-items: center;
-                    padding: 0px;
-                    "
-                    ng-class="{'forWords': screen=='words'}">
+        <div class="" ng-controller="teacherCtr"
+            style=" height: auto; width: 100%;
+                    display: flex; flex-direction: column; align-items: center;
+                    padding: 0px; margin: 0px;
+                    ">
             
-            
-            <div id="mainScreen" ng-controller="teacherCtr" style="border: none;"
-                ng-class="{'forWords': screen=='words' || screen == 'initial' ||
-                            screen === undefined, 
-                           'fullVH': screen=='main' }">
+            <!-- "navbar" -->
+            <div class="myNav row in_row full_width" style="border: 0px dashed">
 
-
-                <!-- "navbar" -->
-                <div class="myNav row in_row full_width" style="border: 0px dashed">
-
-                    <div class="col sm2" style="display:flex; align-items: center; 
-                                                border: 0px solid; width: 15%">
-                        <div ng-show="screen =='main'" 
-                            ng-click="screenChange('initial')"
-                            class="alignCenter size2">
-                                <i class="material-icons hvrb" data-fallback="&#8592;">first_page</i>    
-                        </div>
-
-                        <div ng-show="screen =='words'" 
-                            ng-click="screenChange('main')"
-                            class="alignCenter size2">
-                                <i class="material-icons hvrb" data-fallback="&#8592;">keyboard_arrow_left</i>
-                        </div>
-
-                        <div ng-show="screen == 'test'" 
-                            ng-click="screenChange('test')"
-                            class="alignCenter size2">
-                                <i class="material-icons hvrb" data-fallback="&#8592;">keyboard_arrow_left</i>
-                        </div>
+                <div class="col sm2" style="display:flex; align-items: center; 
+                                            border: 0px solid; width: 15%">
+                    <div ng-show="screen =='main'" 
+                        ng-click="screenChange('initial')"
+                        class="alignCenter size2">
+                            <i class="material-icons hvrb" data-fallback="&#8592;">first_page</i>    
                     </div>
 
-                    <!--  the teacher -->
-                    <h4 id="header" class="col sm8 size1" style="width: 65%; border: 0px dashed" 
-                        ng-class="{test: 'titleDisabled', undefined: 'titleEnabled', 
-                                    initial: 'titleEnabled', words: 'titleEnabled', 
-                                    main: 'titleEnabled'}[screen]">the Teacher</h4>
+                    <div ng-show="screen =='words'" 
+                        ng-click="screenChange('main')"
+                        class="alignCenter size2">
+                            <i class="material-icons hvrb" data-fallback="&#8592;">keyboard_arrow_left</i>
+                    </div>
 
-
-                    <!--  zen & modal -->
-                    <div class="col sm2" style="width: 15%; border: 0px dashed;
-                                            display: flex; justify-content: center; align-items: center">
-                        <div ng-show="screen == undefined || screen == 'initial'">
-                                <a class='btn btn-sm' data-target='introModal' modal>
-                                <i id="fontTester" class="medium material-icons" data-fallback="&#9993;">local_post_office</i></a>
-                                <!-- flight_takeoff, pets, weekend -->
-                        </div>
-                        <div ng-hide="screen == undefined || screen == 'initial'"    
-                             style="display: flex; align-items: center;">
-                             <!--label for="checkbox"></label-->
-                             <i ng-show="!zen" class="material-icons size2" data-fallback="&#9975;"
-                                ng-class="{test: 'titleDisabled'}[screen]" >location_city</i>
-
-                             <i ng-show="zen" class="material-icons size2"  data-fallback="&#9969;" data-or="&#9749;"
-                                ng-class="{test: 'titleDisabled'}[screen]">terrain</i>
-                            
-                            
-                            <label for="zen">
-                                <input id="zen" type="checkbox" ng-model="zen"   
-                                   class="browser-default" ng-click="zenSwitch()"
-                                   ng-disabled="screen=='test'">
-                            <!-- --></label>
-                        </div>
+                    <div ng-show="screen == 'test'" 
+                        ng-click="screenChange('test')"
+                        class="alignCenter size2">
+                            <i class="material-icons hvrb" data-fallback="&#8592;">keyboard_arrow_left</i>
                     </div>
                 </div>
+
+                <!--  the teacher -->
+                <h4 id="header" class="col sm8 size1" style="width: 65%; border: 0px dashed" 
+                    ng-class="{test: 'titleDisabled', undefined: 'titleEnabled', 
+                                initial: 'titleEnabled', words: 'titleEnabled', 
+                                main: 'titleEnabled'}[screen]">the Teacher</h4>
+
+
+                <!--  zen & modal -->
+                <div class="col sm2" style="width: 15%; border: 0px dashed;
+                                        display: flex; justify-content: center; align-items: center">
+                    <div ng-show="screen == undefined || screen == 'initial'">
+                            <a class='btn btn-sm' data-target='introModal' modal>
+                            <i id="fontTester" class="medium material-icons" data-fallback="&#9993;">local_post_office</i></a>
+                            <!-- flight_takeoff, pets, weekend -->
+                    </div>
+                    <div ng-hide="screen == undefined || screen == 'initial'"    
+                         style="display: flex; align-items: center;">
+                         <!--label for="checkbox"></label-->
+                         <i ng-show="!zen" class="material-icons size2" data-fallback="&#9975;"
+                            ng-class="{test: 'titleDisabled'}[screen]" >location_city</i>
+
+                         <i ng-show="zen" class="material-icons size2"  data-fallback="&#9969;" data-or="&#9749;"
+                            ng-class="{test: 'titleDisabled'}[screen]">terrain</i>
+                        
+                        
+                        <label for="zen">
+                            <input id="zen" type="checkbox" ng-model="zen"   
+                               class="browser-default" ng-click="zenSwitch()"
+                               ng-disabled="screen=='test'">
+                        <!-- --></label>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="mainScreen" ng-show="screen!=='test'">
             
                 <!--  loading words  -->
                 <div ng-show="screen ==undefined || screen == 'initial'" 
@@ -162,7 +150,7 @@
                                         <div class="center vertical">
                                             <h4 class="size1">Welcome</h4>
                                             <p  class="size3">This app was made so everyone can practice vocabulary when learning new languages. 
-                                                              You can actually practice any word or text pairs you can think of! </br></br>
+                                                              You can actually practice any word or text pairs you can think of! <br><br>
                                                               May the force be with you.</p>
                                         </div>
                                     </div>
@@ -304,9 +292,9 @@
 
 
 
-                <!-- words && mainScreen  -->
+                <!--  mainScreen  -->
                 <div ng-show="screen == 'main'" 
-                     style="height: 87vh; width: 100%;
+                     style=" width: 100%; height: 100%;
                             display: flex; 
                             flex-direction: column;
                             justify-content: space-between;
@@ -316,12 +304,9 @@
                             <div class="col s6 center">
                                     <div>
                                         <button ng-show="screen=='main'" 
-                                                ng-click="showVocab(true)">show vocab</button> 
+                                                ng-click="showVocab(true)">dictionary</button> 
                                     </div>
                                         
-                                    <div ng-show="screen == 'words'" ng-click="reverse()"> <!-- wAscen = !wAscen -->
-                                                <button>switch order</button> 
-                                    </div>
                             </div>
                             <div class="col s6">
                                     <!-- test length selection -->
@@ -404,16 +389,23 @@
                     </div>
                 </div>
 
-                <!-- showing vocab -->
-                <div ng-show="screen == 'words'" ng-class="{'forWords': screen==='words'}">
+
+                <!--  showing vocab  -->
+                <div ng-show="screen == 'words'" ng-class="" style="width: 100%; height:auto;">
                         
-                        <!-- ng-show="!showWords" -->
-                        <div class="butRow center" style="border: 0px dashed black">
-                            <button ng-show="screen=='words'" 
-                                    ng-click="showVocab(false)">hide vocab
-                            </button>
-                            <button ng-model="showUserNotes" ng-click="showUserNotes=!showUserNotes">back-up</button>
+                        <!--  buttons  -->
+                        <div class="butRow center marginTop15" style="">
+                            <!--button ng-show="screen=='words'" 
+                                    ng-click="showVocab(false)">return
+                            </button-->
+                            <!--div ng-click="reverse()" ></div> < wAscen = !wAscen -->
+                            <button ng-show="screen == 'words'" ng-click="" disabled>switch order</button> 
+                            
+                            <button ng-model="showUserNotes" 
+                                    ng-click="showUserNotes=!showUserNotes"
+                                    >back-up</button>
                         </div>
+                        <!--  user notes  -->
                         <div ng-show="showUserNotes" 
                              class="center vertical" 
                              style="margin: 20px 0px 30px;">
@@ -422,122 +414,123 @@
                                       ng-model="userNotes"
                                       style="width:90%; height: 80px; font-size:15px;" 
                                       placeholder="Add your notes to the file here:">ahoj</textarea>
+                            
                             <div style="margin: 20px 0px;">
                                 <a href="#" download-file 
                                     actionzz="downloadDict(userNotes)"
                                     ng-click="downloadDict(userNotes)"
                                     ng-href="{{myURL}}"  download="{{currentFilename}}"
-                                     >download the file</a>
-                                     <!--download-file></download-file-->
+                                    >download the file</a>
                             </div>
                         </div>
-                        
-                        <h4 class="size2">vocabulary:</h4>
+                        <!--  words list  -->
+                        <div id="vocab" style="width: 100%;
+                                    display: flex; 
+                                    flex-direction: column; 
+                                    align-items: center;
+                                    overflow-y: auto;
+                                    ">
+
+                            <!--h4 class="size2">vocabulary:</h4-->
                     
-                        <vocabulary ascen="wAscen" words="words" al="al"
-                            slct="slct" max="words.length" len="words.length" 
-                            class="dictionary"
-                            ch="change"
+                            <vocabulary ascen="wAscen" words="words" al="al"
+                                slct="slct" max="words.length" len="words.length" 
+                                class="dictionary"
+                                ch="change"
                             ></vocabulary>
-                        <div style="height: 30px">&nbsp;</div>
-        
-                        <!--pre>{{ slct }}</pre-->
-                        <!--pre>{{ xx }}</pre-->
-                        <!--input ng-model="someM" value="ohmygodnness herewjglůwknwlk">
-                        <button ng-click="submit()">submit</button-->
+                            <!--div style="height: 30px">&nbsp;</div-->
+                        </div>
+
                 </div>
                 
             </div>
-
-            <!--  test Screen -->
-            <div id="testScreen" ng-controller="testCtrl" ng-show="screen == 'test'" class="marginTop10">
+        
+        </div>
+        
+        <!--  test Screen -->
+        <div id="testScreen" ng-controller="testCtrl" ng-show="screen == 'test'" class="marginTop10">
                     
-                <div id="testField" ng-show="showTest" class="animate-show animate-hide">
-                            
-                            <!--input ng-model="shared.string"-->
-                            <!--div><h6>{{test}}</h6></div-->
-                            
-                                <!--h7 ng-model="currIndex" ng-show="false">index {{currIndex}}</h7-->
+            <div id="testField" ng-show="showTest" class="animate-show animate-hide">
+                        
+                        <!--input ng-model="shared.string"-->
+                        <!--div><h6>{{test}}</h6></div-->
+                        
+                            <!--h7 ng-model="currIndex" ng-show="false">index {{currIndex}}</h7-->
 
-                            <!-- score & round -->   
-                            <div class="butRow row centered size3">
-                                    <div class="col s4 centered">
-                                            <div ng-model="anim_Bads" ng-class="anim_Bads" class="centered">
-                                                    <h7  >{{bads}}</h7>
-                                                    <!--span></span-->
-                                                    <i class="material-icons margBot3" data-fallback="&#215;" data-or="&#10060;">close</i>
-                                            </div>
-                                    </div>
-                                    <div class="col s4 centered">
-                                            <h7># {{round+1}} / {{testQuestions.length}}</h7>
-                                    </div>
-                                    <div class="col s4 centered">
-                                            <div ng-model="anim_Oks" ng-class="anim_Oks" class="centered">
-                                                    <h7>{{oks}}</h7>
-                                                    <!--span></span-->
-                                                    <i class="material-icons margBot3" data-fallback="&#10003;">check</i>
-                                            </div>
-                                    </div>
-                                    
-                            </div>
-                            
-                            <div class="single marginTop10" >
-                                    <div>
-                                        <h6 class="size2">{{testWord}}</h6>
-                                        <h6 class="size3" ng-class="{true: 'corrAnswer-hide', false: 'corrAnswer-show'}[answerHide]">
-                                            {{corrAnswer}}</h6>
-                                    </div>
-                            </div>
-                            
-                            <form name="test" ng-submit="submit(currIndex, user.input,round)">
-                                <input type="text" name="input"
-                                    ng-model="user.input" ng-value="inpVal" 
-                                    inp-focus   data-myfocus="true"   autocomplete="off" 
-                                    ng-disabled="nextGo =='next'" >
-                                
-                            </form>    
-                            <div class="butRow" ng-model="nextGo"> 
-                                    <button ng-click="submit(currIndex,user.input,round,'idk')" 
-                                            ng-disabled="nextGo == 'next'">idk
-                                    </button>
-
-                                    <button ng-show="nextGo == 'go'" 
-                                        ng-click="submit(currIndex,user.input,round)">go</button>
-                                    <button ng-show="nextGo == 'next'"
-                                        ng-click="next()"
-                                        ng-disabled="finalResult"
-                                        >next</button>
-                            </div>
-                            
-                            
-                </div>
-
-                <!-- final results -->
-                <div ng-show="finalResult" class="animate-show animate-hide" class="center vertical">
-                        <h5 class="size3 five" style="text-align: center">congrats you had {{oks}} of {{testQuestions.length}} correct</h5>
-                        <div>
-                            <div ng-show="feedback.length>0" class="center vertical marginTop15" style="width: 80%; margin: auto;border-bottom: 1px solid gray">
-                                <div class="size3" style="margin-bottom: 20px">incorrect answers:</div>
-
-                                <div  ng-repeat="word in feedback" class="">                        
-                                        <div class="size3" 
-                                             style="margin-top: 0px">{{word.original.word[0]}}. {{word.original.word[1]}}</div>
-                                        <div class="size4" 
-                                             style="margin-bottom: 15px">your answer: {{word.input}}</div>
+                        <!-- score & round -->   
+                        <div class="butRow row centered size3">
+                                <div class="col s4 centered">
+                                        <div ng-model="anim_Bads" ng-class="anim_Bads" class="centered">
+                                                <h7  >{{bads}}</h7>
+                                                <!--span></span-->
+                                                <i class="material-icons margBot3" data-fallback="&#215;" data-or="&#10060;">close</i>
+                                        </div>
+                                </div>
+                                <div class="col s4 centered">
+                                        <h7># {{round+1}} / {{testQuestions.length}}</h7>
+                                </div>
+                                <div class="col s4 centered">
+                                        <div ng-model="anim_Oks" ng-class="anim_Oks" class="centered">
+                                                <h7>{{oks}}</h7>
+                                                <!--span></span-->
+                                                <i class="material-icons margBot3" data-fallback="&#10003;">check</i>
+                                        </div>
                                 </div>
                                 
-                            </div>
-                            <button class="single marginTop15" ng-click="home()">home</button>
                         </div>
-                </div>
+                        
+                        <div class="single marginTop10" >
+                                <div>
+                                    <h6 class="size2">{{testWord}}</h6>
+                                    <h6 class="size3" ng-class="{true: 'corrAnswer-hide', false: 'corrAnswer-show'}[answerHide]">
+                                        {{corrAnswer}}</h6>
+                                </div>
+                        </div>
+                        
+                        <form name="test" ng-submit="submit(currIndex, user.input,round)">
+                            <input type="text" name="input"
+                                ng-model="user.input" ng-value="inpVal" 
+                                inp-focus   data-myfocus="true"   autocomplete="off" 
+                                ng-disabled="nextGo =='next'" >
                             
+                        </form>    
+                        <div class="butRow" ng-model="nextGo"> 
+                                <button ng-click="submit(currIndex,user.input,round,'idk')" 
+                                        ng-disabled="nextGo == 'next'">idk
+                                </button>
+
+                                <button ng-show="nextGo == 'go'" 
+                                    ng-click="submit(currIndex,user.input,round)">go</button>
+                                <button ng-show="nextGo == 'next'"
+                                    ng-click="next()"
+                                    ng-disabled="finalResult"
+                                    >next</button>
+                        </div>
+                        
+                        
             </div>
 
-        
-        </div>     
-        <div class="col m2 l3"></div> 
-        
-    </div>
+            <!-- final results -->
+            <div ng-show="finalResult" class="animate-show animate-hide" class="center vertical">
+                    <h5 class="size3 five" style="text-align: center">congrats you had {{oks}} of {{testQuestions.length}} correct</h5>
+                    <div>
+                        <div ng-show="feedback.length>0" class="center vertical marginTop15" style="width: 80%; margin: auto;border-bottom: 1px solid gray">
+                            <div class="size3" style="margin-bottom: 20px">incorrect answers:</div>
+
+                            <div  ng-repeat="word in feedback" class="">                        
+                                    <div class="size3" 
+                                         style="margin-top: 0px">{{word.original.word[0]}}. {{word.original.word[1]}}</div>
+                                    <div class="size4" 
+                                         style="margin-bottom: 15px">your answer: {{word.input}}</div>
+                            </div>
+                            
+                        </div>
+                        <button class="single marginTop15" ng-click="home()">home</button>
+                    </div>
+            </div>
+                        
+        </div>
+
     <!--div id="fontTest" style="display: none;">test</div-->   
 
 

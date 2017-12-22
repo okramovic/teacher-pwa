@@ -561,7 +561,7 @@ function($scope, $rootScope, $timeout,
                         ['sunday','der Sonntag',2],
                         ['I, me','ich',1],
                         ['knife', 'der Messer',0],
-                        ['sharp', 'scharf'],
+                        ['sharp', 'scharf',0],
                         ['salad', 'der Salat',3],
                         ['sweet', 'süss'],
                         ['sour', 'sauer',6],
@@ -569,7 +569,17 @@ function($scope, $rootScope, $timeout,
                         ['salty', 'salzig',4],
                         ['breakfast', 'das Frühstück',5],
                         ['marmelade', 'die Marmelade'],
-                        ['how', 'wie']
+                        ['how', 'wie'],
+
+                        ['Pročež, proto', 'deshalb'],
+                        ['Proto', 'deswegen'],
+                        ['Čímž, proto','dadurch'],
+                        ['Na to, na tom','darauf'],
+                        ['Alespoň, přinejmenším','wenigstens'],
+                        ['Louka','die Weise'],
+                        ['Podporovat, těžit','fördern'],
+                        ['Pro to, neboť, za to','dafür'],
+                        ['Přesto','trotzdem']
                 ]
                 
 
@@ -656,8 +666,9 @@ function($scope, $rootScope, $timeout,
                 $scope.al = true
                 $scope.sorter = this.lev
                 $scope.reverse = function(){
-                        $scope.wAscen = !$scope.wAscen
-                        console.log('$scope.wAscen', $scope.wAscen)
+                        //$scope.wAscen = !$scope.wAscen
+                        //console.log('$scope.wAscen', $scope.wAscen)
+                        console.log('reversed');
                 }
 
                 $scope.changeDir = function changeDir(){
@@ -906,7 +917,7 @@ function($scope, $rootScope, $timeout,
                 window.speechSynthesis.onvoiceschanged = ()=>{
                         counter ++
 
-                        if (!$scope.voices){
+                        if (!$scope.voices){ // <– this is to prevent reloading of voices all the time
                                 $scope.voices = window.speechSynthesis.getVoices()
                                 console.log('CTRL 22222', $scope.voices) 
                                 if (counter===1 && $scope.voices.length===0 ) location.reload() 

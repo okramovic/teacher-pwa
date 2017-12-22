@@ -30,8 +30,9 @@ app/*.directive('checkB',function(){
                 words: '='
                 //,change: '&'
                 ,ch: '&'
-            },
-            template: '<div id="vocab" ng-repeat="w in words " class="">'+
+            },                          //| orderBy: reverse:true
+                                        //  https://stackoverflow.com/questions/15266671/angular-ng-repeat-in-reverse
+            template: '<div id="" ng-repeat="w in words " >'+
 
                                 '<div  ng-if="lastGroup($index) === false && $index % 10 === 0" '+
                                         '>'+
