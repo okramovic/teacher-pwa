@@ -482,8 +482,8 @@ function($scope, $rootScope, $timeout,
                 }
             } else {
                     $scope.voices= null;
-                    v1on= false // $scope.voice1On,
-                    v2on= false // $scope.voice2On,
+                    $scope.v1on= false // $scope.voice1On,
+                    $scope.v2on= false // $scope.voice2On,
             }
 
 
@@ -1007,6 +1007,8 @@ function($scope, $rootScope, $timeout,
                                 //console.log('localWords', $scope.localWords)
                                 $scope.localWords = $scope.getWords()
 
+                                console.log("voice settings", voiceData)
+
                                 if (window.speechSynthesis){
                                         
                                         $scope.voice1On = voiceData.v1on
@@ -1014,7 +1016,7 @@ function($scope, $rootScope, $timeout,
                                         $scope.voice1 = $scope.voices[voiceData.v1]
                                         $scope.voice2 = $scope.voices[voiceData.v2]
                                         
-                                        console.log("voice settings", voiceData)
+                                        
                                         console.log("speeches: \n", $scope.voice1On, $scope.voice2On, $scope.voice1, $scope.voice2)
                                 } else {
                                         $scope.voice1On = false

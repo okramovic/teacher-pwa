@@ -414,7 +414,7 @@ function autoChooseVoices(){
 
                 //[self.lang1, self.lang2]
                 arr.forEach(function(lang, ind){
-                        console.log("lang", lang)
+                        //console.log("lang", lang)
         
                         if (lang === 'cz' ){
                                 self.defaultVoiceIndexes[ind] = self.voices.findIndex(function(voice){
@@ -436,7 +436,9 @@ function autoChooseVoices(){
                                 self.defaultVoiceIndexes[ind] = self.voices.findIndex(function(voice){
                 
                                                                 //console.log(voice.name)
-                                                                return voice.name ==="Google Deutsch"  ||   voice.name === "German Germany"
+                                                                return voice.name ==="Google Deutsch"  || 
+                                                                       voice.name === "German Germany" ||
+                                                                       voice.lang.startsWith('de')
                                                                 })
                         }
                         
