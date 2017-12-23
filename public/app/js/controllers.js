@@ -459,17 +459,32 @@ function($scope, $rootScope, $timeout,
 
             if (window.speechSynthesis){
                 let counter = 0
+                alert('speech ok')
+                if (window.speechSynthesis.onvoiceschanged=== null)
                 window.speechSynthesis.onvoiceschanged = ()=>{
                         counter ++
-                        alert('voices: ' + window.speechSynthesis.getVoices().length)
-                        if (!$scope.voices){ // <– this is to prevent reloading of voices all the time
-                                $scope.voices = window.speechSynthesis.getVoices()
-                                console.log('CTRL 1', $scope.voices) 
-                                if (counter===1 && $scope.voices.length===0 ) location.reload() 
-                                $rootScope.$broadcast('voicesArrived')
-                        }       
+                        
+                        if (!$scope.voices) // <– this is to prevent reloading of voices all the time
+                                $timeout(()=>{
+                                   $scope.voices = window.speechSynthesis.getVoices()
+                                   alert('a: voices: ' + window.speechSynthesis.getVoices().length + 
+                                         '\n scope.v ' + $scope.voices.length )
+                                   console.log('CTRL 1', $scope.voices) 
+                                   if (counter===1 && $scope.voices.length===0 ) location.reload() 
+                                   $rootScope.$broadcast('voicesArrived')
+                                })
+                                
+                               
+                }; else {
+                        $scope.voices = window.speechSynthesis.getVoices()
+                        alert('b: voices: ' + window.speechSynthesis.getVoices().length + 
+                                         '\n scope.v ' + $scope.voices.length )
                 }
-            } else $scope.voices= null;
+            } else {
+                    $scope.voices= null;
+                    v1on= false // $scope.voice1On,
+                    v2on= false // $scope.voice2On,
+            }
 
 
             
@@ -749,7 +764,7 @@ function($scope, $rootScope, $timeout,
                         //console.log($scope.words)
                 })
 
-
+                // is this being used??
                 $scope.$on('updateWord', function(ev,data){
                         console.log('broadcast')
                         console.log(ev, data)
@@ -1001,6 +1016,9 @@ function($scope, $rootScope, $timeout,
                                         
                                         console.log("voice settings", voiceData)
                                         console.log("speeches: \n", $scope.voice1On, $scope.voice2On, $scope.voice1, $scope.voice2)
+                                } else {
+                                        $scope.voice1On = false
+                                        $scope.voice2On = false
                                 }
 
                                 $scope.oks = 0, $scope.bads = 0, $scope.feedback = []
