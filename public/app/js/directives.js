@@ -32,6 +32,7 @@ app/*.directive('checkB',function(){
                 ,ch: '&'
             },                          //| orderBy: reverse:true
                                         //  https://stackoverflow.com/questions/15266671/angular-ng-repeat-in-reverse
+                                        //  using custom filters  https://stackoverflow.com/questions/25115282/angularjs-orderby-array-index
             template: '<div id="" ng-repeat="w in words " >'+
 
                                 '<div  ng-if="lastGroup($index) === false && $index % 10 === 0" '+

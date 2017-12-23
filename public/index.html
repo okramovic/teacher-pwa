@@ -350,11 +350,11 @@
                         
                     <!-- voices settings -->
                     <div ng-show="screen == 'main'" class="center vertical" >
-                            <div ng-show="voices === null">
+                            <div ng-show="voices == null">
                                 <h6 class="center gray size5">your browser doesn't support Speech ability</h6>
                             </div>
                             <h6 class="center gray size5"
-                                 ng-show="voices.length===0">you could use Speech, try refreshing</h6>
+                                ng-show="voices && voices.length===0">you could use Speech, try refreshing</h6>
 
                             <div ng-show="voices && voices.length>0" style="width: 80%;">
                                 <!--div class="center" style="margin-top: 15px;"-->

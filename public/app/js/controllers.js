@@ -91,9 +91,6 @@ function($scope, $rootScope, $timeout,
             $scope.chooseNew = false
         
 
-            $scope.defaultVoiceIndexes = [null, null]
-
-            $scope.autoChooseVoices = voiceLoader.autoChooseVoices
                 
 
             $scope.loadExample = function(){ 
@@ -456,16 +453,24 @@ function($scope, $rootScope, $timeout,
 
 
             // voice business
+            $scope.defaultVoiceIndexes = [null, null]
+            $scope.autoChooseVoices = voiceLoader.autoChooseVoices
+
+
             if (window.speechSynthesis){
+                let counter = 0
+                window.speechSynthesis.onvoiceschanged = ()=>{
+                        counter ++
+                        alert('voices: ' + window.speechSynthesis.getVoices().length)
+                        if (!$scope.voices){ // <– this is to prevent reloading of voices all the time
+                                $scope.voices = window.speechSynthesis.getVoices()
+                                console.log('CTRL 1', $scope.voices) 
+                                if (counter===1 && $scope.voices.length===0 ) location.reload() 
+                                $rootScope.$broadcast('voicesArrived')
+                        }       
+                }
+            } else $scope.voices= null;
 
-                $scope.$on('voicesArrived',()=>{
-                        
-                        // $scope must have its voices to be able to show them on main screen
-                        $scope.voices = window.speechSynthesis.getVoices()                                       
-                        console.log('CTRL 11111', $scope.voices, 'len',$scope.voices.length)    
-                })
-
-            } else $scope.voices = null
 
             
 
@@ -557,29 +562,29 @@ function($scope, $rootScope, $timeout,
                 ]*/
 
                 $scope.example2 = [
-                        ['hi','hallo',1],
-                        ['sunday','der Sonntag',2],
+                        ['Hi','hallo',1],
+                        ['Sunday','der Sonntag',2],
                         ['I, me','ich',1],
-                        ['knife', 'der Messer',0],
-                        ['sharp', 'scharf',0],
-                        ['salad', 'der Salat',3],
-                        ['sweet', 'süss'],
-                        ['sour', 'sauer',6],
-                        ['midday', 'der Mittag'],
-                        ['salty', 'salzig',4],
-                        ['breakfast', 'das Frühstück',5],
-                        ['marmelade', 'die Marmelade'],
-                        ['how', 'wie'],
+                        ['Knife', 'der Messer',0],
+                        ['Sharp', 'scharf',0],
+                        ['Salad', 'der Salat',3],
+                        ['Sweet', 'süss'],
+                        ['Sour', 'sauer',6],
+                        ['Salty', 'salzig',4],
+                        ['Midday, noon', 'der Mittag'],
+                        ['Breakfast', 'das Frühstück',5],
+                        ['Marmelade', 'die Marmelade'],
+                        ['How', 'wie'],
 
-                        ['Pročež, proto', 'deshalb'],
-                        ['Proto', 'deswegen'],
-                        ['Čímž, proto','dadurch'],
-                        ['Na to, na tom','darauf'],
-                        ['Alespoň, přinejmenším','wenigstens'],
-                        ['Louka','die Weise'],
-                        ['Podporovat, těžit','fördern'],
-                        ['Pro to, neboť, za to','dafür'],
-                        ['Přesto','trotzdem']
+                        ["That's why, therefore", 'deshalb'],
+                        ['Because of that', 'deswegen'],
+                        ['Thereby','dadurch'],
+                        ['After that, thereon','darauf'],
+                        ['At least','wenigstens'],
+                        ['Meadow','die Weise'],
+                        ['Support','fördern'],
+                        ['For this, in return','dafür'],
+                        ['Despite','trotzdem']
                 ]
                 
 
@@ -913,18 +918,15 @@ function($scope, $rootScope, $timeout,
         //console.log('|||  test ctrl  |||')
 
         if (window.speechSynthesis){
-                let counter = 0
-                window.speechSynthesis.onvoiceschanged = ()=>{
-                        counter ++
 
-                        if (!$scope.voices){ // <– this is to prevent reloading of voices all the time
-                                $scope.voices = window.speechSynthesis.getVoices()
-                                console.log('CTRL 22222', $scope.voices) 
-                                if (counter===1 && $scope.voices.length===0 ) location.reload() 
-                                $rootScope.$broadcast('voicesArrived')
-                        }       
-                }
-        }
+                $scope.$on('voicesArrived',()=>{
+                        
+                        // $scope must have its voices to be able to show them on main screen
+                        $scope.voices = window.speechSynthesis.getVoices()                                       
+                        console.log('CTRL 2', $scope.voices, 'len',$scope.voices.length)    
+                })
+
+        } else $scope.voices = null
         
 
         $scope.zen = true, $scope.showTest = false
