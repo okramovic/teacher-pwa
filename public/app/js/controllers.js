@@ -460,26 +460,32 @@ function($scope, $rootScope, $timeout,
             if (window.speechSynthesis){
                 let counter = 0
                 alert('speech ok')
+
                 if (window.speechSynthesis.onvoiceschanged=== null)
-                window.speechSynthesis.onvoiceschanged = ()=>{
-                        counter ++
-                        
-                        if (!$scope.voices) // <– this is to prevent reloading of voices all the time
-                                $timeout(()=>{
-                                   $scope.voices = window.speechSynthesis.getVoices()
-                                   alert('a: voices: ' + window.speechSynthesis.getVoices().length + 
-                                         '\n scope.v ' + $scope.voices.length )
-                                   console.log('CTRL 1', $scope.voices) 
-                                   if (counter===1 && $scope.voices.length===0 ) location.reload() 
-                                   $rootScope.$broadcast('voicesArrived')
-                                })
-                                
-                               
-                }; else {
+                        window.speechSynthesis.onvoiceschanged = () => {
+                                counter ++
+                                alert('onvoiceschanged event')
+                                if (!$scope.voices) // <– this is to prevent reloading of voices all the time
+                                        $timeout(()=>{
+                                           $scope.voices = window.speechSynthesis.getVoices()
+                                           alert('a: voices: ' + window.speechSynthesis.getVoices().length + 
+                                                 '\n scope.v ' + $scope.voices.length )
+                                           console.log('CTRL 1', $scope.voices)
+
+                                           if (counter===1 && $scope.voices.length===0 ) location.reload() 
+                                           $rootScope.$broadcast('voicesArrived')
+                                        })
+                        }; 
+
+                else $timeout(()=>{
+                        //console.log('saf voices check')
                         $scope.voices = window.speechSynthesis.getVoices()
-                        alert('b: voices: ' + window.speechSynthesis.getVoices().length + 
+                        $rootScope.$broadcast('voicesArrived')
+                        console.log('b: voices: ' + window.speechSynthesis.getVoices().length + 
                                          '\n scope.v ' + $scope.voices.length )
-                }
+                })
+                        
+                
             } else {
                     $scope.voices= null;
                     $scope.v1on= false // $scope.voice1On,
@@ -1001,15 +1007,15 @@ function($scope, $rootScope, $timeout,
         
         $scope.$on('newTest',function(ev, voiceData){
                 
-                        console.log('--------------------------------------')
+                console.log('--------------------------------------')
                         
-                        $timeout(function(){
-                                //console.log('localWords', $scope.localWords)
-                                $scope.localWords = $scope.getWords()
+                $timeout(function(){
+                        //console.log('localWords', $scope.localWords)
+                        $scope.localWords = $scope.getWords()
 
-                                console.log("voice settings", voiceData)
+                        console.log("voice settings", voiceData)
 
-                                if (window.speechSynthesis){
+                        if (window.speechSynthesis && $scope.voices){
                                         
                                         $scope.voice1On = voiceData.v1on
                                         $scope.voice2On = voiceData.v2on
@@ -1018,31 +1024,31 @@ function($scope, $rootScope, $timeout,
                                         
                                         
                                         console.log("speeches: \n", $scope.voice1On, $scope.voice2On, $scope.voice1, $scope.voice2)
-                                } else {
+                        } else {
                                         $scope.voice1On = false
                                         $scope.voice2On = false
-                                }
+                        }
 
-                                $scope.oks = 0, $scope.bads = 0, $scope.feedback = []
-                                $scope.round = 0
-                                $scope.addRound = false
-                
-                                //$scope.blur = true
-                                $scope.changeNextGo('go')
-                                $scope.finalResult = 0
+                        $scope.oks = 0, $scope.bads = 0, $scope.feedback = []
+                        $scope.round = 0
+                        $scope.addRound = false
 
-                                $scope.screen = 'test'
-                                $scope.showTest = true
+                        //$scope.blur = true
+                        $scope.changeNextGo('go')
+                        $scope.finalResult = 0
 
-                                $scope.testQuestions = $scope.getQuestions()
-                                //console.log('$scope.testQuestions', $scope.testQuestions) //[$scope.round]
-                                console.log('$scope.testQuestions', $scope.testQuestions[$scope.round])
+                        $scope.screen = 'test'
+                        $scope.showTest = true
 
-                                $scope.currIndex = $scope.testQuestions[$scope.round].ind
+                        $scope.testQuestions = $scope.getQuestions()
+                        //console.log('$scope.testQuestions', $scope.testQuestions) //[$scope.round]
+                        console.log('$scope.testQuestions', $scope.testQuestions[$scope.round])
+
+                        $scope.currIndex = $scope.testQuestions[$scope.round].ind
                                 
-                                //$scope.newRound('first')
-                                $scope.newRound()
-                        })
+                        //$scope.newRound('first')
+                        $scope.newRound()
+                })
                         
                         
         })

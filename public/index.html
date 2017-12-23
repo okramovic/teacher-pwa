@@ -511,11 +511,14 @@
             </div>
 
             <!-- final results -->
-            <div ng-show="finalResult" class="animate-show animate-hide" class="center vertical">
+            <div ng-show="finalResult" class="animate-show animate-hide center vertical"
+                    style="width: 100%;" >
                     <h5 class="size3 five" style="text-align: center">congrats you had {{oks}} of {{testQuestions.length}} correct</h5>
-                    <div>
-                        <div ng-show="feedback.length>0" class="center vertical marginTop15" style="width: 80%; margin: auto;border-bottom: 1px solid gray">
-                            <div class="size3" style="margin-bottom: 20px">incorrect answers:</div>
+                    <!--div-->
+                        <div ng-show="feedback.length>0" class="center vertical marginTop15" 
+                             style="width: 80%; margin: auto;border-bottom: 1px solid gray">
+
+                            <div class="size3" style="margin-bottom: 20px">incorrect answers</div>
 
                             <div  ng-repeat="word in feedback" class="">                        
                                     <div class="size3" 
@@ -525,8 +528,9 @@
                             </div>
                             
                         </div>
-                        <button class="single marginTop15" ng-click="home()">home</button>
-                    </div>
+                        <button class="marginTop15" ng-click="home()"
+                            >home</button>
+                    <!--/div-->
             </div>
                         
         </div>

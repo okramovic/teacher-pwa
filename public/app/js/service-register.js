@@ -1,10 +1,6 @@
-//console.log('serviceWorker registerer');
 
 if ('serviceWorker' in navigator){
-  
-        //alert('browser has service worker');
-        
-          
+                
         navigator.serviceWorker
             .register('service-worker.js')
             .then(function(reg){
@@ -13,7 +9,7 @@ if ('serviceWorker' in navigator){
         })
   
 } else {
-    alert("storing this app offline isn't going to be possible");
+    //alert("storing this app offline isn't going to be possible");
 }
 
 
@@ -30,34 +26,27 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 
 window.addEventListener('load',(ev)=>{
-        //console.log("||||||||| loaded 2", ev);
+
         let tester = document.getElementById('fontTester');
         let wid = parseFloat(  window.getComputedStyle( tester, null ).getPropertyValue( "width") );
         //alert("icon wid  " + wid)                             
                              
-        // it tests the envelope icon for width
-                             
+        // test the envelope icon for width              
         if ( wid > 22){   
             
                             console.log("mat. icons not loaded")
 
                             let icons = document.querySelectorAll('i')
-                            //console.log("icons", icons)
 
                             for (let i=0; i<icons.length;i++){
                                     let icon = icons[i]
 
                                     let fb = icon.getAttribute('data-fallback')
-                                    //console.log("fallback? ", fb)
             
                                     if (fb) icon.innerHTML=fb
             
                                     icon.style.fontSize = "35px";
                                     icon.style.paddingBottom = "15px"
                             }
-                            
-        } else {
-            console.log('icons loaded ok')
-                
-        }
+        } else console.log('icons loaded ok')
 })
