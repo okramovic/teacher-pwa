@@ -123,6 +123,11 @@ input[type="file"]{
     text-shadow: 1px 1px 0px rgb(193, 193, 193);
     cursor: pointer;
 }
+br{
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
 label{
     user-select: none;
     -webkit-user-select: none;
@@ -192,6 +197,7 @@ select {
     /*margin- 20px 10px;*/
     width: 80%;
     margin: auto;
+    text-align: center;
     text-align-last: center;
     /*---webkit-text-align-last: center;*/
 

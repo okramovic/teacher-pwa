@@ -80,11 +80,11 @@
 .animate-show.ng-hide-remove,
 .animate-hide.ng-hide-add.ng-hide-add-active {
   opacity: 0;
-  display: block !important;
+  display: flex !important;
 }
 
 .animate-hide.ng-hide-add,
 .animate-show.ng-hide-remove.ng-hide-remove-active {
   opacity: 1;
-  display: block !important;
+  display: flex !important;
 }

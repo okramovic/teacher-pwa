@@ -39,8 +39,8 @@ app/*.directive('checkB',function(){
                                         '>'+
                                         '</br class="size5">' +
 
-                                        '{{$index+1}}.-{{$index+10}}.   '+
-                                        '<label >'+
+                                        //'<p class="size3">{{$index+1}}.-{{$index+10}}.</p>'+
+                                        '<label class="size3" style="color: black;"> {{$index+1}}.-{{$index+10}}.'+
                                         '<input  type="checkbox" class="browser-default" ng-model="idk"      ' +
                                         //'ng-checked="allchecked({{$index}}) == true"             ' +
                                         'ng-change="change({{$index}},1)  ">' +
@@ -52,9 +52,9 @@ app/*.directive('checkB',function(){
                                         'ng-model="www"> '+
                                         '</br class="size5">'+
 
-                                        '{{$index+1}}.-{{words.length}}.'+
+                                        //'<p class="size3">{{$index+1}}.-{{words.length}}.</p>'+
 
-                                        '<label >'+
+                                        '<label class="size3" style="color: black;"> {{$index+1}}.-{{words.length}}.'+
                                         '<input  type="checkbox" class="browser-default" ng-model="www"      ' +
                                         //'ng-checked="allchecked({{$index}}) == true"             ' +
                                         'ng-change="change({{$index}},1)  ">' +
@@ -75,52 +75,23 @@ app/*.directive('checkB',function(){
                                         '{{w[0]}} {{w[1]}} {{w[2]}}'+
                                 '</div>'+
                         '</div>' ,
-            /*'<div  ng-model="wx"  '+
-                                'ng-class="{0: &quot;zero&quot;, 1: &quot;one&quot;,'+
-                                        ' 2: &quot;two&quot; , 3: &quot;three&quot;,'+
-                                        ' 4: &quot;four&quot;, 5: &quot;five&quot;,'+
-                                        ' 6: &quot;six&quot;}[w[2]]"'+
-                                                '>' +
-                                        '{{w[0]}} {{w[1]}} {{w[2]}}'+
-
-                                               // '<br> max {{words.length}} - {{max}}..'   +*/
-            /* 
-                        '<input  type="checkbox"  smt="{{$index}}" ' +
-                                ' ng-checked="slct.indexOf({{$index}}) > -1"    ' +        
-                                'ng-model="smt"   ng-change="change({{$index}})"  >'+
-            */
+            
             link: function(scope, el, att){
-                //console.log("att", att)
-                //console.log("change",scope.change)
-                //scope.w[2] = scope.wo[2]
-                scope.wx = true//scope.wo[2][2]
+               
+                scope.wx = true
                 scope.idk = 1
                 scope.al = true
                 $timeout(function(){
-                scope.max = 9
+                    scope.max = 9
                 })
-                //scope.len = 9
-                //console.log("len",scope.len,"<<")
-                //scope.change = change
-                /*function(){
-                        console.log('change');
-                }*/
-                /*scope.picked = picked
-                function picked(x){
-                        console.log('hi colors')
-                        if (x % 2 === 0) return true
-                        else return false
-                }*/
+                
                 scope.$watch('slct', function(sl){
-                        //alert('al' + scope.al + ' .')
-                        //console.log('*****  sl\n',sl)
+
                 })
                 scope.$watch('words', function(w){
-                        //alert('al' + scope.al + ' .')
-                        //console.log('w\n\n',w)
+
                 })
 
-                //scope.rev = false;
                 scope.$watch('len', function(wo){
                         //console.log("wo", wo)
                         //scope.len = 
@@ -132,13 +103,13 @@ app/*.directive('checkB',function(){
                         //})
                         
                 })
-                scope.$watch('max', function(fck){
-                                /*console.log('pipi', fck,"<")
+                /*scope.$watch('max', function(fck){
+                                console.log('pipi', fck,"<")
                                 console.log("words",scope.wo,"<<")
                                 console.log("scope.max", scope.max)
                                 console.log("scope", scope)
-                                */
-                })
+                                
+                })*/
 
                 scope.$watch( 'ascen'
                                 //'wAscen'
@@ -164,13 +135,10 @@ app/*.directive('checkB',function(){
                         //alert('al' + scope.al + ' .')
                         //console.log('al')      
                 })
-                //console.log(scope.wo[7][2])
-                //console.log(att)
-                //console.log($scope)
             }
     }
 })
-.directive('testLength', function(){
+/*.directive('testLength', function(){
         return {
                 restrict: 'E',
                 replace: true,
@@ -181,33 +149,27 @@ app/*.directive('checkB',function(){
                 template: '<p></p>'/*'<select ng-model="lengthSel" '+
                                 'ng-options="l + \' rounds\' for l in lengths" '+
                                 ' ng-change="lengthSelect(3)">' +
-                                '</select>' */        
+                                '</select>'       
                         //'<option>{{l}} rounds</option>' +
                         
                         
         }
   //       
   //    ng-change="lengthSelect()"
-})
+ 
+})*/ 
 .directive('inpFocus', ['$timeout', function($timeout){
         return{
                 restrict: 'A',
-                //controller: 'testCtrl',
                 //scope:{
                         //blr: '='
                 //},
                 link: function(scope, el, attr){
-                        //console.log('directive el', el)
-                        //console.log(scope)
-
                         scope.blur = false
                         
                         scope.$watch('blur', function(idk){
-                                //alert('halo')
-
                                 
                                 if (scope.blur){
-                                        //console.log("-- blur 111 ",scope.blur)
                                         console.log('focus')
                                         $timeout(function(){
                                                 el[0].focus()
@@ -216,46 +178,34 @@ app/*.directive('checkB',function(){
                                 else if (!scope.blur) {
                                         console.log('blur')
                                         $timeout(function(){
-                                                //console.log("-- blur 222 ",scope.blur)
-        
                                                 el[0].blur()
                                         })
                                 }
-                                else alert('else')
+                                else alert('directive inpFocus else')
                         },true)
 
                         scope.$on('blurit', function(){
                                 console.log('wwwwwwww   blurit wwww')
-
-                                //el[0].focus() //blur()
                         })
-                        
                 }
         }
-
-
 }])
 // file reader
 .directive('fileSelect', ['$window',function($window){
         return{
                 restrict: 'A',
                 //require: 'ngModel',
-                //controller: 'teacherCtr',       // ng-change="upFile(file)"
+                //controller: 'teacherCtr',
                 /*scope:{
                         //onSelect: '&',
                         //fileSelect: '@',
                         data: '@',
                 },*/
-                //template:'<input type="file" ng-model="file" >',
                 link: function(scope, el, attr){
                         "use strict"
-                        //console.log(scope)
-                        //console.log(el)
-                        //console.log(attr)
 
                         el.bind("change", function(e){
-                               //, e.target.files[0])
-                               console.log("file change")
+                               //console.log("file change")
 
                                if (e.target.files[0].type !== 'text/plain'){
                                         alert("only .txt files accepted\n" + 
@@ -270,25 +220,20 @@ app/*.directive('checkB',function(){
 
                                r.onloadend = function(e){
 
-                                        //scope.words = noNotes
                                         let withoutNotes = clearNotes(e.target.result)
 
-                                        //scope.upload( clearNotes(e.target.result) )
-                                        //console.log('load end  -->  broadcast')
-                                        scope./*$parent.*/$emit('newDict', 
-                                                {
-                                                        filename: filename, 
-                                                        words: parseText( withoutNotes ),
-                                                        langs: getLangs ( withoutNotes )
-                                                }
+                                        scope.$emit('newDict', 
+                                                      {
+                                                       filename: filename, 
+                                                       words: parseText( withoutNotes ),
+                                                       langs: getLangs ( withoutNotes )
+                                                      }
                                         )
                                }
                                r.onerror = function(e){
                                        alert("error reading file")
                                }
                                r.readAsText(e.target.files[0])
-
-                               //console.log('event', e.target.files[0].name)
                         })
                 }
         }
