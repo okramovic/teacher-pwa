@@ -118,7 +118,7 @@ input[type="file"]{
 .gray{
     color: rgba(193, 193, 193, 0.5);
 }
-.hvrb{}
+
 .hvrb:hover{
     text-shadow: 1px 1px 0px rgb(193, 193, 193);
     cursor: pointer;
@@ -167,8 +167,6 @@ a, button {
     background-color: transparent;
 }
 a, button:hover{
-    /*cursor- pointer;*/
-
     /* h-shadow v-shadow blur-radius color|none|initial|inherit; */
     text-shadow: 1px 1px 0px rgb(193, 193, 193);
 
@@ -235,7 +233,9 @@ textarea::placeholder{
     display: flex;
     flex-direction: column;
 }
-
+.margBot20{
+     margin-bottom: 20px;
+}
 
 
 .zero{

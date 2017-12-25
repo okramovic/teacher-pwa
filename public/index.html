@@ -175,7 +175,7 @@
                                         </button>
                                         <button class="thumb-sized alignCenter" 
                                             ng-click="deleteLSDict(dict.name, $index)">
-                                            <i class="material-icons" data-fallback="&#9940;" data-or="&#10054;">delete</i>
+                                            <i class="material-icons" data-fallback="&#215;" data-or="&#9940;" data-or2="&#10054;">delete</i>
                                         </button>
                                     </div> 
                             </div>
@@ -449,8 +449,9 @@
         
         <!--  test Screen -->
         <div id="testScreen" ng-controller="testCtrl" ng-show="screen == 'test'" class="marginTop10">
-                    
-            <div id="testField" ng-show="showTest" class="animate-show animate-hide">
+               
+               <!--  questions  -->
+               <div id="testField" ng-show="showTest" class="animate-show animate-hide">
                         
                         <!--input ng-model="shared.string"-->
                         <!--div><h6>{{test}}</h6></div-->
@@ -508,30 +509,28 @@
                         </div>
                         
                         
-            </div>
+               </div>
 
-            <!-- final results -->
-            <div ng-show="finalResult" class="animate-show animate-hide center vertical"
-                    style="width: 100%;" >
-                    <h5 class="size3 five" style="text-align: center">congrats you had {{oks}} of {{testQuestions.length}} correct</h5>
-                    <!--div-->
-                        <div ng-show="feedback.length>0" class="center vertical marginTop15" 
-                             style="width: 80%; margin: auto;border-bottom: 1px solid gray">
+               <!-- final result -->
+               <div ng-show="finalResult" class="animate-show animate-hide vertical"
+                    style="width: 100%; max-height: 87vh; align-items: center;" >
+                         <h5 class="size3 five" style="text-align: center">congrats you had {{oks}} of {{testQuestions.length}} correct</h5>
+                         <div ng-show="feedback.length>0" class="size3">{{bads}} incorrect answers:</div>
+                         <div ng-show="feedback.length>0" class="vertical marginTop15" 
+                              style="width: 90%; max-height: 70vh; overflow: auto; align-items: center;
+                                     border-bottom: 1px solid gray">
 
-                            <div class="size3" style="margin-bottom: 20px">incorrect answers</div>
-
-                            <div  ng-repeat="word in feedback" class="">                        
-                                    <div class="size3" 
-                                         style="margin-top: 0px">{{word.original.word[0]}}. {{word.original.word[1]}}</div>
-                                    <div class="size4" 
-                                         style="margin-bottom: 15px">your answer: {{word.input}}</div>
-                            </div>
+                              <div ng-repeat="word in feedback" style="text-align: center;">                        
+                                   <div class="size3" style="margin-top: 0px"
+                                        >{{word.original.word[0]}}. {{word.original.word[1]}}</div>
+                                    <div class="size4" style="margin-bottom: 15px"
+                                        >your answer: {{word.input}}</div>
+                              </div>
                             
-                        </div>
-                        <button class="marginTop15" ng-click="home()"
-                            >home</button>
-                    <!--/div-->
-            </div>
+                         </div>
+                         <button class="marginTop15 margBot20" ng-click="home()"
+                              >home</button>
+               </div>
                         
         </div>
 

@@ -459,7 +459,7 @@ function($scope, $rootScope, $timeout,
 
             if (window.speechSynthesis){
                 let counter = 0
-                alert('speech ok')
+                //alert('speech ok')
 
                 if (window.speechSynthesis.onvoiceschanged=== null)
                         window.speechSynthesis.onvoiceschanged = () => {
@@ -468,8 +468,7 @@ function($scope, $rootScope, $timeout,
                                 if (!$scope.voices) // <– this is to prevent reloading of voices all the time
                                         $timeout(()=>{
                                            $scope.voices = window.speechSynthesis.getVoices()
-                                           alert('a: voices: ' + window.speechSynthesis.getVoices().length + 
-                                                 '\n scope.v ' + $scope.voices.length )
+                                           //alert('a: voices: ' + window.speechSynthesis.getVoices().length + '\n scope.v ' + $scope.voices.length )
                                            console.log('CTRL 1', $scope.voices)
 
                                            if (counter===1 && $scope.voices.length===0 ) location.reload() 
