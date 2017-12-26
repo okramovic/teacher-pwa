@@ -301,8 +301,10 @@
                         <div class="butRow row marginTop15" style="border: 0px solid gray">
                             <div class="col s6 center">
                                     <div>
+                                        <!--button ng-show="screen=='main'" 
+                                                ng-click="showVocab(true)">dictionary</button-->
                                         <button ng-show="screen=='main'" 
-                                                ng-click="showVocab(true)">dictionary</button> 
+                                                ng-click="screen='words'">dictionary</button>
                                     </div>
                                         
                             </div>
@@ -394,7 +396,7 @@
                             <!--button ng-show="screen=='words'" 
                                     ng-click="showVocab(false)">return
                             </button-->
-                            <!--div ng-click="reverse()" ></div> < wAscen = !wAscen -->
+                            <!--div ng-click="()" ></div> < wAscen = !wAscen -->
                             <button ng-show="screen == 'words'" ng-click="" disabled>switch order</button> 
                             
                             <button ng-model="showUserNotes" 
@@ -428,11 +430,10 @@
                                     ">
 
                             <!--h4 class="size2">vocabulary:</h4-->
-                    
-                            <vocabulary ascen="wAscen" words="words" al="al"
-                                slct="slct" max="words.length" len="words.length" 
-                                class="dictionary"
-                                ch="change"
+
+                              <!-- not used attributes:   slct="slct"   al="al"   len="words.length"   max="words.length"  -->
+                            <vocabulary words="words" ch="change"
+                                        class="dictionary"
                             ></vocabulary>
                             <!--div style="height: 30px">&nbsp;</div-->
                         </div>

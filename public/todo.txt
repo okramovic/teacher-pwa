@@ -40,6 +40,12 @@ not neccessary
   https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis
 
 
+some notes on checkboxes
+     //  getting selected checkboxes
+    //  https://stackoverflow.com/questions/42533332/angularjs-ng-repeat-array-index
+    //  http://jsfiddle.net/g1aurav/026mc5c6/1/
+
+
 - - - - - - - - - - - - - - - - - - - - - - - - - - -
 - - - - - - - - — - -  done   - - - - - - - - - - - -
 

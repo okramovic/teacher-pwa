@@ -1,39 +1,14 @@
-app/*.directive('checkB',function(){
-    return {
-            restrict: 'AE',
-            replace: true,
-            scope:{
-                    ch: '&'
-            },
-            template: '<input type="checkbox" ng-change="change(111)">',
-            link: function(scope, el, att){
-                    
-
-            }
-    }
-    
-}])*/.directive('vocabulary',function($timeout){
-    return {
-            restrict: 'EA',
-            replace: true,
-            //controller: 'teacherCtr',
-            /*scope:{
-                    wo: '=',
-                    ch: '&',
-                    ascen: '=',
-                    al:'=',
-                    slct: '=',
-                    len: '=',
-                    max: '='
-            },*/  // | orderBy:w.lev:ascen    track by $index 
-            scope: {
-                words: '='
+app
+.directive('vocabulary',function($timeout){
+     return {
+          restrict: 'EA',
+          replace: true,
+          scope: {
+               words: '=',
                 //,change: '&'
-                ,ch: '&'
-            },                          //| orderBy: reverse:true
-                                        //  https://stackoverflow.com/questions/15266671/angular-ng-repeat-in-reverse
-                                        //  using custom filters  https://stackoverflow.com/questions/25115282/angularjs-orderby-array-index
-            template: '<div id="" ng-repeat="w in words " >'+
+               ch: '&'
+          },
+          template: '<div id="" ng-repeat="w in words " >'+
 
                                 '<div  ng-if="lastGroup($index) === false && $index % 10 === 0" '+
                                         '>'+
@@ -41,7 +16,7 @@ app/*.directive('checkB',function(){
 
                                         //'<p class="size3">{{$index+1}}.-{{$index+10}}.</p>'+
                                         '<label class="size3" style="color: black;"> {{$index+1}}.-{{$index+10}}.'+
-                                        '<input  type="checkbox" class="browser-default" ng-model="idk"      ' +
+                                        '<input  type="checkbox" class="browser-default" ng-model="groupCheck" ' +
                                         //'ng-checked="allchecked({{$index}}) == true"             ' +
                                         'ng-change="change({{$index}},1)  ">' +
                                         '</label>'  +
@@ -76,67 +51,14 @@ app/*.directive('checkB',function(){
                                 '</div>'+
                         '</div>' ,
             
-            link: function(scope, el, att){
+          link: function(scope, el, att){
                
-                scope.wx = true
-                scope.idk = 1
-                scope.al = true
-                $timeout(function(){
-                    scope.max = 9
-                })
+                //scope.wx = true
+                //scope.i-dk = 1
+                scope.groupCheck = 1
                 
-                scope.$watch('slct', function(sl){
-
-                })
-                scope.$watch('words', function(w){
-
-                })
-
-                scope.$watch('len', function(wo){
-                        //console.log("wo", wo)
-                        //scope.len = 
-                        $timeout(function(){
-                                scope.max = wo//.length
-                        })
-                        //scope.$apply(function(){
-                                scope.max = wo
-                        //})
-                        
-                })
-                /*scope.$watch('max', function(fck){
-                                console.log('pipi', fck,"<")
-                                console.log("words",scope.wo,"<<")
-                                console.log("scope.max", scope.max)
-                                console.log("scope", scope)
-                                
-                })*/
-
-                scope.$watch( 'ascen'
-                                //'wAscen'
-                                , function(ascen){
-                        //scope.rev = ascen
-                        //scope.
-                        //timeout(function(){
-                               /* console.log('ascen ' +ascen + " : " + 
-                                                scope.al 
-                                                 +' 222')*/
-                        //},0)
-                        
-                        
-                })
-                scope.$watch('slct', function(ddw){
-                        //alert('slct ' + ddw + " --")
-                })
-                scope.$on('slct', function(){
-                        //console.log('slct')
-                })
-
-                scope.$watch('al', function(){
-                        //alert('al' + scope.al + ' .')
-                        //console.log('al')      
-                })
-            }
-    }
+          }
+     }
 })
 /*.directive('testLength', function(){
         return {
@@ -167,7 +89,7 @@ app/*.directive('checkB',function(){
                 link: function(scope, el, attr){
                         scope.blur = false
                         
-                        scope.$watch('blur', function(idk){
+                        scope.$watch('blur', function(oldVal, newVal){
                                 
                                 if (scope.blur){
                                         console.log('focus')
@@ -184,9 +106,9 @@ app/*.directive('checkB',function(){
                                 else alert('directive inpFocus else')
                         },true)
 
-                        scope.$on('blurit', function(){
+                        /*scope.$on('blurit', function(){
                                 console.log('wwwwwwww   blurit wwww')
-                        })
+                        })*/
                 }
         }
 }])
@@ -197,7 +119,6 @@ app/*.directive('checkB',function(){
                 //require: 'ngModel',
                 //controller: 'teacherCtr',
                 /*scope:{
-                        //onSelect: '&',
                         //fileSelect: '@',
                         data: '@',
                 },*/
@@ -287,6 +208,8 @@ app/*.directive('checkB',function(){
         }
 
 }])
+
+
 // this is for locally stored dictionary names on initial screen
 .filter('replace_',function(){
         return function(name){

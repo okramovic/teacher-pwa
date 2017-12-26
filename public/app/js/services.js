@@ -1,4 +1,34 @@
-app.service('exam', ['$timeout','$window',function($timeout,$window){
+app
+.service('testShare',function(){
+
+     const shared = {}
+
+     // for sharing of current Dictionary
+     this.getWords = function(){
+          return shared.words
+     }
+     this.setWords = function(array){
+          shared.words = array
+     }
+
+     // to be able to do previous test again
+     this.setPrevTest = function(test){
+               shared.prevTest = test
+     }
+     this.getPrevTest = function(){
+               if (Array.isArray(shared.prevTest) && shared.prevTest.length > 0) return shared.prevTest
+               else return null
+     }
+     })
+.service('voiceLoader',['$timeout',function($timeout){
+        
+     this.autoChooseVoices = autoChooseVoices
+     }])
+.service('vocabfile', [function(){
+
+          this.parseText = parseText
+     }])
+.service('exam', ['$timeout','$window',function($timeout,$window){
     
         this.prepareExam = prepareExam
         this.downloadDict = function downloadDict(notes){
@@ -29,17 +59,13 @@ app.service('exam', ['$timeout','$window',function($timeout,$window){
                         
                         let zis = this
                         $timeout(function(){
-                                console.log('--- this\n', zis)
-                                //zis.$parent.showUserNotes = false;
-                                zis.showUserNotes = false;
+                                
+                              zis.showUserNotes = false;
                         })
-                        //this.showUserNotes = false;
-
-                        //console.log('--- this 222 \n',this)
         }
 
-        var x
-        this.shared = x
+        //var x
+        //this.shared = x
 
         this.makeTest = function(words, indexes){
     
@@ -352,83 +378,30 @@ app.service('exam', ['$timeout','$window',function($timeout,$window){
                 })
         }
 }])
-.service('vocabfile', [function(){
-
-        //this.upload = upload
-        this.parseText = parseText
-}])
-.service('voiceLoader',['$timeout',function($timeout){
-        // getSynth  loadVoices  autoChooseVoices
-        //this.getSynth = getSynth
-        //this.loadVoices = loadVoices
-        //this.attachVoices = attachVoices
-        this.autoChooseVoices = autoChooseVoices
 
 
-}])
 
-function getSynth(){
-        
-                //return new Promise((resolve, reject)=>{
-                        if (window.speechSynthesis) {
-        
-                                //this.voices = []
-                                //var synth = await window.speechSynthesis//.__proto__
-                                setTimeout(()=>{
-                                        
-                                        //console.log('x', synth)
-                                        //resolve (synth.getVoices())
-                                },5000)
-                                //resolve(synth)
-                                //this.synth = synth
-                                //return synth
-        
-                        } else  {
-                                //this.voices = null
-                                //reject(' - no voices available - ')
-                        }
-                //})
-}
-/*function loadVoices(synth){
-                        console.log('x', x)
-                        //let voices = await x.getVoices()
-                        this.voices = voices
-                        return voices
-        }
-        function attachVoices(voices){
-        this.voices = voices
-        //console.log('atach voices', voices)
-        //return voices
-        }*/
+// auto-selects voices for EN, DE and CS
 function autoChooseVoices(){
-        //this.voices = []
-        //this.voices = voices  // synth.getVoices();
-        console.log('autoChooseVoices =>',this.voices) 
-        //console.log('this =>',this)    
-        console.log('[this.lang1, this.lang2]',this.lang1, this.lang2)
-        //console.log('this.defaultVoiceIndexes', this.defaultVoiceIndexes)
-        //this.$timeout(function(){
-        var self = this
-        //console.log('self', self)
-        let arr = [this.lang1, this.lang2]
+          //console.log('autoChooseVoices =>',this.voices) 
+          console.log('[this.lang1, this.lang2]',this.lang1, this.lang2)
 
-                //[self.lang1, self.lang2]
-                arr.forEach(function(lang, ind){
-                        //console.log("lang", lang)
+          var self = this
+
+          let languages = [this.lang1, this.lang2]
+
+          languages.forEach(function(lang, ind){
         
                         if (lang === 'cz' ){
                                 self.defaultVoiceIndexes[ind] = self.voices.findIndex(function(voice){
                 
-                                                //console.log(voice.lang.toLowerCase().includes('cz'))
                                                 return voice.lang.toLowerCase().includes('cz') || voice.lang.toLowerCase().includes('cs')
-                                                })
-                                
+                                                })                
         
                         } else if (lang === 'en'){
         
                                 self.defaultVoiceIndexes[ind] = self.voices.findIndex(function(voice){
                 
-                                                                //console.log(voice.lang.toLowerCase().includes('cz'))
                                                                 return voice.lang.toLowerCase().includes('gb') //|| voice.lang.toLowerCase().includes('cs')
                                                                 })
                         } else if (lang === 'de'){
@@ -441,17 +414,11 @@ function autoChooseVoices(){
                                                                        voice.lang.startsWith('de')
                                                                 })
                         }
-                        
-        
-                })
-                console.log('this.defaultVoice1Index', this.defaultVoiceIndexes)
+          })
+          console.log('this.defaultVoice1Index', this.defaultVoiceIndexes)
 
-                this.defaultVoice1 = this.voices[this.defaultVoiceIndexes[0]]
-                this.defaultVoice2 = this.voices[this.defaultVoiceIndexes[1]]
-
-
-       // },0)
-
+          this.defaultVoice1 = this.voices[this.defaultVoiceIndexes[0]]
+          this.defaultVoice2 = this.voices[this.defaultVoiceIndexes[1]]
 }
 
 
@@ -715,21 +682,15 @@ function correct(input, word, round, to, from){
         else alert("correct fn Error")
     
 }
+// changes words knowledge level (rating)
 function changeLevel(word, change){
-        //console.log('bef',word.word, change)
+        
+     if (word.word[2]=== undefined || isNaN( parseInt(word.word[2]) )  )  word.word[2] = 0 + change
+     else  word.word[2] = parseInt(word.word[2]) + change
 
-        if (word.word[2]=== undefined || isNaN( parseInt(word.word[2]) )  ){
-                word.word[2] = 0 + change
-                
-                //console.log('newly',word.word,'index', word.ind)
-
-                /*if (word.word[2]!== undefined) */
-        } else  word.word[2] = parseInt(word.word[2]) + change
-
-        //console.log('newly',word.word,'index', word.ind)
-
-        if (word.word[2]<0) word.word[2] = 0
-        else if (word.word[2]>6) word.word[2] = 6
+     // keep word's rating in range from 0 to 6
+     if (word.word[2]<0) word.word[2] = 0
+     else if (word.word[2]>6) word.word[2] = 6
 }
 function newRound(string){
         
@@ -784,7 +745,7 @@ function newRound(string){
 
 function prepareExam (type,len,words,cb){
     
-                console.log('its ',type,'length', len)
+                console.log('its ',type,'test - length', len)
 
 
                 let taken = [],questions=[]
@@ -954,7 +915,6 @@ function prepareExam (type,len,words,cb){
                             while(!found) {
                         
                                 let ind = Math.floor(Math.random()*prev.length)
-                                        //console.log(ind, taken.indexOf(ind));
                         
                                 if (taken.indexOf(ind)=== -1) {
                                             taken.push(ind);
@@ -965,18 +925,7 @@ function prepareExam (type,len,words,cb){
                         } 
                         console.log('new questions', questions)
                         return questions
-
                 }
-    
-                // 'repeat previous','checked ones','everything','unknown','newest']
-    
-    }
-function shared(val){
-    
-            //this.getVal = function(val){
-    
-                    console.log('= = = VAL = = =', val)
-            //}
 }
 
 
