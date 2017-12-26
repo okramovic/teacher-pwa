@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
      <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <meta name="description" content="vocab teacher v1">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge"/ >
+        <meta name="description" content="vocab teacher v1" />
         <title>teacher</title>
         
-        <link rel="manifest" href="./manifest.json">
+        <link rel="shortcut icon" href="./resources/icons/favicon.ico" type="image/x-icon" />
+        <link rel="manifest" href="./manifest.json" />
         <meta name="theme-color" content="#040072"/>
         
         <link rel="apple-touch-icon" sizes="57x57"   href="./resources/icons/icon57.png"  />
@@ -148,10 +149,11 @@
                      style="width: 100%">
 
                             <div id="introModal" class="modal">
-                                    <div class="modal-content">
+                                    <div class="modal-content" style="padding: 16px 24px 8px;">
                                         <div class="center vertical">
                                             <h4 class="size1">Welcome</h4>
-                                            <p  class="size3">This app was made so everyone can practice vocabulary when learning new languages. 
+                                            <p  class="size3 marginTop10 margBot8"
+                                            >This app was made so everyone can practice vocabulary when learning new languages. 
                                                               You can actually practice any word or text pairs you can think of! <br><br>
                                                               May the force be with you.</p>
                                         </div>
@@ -161,9 +163,11 @@
                                         <a href="#!" class="size2 modal-action modal-close waves-effect waves-green btn-flat">ok</a>
                                     </div>
                             </div>
-                    <div style="width: 100%; display: flex; justify-content: center;">
+                    <!--div style="width: 100%; display: flex; justify-content: center;"-->
                         <!--a class='btn blue' data-target='introModal' modal>?</a-->
-                    </div>
+                    <!--/div-->
+
+                    <!--  dicts from Local Storage  -->
                     <div ng-show="hasLocalStorage() == true">
                         <div class="center vertical">
                                 <h5 class="size2">previous dictionaries</h5>
@@ -187,12 +191,12 @@
                     </div>
                     
                     <!-- load new words -->
-                    <div class="center vertical">
+                    <div class="center vertical" style="padding-bottom: 30px;">
                             <br/>
                             <button ng-click="chooseNew = !chooseNew" 
                                     class="size2">load new words</button>
                             <br class="size4">
-                            <div ng-show="chooseNew">
+                            <div ng-show="chooseNew" >
                                     <div class="center vertical">
                                         <button ng-click="loadExample()"
                                             class="size3"
@@ -206,7 +210,7 @@
 
                                         <!-- input type file div -->
                                         <div class="center" 
-                                            style="width: 100%; border:0px dashed; 
+                                            style="width: 100%;
                                                     display: flex; 
                                                     flex-direction: column;
                                                     justify-content: flex-start;
@@ -246,9 +250,8 @@
                                                     placeholder="paste in content from another file (check the hint)"
                                                     ></textarea>
 
-                                            <div class="" 
-                                                style="width: 80%; margin: auto;
-                                                display: flex; justify-content: space-around; align-items: center;">
+                                            <div style="width: 80%; margin: auto; 
+                                                        display: flex; justify-content: space-around; align-items: center;">
 
                                                 <a class='btn btn-sm size2' style="padding-left: 20px; padding-right: 20px"
                                                    data-target='instructionsModal' modal>?</a>
@@ -256,8 +259,8 @@
                                                 <button class="size2"
                                                         ng-click="uploadPasted(txt)">Go</button>
                                             </div>
-                                            <br class="size4">
-                                            <br class="size4">
+                                            <!--br class="size4">
+                                            <br class="size4"-->
                                     </div>
                                     
                                     <!-- instructions Modal -->
