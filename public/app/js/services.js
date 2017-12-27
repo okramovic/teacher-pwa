@@ -30,8 +30,17 @@ app
      }])
 .service('exam', ['$timeout','$window',function($timeout,$window){
     
-        this.prepareExam = prepareExam
-        this.downloadDict = function downloadDict(notes){
+          this.prepareExam = prepareExam
+          this.newRound = newRound
+          this.changeLevel = changeLevel
+
+          this.next = next
+          this.home = home
+          
+
+          // to get txt file with dictionary and progress
+          this.downloadDict = function downloadDict(notes){
+                         console.log('using Services line 34')
 
                         if (!notes) notes = ""
 
@@ -53,330 +62,305 @@ app
                         
 
                         let blob = new Blob([data], {type: 'text/plain'})
-                        //console.log('blob', blob)
                         this.myURL = url.createObjectURL(blob);
 
                         
                         let zis = this
-                        $timeout(function(){
-                                
+                        $timeout(()=>{
                               zis.showUserNotes = false;
                         })
-        }
+          }
 
-        //var x
-        //this.shared = x
-
-        this.makeTest = function(words, indexes){
-    
-    
-    
-                            indexes.sort()
-                            var res =  words.map(function(w,i){
-    
-                                    var r = w
-                                    if (indexes.indexOf(i)!==-1) {
-    
-                                            r[2]=(i)
-                                            return r
-                                    } //else {}
-                                    
-                            })
-                            res2 = res.filter(function(el){
-                                    return el!== undefined
-                            })
-                            //console.log('------  res  ------')
-                            return res2
-        }
-        this.newRound = newRound
-        
-        this.next = next
-        this.home = home
-        this.changeLevel = changeLevel
-
-        this.changeNextGo = changeNextGo
-        this.getNextGo = getNextGo
-
-
-        this.submit = function submit(ind,input, round, idk){
-                console.log('     - - - -  new answ - - - - ')
-                //console.log('>>>', ind, input,"round", round)
-                
-                
-                this.okAnswer = okAnswer; this.badAnswer = badAnswer
-
-                this.animateOk = animateOk
-                this.animateBad = animateBad
-                this.fadeout = fadeout
-
-                this.blur= false
-
-                this.correct = correct
-
-                let zis = this
-
-                var curWord = this.testQuestions[round],
-                    dir = this.direction
-
-                
-                // if answer is submitted && empty
-                if (!idk && input.trim()==="") {
-                        console.log('empty input')
-                        this.blur= true
-                        return
-
-                }  else if (idk){
-
-                        this.changeNextGo('next')
-                }
-
-                let from, to
-                
-                if (dir==='ab'){ from = 0; to = 1
-                } else if (dir==='ba'){ from = 1; to = 0 }  
-
-
-                console.log("voice2On?", this.voice2On )
-                if (window.speechSynthesis && this.voice2On){
-
-                        let toSay = curWord.word[to]
-                        let self = this
-                        //let toSay = this.testWord
-                        let utterThis = new SpeechSynthesisUtterance(toSay);
-                        utterThis.voice = this.voice2
-                        utterThis.lang = this.voice2.lang
-                        window.speechSynthesis.speak(utterThis);
-
-                        /*new Promise((resolve, reject)=>{
-                                resolve( new SpeechSynthesisUtterance(toSay) )
-                        }).then(utterThis=>{
-
-                                utterThis.voice = this.voice2
-                                utterThis.lang = this.voice2.lang
-                                self.synth.speak(utterThis);
-                        })*/
-                        /*let utterThis = new SpeechSynthesisUtterance(toSay);
-                        utterThis.voice = this.voice2
-                        utterThis.lang = this.voice2.lang
-                        //alert(JSON.stringify(this.voice2) + "\n" +
-                        //utterThis.voice.localService + " "+ utterThis.voice.lang + "\n\n " + utterThis.voice.name + " " + utterThis.voice.voiceURI)
-                        //utterThis.onstart = function(){}
-                        
-                        this.synth.speak(utterThis);*/
-                }               
-
-                //this.p2 = 
-                new Promise(function(resolve, reject){
-                            
-                        //console.log("zis? >>", zis)
-
-                            var res = { dir: dir}
-                            res.res = zis.correct(input,curWord,round,to,from) 
-
-                            
-                        
-
-                        console.log("correct?", res.res)
-
-                        /* if okay answer >> animate, 
-                                             after she speaks, next round
-
-                           if bad answer  >> animate & show next button,
-                                             speak
-
-                                             on next click newround
-
-                        */
-                        //utterThis.onend = function(){
-                                //setTimeout(function(){
-                                    //console.log('end speech')  
-                                    
-                                //},500)     
-                        //}    
-
-                        if (res.res === 2) { 
-                                //console.log('anim start', res.res)
-                                zis.answerHide = true
-                                zis.animateOk(function(){
-
-                                       // utterThis.onend = function(){
-                                                console.log('end speech')    
-
-                                                zis.timeout(function(){
-                                                        zis.addRound = true;
-                                                        resolve(res.res)
-                                                },200)
-                                                
-                                        //}
+          this.makeTest = function(words, indexes){
+     
+     
+     
+                              indexes.sort()
+                              var res =  words.map(function(w,i){
+     
+                                        var r = w
+                                        if (indexes.indexOf(i)!==-1) {
+     
+                                             r[2]=(i)
+                                             return r
+                                        } //else {}
                                         
-                                })
-                        } else if (res.res === 1 && !zis.zen){
+                              })
+                              res2 = res.filter(function(el){
+                                        return el!== undefined
+                              })
+                              //console.log('------  res  ------')
+                              return res2
+          }
+          
 
-                                console.log('1 + no-zen')
+          this.submit = function submit(ind,input, round, idk){
+                    console.log('     - - - -  new answ - - - - ')
+                    //console.log('>>>', ind, input,"round", round)
+                    
+                    
+                    this.okAnswer = okAnswer; this.badAnswer = badAnswer
 
-                                
+                    this.animateOk = animateOk
+                    this.animateBad = animateBad
+                    this.fadeout = fadeout
 
-                                zis.animateOk(function(){
+                    this.blur= false
 
-                                        //utterThis.onend = function(){
-                                                console.log('end speech')    
+                    this.correct = correct
 
-                                                $timeout(function(){
-                                                        //zis.nextGo = "go"
-                                                        //zis.answerHide = true
-                                                        zis.nextGo = "next"
-                                                        zis.answerHide = false
-                                                        zis.addRound = true;
-                                                })
+                    let zis = this
 
-                                                zis.timeout(function(){
+                    var curWord = this.testQuestions[round],
+                         dir = this.direction
 
-                                                        resolve(res.res)
-                                                },200)
-                                                
-                                        //}
-                                })
+                    
+                    // if answer is submitted && empty
+                    if (!idk && input.trim()==="") {
+                         console.log('empty input')
+                         this.blur= true
+                         return
+
+                    } else if (idk) this.nextGo = 'next'
+                    
+
+                    let from, to
+                    
+                    if (dir==='ab'){ from = 0; to = 1
+                    } else if (dir==='ba'){ from = 1; to = 0 }  
 
 
-                        } else if (res.res === 1 && zis.zen){
-                                    console.log('1 + zen')
+                    console.log("voice2On?", this.voice2On )
+                    if (window.speechSynthesis && this.voice2On){
 
-                                    zis.animateOk(function(){
+                         let toSay = curWord.word[to]
+                         let self = this
+                         //let toSay = this.testWord
+                         let utterThis = new SpeechSynthesisUtterance(toSay);
+                         utterThis.voice = this.voice2
+                         utterThis.lang = this.voice2.lang
+                         window.speechSynthesis.speak(utterThis);
+
+                         /*new Promise((resolve, reject)=>{
+                                   resolve( new SpeechSynthesisUtterance(toSay) )
+                         }).then(utterThis=>{
+
+                                   utterThis.voice = this.voice2
+                                   utterThis.lang = this.voice2.lang
+                                   self.synth.speak(utterThis);
+                         })*/
+                    }               
+
+                    //this.p2 = 
+                    new Promise(function(resolve, reject){
+
+                              var res = { dir: dir}
+                              res.res = zis.correct(input,curWord,round,to,from) 
+
+                              
+                         
+
+                         console.log("correct?", res.res)
+
+                         /* if okay answer >> animate, 
+                                                  after she speaks, next round
+
+                              if bad answer  >> animate & show next button,
+                                                  speak
+
+                                                  on next click newround
+
+                         */
+                         //utterThis.onend = function(){
+                                   //setTimeout(function(){
+                                        //console.log('end speech')  
+                                        
+                                   //},500)     
+                         //}    
+
+                         if (res.res === 2) { 
+                                   //console.log('anim start', res.res)
+                                   zis.answerHide = true
+                                   zis.animateOk(function(){
+
+                                        // utterThis.onend = function(){
+                                                  console.log('end speech')    
+
+                                                  zis.timeout(function(){
+                                                            zis.addRound = true;
+                                                            resolve(res.res)
+                                                  },200)
+                                                  
+                                             //}
+                                             
+                                   })
+                         } else if (res.res === 1 && !zis.zen){
+
+                                   console.log('1 + no-zen')
+
+                                   
+
+                                   zis.animateOk(function(){
+
+                                             //utterThis.onend = function(){
+                                                  console.log('end speech')    
+
+                                                  $timeout(function(){
+                                                            //zis.nextGo = "go"
+                                                            //zis.answerHide = true
+                                                            zis.nextGo = "next"
+                                                            zis.answerHide = false
+                                                            zis.addRound = true;
+                                                  })
+
+                                                  zis.timeout(function(){
+
+                                                            resolve(res.res)
+                                                  },200)
+                                                  
+                                             //}
+                                   })
+
+
+                         } else if (res.res === 1 && zis.zen){
+                                        console.log('1 + zen')
+
+                                        zis.animateOk(function(){
+
+                                             $timeout(function(){
+                                                  zis.nextGo = "next"
+                                                  zis.answerHide = false
+                                                  zis.addRound = false
+                                                  
+                                             })
+                                             resolve(res.res)
+
+                                        })                                    
+                                        
+
+                         } else if (res.res === 0 && !zis.zen) {     
+                                        console.log('\n\n  idk or 0')
+                                        
+                                        zis.animateBad()
 
                                         $timeout(function(){
-                                                zis.nextGo = "next"
-                                                zis.answerHide = false
-                                                zis.addRound = false
-                                                 
-                                        })
+                                        zis.nextGo ='next'
+                                        zis.answerHide = false
+                                        zis.addRound = true
                                         resolve(res.res)
-
-                                    })                                    
-                                    
-
-                        } else if (res.res === 0 && !zis.zen) {     
-                                    console.log('\n\n  idk or 0')
-                                    
-                                    zis.animateBad()
-
-                                    $timeout(function(){
-                                       zis.changeNextGo('next')
-                                       zis.answerHide = false
-                                       zis.addRound = true
-                                       resolve(res.res)
-                                    })
-
-                        } else if (res.res === 0 && zis.zen) {     
-                                console.log('\n\n  idk or 0')
-                                
-                                zis.animateBad()
-
-                                $timeout(function(){
-                                   zis.changeNextGo('next')
-                                   zis.answerHide = false
-                                   zis.addRound = false
-                                   resolve(res.res)  
-                                })
-
-                        } else alert('error Promise')
-                })
-                
-                //this.p2
-                .then(function(answer){
-
-                        console.log('correct?', answer)
-
-                        // possibilities:
-                        //  1) ok answer & no zen  >>> ok point, next round, rating up
-                        //  2) ok answer & zen     >>> ok point, next round, rating up
-                        //  3) bad & no zen >>> add bad point, next round, rating down
-                        //  4) bad & zen    >>> add bad point, repeat round, rating down
-
-                    //var prms = 
-                    new Promise(function(res,rej){
-
-                                if (answer === 2) {
-                                        
-                                        // update currWord rating, add ok point, go to next round
-
-                                        zis.okAnswer(null,curWord, function(){
-
-                                                        res(true)
                                         })
 
-                                } else if (answer === 1 && !zis.zen) 
+                         } else if (res.res === 0 && zis.zen) {     
+                                   console.log('\n\n  idk or 0')
+                                   
+                                   zis.animateBad()
 
-                                        //  dont update any rating, add ok point, go next round
-                                        zis.okAnswer(true, curWord, function(){
-                                                        //zis.answerHide = false
+                                   $timeout(function(){
+                                        zis.nextGo ='next'
+                                        zis.answerHide = false
+                                        zis.addRound = false
+                                        resolve(res.res)  
+                                   })
 
-                                                        res(true)
-                                        })
-
-                                else if ((answer === 1 && zis.zen) || (answer === 0 && zis.zen) )
-
-                                        //  down this word's rating, add bad point, stay in round
-
-                                        zis.badAnswer(true,curWord, input, function(){
-                                                
-                                                res(false)
-                                        })           
-                                else {
-                                        //  down this word's rating, add bad point, go next round
-
-                                        zis.badAnswer(false,curWord, input, function(){
-                                                
-                                                res(true)
-                                        })
-                                } 
+                         } else alert('error Promise')
                     })
-                    //prms
-                    .then(function(toNextRound){
-                        console.log('|||||||    resolved', toNextRound)
+                    
+                    //this.p2
+                    .then(function(answer){
 
-                        zis.endCheck(function(end){
-                                
+                         console.log('correct?', answer)
 
-                                if (end === true && toNextRound){
+                         // possibilities:
+                         //  1) ok answer & no zen  >>> ok point, next round, rating up
+                         //  2) ok answer & zen     >>> ok point, next round, rating up
+                         //  3) bad & no zen >>> add bad point, next round, rating down
+                         //  4) bad & zen    >>> add bad point, repeat round, rating down
 
-                                        //if (toNextRound){
-                                                console.log('end!! ', end)    
-                                                
-                                                $timeout(function(){
-                                                        zis.showTest = false 
-                                                        zis.fadeout(function(){
-                                                                //console.log('zis.finalResult', zis.finalResult)
-                                                                $timeout(function(){
-                                                                        zis.finalResult = 1         
-                                                                })
-                                                                
+                         //var prms = 
+                         new Promise(function(res,rej){
 
-                                                                
+                                   if (answer === 2) {
+                                             
+                                             // update currWord rating, add ok point, go to next round
 
-                                                                if (!zis.feedback || zis.feedback.length === 0){
-                                                                
-                                                                        console.log('zis.feedback',zis.feedback)
-                                                                        zis.$parent.$broadcast('endOfTest')
-                                                                }
-                                                        })
-                                                        
-                                                }, 1500);
-                                        //}
-        
-                                } else {
+                                             zis.okAnswer(null,curWord, function(){
 
-                                        if (zis.nextGo === 'go'){
-                                                 zis.newRound();
-                                        
-                                        } else if(zis.nextGo ==='next') {
-                                                //alert("-next-")
-                                        }
-                                        
-                                }
-                        })  
+                                                            res(true)
+                                             })
+
+                                   } else if (answer === 1 && !zis.zen) 
+
+                                             //  dont update any rating, add ok point, go next round
+                                             zis.okAnswer(true, curWord, function(){
+                                                            //zis.answerHide = false
+
+                                                            res(true)
+                                             })
+
+                                   else if ((answer === 1 && zis.zen) || (answer === 0 && zis.zen) )
+
+                                             //  down this word's rating, add bad point, stay in round
+
+                                             zis.badAnswer(true,curWord, input, function(){
+                                                  
+                                                  res(false)
+                                             })           
+                                   else {
+                                             //  down this word's rating, add bad point, go next round
+
+                                             zis.badAnswer(false,curWord, input, function(){
+                                                  
+                                                  res(true)
+                                             })
+                                   } 
+                         })
+                         //prms
+                         .then(function(toNextRound){
+                         console.log('|||||||    resolved', toNextRound)
+
+                         zis.endCheck(function(end){
+                                   
+
+                                   if (end === true && toNextRound){
+
+                                             //if (toNextRound){
+                                                  console.log('end!! ', end)    
+                                                  
+                                                  $timeout(function(){
+                                                            zis.showTest = false 
+                                                            zis.fadeout(function(){
+                                                                 //console.log('zis.finalResult', zis.finalResult)
+                                                                 $timeout(function(){
+                                                                           zis.finalResult = 1         
+                                                                 })
+                                                                 
+
+                                                                 
+
+                                                                 if (!zis.feedback || zis.feedback.length === 0){
+                                                                 
+                                                                           console.log('zis.feedback',zis.feedback)
+                                                                           zis.$parent.$broadcast('endOfTest')
+                                                                 }
+                                                            })
+                                                            
+                                                  }, 1500);
+                                             //}
+          
+                                   } else {
+
+                                             if (zis.nextGo === 'go'){
+                                                  zis.newRound();
+                                             
+                                             } else if(zis.nextGo ==='next') {
+                                                  //alert("-next-")
+                                             }
+                                             
+                                   }
+                         })  
+                         })
                     })
-                })
-        }
+          }
 }])
 
 
@@ -422,199 +406,137 @@ function autoChooseVoices(){
 }
 
 
-
-function changeNextGo(str){
-
-        //console.log( "this $timeout", $timeout)
-        console.log('changing nextGo to=',str)
-        //this.timeout(function(){
-
-                this.nextGo = str
-        //})
-
-}
-function getNextGo(){
-        return this.nextGo
-}
 function next(){
-        console.log('\\\\\\\ next  ///////')
-
-        this.nextGo = 'go'
-        //this.$emit('blurit',true)
-        this.newRound()
+     this.nextGo = 'go'
+     this.newRound()
 }
 function home(){
-        console.log('home')
-        let zis = this
+     let self = this
 
-        this.nextGo = 'go'
-        this.finalResult = null
-        this.showTest = false
-        this.timeout(function(){
-                
-        },0)
-        //zis
-        this.$parent.$broadcast('endOfTest')
-        //this.$apply()        
+     this.timeout(()=>{
+          self.finalResult = null
+          self.$parent.$broadcast('endOfTest')
+     })
+     //this.finalResult = null
+     //this.$parent.$broadcast('endOfTest')
 }
 function okAnswer(zen,curWord,cb){
-        //console.log("updatescore this")
-        //console.log(this)
-        //-------
+          let self = this
 
-        //this.animateOk = animateOk
-        //this.animateOk()
+          // answer was 2 = super ok
+          if (!zen) this.timeout(function updateProgress(){
 
-        let zis = this
+                    self.oks ++
+                    self.changeLevel(curWord,1)
+                    if (cb) cb()
+          },0)
 
-        // answer was 2 = super ok
-        if (!zen)
-        this.timeout(function updateProgress(){
+          // answer was 1
+          else this.timeout(function updateProgress(){
 
-                zis.oks ++
-                //zis.round ++
-                zis.changeLevel(curWord,1)
-                if (cb) cb()
-        },0)
-
-        // answer was 1
-        else this.timeout(function updateProgress(){
-
-                zis.oks ++
-                //zis.round ++;
-                if(cb) cb()
-        }, 0)
-
-        
-
+                    self.oks ++
+                    if(cb) cb()
+          }, 0)
 }
 function badAnswer(zen, curWord,input, cb){
-        //console.log("updatescore this")
-        //console.log('$timeout', $timeout)
-        //this.animateBad = animateBad
-        let zis = this
-        //this.animateBad()
-
-        //console.log( this.corrAnswer , "hide?", this.answerHide)
-        //console.log("wrong answers",this.feedback)
-
-        //this.$apply()
-        if (zen) this.timeout(function updateProgress(){
-
-                zis.answerHide = false
+        
+        let self = this
+        
+        //if (zen) 
+        this.timeout(function updateProgress(){
                 
-                zis.answerHide = false
-                zis.bads ++
-                //zis.round ++
-                zis.changeLevel(curWord,-1)
+               self.answerHide = false
+               self.bads ++
 
+               self.changeLevel(curWord,-1)
+
+               // new entry for test Feedback
                         let toFeedback = {original:curWord}
 
                         if (!input) toFeedback.input = '-'
                         else toFeedback.input = input
 
-                        zis.feedback.push(toFeedback)
-                //console.log('zis.round',zis.round)
-                if (cb) cb()
+                        self.feedback.push(toFeedback)
+
+               if (cb) cb()
         },0)
 
-        else this.timeout(function updateProgress(){
+        /*else this.timeout(function updateProgress(){
 
-                zis.answerHide = false
+               self.answerHide = false
+               self.bads ++
 
-                zis.bads ++
-                //zis.round ++
-                zis.changeLevel(curWord,-1)
+               self.changeLevel(curWord,-1)
 
+               // new entry for test Feedback
                         let toFeedback = {original:curWord}
 
                         if (!input) toFeedback.input = '-'
                         else toFeedback.input = input
 
-                        zis.feedback.push(toFeedback)
-                //console.log('zis.round',zis.round)
-                if (cb) cb()                
-        })
+                        self.feedback.push(toFeedback)
+
+               if (cb) cb()                
+        },0)*/
 }
 function animateOk(cb){
-        //console.log('anim ok')
-        let zis = this
-        this.anim_Oks = 'anim-ok live'
-        //console.log(this.anim_Oks)
 
-        this.timeout(function(){
-                zis.anim_Oks = 'anim-ok'
-                //console.log(zis.anim_Oks)
-        },3500)
+          let self = this
+          this.anim_Oks = 'anim-ok live'
 
-        if (cb) cb()
+          this.timeout(()=>{
+               self.anim_Oks = 'anim-ok'      
+          },3500)
+
+          if (cb) cb()
 }
 function fadeout(cb){
+          // is this used?
+          this.visible = "fadeout"
 
-        //console.log( "fadeout");
-
-        this.visible = "fadeout"
-
-        /*$timeout(function(){
-        //        alert('fade')
-        },1000)*/
-        setTimeout(function(){
-                if (cb) cb()
-        },1200)
-        
-
+          setTimeout(function(){
+               if (cb) cb()
+          },1200)
 }
 function animateBad(cb){
 
-        //console.log('anim bad')
-        //console.log($timeout)
-        //console.log('this', this)
-        let zis = this
-        zis.anim_Bads = 'anim-bad live'
+          let self = this
+          self.anim_Bads = 'anim-bad live'
 
-        this.timeout(function(){
-                //console.log('end anim', this.anim_Bads, "<<")
-                
-                zis.anim_Bads = 'anim-bad'
-        },3500)
+          this.timeout(()=>{
+               self.anim_Bads = 'anim-bad'
+          },3500)
     
-        if (cb) cb()
+          if (cb) cb()
 }
+// return if user input was correct
 function correct(input, word, round, to, from){
         
-        // how to make it so at least main word is required as input
-        //console.log('zis.words', this)//zis.words)
+     // make it so at least one non-article word is required as input
 
-        console.log('word', word)
+     //console.log('word', word)
 
-        if (input.trim() ==="") return 0
+     if (input.trim() ==="") return 0
 
-        let w = word.word //, from, to
-        const INDEX = word.ind
-        //if (dir==='ab'){ from = 0; to = 1
-        //} else if (dir==='ba'){ from = 1; to = 0 }
+     let w = word.word
+     const INDEX = word.ind
 
-        if (w[to].toLowerCase().includes(input.toLowerCase())) {
-                console.log("found directly = ",2)
+     if (w[to].toLowerCase().includes(input.toLowerCase())) {
+               console.log("found directly = ",2)
+               return 2
 
-                return 2
-        }
-
-        else if (! w[to].toLowerCase().includes(input.toLowerCase())){
+     } else if (! w[to].toLowerCase().includes(input.toLowerCase())){
 
                 let found = 0, where = null
 
                 let thisWord = w[from].split(/,/g) 
 
-                                // clear them, ignore Uppercases
-                                .map(function(item){ return item.toString().toLowerCase().trim()})
+                              // clear them, ignore Uppercases
+                              .map(item=> item.toString().toLowerCase().trim() )
 
-                console.log("thisWord", thisWord)
+               console.log("thisWord", thisWord)
 
-
-                for (let i=0; i < this.localWords.length; i++){
-
-                        //console.log('INDEX 22', INDEX)
+               for (let i=0; i < this.localWords.length; i++){
 
                         // skip checking itself again
                         if (i === INDEX) continue
@@ -624,15 +546,15 @@ function correct(input, word, round, to, from){
 
                         //  only look for answer in words that have same word on from side
                         
-                        let fits = thisWord.some(function(word, ind){
+                        let fits = thisWord.some((word, ind) =>
                                 
-                                        return dictWord.some(function(w){
+                                             dictWord.some(w =>
 
-                                                        // ignore emptySpace and upperCase noise
-                                                return w.toString().toLowerCase().trim() 
-                                                        === word.toString().toLowerCase().trim()
-                                        })
-                                    })
+                                                  // ignore emptySpace and upperCase noise
+                                                  w.toString().toLowerCase().trim() 
+                                                            === word.toString().toLowerCase().trim()
+                                             )
+                                   )
 
                         if (fits){
 
@@ -641,17 +563,11 @@ function correct(input, word, round, to, from){
                              // vocabulary word   
                              let word = this.localWords[i][to].split(/,/g)
                                 
-                                        
-                                        .map(function(w){ return w.toString().toLowerCase().trim()})
-                                
-                                
-                             console.log("     -  ", word)           
+                                             .map(w=> w.toString().toLowerCase().trim() )
+
+                             //console.log("     -  ", word)           
                              // does this vocabulary word equal to input?   
-                             if (word.some(function(w, ind){
-
-                                                   return w === input.toLowerCase().trim()
-
-                                        }) === true) {
+                             if (word.some((w, ind)=>w === input.toLowerCase().trim() ) === true) {
 
                                         //console.log("found this:", word)
                                         found = 1; 
@@ -662,25 +578,17 @@ function correct(input, word, round, to, from){
                                         return found
                                         break
                              }
-
-
                         }            
                         
                         if (i === this.localWords.length -1 ){
 
-                                console.log("havent found",found,"alternative @", where)
+                              //console.log("havent found",found,"alternative @", where)
                                 
-                                return found
-
-                        }
-
-                        
-                }
-
-                
+                              return found
+                        }       
+               }
         }
         else alert("correct fn Error")
-    
 }
 // changes words knowledge level (rating)
 function changeLevel(word, change){
@@ -692,39 +600,23 @@ function changeLevel(word, change){
      if (word.word[2]<0) word.word[2] = 0
      else if (word.word[2]>6) word.word[2] = 6
 }
+// to start new round
 function newRound(string){
+          console.log('round:',this.round,'current word:  ', this.testQuestions[this.round].word[0],this.testQuestions[this.round].word[1])
+
+          let self = this
         
-        /*if (string ==='first' ) {this.round=0; string = null;      
-        } else if (!string){ //this.round ++;
-                //this.blr ++
-        }*/
-        //this.blur = true
+          this.timeout(()=>{
+                    if (self.addRound) self.round ++
 
-        let self = this
-
-        console.log('rounds', this.round)//, this.testQuestions[0].word)
-        console.log('current word:  ', this.testQuestions[this.round].word[0],this.testQuestions[this.round].word[1])
-        //console.log("inpVal",this.inpVal," || ", this.user.input,"<<<")
-
-        /*this.testWord = this.testQuestions[this.round].word[this.from] 
-        this.corrAnswer = this.testQuestions[this.round].word[this.to] 
-        this.answerHide = true
-
-        this.user.input = ""*/
-        
-        //if (this.round===0) //this.$apply()
-                this.timeout(()=>{
-                        if (self.addRound) self.round ++
-
-                        self.testWord = self.testQuestions[self.round].word[self.from] 
-                        self.corrAnswer = self.testQuestions[self.round].word[self.to] 
-                        self.answerHide = true
+                    self.testWord = self.testQuestions[self.round].word[self.from] 
+                    self.corrAnswer = self.testQuestions[self.round].word[self.to] 
+                    self.answerHide = true
                 
-                        self.user.input = ""
-                        self.blur = true
+                    self.user.input = ""
+                    self.blur = true    // actually auto-focuses the input
 
-                        if (window.speechSynthesis && self.voice1On){
-                                //let self = this
+                    if (window.speechSynthesis && self.voice1On){
                                 let toSay = self.testWord
                                 let utterThis = new SpeechSynthesisUtterance(toSay);
                                 //console.log('this.voices', this.voices[this.voice1])
@@ -732,36 +624,36 @@ function newRound(string){
                                 utterThis.lang  = self.voice1.lang
         
                                 window.speechSynthesis.speak(utterThis);
-        
-                                
-                                //utterThis.onstart = function(){}
-                        }
-                })
-
-        console.log('this.voice1On', this.voice1On)
-        
-        
+                    }
+          })
+          //console.log('this.voice1On', this.voice1On)
 }
+
+
+/**
+*   @param len is user-desired length of test
+*/
 
 function prepareExam (type,len,words,cb){
     
-                console.log('its ',type,'test - length', len)
+               console.log('its ',type,'test - length', len)
 
 
-                let taken = [],questions=[]
+               let  taken = [],  // to prevent words being repeated
+                    questions=[] // actual questions to be returned
     
-                if (type=== 'all words'){
+               if (type === 'all words'){
     
                     if (len>words.length) len=words.length
     
-                    for (let i=0;i<len; i++){
+                    // randomly chooses words from whole Dict
+                    for (let i=0; i<len; i++){
                         
                         let found = false
     
                         while(!found) {
     
                             let ind = Math.floor(Math.random()*words.length)
-                            //console.log(ind, taken.indexOf(ind));
     
                             if (taken.indexOf(ind)=== -1) {
                                         taken.push(ind)
@@ -770,83 +662,52 @@ function prepareExam (type,len,words,cb){
                                                         word: words[ind]
                                                         })
                                         found = true
-                            } else { found = false}
+                            } //else found = false
                         } 
-                        
-                        
                     } 
+                    console.log("questions\n", questions)
                     return questions
-    
-                    /*let promise = new Promise(function(res,rej){
-                        setTimeout(function(){
-                            res("Success!"); // Yay! Everything went well!
-                          }, 1250);
-                        })
-                        promise.then(function(msg){
-                            console.log(msg)
-                        })*/
-                        //if (cb) cb(questions)
-                } else if (type === 'newest'){
+               } else if (type === 'newest'){
 
-                        if (len>words.length) len=words.length
+                         if (len>words.length) len=words.length
 
-                        for (var i=0; i< len; i++){
+                         for (var i=0; i< len; i++){
 
                                 let found = false
                                 
                                 while(!found) {
                                 
                                         let ind = Math.floor(Math.random()*len)
-                                                        //console.log(ind, taken.indexOf(ind));
                                 
                                         if (taken.indexOf(ind)=== -1) {
-                                                taken.push(ind)
-                                                questions.push({
-                                                                ind: ind,
-                                                                word: words[ind]
-                                                                                })
-                                                                found = true
-                                        } else { found = false}
+                                                  taken.push(ind)
+                                                  questions.push({
+                                                                 ind: ind,
+                                                                 word: words[ind]
+                                                                 })
+                                                  found = true
+                                        } //else found = false
                                 }
-                                //questions.push({ind: i, word: words[i]})
-                        }
+                         }
+                         console.log("questions\n", questions)
+                         return questions
+               } else if (type === 'checked ones'){
 
-                        return questions
+                         let chosenW = []
 
-                } else if (type === 'checked ones'){
+                         len = this.slct.length
 
-                        let chosenW = []
-
-                        //console.log('this.slct', this.slct)
-
-                        //if (len>this.slct.length) 
-                        len = this.slct.length
-
-                        for (let i=0; i<len ; i++){
-                                //console.log(this.words[this.slct[i]] )
-
-                                chosenW.push( //{ ind: this.slct[i], 
-                                              //  word: 
-                                              
-                                                this.words[this.slct[i]] 
-                                              //}
-                                )
-                        }
-
-                        console.log('chosenW', chosenW)
-                        
-                        //words = [...chosenW]
-                        // now they are ordered as in vocab - > shuffle them
-
-
-                        for (let i=0; i<len; i++){
+                         for (let i=0; i<len ; i++){
+                                chosenW.push( this.words[this.slct[i]] )
+                         }
+                         // now words are ordered as in vocab - > shuffle them
+                         for (let i=0; i<len; i++){
 
                                 let found = false
 
                                 while(!found) {
     
                                         let ind = Math.floor(Math.random()*chosenW.length)
-                                        //console.log(ind, taken.indexOf(ind));
                 
                                         if (taken.indexOf(ind)=== -1) {
                                                         taken.push(ind)
@@ -855,33 +716,29 @@ function prepareExam (type,len,words,cb){
                                                                         word: chosenW[ind]
                                                                         })
                                                         found = true
-
-                                        } else { //found = false
                                         }
                                 }
-                        }
-                        console.log("questions\n", questions)
+                         }
+                         console.log("questions\n", questions)
+                         return questions
+               } else if (type === 'unknown'){
 
-                        return questions
-                } else if (type === 'unknown'){
+                         let filtered = words.filter(function(item){
 
-                        let filtered = words.filter(function(item){
+                                                  console.log(item)
 
-                                                console.log(item)
+                                             return item[2] === undefined
+                         })
 
-                                        return item[2] === undefined
-                        })
-
-                        if (len>filtered.length) len=filtered.length
+                         if (len>filtered.length) len=filtered.length
                         
-                        for (let i=0;i<len; i++){
+                         for (let i=0;i<len; i++){
                                             
                                     let found = false
                         
                                     while(!found) {
                         
                                             let ind = Math.floor(Math.random()*words.length)
-                                                        //console.log(ind, taken.indexOf(ind));
                                 
                                             if (taken.indexOf(ind)=== -1) {
 
@@ -891,17 +748,12 @@ function prepareExam (type,len,words,cb){
                                                                 word: words[ind]
                                                                 })
                                                         found = true
-
-                                            } else { //found = false
                                             }
-                                    } 
-                                            
-                                            
-                        } 
-                        console.log('questions', questions)
-                        return questions
-
-                } else if (type === 'repeat previous'){
+                                    }    
+                         } 
+                         console.log('questions', questions)
+                         return questions
+               } else if (type === 'repeat previous'){
 
                         let prev = this.getPrevTest()
                         console.log('\n\n\nprevious questions',prev)
@@ -925,25 +777,11 @@ function prepareExam (type,len,words,cb){
                         } 
                         console.log('new questions', questions)
                         return questions
-                }
+               }
 }
 
 
-function downloadDict(notes){
-
-        let x = this.userNotes
-        //alert
-        console.log('downloading >>' + notes + "<<")
-
-        let data = 'testik', 
-        blob = new Blob([data], {type: 'text/plain'})
-        url = $window.URL || $window.webkitURL
-        //console.log(this)
-        console.log('blob', blob)
-        this.myURL = url.createObjectURL(blob);
-}
-
-// get only langs from input data
+// when opening new Dict, get only langs from input data
 function getLangs(string){
 
         let res = stringToArr(string)[0]
@@ -953,10 +791,9 @@ function getLangs(string){
                 b: res[1]
                }
 }
+// return only words for vocab
 function parseText(string){
-
-        // return only words for vocab
-        return stringToArr(string).slice(1)
+     return stringToArr(string).slice(1)
 }
 
 function stringToArr(str){
@@ -969,8 +806,6 @@ function stringToArr(str){
                         return el.toString().trim() !== ""
         })
         .map(lineToArray)
-
-        //console.log('filteredArray\n\n', filteredArray )
         return filteredArray
 }
 
@@ -984,23 +819,20 @@ function lineToArray(line){
 function toProperType(el){
 
         if ( isNaN(parseInt(el))===true ) return el.toString().trim()
-        
         else return parseInt(el)
 }
 
-
+// used when saving progress to Local Storage
 function mergeToSave(langs, words){
         
-                let l = words.length
+          let l = words.length
         
-                let res = new Array(l+1)
-                res[0] = langs
+          let res = new Array(l+1)
+          res[0] = langs
 
-                for (let i = 0; i< words.length;i++){
+          for (let i = 0; i< words.length;i++){
         
-                        res[i+1] = words[i]
-                }
-        
-                return res
+                    res[i+1] = words[i]
+          }
+          return res
 }
-

@@ -8,9 +8,12 @@
 - enable auto deleting old caches
 - enable auto-updating cached files to newest version
 
+- some beautiful animation when test has finished (like khan academy)
+
+using postCss and autoprefixer?
 - do styling for safari as well
 - do styling for IE (it could be gotcha) - they'd see i didnt finish my work
-
+     
 
 
 
@@ -22,7 +25,7 @@
 - remove non-used code
 
 
-add dropbox get file and upload file functionality
+- add dropbox get file and upload file functionality
 
 
 not that important? try when fresh
@@ -109,3 +112,22 @@ some notes on checkboxes
 25 dec
 - done but tst with kris - make font for iphones even smaller
 - desktop safari gives me trouble
+
+26 dec
+	⁃	on big screens, set (body height to 80vh,) margin top 10vh,bottom 10vh,
+	⁃	 words section overflow: auto
+	⁃	solved other way (store voices in shared service - make sure they dont reload all time)
+	⁃	on mobile mozilla - on initial screen - put x instead of delete button
+	⁃	feedback div after test 
+	⁃	is cramped to fit window (use css overflow)
+	⁃	calculating final result is wierd (subtract wrong answers)
+	⁃	make it look same on iphone as it does on android
+	⁃	select are center aligned - for safari this seems impossible
+	⁃	add favicon to get rid of console error
+	⁃	added apple homescreen icons
+
+
+27 dec
+- cleaned more unused code
+- when starting new test - previous result doesn't show anymore
+- when test starts - inout field auto-focuses

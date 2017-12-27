@@ -1,4 +1,6 @@
 app
+
+// to display current Dictionary
 .directive('vocabulary',function($timeout){
      return {
           restrict: 'EA',
@@ -52,94 +54,64 @@ app
                         '</div>' ,
             
           link: function(scope, el, att){
-               
-                //scope.wx = true
-                //scope.i-dk = 1
-                scope.groupCheck = 1
-                
+
+               scope.groupCheck = 1
+               //scope.wx = true; scope.i-dk = 1
           }
      }
 })
-/*.directive('testLength', function(){
-        return {
-                restrict: 'E',
-                replace: true,
-                scope: {
-                        lengths: '=',
-                        action: '&'
-                },
-                template: '<p></p>'/*'<select ng-model="lengthSel" '+
-                                'ng-options="l + \' rounds\' for l in lengths" '+
-                                ' ng-change="lengthSelect(3)">' +
-                                '</select>'       
-                        //'<option>{{l}} rounds</option>' +
-                        
-                        
-        }
-  //       
-  //    ng-change="lengthSelect()"
- 
-})*/ 
+
+// during test this auto-focuses input
 .directive('inpFocus', ['$timeout', function($timeout){
         return{
                 restrict: 'A',
-                //scope:{
-                        //blr: '='
-                //},
                 link: function(scope, el, attr){
                         scope.blur = false
                         
-                        scope.$watch('blur', function(oldVal, newVal){
-                                
+                        scope.$watch('blur', function(o, n){
+                                let time
+                                if (scope.round>0) time = 500
+                                else time = 1000
+
+                                //console.log('round',scope.round,'\n$watch - scope.blur - vals old, new', o, n)
                                 if (scope.blur){
                                         console.log('focus')
-                                        $timeout(function(){
+                                        $timeout(()=>{
                                                 el[0].focus()
-                                        },500)
-                                }
-                                else if (!scope.blur) {
-                                        console.log('blur')
-                                        $timeout(function(){
+                                        },time)
+
+                                } else if (!scope.blur){
+                                        //console.log('blur')
+                                        $timeout(()=>{
                                                 el[0].blur()
                                         })
                                 }
-                                else alert('directive inpFocus else')
                         },true)
-
-                        /*scope.$on('blurit', function(){
-                                console.log('wwwwwwww   blurit wwww')
-                        })*/
                 }
         }
 }])
-// file reader
+
+// file reader - to input new Dictionary
 .directive('fileSelect', ['$window',function($window){
-        return{
-                restrict: 'A',
-                //require: 'ngModel',
-                //controller: 'teacherCtr',
-                /*scope:{
-                        //fileSelect: '@',
-                        data: '@',
-                },*/
-                link: function(scope, el, attr){
+     return{
+               restrict: 'A',
+               link: function(scope, el, attr){
                         "use strict"
 
                         el.bind("change", function(e){
-                               //console.log("file change")
 
-                               if (e.target.files[0].type !== 'text/plain'){
+                              if (e.target.files[0].type !== 'text/plain'){
                                         alert("only .txt files accepted\n" + 
                                               "if you can't change this, try option to copy + paste"+
                                               " the text of the file itself")
                                         return null
-                               }
-                               var r = new FileReader()
+                              }
+                              const r = new FileReader()
 
-                               let filename = e.target.files[0].name
-                               console.log(e.target.files[0])
+                              let filename = e.target.files[0].name
+                              console.log(e.target.files[0])
 
-                               r.onloadend = function(e){
+                              r.onloadend = function(e){
 
                                         let withoutNotes = clearNotes(e.target.result)
 
@@ -151,62 +123,13 @@ app
                                                       }
                                         )
                                }
-                               r.onerror = function(e){
-                                       alert("error reading file")
-                               }
-                               r.readAsText(e.target.files[0])
+                              r.onerror = function(e){
+                                       alert("error while reading file")
+                              }
+                              r.readAsText(e.target.files[0])
                         })
-                }
-        }
-}])
-.directive('downloadFile',[function(){
-        return{
-
-                restrict: "E",
-                scope:{
-                        action: '&'
-                },
-                template: '<a href="#" download-file ' + 
-                                ' action="downloadDict(userNotes)"' +
-                                ' ng-clickzz="downloadDict(userNotes)" ' + 
-                                //'ng-href="{{ }}"'+
-                                ' >get the file</a>'
-                ,
-                replace: true,
-                link: function(scope, elem, attrs){
-                        console.log("scope", scope);
-                        console.log("attrs", attrs);
-                        console.log("elem", elem[0]);
-
-                        console.log("scope notes", scope.$parent.userNotes);
-                        //console.log(
-                        //elem[0].attrs("href") )
-                        // set href attr to new value
-                        let data = [[scope.$parent.lang1, scope.$parent.lang2],
-                                     ...scope.$parent.words].map(function(word){
-                                             return word.join(". ")
-                                     })
-                        //let data = 'testik', blob = new Blob([data], {type: 'text/plain'})
-
-                        //let func = /*elem[0].*/attrs.$get('action') //elem[0].
-                        //let func = /*elem[0].*/attrs['action'] //elem[0].
-                        let func = scope.$parent.downloadDict
-                        //func(scope.)
-                        //func.call('ulo')
-                        console.log(func)
-                        //scope.$parent.downloadDict('test test')
-                        //console.log(data);
-                        
-
-                        let href = 'data:application/octet-stream,' + 
-                                       encodeURIComponent('babuska')//comments + "\n" + 
-                        //                lang1 + "," + lang2 + "\n");
-                        //attrs.$set("href", href);
-                }
-
-
-        }
-
+               }
+     }
 }])
 
 

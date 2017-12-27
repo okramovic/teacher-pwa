@@ -26,7 +26,6 @@ app
                     $scope.$timeout = $timeout    // needed in Services to update view with new values
 
                
-
                
                // loading and saving words
 
@@ -537,8 +536,7 @@ app
      
                                    console.log("screen", $scope.screen)
                          })
-               }*/
-               
+               }*/               
 
                
                
@@ -694,6 +692,7 @@ app
                          $scope.$parent.$broadcast('slct')
                }
                
+
                // when viewing dict: to see that words are checkbox-chosen, return true
                $scope.slct = []
                $scope.picked = function picked(x){
@@ -774,47 +773,53 @@ app
 .controller('testCtrl',['$scope','$rootScope','$timeout', 'exam','testShare','voiceLoader',
                function($scope,$rootScope, $timeout,exam,testShare,voiceLoader){
 
-        if (window.speechSynthesis){
+          // Services functions
+               $scope.getQuestions = testShare.getPrevTest
+               $scope.getWords = testShare.getWords
 
-                $scope.$on('voicesArrived',()=>{
-                        
-                        // $scope must have its voices to be able to show them on main screen
-                        $scope.voices = window.speechSynthesis.getVoices()                                       
-                        console.log('CTRL 2', $scope.voices, 'len',$scope.voices.length)    
-                })
+               $scope.newRound = exam.newRound
+               $scope.submit = exam.submit
+               //$scope.getNextGo = exam.getNextGo
 
-        } else $scope.voices = null
+               $scope.next = exam.next
+          //
+          $scope.changeLevel = changeLevel
+          $scope.timeout = $timeout     // needed for Service functions
+
+
+          if (window.speechSynthesis){
+
+               $scope.$on('voicesArrived',()=>{
+
+                         $scope.voices = window.speechSynthesis.getVoices()                                       
+                         console.log('CTRL 2', $scope.voices, 'len',$scope.voices.length)    
+               })
+
+          } else $scope.voices = null
         
-
-        $scope.zen = true, $scope.showTest = false
         
-        //$scope.dir = testShare.direction
-        
+          //score animation
+          $scope.anim_Bads = 'anim-bad', $scope.anim_Oks = 'anim-ok'
 
-        $scope.timeout = $timeout
+          $scope.oks = 0; $scope.bads = 0; $scope.feedback = []
+          
+          $scope.showTest = false
+          $scope.answerHide = true
+          $scope.testQuestions = ""
+          $scope.inpVal = ""
+          // for user input handling
+          $scope.user = {}
 
-        $scope.anim_Bads = 'anim-bad', $scope.anim_Oks = 'anim-ok'
-
-        $scope.oks = 0, $scope.bads = 0, $scope.feedback = []
-        //$scope.testQuestions = testShare.testQuestions
-        //$scope.getQuestions = testShare.getTest
-        $scope.getQuestions = testShare.getPrevTest
-        $scope.testQuestions = "", 
-        
-        $scope.answerHide = true
-        $scope.inpVal = "", $scope.user = {}
-
-        $scope.newRound = exam.newRound
-        $scope.submit = exam.submit
-
-        $scope.next = exam.next, $scope.nextGo = 'go',
-        $scope.home = home
+          
+          $scope.nextGo = 'go' // to be bale to handle Next or Go buttons state
+          $scope.home = home   // after test, when seeing results, to get to main screen
 
 
-          $scope.direction = 'ab'
-          $scope.from = 0; $scope.to = 1
-
-          $scope.$on('dirChange', function(ev,string){
+          // syncs the 'EN to DE' direction with main controller
+               $scope.direction = 'ab'
+               $scope.from = 0; $scope.to = 1
+          
+               $scope.$on('dirChange', function(ev,string){
                 $scope.direction = string
                 console.log('ctrl2 new dir:',$scope.direction)
 
@@ -823,85 +828,72 @@ app
                 } else if ($scope.direction === 'ba'){
                                         $scope.from = 1; $scope.to = 0
                 }
-                })
+               })
+
+          $scope.zen = true
           $scope.$on('zenSwitch', function(ev,data){
                     $timeout(function(){
                          $scope.zen = data
                          console.log('$scope.zen',$scope.zen)
                     })
-               })
-          /*$scope.$on('testScreen', function(){
-                        console.log('test screen on')
-                        //$scope.screen = 'test'
-                        //$scope.$apply()
-          })*/
-          $scope.$on('endOfTest', function(){
-                console.log('endoftest')
-                $scope.screen = ''    
-                $scope.blur = false;           
           })
+          
         
         
           $scope.$on('newTest',function(ev, voiceData){
-                                   console.log('--------------------------------------')
-                        
+               console.log('--------------------------------------')
                $timeout(function(){
-                        //console.log('localWords', $scope.localWords)
-                        $scope.feedback = []; $scope.finalResult = 0
 
-                        $scope.localWords = $scope.getWords()
+                         $scope.screen = 'test'
+                         $scope.showTest = true
 
-                        console.log("voice settings", voiceData)
+                         // reset the state for new test
+                         $scope.feedback = []; $scope.finalResult = 0
+                         $scope.oks = 0; $scope.bads = 0
+                         $scope.round = 0
+                         $scope.addRound = false
+                         
+                         // Next or Go button switch
+                         $scope.nextGo = 'go'
+                         
 
-                        if (window.speechSynthesis && $scope.voices){
-                                        
+                         // to have access to Dictionary words
+                         $scope.localWords = $scope.getWords()
+
+                         // voices
+                              console.log("voice settings", voiceData)
+                              if (window.speechSynthesis && $scope.voices){
+                                             
                                         $scope.voice1On = voiceData.v1on
                                         $scope.voice2On = voiceData.v2on
                                         $scope.voice1 = $scope.voices[voiceData.v1]
                                         $scope.voice2 = $scope.voices[voiceData.v2]
-                                        
-                                        
+
                                         console.log("speeches: \n", $scope.voice1On, $scope.voice2On, $scope.voice1, $scope.voice2)
-                        } else {
+                              } else {
                                         $scope.voice1On = false
                                         $scope.voice2On = false
-                        }
-
-                        $scope.oks = 0; $scope.bads = 0; 
-                        $scope.round = 0
-                        $scope.addRound = false
-
-                        //$scope.blur = true
-                        $scope.changeNextGo('go')
+                              }
+                         
+                         // get test questions
+                         $scope.testQuestions = $scope.getQuestions()
+                         $scope.currIndex = $scope.testQuestions[$scope.round].ind
                         
-
-                        $scope.screen = 'test'
-                        $scope.showTest = true
-
-                        $scope.testQuestions = $scope.getQuestions()
-
-                        console.log('$scope.testQuestions', $scope.testQuestions[$scope.round])
-
-                        $scope.currIndex = $scope.testQuestions[$scope.round].ind
-                        
-                        //$scope.newRound('first')
-                        $scope.newRound()
+                         // starts the actual test
+                         $scope.newRound()
                })     
           })
-        
-        $scope.changeNextGo = exam.changeNextGo
-        $scope.getNextGo = exam.getNextGo
-        
-        //new Promise(
-        $scope.endCheck = function(/*resolve, reject*/ cb ){
+          $scope.$on('endOfTest',()=>{
+               console.log('- - - - - - -  endoftest  - - - - - - -')
+               // to show test result
+               $scope.screen = ''
+          })
 
-               console.log($scope.round, " vs ", $scope.testQuestions.length-1)
+          // returns if test had the last question
+          $scope.endCheck = function(cb){
 
                if ($scope.round === $scope.testQuestions.length-1) cb(true)
                else cb(false)
 
-        }
-        $scope.changeLevel = changeLevel
-        //$scope.updateWord = testShare.updateWord
-        $scope.getWords = testShare.getWords
+          }
 }])
