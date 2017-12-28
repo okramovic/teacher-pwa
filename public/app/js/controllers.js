@@ -244,7 +244,7 @@ app
                     }
                     $scope.deleteLSDict = function(dict, ind){
 
-                              if (confirm("sure to delete?\n\n" + dict)){
+                              if (confirm("sure to delete?\n\n" + dict.replace(/_/g, " ").trim() )){
 
                                         let names = angular.fromJson(
                                                   $window.localStorage.getItem("userFileNames")
@@ -597,7 +597,7 @@ app
                                    })
                }
                $scope.$on('endOfTest', function(){
-
+                         console.log('CTRL 1 end of test registered')
                          // change screen
                          $timeout(function(){
                                    $scope.mainScreen = true
@@ -770,8 +770,10 @@ app
                          return allChecked
                }*/
 }])
-.controller('testCtrl',['$scope','$rootScope','$timeout', 'exam','testShare','voiceLoader',
-               function($scope,$rootScope, $timeout,exam,testShare,voiceLoader){
+.controller('testCtrl',['$scope','$rootScope','$timeout', 
+                         '$window', // needed for confetti animation
+                         'exam','testShare','voiceLoader',
+               function($scope,$rootScope,$timeout,$window,exam,testShare,voiceLoader){
 
           // Services functions
                $scope.getQuestions = testShare.getPrevTest
@@ -783,6 +785,7 @@ app
 
                $scope.next = exam.next
           //
+
           $scope.changeLevel = changeLevel
           $scope.timeout = $timeout     // needed for Service functions
 
@@ -884,8 +887,10 @@ app
                })     
           })
           $scope.$on('endOfTest',()=>{
-               console.log('- - - - - - -  endoftest  - - - - - - -')
-               // to show test result
+               //console.log('- - - - - - -  endoftest  - - - - - - -')
+
+               // without this testscreen and main menu overlap
+               //$scope.screen = ''
                $scope.screen = ''
           })
 
@@ -895,5 +900,5 @@ app
                if ($scope.round === $scope.testQuestions.length-1) cb(true)
                else cb(false)
 
-          }
+          }     
 }])

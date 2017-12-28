@@ -29,7 +29,7 @@ app
           this.parseText = parseText
      }])
 .service('exam', ['$timeout','$window',function($timeout,$window){
-    
+
           this.prepareExam = prepareExam
           this.newRound = newRound
           this.changeLevel = changeLevel
@@ -103,7 +103,6 @@ app
 
                     this.animateOk = animateOk
                     this.animateBad = animateBad
-                    this.fadeout = fadeout
 
                     this.blur= false
 
@@ -120,7 +119,8 @@ app
                          console.log('empty input')
                          this.blur= true
                          return
-
+                         
+                    // if user pressed 'IDK'
                     } else if (idk) this.nextGo = 'next'
                     
 
@@ -141,17 +141,9 @@ app
                          utterThis.lang = this.voice2.lang
                          window.speechSynthesis.speak(utterThis);
 
-                         /*new Promise((resolve, reject)=>{
-                                   resolve( new SpeechSynthesisUtterance(toSay) )
-                         }).then(utterThis=>{
-
-                                   utterThis.voice = this.voice2
-                                   utterThis.lang = this.voice2.lang
-                                   self.synth.speak(utterThis);
-                         })*/
                     }               
 
-                    //this.p2 = 
+
                     new Promise(function(resolve, reject){
 
                               var res = { dir: dir}
@@ -264,8 +256,6 @@ app
 
                          } else alert('error Promise')
                     })
-                    
-                    //this.p2
                     .then(function(answer){
 
                          console.log('correct?', answer)
@@ -276,7 +266,7 @@ app
                          //  3) bad & no zen >>> add bad point, next round, rating down
                          //  4) bad & zen    >>> add bad point, repeat round, rating down
 
-                         //var prms = 
+
                          new Promise(function(res,rej){
 
                                    if (answer === 2) {
@@ -314,55 +304,85 @@ app
                                              })
                                    } 
                          })
-                         //prms
                          .then(function(toNextRound){
-                         console.log('|||||||    resolved', toNextRound)
+
+                         //console.log('|||||||    resolved', toNextRound)
 
                          zis.endCheck(function(end){
                                    
-
-                                   if (end === true && toNextRound){
-
-                                             //if (toNextRound){
-                                                  console.log('end!! ', end)    
+                              if (end === true && toNextRound){ //console.log('end!! ', end)
                                                   
-                                                  $timeout(function(){
-                                                            zis.showTest = false 
-                                                            zis.fadeout(function(){
-                                                                 //console.log('zis.finalResult', zis.finalResult)
-                                                                 $timeout(function(){
-                                                                           zis.finalResult = 1         
-                                                                 })
-                                                                 
+                                   $timeout(function(){
+                                        zis.showTest = false 
 
-                                                                 
+                                        // if having 100% good score (different confetti)
+                                        if (!zis.feedback || zis.feedback.length === 0){ console.log('zis.feedback 0',zis.feedback)
 
-                                                                 if (!zis.feedback || zis.feedback.length === 0){
-                                                                 
-                                                                           console.log('zis.feedback',zis.feedback)
-                                                                           zis.$parent.$broadcast('endOfTest')
-                                                                 }
-                                                            })
-                                                            
-                                                  }, 1500);
-                                             //}
+                                             $timeout(()=>{
+                                                  zis.finalResult = null //was 1  null is to not show wrong answers on next test start
+                                                  startNewConfetti(7000,70)
+
+                                                  zis.$parent.$broadcast('endOfTest')
+                                             },1000)
+
+                                             $timeout(stopConfetti,7500)
+
+                                             return
+                                        }
+
+
+                                        $timeout(()=>{
+                                                  zis.finalResult = 1  // to show wrong answers
+                                                  startNewConfetti(10000,110)
+                                        },1000)
+                                        $timeout(stopConfetti,11000)
+                                                       
+                                   }, 1500);
           
-                                   } else {
+                              } else {
 
-                                             if (zis.nextGo === 'go'){
-                                                  zis.newRound();
-                                             
-                                             } else if(zis.nextGo ==='next') {
-                                                  //alert("-next-")
-                                             }
-                                             
-                                   }
+                                   if (zis.nextGo === 'go'){
+                                        zis.newRound();
+                                        
+                                   } else if(zis.nextGo ==='next') {
+                                        //alert("-next-")
+                                   }               
+                              }
                          })  
                          })
                     })
           }
 }])
+//duration in milliseconds, best 10000 and 80 particles
+function startNewConfetti(duration, particles){
 
+     // enable animation frame requests to start
+     window.confettiACTIVE = true;
+     
+
+     this.confetti = new Confetti({
+
+                         width    : window.innerWidth,
+                         height   : window.innerHeight,
+                         length   : particles,
+                         duration : duration
+                    });
+}
+function stopConfetti(){
+     
+
+     this.confetti = null;
+
+     let canvas = document.querySelector('canvas');
+     canvas.classList.add('confettiHidden')
+     
+     setTimeout(()=>{
+          // turn requestframe off!
+          window.confettiACTIVE = false
+          canvas.parentNode.removeChild(canvas);
+     },2000)
+     //console.log('canvas', canvas)
+}
 
 
 // auto-selects voices for EN, DE and CS
@@ -489,14 +509,6 @@ function animateOk(cb){
           },3500)
 
           if (cb) cb()
-}
-function fadeout(cb){
-          // is this used?
-          this.visible = "fadeout"
-
-          setTimeout(function(){
-               if (cb) cb()
-          },1200)
 }
 function animateBad(cb){
 
@@ -836,3 +848,172 @@ function mergeToSave(langs, words){
           }
           return res
 }
+
+
+
+
+//  confetti
+class Progress {
+     constructor(param = {}) {
+       this.timestamp        = null;
+       this.duration         = param.duration || Progress.CONST.DURATION;
+       this.progress         = 0;
+       this.delta            = 0;
+       this.progress         = 0;
+       //this.isLoop           = !!param.isLoop;
+   
+       this.reset();
+     }
+   
+     static get CONST() {
+       return {
+         DURATION : 1000
+       };
+     }
+   
+     reset() {
+       this.timestamp = null;
+     }
+   
+     start(now) {
+       this.timestamp = now;
+     }
+   
+     tick(now) {
+       if (this.timestamp) {
+         this.delta    = now - this.timestamp;
+         this.progress = Math.min(this.delta / this.duration, 1);
+   
+         if (this.progress >= 1 && this.isLoop) {
+           this.start(now);
+         }
+   
+         return this.progress;
+       } else {
+         return 0;
+       }
+     }
+}
+   
+class Confetti {
+     constructor(param) {
+       this.parent         = param.elm || document.body;
+       this.canvas         = document.createElement("canvas");
+       this.ctx            = this.canvas.getContext("2d");
+       this.width          = param.width  || this.parent.offsetWidth;
+       this.height         = param.height || this.parent.offsetHeight;
+       this.length         = param.length || Confetti.CONST.PAPER_LENGTH;
+       this.yRange         = param.yRange || this.height * 2;
+       this.progress       = new Progress({
+         duration : param.duration,
+         isLoop   : false
+       });
+       this.rotationRange  = typeof param.rotationLength === "number" ? param.rotationRange  : 10;
+       this.speedRange     = typeof param.speedRange     === "number" ? param.speedRange : 10;
+       this.sprites        = [];
+   
+       this.canvas.style.cssText = [
+         "display: block",
+         "position: absolute",
+         "top: 0",
+         "left: 0",
+         "pointer-events: none",
+         "z-index: 1"
+       ].join(";");
+   
+       this.render = this.render.bind(this);
+   
+       this.build();
+   
+       this.parent.appendChild(this.canvas);
+       this.progress.start(performance.now());
+   
+       // otherwise animation continues invisibly
+       if (window.confettiACTIVE === true) requestAnimationFrame(this.render);
+     }
+   
+     static get CONST() {
+       return {
+           SPRITE_WIDTH  : 9,
+           SPRITE_HEIGHT : 16,
+           PAPER_LENGTH  : 1000,
+           DURATION      : 8000,
+           ROTATION_RATE : 50,
+           COLORS        : [
+             "#EF5350", // okr
+             "#EC407A", // magentish
+             "#AB47BC", // purple 
+             "#7E57C2",
+             "#5C6BC0",
+             "#42A5F5",
+             "#29B6F6",
+             "#26C6DA",
+             "#26A69A",
+             "#66BB6A",
+             "#9CCC65",
+             "#D4E157",
+             "#FFEE58",
+             "#FFCA28",
+             "#FFA726",  // light orange
+             "#FF7043",  // orange
+             //"#8D6E63",// brown
+             "#BDBDBD"   // light gray
+             //"#78909C" // gray bluish
+           ]
+       };
+     }
+   
+     build() {
+       for (let i = 0; i < this.length; ++i) {
+         let canvas = document.createElement("canvas"),
+             ctx    = canvas.getContext("2d");
+   
+         canvas.width  = Confetti.CONST.SPRITE_WIDTH;
+         canvas.height = Confetti.CONST.SPRITE_HEIGHT;
+   
+         canvas.position = {
+           initX : Math.random() * this.width,
+           initY : -canvas.height - Math.random() * this.yRange
+         };
+   
+         canvas.rotation = (this.rotationRange / 2) - Math.random() * this.rotationRange;
+         canvas.speed    = (this.speedRange / 2) + Math.random() * (this.speedRange / 2);
+   
+         ctx.save();
+           ctx.fillStyle = Confetti.CONST.COLORS[(Math.random() * Confetti.CONST.COLORS.length) | 0];
+           ctx.fillRect(0, 0, canvas.width, canvas.height);
+         ctx.restore();
+   
+         this.sprites.push(canvas);
+       }
+     }
+   
+     render(now) {
+       //console.log('render', new Date().getSeconds()); 
+       let progress = this.progress.tick(now);
+   
+       this.canvas.width  = this.width;
+       this.canvas.height = this.height;
+   
+       for (let i = 0; i < this.length; ++i) {
+         this.ctx.save();
+           this.ctx.translate(
+             this.sprites[i].position.initX + this.sprites[i].rotation * Confetti.CONST.ROTATION_RATE * progress,
+             this.sprites[i].position.initY + progress * (this.height + this.yRange)
+           );
+           this.ctx.rotate(this.sprites[i].rotation);
+           this.ctx.drawImage(
+             this.sprites[i],
+             -Confetti.CONST.SPRITE_WIDTH * Math.abs(Math.sin(progress * Math.PI * 2 * this.sprites[i].speed)) / 2,
+             -Confetti.CONST.SPRITE_HEIGHT / 2,
+             Confetti.CONST.SPRITE_WIDTH * Math.abs(Math.sin(progress * Math.PI * 2 * this.sprites[i].speed)),
+             Confetti.CONST.SPRITE_HEIGHT
+           );
+         this.ctx.restore();
+       }
+
+     // to be able to turn it off via global state
+     if (window.confettiACTIVE === true) requestAnimationFrame(this.render);
+     }
+}
+   

@@ -82,3 +82,8 @@
 .animatediv.ng-hide-remove{
      transition: all linear 1s;
 }
+
+
+.confettiHidden{
+     opacity: 0;
+}

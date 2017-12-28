@@ -146,6 +146,13 @@ textarea::placeholder{
     text-align: center;    
 }
 
+/*  for confetti  */
+canvas{
+     opacity: 1;
+     transition: opacity  0.7s;
+     -webkit-transition: opacity 0.7s;
+}
+
 /* id's */
 #mainScreen{
      width: 100%;

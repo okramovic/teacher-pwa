@@ -1,8 +1,9 @@
-const shellName = "teacher_v02";
+const shellName = "teacher_v00";
 const origin = "https://theteacher.herokuapp.com"
 //"/",
 const shellFiles = [
   "/index.html",
+
   "/app/css/animations.css",
   "/app/css/elements.css",
   "/app/css/classes.css",
@@ -25,111 +26,87 @@ const shellFiles = [
   "/app/js/teacherApp.js",
 ]
 
-self.addEventListener('install', function(e) {
-      console.log('[ServiceWorker] Install');
+self.addEventListener('install', e =>{
+     console.log('[ServiceWorker] Install');
 
-      // https://stackoverflow.com/questions/44375494/uncaught-in-promise-domexception-quota-exceeded/
-      // delete old caches
-      //function delete(cb){
-          /*caches.keys().then(ckeys=>{
-              console.log("cacheKeys all")
-              console.log(ckeys)
-
-              var oldkeys = ckeys.filter(key=>{ return key !== shellName})
-              var deletePromises = oldkeys.map(oldkey=>{ caches.delete(oldkey)})
-              return Promise.all(deletePromises)
-          })*/
-
-      //}
-      //delete(function(){
-        e.waitUntil(
-              caches.open(shellName)
-                .then(function(cache) {
-
+     e.waitUntil(
+               caches.open(shellName)
+               .then(cache => {
                     console.log('[ServiceWorker] installation: Caching app shell', cache);
 
                     return cache.addAll(shellFiles);
-                })
-                .then(function() {
-                  console.log('[install] All required resources have been cached');
-                  return self.skipWaiting();
-                })
-        );
-      //});
+               })
+               .then(()=>{
+                    console.log('[install] All required resources have been cached');
+                    return self.skipWaiting();
+               })
+     );
 });
 
 
 
-self.addEventListener('activate', function(e) {
-      
-      console.log('sw activated');
-  
-      e.waitUntil(
-          caches.keys().then(function(cacheNames) {
-            return Promise.all(
-              cacheNames.map(function(cacheName) {
-                console.log("activate: cache key filtering", cacheName);
-                
-                if (cacheName !== shellName) {
-                  return caches.delete(cacheName);
-                }
-              })
-            );
+self.addEventListener('activate', e =>{
+
+     console.log('[SW activate]');
+     console.log('Cache newest version:', shellName);
+
+     e.waitUntil(
+          caches.keys().then( cacheNames =>{
+               return Promise.all(
+                    cacheNames.map( cacheName => {
+                              console.log("activate: cache filtering:", cacheName);
+                         
+                              if (cacheName !== shellName) {
+                                   console.log('deleting cache:', cacheName)
+                                   return caches.delete(cacheName);
+                              }
+                    })
+               );
           })
-      );
-      //alert('activate event');
+     );
 })
 
 
 // offline serving
-self.addEventListener('fetch', function(e) {
+self.addEventListener('fetch', e =>{
 
-      //console.log('[ServiceWorker] Fetch for ', e.request.url,"\n",e.request)
-
-      e.respondWith(fromNetwork(e.request.url, 2000).catch(function () {
-          return fromCache(e.request);
-      }));
+     e.respondWith(
+               fromNetwork(e.request.url, 2000)
+               .catch(() => fromCache(e.request))
+     );
   
   
-      function fromNetwork(request, timeout) {
-            return new Promise(function (resolve, reject) {
+     function fromNetwork(request, timeout) {
+          return new Promise((resolve, reject)=>{
 
-                var timeoutId = setTimeout(reject, timeout);
+               const timeoutId = setTimeout(reject, timeout);
                 
-                fetch(request).then(function (response) {
+               fetch(request)
+               .then(response => {
                     clearTimeout(timeoutId);
                     resolve(response);
-                }, reject);
-            });
-      }
-  
-      function fromCache(request) {
-        return caches.open(shellName).then(function (cache) {
-          return cache.match(request).then(function (matching) {
-            return matching || Promise.reject('no-match');
+               }, reject);
           });
-        });
-      }
-      function useCache(e){
+     }
+  
+     function fromCache(request) {
+          return caches.open(shellName)
+               .then( cache =>{
+                    return cache.match(request)
+                              .then(matching => {
+                                   return matching || Promise.reject('no-match');
+                              });
+          });
+     }
+     function useCache(e){
 
-            return  e.respondWith(
+               return  e.respondWith(
           
-                    caches.match(e.request).then(function(response) {
+                    caches.match(e.request)
+                    .then(response =>{
                               console.log(response)
-                        return fetch(e.request) || response
+                              return fetch(e.request) || response
                     })
-              );
-      }       
-      
-      
-
-
-  function isShellFile(){
-    
-    return shellFiles.some(function(fileURL){
-
-                return e.request.url.includes(fileURL)
-           })
-    // if req url contains any of itmes in "files" arr
-  }
+               );
+     }       
 });
