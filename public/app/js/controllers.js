@@ -479,19 +479,21 @@ app
 
                     $scope.screenChange = function(screen){
 
-                              console.log('to screen', screen)
-
                               // if returning from test early
-                              if (screen ==='test') {
+                              if (screen == 'test') {
                                         screen = 'main'
                                         $scope.finalResult = 0;
                                         $scope.$parent.$broadcast('endOfTest')
-                              }
+
+                              // if going to initial screen - to reset possibly checkbox-selected words in Dictionary
+                              } else if (screen == 'initial') $timeout(()=>{
+                                        $scope.slct = []
+                                        $scope.selectedType = $scope.testTypes[2]  // i.e. Newest
+                              }) 
+
                               $timeout(function(){
                                         $scope.screen = screen;        
                               })
-
-                              //if (screen ==='test') $scope.$parent.$broadcast('testScreen')
                     }
                //
 

@@ -204,7 +204,7 @@
 
                                         </div>
 
-                                        <!-- copy/paste -->
+                                        <!-- choose copy/paste -->
                                         <button ng-click="loadDictWay ='copyPaste'"
                                                 style="margin: 10px 0px 10px;"
                                                 class="size3"
@@ -274,17 +274,17 @@
                             justify-content: space-between;
                             align-items: center;">
                     <div style="width: 100%;">
-                        <div class="butRow row marginTop15" style="border: 0px solid gray">
-                            <div class="col s6 center">
-                                    <div>
+                        <div class="butRow row marginTop15" >
+                            <div class="col s6 center" >
+                                    <!--div style="height: 100%;"-->
                                         <!--button ng-show="screen=='main'" 
                                                 ng-click="showVocab(true)">dictionary</button-->
                                         <button ng-show="screen=='main'" 
                                                 ng-click="screen='words'">dictionary</button>
-                                    </div>
+                                    <!--/div-->
                                         
                             </div>
-                            <div class="col s6">
+                            <div class="col s6" >
                                     <!-- test length selection -->
                                     <select class="browser-default"
                                             ng-model="defaultLength" 
@@ -299,12 +299,12 @@
                         </div>
                         
                         <div class="butRow row marginTop15" ng-show="screen == 'main'">
-                                <div class="col s6 center">
+                                <div class="col s6 center" >
                                             <button ng-show="screen == 'main'" 
                                                     ng-click="changeDir()"
                                                     >{{lang1}} to {{lang2}}</button>
                                 </div>
-                                <div class="col s6 center">
+                                <div class="col s6 center" >
                                         <!-- test length selection -->
                                         <select ng-model="selectedType" 
                                             ng-options="t disable when (t ==='repeat previous' && getPrevTest()=== null) ||
@@ -368,10 +368,13 @@
                <div ng-show="screen == 'words'" ng-class="" style="width: 100%; height:auto;">
                         
                         <!--  buttons  -->
-                        <div class="butRow center marginTop15" style="">
-                            <!--button ng-show="screen=='words'" 
-                                    ng-click="showVocab(false)">return
-                            </button-->
+                        <div class="butRow marginTop15" >
+                             <!-- style="display: flex;
+                                   justify-content: space-around;
+                                   align-items: center;" -->
+
+
+                            <!--button ng-show="screen=='words'" ng-click="showVocab(false)">return</button-->
                             <!--div ng-click="()" ></div> < wAscen = !wAscen -->
                             <!--button ng-show="screen == 'words'" ng-click="" 
                                     disabled>switch order</button  href="#"--> 
@@ -432,7 +435,7 @@
                <div id="testField" ng-show="showTest" class="animate-show animate-hide">
 
                         <!-- score & round -->   
-                        <div class="butRow row center size3">
+                        <div class="butRow row size3">
                                 <div class="col s4 center">
                                         <div ng-model="anim_Bads" ng-class="anim_Bads" class="center">
                                                 <h7  >{{bads}}</h7>

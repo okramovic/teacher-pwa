@@ -17,6 +17,7 @@
 
 
 not that important? try when fresh
+- enable auto-updating cached files to newest version
 - add mtrlz preloader when i tap on show vocab, bcs people might get confused that its not reacting
 - make sure no nonsense words (bug-giving) are in loaded dict/file
 - add dropbox get file and upload file functionality
@@ -133,17 +134,18 @@ some notes on checkboxes
 	⁃	rearrange Css into different files: elements, classes, media Querries
 	⁃	when deleting Local storage Dict, and confirm appears, replace Dict name chars ’_’ for ‘ ‘
      -    enable auto deleting old caches
-     -    enable auto-updating cached files to newest version
-     - some beautiful animation when test has finished (like khan academy)
-          - ok pens
-               https://codepen.io/kimmy/pen/dzJgOq
-               https://codepen.io/ComeonCreative/pen/ZBYwwL     - seems most natural
+     -    some beautiful animation when test has finished (like khan academy)
+               - ok pens
+                    https://codepen.io/kimmy/pen/dzJgOq
+                    https://codepen.io/ComeonCreative/pen/ZBYwwL     - seems most natural
 
-               minimalistic, good for mobile performance? - https://codepen.io/moonglows76/pen/BRVrgZ
-               this one works great with camera!!!  but is static - https://codepen.io/palmaswell/pen/zdZgRb?limit=all&page=4&q=confetti
+                    minimalistic, good for mobile performance? - https://codepen.io/moonglows76/pen/BRVrgZ
+                    this one works great with camera!!!  but is static - https://codepen.io/palmaswell/pen/zdZgRb?limit=all&page=4&q=confetti
 
-               static conf generator    https://codepen.io/brianjhanson/pen/RKoPNR
-               also nice, minimalistic       https://codepen.io/orrybaram/pen/LxOMwG
-               this one starts great, but then it gets wierd     https://codepen.io/JTParrett/pen/YxrNVQ
-               i like the shapes and colors here  https://codepen.io/lilianqian/pen/OxzeyZ
-     - if previous test was 100% without wrong answers, next test it shows up
+                    static conf generator    https://codepen.io/brianjhanson/pen/RKoPNR
+                    also nice, minimalistic       https://codepen.io/orrybaram/pen/LxOMwG
+                    this one starts great, but then it gets wierd     https://codepen.io/JTParrett/pen/YxrNVQ
+                    i like the shapes and colors here  https://codepen.io/lilianqian/pen/OxzeyZ
+     -    if previous test was 100% without wrong answers, next test it shows up
+     -    added See data button (for situations when downloading file isnt possible)
+     ⁃	when some words in Dict are checked and Dict gets reloaded, words stay marked as chosen

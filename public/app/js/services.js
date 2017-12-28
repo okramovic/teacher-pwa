@@ -86,6 +86,7 @@ app
                     }
 
                // for browsers that don't allow downloads, 
+               // or when text encoding doesnt help
                // open data in new tab so user can copy/paste back it up
                     let currentDate = this.dateIt().toString()
                     console.log('currentDate', currentDate)
@@ -93,7 +94,7 @@ app
                     let data = [[lang1, lang2], ...this.words]
                               .map( word => word.join(". ") )
                               .join('<br>')
-                              
+
                     data = '<br>' + currentDate +  `<br>
                            This is your current dictionary and progress.<br>
                            You can copy/paste it into a file and back it up.<br>
