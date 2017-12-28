@@ -1,9 +1,9 @@
 - - - - - - - - - Teacher - TO DO  - - - - - - - — - - - -
 - decide what’s most important things to publish prototype
 
-- if previous test was 100% without wrong answers, next test it shows up
+
 - remove non-used code
-- add mtrlz preloader when i tap on show vocab, bcs people might get confused that its not reacting
+
 
      using postCss and autoprefixer?
 - do styling for safari as well
@@ -17,6 +17,7 @@
 
 
 not that important? try when fresh
+- add mtrlz preloader when i tap on show vocab, bcs people might get confused that its not reacting
 - make sure no nonsense words (bug-giving) are in loaded dict/file
 - add dropbox get file and upload file functionality
 - when user clicks on word (test Q / A or in dict), it's copied to clipboard and small anouncement pops up
@@ -145,3 +146,4 @@ some notes on checkboxes
                also nice, minimalistic       https://codepen.io/orrybaram/pen/LxOMwG
                this one starts great, but then it gets wierd     https://codepen.io/JTParrett/pen/YxrNVQ
                i like the shapes and colors here  https://codepen.io/lilianqian/pen/OxzeyZ
+     - if previous test was 100% without wrong answers, next test it shows up

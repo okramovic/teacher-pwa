@@ -313,14 +313,14 @@ app
                               if (end === true && toNextRound){ //console.log('end!! ', end)
                                                   
                                    $timeout(function(){
-                                        zis.showTest = false 
+                                        zis.showTest = false  // hide test container
 
                                         // if having 100% good score (different confetti)
                                         if (!zis.feedback || zis.feedback.length === 0){ console.log('zis.feedback 0',zis.feedback)
 
                                              $timeout(()=>{
-                                                  zis.finalResult = null //was 1  null is to not show wrong answers on next test start
-                                                  startNewConfetti(7000,70)
+                                                  zis.finalResult = null // was 1  null is to not show wrong answers on next test start
+                                                  startNewConfetti(7000,110)
 
                                                   zis.$parent.$broadcast('endOfTest')
                                              },1000)
@@ -335,7 +335,7 @@ app
                                                   zis.finalResult = 1  // to show wrong answers
                                                   startNewConfetti(10000,110)
                                         },1000)
-                                        $timeout(stopConfetti,11000)
+                                        $timeout(stopConfetti,10500)
                                                        
                                    }, 1500);
           

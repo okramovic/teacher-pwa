@@ -1,35 +1,21 @@
 
 if ('serviceWorker' in navigator){
                 
-        navigator.serviceWorker
-            .register('service-worker.js')
-            .then(function(reg){
-          
-                    console.log('sw registered', reg);
-        })
+          navigator.serviceWorker
+               .register('service-worker.js')
+               .then(function(reg){
+                    console.log('Service Worker registered', reg);
+          })
   
 } else {
     //alert("storing this app offline isn't going to be possible");
 }
 
 
-document.addEventListener('DOMContentLoaded',()=>{
-    //console.log('DOMload')
-    
-    //var styl = window.getComputedStyle( fonter, null ).getPropertyValue( )
-    //console.log("header", parseFloat(  window.getComputedStyle( fonter, null ).getPropertyValue( "width") ) )
-    /*if ( parseFloat(  window.getComputedStyle( fonter, null ).getPropertyValue( "width") ) > 22){
-
-                //alert("mat. icons not loaded")
-    } else alert('font ok')*/
-})
-
-
-window.addEventListener('load',(ev)=>{
+window.addEventListener('load', ev =>{
 
         let tester = document.getElementById('fontTester');
-        let wid = parseFloat(  window.getComputedStyle( tester, null ).getPropertyValue( "width") );
-        //alert("icon wid  " + wid)                             
+        let wid = parseFloat(  window.getComputedStyle( tester, null ).getPropertyValue( "width") );                           
                              
         // test the envelope icon for width              
         if ( wid > 22){   
