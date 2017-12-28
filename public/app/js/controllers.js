@@ -178,7 +178,7 @@ app
 
                                         //console.log("no stored filenames", savedFilenames)
 
-                                        let names = [  {name: newName, date: dateIt()}  ]
+                                        let names = [  {name: newName, date: $scope.dateIt()}  ]
                                         
                                         $window.localStorage.setItem("userFileNames", angular.toJson(names))
 
@@ -209,7 +209,7 @@ app
 
                                                   savedFilenames.push({
                                                                       name: newName,
-                                                                      date: dateIt()
+                                                                      date: $scope.dateIt()
                                                                       })
 
                                                   $window.localStorage.setItem("userFileNames", angular.toJson(savedFilenames))
@@ -231,7 +231,7 @@ app
                                                   
                                                   // save date to show on initial screen
                                                        let currentFile = savedFilenames.find(obj=>obj.name==newName)
-                                                       currentFile.date = dateIt()
+                                                       currentFile.date = $scope.dateIt()
                                                        console.log('updated filenames', savedFilenames)
                                                        $window.localStorage.setItem("userFileNames", angular.toJson(savedFilenames))
 
@@ -718,7 +718,7 @@ app
 
                     
                // to append Date to Local storage dictionary
-               function dateIt(){
+               $scope.dateIt = function(){
                          
                     let d = new Date()
           

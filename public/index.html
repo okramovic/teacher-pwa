@@ -373,8 +373,12 @@
                                     ng-click="showVocab(false)">return
                             </button-->
                             <!--div ng-click="()" ></div> < wAscen = !wAscen -->
-                            <button ng-show="screen == 'words'" ng-click="" disabled>switch order</button> 
-                            
+                            <!--button ng-show="screen == 'words'" ng-click="" 
+                                    disabled>switch order</button--> 
+                            <a href="#" 
+                               ng-click="downloadDict(userNotes,true)" 
+                               >see data</a> <!-- target="_blank"  ng-href="{{myURL}}"  download="{{currentFilename}}"  -->
+
                             <button ng-model="showUserNotes" 
                                     ng-click="showUserNotes=!showUserNotes"
                                     >back-up</button>

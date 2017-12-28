@@ -39,17 +39,30 @@ app
           
 
           // to get txt file with dictionary and progress
-          this.downloadDict = function downloadDict(notes){
-                         console.log('using Services line 34')
+          this.downloadDict = function downloadDict(notes, newTab){
+                        
+               // for file saving, have languages to their original order
+                    let lang1, lang2
+                    if (this.direction=='ba'){
+                         //console.log(this.direction, ' = ba?')
+                         lang1 = this.lang2
+                         lang2 = this.lang1
+                    } else{
+                         //console.log(this.direction, ' = ab?')
+                         lang1 = this.lang1
+                         lang2 = this.lang2
+                    }
 
+               // save it as file
+                    if (!newTab){
+                        //console.log('using Services line 34')
                         if (!notes) notes = ""
 
                         if ( !this.currentFilename.endsWith('.txt')) this.currentFilename += '.txt'
 
-                        
                         let url = $window.URL || $window.webkitURL
 
-                        let data = [[this.lang1, this.lang2],
+                        let data = [[lang1, lang2],
                                      ...this.words]
                                      .map(function(word){
                                         return word.join(". ")
@@ -65,10 +78,30 @@ app
                         this.myURL = url.createObjectURL(blob);
 
                         
-                        let zis = this
+                        let self = this
                         $timeout(()=>{
-                              zis.showUserNotes = false;
+                              self.showUserNotes = false;
                         })
+                        return
+                    }
+
+               // for browsers that don't allow downloads, 
+               // open data in new tab so user can copy/paste back it up
+                    let currentDate = this.dateIt().toString()
+                    console.log('currentDate', currentDate)
+
+                    let data = [[lang1, lang2], ...this.words]
+                              .map( word => word.join(". ") )
+                              .join('<br>')
+                              
+                    data = '<br>' + currentDate +  `<br>
+                           This is your current dictionary and progress.<br>
+                           You can copy/paste it into a file and back it up.<br>
+                           Place your notes here:<br>
+                           <br>
+                           - - - (do not remove this line) - - -<br>` + data
+
+                    window.open("", "_blank").document.write(data);                    
           }
 
           this.makeTest = function(words, indexes){
