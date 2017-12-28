@@ -1,0 +1,198 @@
+.titleEnabled{
+    color: black
+}
+.titleDisabled{
+    color: rgb(200, 200, 200);
+    cursor: initial;
+
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+.alignCenter{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+.container{
+     width: 100%;
+     border: 1 px solid;
+     margin: 0px;
+ }
+.collection{
+     width: 100%;
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+     align-items: center;
+ 
+     border: none;
+ 
+     margin: 5px 0px 0px;
+ }
+.collection-item{
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+ 
+     width: 95%;
+     margin: auto;
+ 
+     border-top: 1px solid;
+ }
+.collection-item.thumb-sized{
+     
+     min-width: 48px;
+     min-height: 48px;
+ }
+.modal-footer{
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     float: left;
+}
+
+
+.single{
+     width: 100%;
+ 
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     text-align: center;
+}
+ 
+.row{
+     width: 100%;
+     
+     margin: 0px;
+     padding: 0px;
+}
+.butRow{
+     width: 100%;
+     display: flex;
+     justify-content: space-around;
+     align-items: center;
+}
+.single_center{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+ 
+ .in_row {
+     display: flex;
+     justify-content: space-around;
+     align-items: center;
+ }
+ .full_width{
+     width: 100%;
+ }
+
+
+.date{
+     float: left;
+}
+ 
+.btn{
+     background-color: rgba(63, 120, 254,.6);
+     border-radius: 4px;
+ }
+.btn-sm{
+     padding-left: 15px;
+     padding-right: 15px;
+ }
+ 
+.gray{
+     color: rgba(193, 193, 193, 0.5);
+ }
+ 
+.hvrb:hover{
+     text-shadow: 1px 1px 0px rgb(193, 193, 193);
+     cursor: pointer;
+}
+ 
+ 
+ 
+ 
+ 
+.center{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+}
+.vertical{
+     display: flex;
+     flex-direction: column;
+}
+.centerstart{
+     display: flex;
+     flex-direction: column;
+     align-items: center;   
+}
+.flexend{
+     display: flex;
+     justify-content: center;
+     align-items: flex-end;
+}
+
+.margBot20{
+     margin-bottom: 20px;
+}
+
+
+.corrAnswer-hide{
+     color: white;
+ }
+ .corrAnswer-show{
+     color: dodgerblue;
+}
+
+
+
+.zero{
+     color: red;
+ }
+.one{
+     color: orange;
+ }
+.two{
+     color: rgb(255, 240, 0);
+}
+.three{
+     color: limegreen;
+}
+.four{
+     color: powderblue;
+}
+.five{
+     color: dodgerblue;
+}
+.six{
+     color: #0040ff;
+}
+
+.example{
+     padding: 0px;
+     margin: 0px;
+}
+
+.dictionary{
+     text-align: center;
+     width: 100%;
+ }
+ #vocab .word{
+     width: 80%;
+     margin: auto;
+ }
+
+.forWords{
+    width: 95%;
+    margin: auto;
+}
+.picked{ 
+    /*position: relative;
+    left: 20px;*/
+    border-left: 1px solid black;
+}

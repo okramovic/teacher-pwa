@@ -1,15 +1,14 @@
-var shellName = "teacher_v02";
-var origin = "https://theteacher.herokuapp.com"
+const shellName = "teacher_v02";
+const origin = "https://theteacher.herokuapp.com"
 //"/",
-var shellFiles = [
+const shellFiles = [
   "/index.html",
   "/app/css/animations.css",
-  "/app/css/general.css",
-  "/app/css/mainScreen.css",
+  "/app/css/elements.css",
+  "/app/css/classes.css",
   "/app/css/material-icons.css",
   "/app/css/material-icons.woff",
   "/app/css/mediaQuerries.css",
-  "/app/css/testDiv.css",
   "/app/css/Frank_Ruhl_Libre/FrankRuhlLibre-Medium.ttf",
 
   "/app/libs/jquery-3.1.1.min.js",
@@ -19,8 +18,6 @@ var shellFiles = [
   "/app/libs/angular-materialize.0.2.2.min.js",
   "/app/libs/angular-animate.1.5.5.min.js",
   
-
-
   "/app/js/service-register.js",
   "/app/js/controllers.js",
   "/app/js/directives.js",

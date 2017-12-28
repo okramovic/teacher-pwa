@@ -1,13 +1,3 @@
-/*@-webkit-keyframes testxx{
-    from{ transform: rotate(0deg) scale(1) }
-    to  { transform: rotate(120deg) scale(2)}
-}
-@-webkit-keyframes test{
-    from{ -webkit-transform: rotate(0deg) scale(1);
-            color: black; }
-    to  { -webkit-transform: rotate(120deg) scale(2);
-            color: orange;}
-}*/
 @keyframes bads{
     0% { transform: rotate(0deg) scale(1);
             color: black;  }
@@ -24,30 +14,26 @@
     100%{   color: black; 
             transform: scale(1) }
 }
-@keyframes fadeout{
+/*@keyframes fadeout{
     0%   {color: black; visibility: visible;}
     100% {color: yellow; visibility: hidden;}
 }
-/*  chage this so it works everywhere
-
-    @keyframes test{
-    from{ -webkit-transform: rotate(0deg) scale(1);
-        color: black;  }
-    to  { -webkit-transform: rotate(120deg) scale(2);
-        color: orange; }
+.fadeout{   
+     animation: fadeout 2s linear;
 }*/
+
+
 .visible{
     color: black;
     display: flex;
 }
-.fadeout{   
-    animation: fadeout 2s linear;
-}
+
 .invisible{
     display: none;
 }
 .anim-ok{
     color: black;
+    transform: rotate(0deg);
     -webkit-transform: rotate(0deg);
 }
 .anim-ok.live{
@@ -55,15 +41,11 @@
 }
 .anim-bad{ 
     color: black;
+    transform: rotate(0deg);
     -webkit-transform: rotate(0deg);
-    /*transform- rotate(120)*/
 }
 .anim-bad.live{
-    /*-webkit-transform: rotate(360deg);
-    transform: rotate(45deg);*/
     animation: bads .5s linear;
-    
-    /*transition- all linear 0.5s;*/
 }
 
 
@@ -87,4 +69,16 @@
 .animate-show.ng-hide-remove.ng-hide-remove-active {
   opacity: 1;
   display: flex !important;
+}
+
+
+.animatediv{
+     opacity:1;
+}
+.animatediv.ng-hide{
+     opacity: 0;
+}
+.animatediv.ng-hide-add,
+.animatediv.ng-hide-remove{
+     transition: all linear 1s;
 }

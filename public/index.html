@@ -36,9 +36,8 @@
         <script src="./app/libs/angular-materialize.0.2.2.min.js"></script>
         
         
-        <link rel="stylesheet"  href="./app/css/general.css" >
-        <link rel="stylesheet"  href="./app/css/testDiv.css" >
-        <link rel="stylesheet"  href="./app/css/mainScreen.css" >
+        <link rel="stylesheet"  href="./app/css/elements.css" >
+        <link rel="stylesheet"  href="./app/css/classes.css" >
         <link rel="stylesheet"  href="./app/css/animations.css" >
         <link rel="stylesheet"  href="./app/css/mediaQuerries.css" >
         
@@ -430,18 +429,18 @@
                <div id="testField" ng-show="showTest" class="animate-show animate-hide">
 
                         <!-- score & round -->   
-                        <div class="butRow row centered size3">
-                                <div class="col s4 centered">
-                                        <div ng-model="anim_Bads" ng-class="anim_Bads" class="centered">
+                        <div class="butRow row center size3">
+                                <div class="col s4 center">
+                                        <div ng-model="anim_Bads" ng-class="anim_Bads" class="center">
                                                 <h7  >{{bads}}</h7>
                                                 <i class="material-icons margBot3" data-fallback="&#215;" data-or="&#10060;">close</i>
                                         </div>
                                 </div>
-                                <div class="col s4 centered">
+                                <div class="col s4 center">
                                         <h7># {{round+1}} / {{testQuestions.length}}</h7>
                                 </div>
-                                <div class="col s4 centered">
-                                        <div ng-model="anim_Oks" ng-class="anim_Oks" class="centered">
+                                <div class="col s4 center">
+                                        <div ng-model="anim_Oks" ng-class="anim_Oks" class="center">
                                                 <h7>{{oks}}</h7>
                                                 <i class="material-icons margBot3" data-fallback="&#10003;">check</i>
                                         </div>
