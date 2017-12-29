@@ -156,8 +156,8 @@ textarea::placeholder{
 /*  for confetti  */
 canvas{
      opacity: 1;
-     transition: opacity  0.7s;
-     -webkit-transition: opacity 0.7s;
+     transition: opacity  0.3s;
+     -webkit-transition: opacity 0.3s;
 }
 
 /* id's */

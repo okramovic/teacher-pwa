@@ -128,171 +128,136 @@ app
           }
           
 
-          this.submit = function submit(ind,input, round, idk){
-                    console.log('     - - - -  new answ - - - - ')
-                    //console.log('>>>', ind, input,"round", round)
-                    
-                    
-                    this.okAnswer = okAnswer; this.badAnswer = badAnswer
+          this.submit = function(ind, input, round, idk){
+               console.log('     - - - -  new answ - - - - ')
 
-                    this.animateOk = animateOk
-                    this.animateBad = animateBad
+               this.correct = correct
+               this.okAnswer = okAnswer; this.badAnswer = badAnswer
+               this.animateOk = animateOk; this.animateBad = animateBad
 
-                    this.blur= false
+               this.blur= false
 
-                    this.correct = correct
+               //let zis = this
 
-                    let zis = this
-
-                    var curWord = this.testQuestions[round],
-                         dir = this.direction
+               const curWord = this.testQuestions[round],
+                    dir = this.direction
 
                     
-                    // if answer is submitted && empty
-                    if (!idk && input.trim()==="") {
+               // if answer is submitted && empty
+               if (!idk && input.trim()==="") {
                          console.log('empty input')
                          this.blur= true
                          return
                          
                     // if user pressed 'IDK'
-                    } else if (idk) this.nextGo = 'next'
+               } else if (idk) this.nextGo = 'next'
                     
 
-                    let from, to
+               let from, to
                     
-                    if (dir==='ab'){ from = 0; to = 1
-                    } else if (dir==='ba'){ from = 1; to = 0 }  
+               if (dir==='ab'){ from = 0; to = 1
+               } else if (dir==='ba'){ from = 1; to = 0 }  
 
+               
+               let self = this
 
-                    console.log("voice2On?", this.voice2On )
+               new Promise( resolve => {        console.log("voice2On?", self.voice2On )
+
                     if (window.speechSynthesis && this.voice2On){
 
-                         let toSay = curWord.word[to]
-                         let self = this
-                         //let toSay = this.testWord
-                         let utterThis = new SpeechSynthesisUtterance(toSay);
-                         utterThis.voice = this.voice2
-                         utterThis.lang = this.voice2.lang
-                         window.speechSynthesis.speak(utterThis);
-
-                    }               
-
-
-                    new Promise(function(resolve, reject){
-
-                              var res = { dir: dir}
-                              res.res = zis.correct(input,curWord,round,to,from) 
-
-                              
-                         
-
-                         console.log("correct?", res.res)
-
-                         /* if okay answer >> animate, 
-                                                  after she speaks, next round
-
-                              if bad answer  >> animate & show next button,
-                                                  speak
-
-                                                  on next click newround
-
-                         */
-                         //utterThis.onend = function(){
-                                   //setTimeout(function(){
-                                        //console.log('end speech')  
+                              let toSay = curWord.word[to]
+                              let utterThis = new SpeechSynthesisUtterance(toSay);
+                              utterThis.voice = self.voice2
+                              utterThis.lang = self.voice2.lang
+                              utterThis.onstart = function(ev){
+                                   //console.log('start speech')
+                              }
+                              utterThis.onpause = function(ev){
+                                   console.log('speech pause')
+                              }
+                              utterThis.onend = function(ev){
+                                        console.log('end speech')
+                                        setTimeout(function(){
+                                             resolve()
+                                        },100)     
                                         
-                                   //},500)     
-                         //}    
+                              }
+                              utterThis.onerror = function(){ console.error('speech error'); resolve() }
+                              window.speechSynthesis.speak(utterThis);
+                    } else resolve()
+
+               }).then(() => new Promise( resolve =>{
+
+                         var res = { dir: dir}
+                         res.res = self.correct(input,curWord,round,to,from)  
 
                          if (res.res === 2) { 
-                                   //console.log('anim start', res.res)
-                                   zis.answerHide = true
-                                   zis.animateOk(function(){
+                                   self.answerHide = true
+                                   self.animateOk(function(){
 
-                                        // utterThis.onend = function(){
-                                                  console.log('end speech')    
-
-                                                  zis.timeout(function(){
-                                                            zis.addRound = true;
-                                                            resolve(res.res)
-                                                  },200)
-                                                  
-                                             //}
-                                             
+                                             self.timeout(function(){
+                                                       self.addRound = true;
+                                                       resolve(res.res)
+                                             },200)
                                    })
-                         } else if (res.res === 1 && !zis.zen){
+                         } else if (res.res === 1 && !self.zen){ console.log('1 + no-zen')
 
-                                   console.log('1 + no-zen')
-
-                                   
-
-                                   zis.animateOk(function(){
-
-                                             //utterThis.onend = function(){
-                                                  console.log('end speech')    
+                                   self.animateOk(function(){
 
                                                   $timeout(function(){
-                                                            //zis.nextGo = "go"
-                                                            //zis.answerHide = true
-                                                            zis.nextGo = "next"
-                                                            zis.answerHide = false
-                                                            zis.addRound = true;
+                                                            self.nextGo = "next"
+                                                            self.answerHide = false
+                                                            self.addRound = true;
                                                   })
 
-                                                  zis.timeout(function(){
+                                                  self.timeout(function(){
 
                                                             resolve(res.res)
                                                   },200)
-                                                  
-                                             //}
                                    })
 
-
-                         } else if (res.res === 1 && zis.zen){
+                         } else if (res.res === 1 && self.zen){
                                         console.log('1 + zen')
 
-                                        zis.animateOk(function(){
+                                        self.animateOk(function(){
 
                                              $timeout(function(){
-                                                  zis.nextGo = "next"
-                                                  zis.answerHide = false
-                                                  zis.addRound = false
+                                                  self.nextGo = "next"
+                                                  self.answerHide = false
+                                                  self.addRound = false
                                                   
                                              })
                                              resolve(res.res)
+                                        })                                      
 
-                                        })                                    
-                                        
-
-                         } else if (res.res === 0 && !zis.zen) {     
+                         } else if (res.res === 0 && !self.zen) {     
                                         console.log('\n\n  idk or 0')
                                         
-                                        zis.animateBad()
+                                        self.animateBad()
 
                                         $timeout(function(){
-                                        zis.nextGo ='next'
-                                        zis.answerHide = false
-                                        zis.addRound = true
-                                        resolve(res.res)
+                                             self.nextGo ='next'
+                                             self.answerHide = false
+                                             self.addRound = true
+                                             resolve(res.res)
                                         })
 
-                         } else if (res.res === 0 && zis.zen) {     
+                         } else if (res.res === 0 && self.zen) {     
                                    console.log('\n\n  idk or 0')
                                    
-                                   zis.animateBad()
+                                   self.animateBad()
 
                                    $timeout(function(){
-                                        zis.nextGo ='next'
-                                        zis.answerHide = false
-                                        zis.addRound = false
+                                        self.nextGo ='next'
+                                        self.answerHide = false
+                                        self.addRound = false
                                         resolve(res.res)  
                                    })
 
-                         } else alert('error Promise')
+                         } else alert('error Promise\nresult >> ' + res.res + "<<")
                     })
-                    .then(function(answer){
-
-                         console.log('correct?', answer)
+               )
+               .then(function(answer){ console.log('correct?', answer)
 
                          // possibilities:
                          //  1) ok answer & no zen  >>> ok point, next round, rating up
@@ -301,90 +266,73 @@ app
                          //  4) bad & zen    >>> add bad point, repeat round, rating down
 
 
-                         new Promise(function(res,rej){
+                    new Promise( res => {
 
-                                   if (answer === 2) {
-                                             
+                                   if (answer === 2) 
                                              // update currWord rating, add ok point, go to next round
 
-                                             zis.okAnswer(null,curWord, function(){
+                                             self.okAnswer( null,curWord,() => res(true) )
 
-                                                            res(true)
-                                             })
-
-                                   } else if (answer === 1 && !zis.zen) 
-
+                                   else if (answer === 1 && !self.zen) 
                                              //  dont update any rating, add ok point, go next round
-                                             zis.okAnswer(true, curWord, function(){
-                                                            //zis.answerHide = false
 
-                                                            res(true)
-                                             })
+                                             self.okAnswer(true, curWord, () => res(true) )
 
-                                   else if ((answer === 1 && zis.zen) || (answer === 0 && zis.zen) )
-
+                                   else if ((answer === 1 && self.zen) || (answer === 0 && self.zen) )
                                              //  down this word's rating, add bad point, stay in round
 
-                                             zis.badAnswer(true,curWord, input, function(){
-                                                  
-                                                  res(false)
-                                             })           
-                                   else {
+                                             self.badAnswer( true,curWord, input, () => res(false) )
+                                   else 
                                              //  down this word's rating, add bad point, go next round
 
-                                             zis.badAnswer(false,curWord, input, function(){
-                                                  
-                                                  res(true)
-                                             })
-                                   } 
+                                             self.badAnswer( false,curWord, input, () => res(true) ) 
                          })
                          .then(function(toNextRound){
 
-                         //console.log('|||||||    resolved', toNextRound)
-
-                         zis.endCheck(function(end){
+                              self.endCheck(function(end){
                                    
                               if (end === true && toNextRound){ //console.log('end!! ', end)
                                                   
                                    $timeout(function(){
-                                        zis.showTest = false  // hide test container
+                                        self.showTest = false  // hide test container
 
                                         // if having 100% good score (different confetti)
-                                        if (!zis.feedback || zis.feedback.length === 0){ console.log('zis.feedback 0',zis.feedback)
+                                        if (!self.feedback || self.feedback.length === 0){ console.log('self.feedback 0',self.feedback)
 
                                              $timeout(()=>{
-                                                  zis.finalResult = null // was 1  null is to not show wrong answers on next test start
-                                                  startNewConfetti(7000,110)
+                                                  self.finalResult = null // was 1  null is to not show wrong answers on next test start
+                                                  startNewConfetti(7000,140)
 
-                                                  zis.$parent.$broadcast('endOfTest')
+                                                  self.$parent.$broadcast('endOfTest')
                                              },1000)
 
-                                             $timeout(stopConfetti,7500)
+                                             $timeout(stopConfetti,7700)
 
                                              return
                                         }
 
-
+                                        // if not 100% score
                                         $timeout(()=>{
-                                                  zis.finalResult = 1  // to show wrong answers
+                                                  self.finalResult = 1  // to show wrong answers
                                                   startNewConfetti(10000,110)
                                         },1000)
-                                        $timeout(stopConfetti,10500)
+                                        $timeout(stopConfetti,10700)
                                                        
                                    }, 1500);
           
                               } else {
 
-                                   if (zis.nextGo === 'go'){
-                                        zis.newRound();
+                                   if (self.nextGo === 'go')//{
+                                        self.newRound()
                                         
-                                   } else if(zis.nextGo ==='next') {
+                                   //} 
+                                        /*else if(self.nextGo ==='next') {
                                         //alert("-next-")
-                                   }               
+                                   }   */            
                               }
                          })  
                          })
-                    })
+               })
           }
 }])
 //duration in milliseconds, best 10000 and 80 particles
@@ -471,8 +419,6 @@ function home(){
           self.finalResult = null
           self.$parent.$broadcast('endOfTest')
      })
-     //this.finalResult = null
-     //this.$parent.$broadcast('endOfTest')
 }
 function okAnswer(zen,curWord,cb){
           let self = this
@@ -514,24 +460,6 @@ function badAnswer(zen, curWord,input, cb){
 
                if (cb) cb()
         },0)
-
-        /*else this.timeout(function updateProgress(){
-
-               self.answerHide = false
-               self.bads ++
-
-               self.changeLevel(curWord,-1)
-
-               // new entry for test Feedback
-                        let toFeedback = {original:curWord}
-
-                        if (!input) toFeedback.input = '-'
-                        else toFeedback.input = input
-
-                        self.feedback.push(toFeedback)
-
-               if (cb) cb()                
-        },0)*/
 }
 function animateOk(cb){
 
@@ -679,7 +607,6 @@ function newRound(string){
 /**
 *   @param len is user-desired length of test
 */
-
 function prepareExam (type,len,words,cb){
     
                console.log('its ',type,'test - length', len)
@@ -886,7 +813,7 @@ function mergeToSave(langs, words){
 
 
 
-//  confetti
+// modified confetti originally by https://codepen.io/kimmy/
 class Progress {
      constructor(param = {}) {
        this.timestamp        = null;
