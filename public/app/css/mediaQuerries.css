@@ -60,6 +60,7 @@
   #mainScreen{
     /*--height: calc(100vh - 65px);*/
     height: 87vh;
+    min-height: 320px;
   }
   
 
@@ -152,6 +153,7 @@
   #mainScreen{
     /*--height: calc(100vh - 65px);*/
     height: 87vh;
+    min-height: 320px;
   }
   
 
@@ -237,6 +239,7 @@
   #mainScreen{
     /*height: calc(100% - 65px);*/
     height: 87vh;
+    min-height: 320px;
   }
   
 
