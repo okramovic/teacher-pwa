@@ -55,6 +55,7 @@
   }
   .myNav{
     height: 13vh;/*35px;*/
+    min-height: 60px;
     padding-top: 10px; 
   }
   #mainScreen{

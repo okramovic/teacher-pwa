@@ -82,6 +82,7 @@ a{
 }
 .butRow > button{
      height: 100%;
+     min-height: 55px;
      width: 33%;
 }
 a, button {
