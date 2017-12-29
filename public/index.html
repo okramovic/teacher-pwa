@@ -1,50 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
      <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-        <meta name="description" content="Helps you practice vocabulary like in mountain monastery." />
-        <title>Vocabulary teacher</title>
-        
-        <link rel="shortcut icon" href="./resources/icons/favicon.ico" type="image/x-icon" />
-        <link rel="manifest" href="./manifest.json" />
-        <meta name="theme-color" content="#040072"/>
-        
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-title" content="Teacher">
-        <meta name="apple-mobile-web-app-status-bar-style" content="white">
-               <meta name="format-detection" content="telephone=no">
+          <meta charset="utf-8" />
+          <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+          <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+          <meta name="description" content="Helps you practice vocabulary like in mountain monastery." />
+          <title>Vocabulary teacher</title>
+          
+          <link rel="shortcut icon" href="./resources/icons/favicon.ico" type="image/x-icon" />
+          <link rel="manifest" href="./manifest.json" />
+          <meta name="theme-color" content="#040072"/>
+          
+          <meta name="apple-mobile-web-app-capable" content="yes">
+          <meta name="apple-mobile-web-app-title" content="Teacher">
+          <meta name="apple-mobile-web-app-status-bar-style" content="white">
+                    <meta name="format-detection" content="telephone=no">
 
-        <link rel="apple-touch-icon" sizes="57x57"   href="./resources/icons/icon57.png"  />
-        <link rel="apple-touch-icon" sizes="72x72"   href="./resources/icons/icon72.png"  />
-        <link rel="apple-touch-icon" sizes="114x114" href="./resources/icons/icon114.png" />
-        <link rel="apple-touch-icon" sizes="144x144" href="./resources/icons/icon144-apple.png" />
-        
-        
-        <script src="./app/libs/jquery-3.1.1.min.js"></script>
-        
-        <script src="./app/libs/angular.1.5.5.min.js"></script>
-        <script src="./app/libs/angular-animate.1.5.5.min.js" ></script>
-        
-        <script src="./app/libs/materialize.0.98.1.min.js"></script>
-        <link rel="stylesheet"  href="./app/libs/materialize.0.98.1.min.css">
+          <link rel="apple-touch-icon" sizes="57x57"   href="./resources/icons/icon57.png"  />
+          <link rel="apple-touch-icon" sizes="72x72"   href="./resources/icons/icon72.png"  />
+          <link rel="apple-touch-icon" sizes="114x114" href="./resources/icons/icon114.png" />
+          <link rel="apple-touch-icon" sizes="144x144" href="./resources/icons/icon144-apple.png" />
+          
+          
+          <script src="./app/libs/jquery-3.1.1.min.js"></script>
+          
+          <script src="./app/libs/angular.1.5.5.min.js"></script>
+          <script src="./app/libs/angular-animate.1.5.5.min.js" ></script>
+          
+          <script src="./app/libs/materialize.0.98.1.min.js"></script>
+          <link rel="stylesheet"  href="./app/libs/materialize.0.98.1.min.css">
 
-        <script src="./app/libs/angular-materialize.0.2.2.min.js"></script>
-        
-        
-        <link rel="stylesheet"  href="./app/css/elements.css" >
-        <link rel="stylesheet"  href="./app/css/classes.css" >
-        <link rel="stylesheet"  href="./app/css/animations.css" >
-        <link rel="stylesheet"  href="./app/css/mediaQuerries.css" >
-        
-        <link rel="stylesheet" type="text/css" href="./app/css/material-icons.css" >
+          <script src="./app/libs/angular-materialize.0.2.2.min.js"></script>
+          
+          
+          <link rel="stylesheet"  href="./app/css/elements.css" >
+          <link rel="stylesheet"  href="./app/css/classes.css" >
+          <link rel="stylesheet"  href="./app/css/animations.css" >
+          <link rel="stylesheet"  href="./app/css/mediaQuerries.css" >
+          
+          <link rel="stylesheet" type="text/css" href="./app/css/material-icons.css" >
 
-        
-        <script src="./app/js/teacherApp.js"></script>
-        <script src="./app/js/services.js"></script>
-        <script src="./app/js/controllers.js"></script>        
-        <script src="./app/js/directives.js"></script>     
+          
+          <script src="./app/js/teacherApp.js"></script>
+          <script src="./app/js/services.js"></script>
+          <script src="./app/js/controllers.js"></script>        
+          <script src="./app/js/directives.js"></script>     
 </head>
 <body ng-app='teacherApp' dir="ltr">
      
@@ -56,45 +56,36 @@
           <!-- "navbar" -->
           <div class="myNav row in_row full_width">
 
-                <div class="col sm2" style="display:flex; align-items: center; 
-                                            border: 0px solid; width: 15%">
-                    <div ng-show="screen =='main'" 
-                         ng-click="screenChange('initial')"
-                         class="alignCenter size2">
+               <div class="col sm2" style="display:flex; align-items: center; width: 15%">
+                    <div ng-show="screen =='main'" ng-click="screenChange('initial')" class="alignCenter size2">
                          <i class="material-icons hvrb" data-fallback="&#8592;">first_page</i>    
                     </div>
 
-                    <div ng-show="screen =='words'" 
-                        ng-click="screenChange('main')"
-                        class="alignCenter size2">
-                            <i class="material-icons hvrb" data-fallback="&#8592;">keyboard_arrow_left</i>
+                    <div ng-show="screen =='words'" ng-click="screenChange('main')" class="alignCenter size2">
+                         <i class="material-icons hvrb" data-fallback="&#8592;">keyboard_arrow_left</i>
                     </div>
 
-                    <div ng-show="screen == 'test'" 
-                        ng-click="screenChange('test')"
-                        class="alignCenter size2">
-                            <i class="material-icons hvrb" data-fallback="&#8592;">keyboard_arrow_left</i>
+                    <div ng-show="screen == 'test'" ng-click="screenChange('test')" class="alignCenter size2">
+                         <i class="material-icons hvrb" data-fallback="&#8592;">keyboard_arrow_left</i>
                     </div>
-                </div>
+               </div>
 
-                <!--  the teacher -->
-                <h4 id="header" class="col sm8 size1" style="width: 65%; border: 0px dashed" 
+               <!--  the teacher -->
+               <h4 id="header" class="col sm8 size1" style="width: 65%;" 
                     ng-class="{test: 'titleDisabled', undefined: 'titleEnabled', 
                                 initial: 'titleEnabled', words: 'titleEnabled', 
                                 main: 'titleEnabled'}[screen]">the Teacher</h4>
 
 
-                <!--  zen & modal -->
-                <div class="col sm2" style="width: 15%; border: 0px dashed;
-                                        display: flex; justify-content: center; align-items: center">
+               <!--  zen & modal -->
+               <div class="col sm2" style="width: 15%; display: flex; justify-content: center; align-items: center">
                     <div ng-show="screen == undefined || screen == 'initial'">
-                            <a class='btn btn-sm' data-target='introModal' modal>
-                            <i id="fontTester" class="medium material-icons" data-fallback="&#9993;">local_post_office</i></a>
-                            <!-- another? flight_takeoff, pets, weekend -->
+                              <a class='btn btn-sm' data-target='introModal' modal>
+                              <i id="fontTester" class="medium material-icons" data-fallback="&#9993;">local_post_office</i></a>
+                              <!-- another? flight_takeoff, pets, weekend -->
                     </div>
                     <div ng-hide="screen == undefined || screen == 'initial'"    
                          style="display: flex; align-items: center;">
-                         <!--label for="checkbox"></label-->
                          <i ng-show="!zen" class="material-icons size2" data-fallback="&#9975;"
                             ng-class="{test: 'titleDisabled'}[screen]" >location_city</i>
 
@@ -102,13 +93,13 @@
                             ng-class="{test: 'titleDisabled'}[screen]">terrain</i>
                         
                         
-                        <label for="zen">
-                            <input id="zen" type="checkbox" ng-model="zen"   
+                         <label for="zen">
+                              <input id="zen" type="checkbox" ng-model="zen"   
                                class="browser-default" ng-click="zenSwitch()"
                                ng-disabled="screen=='test'">
-                        <!-- --></label>
+                         <!-- --></label>
                     </div>
-                </div>
+               </div>
 
           </div>
 
@@ -401,66 +392,63 @@
      <!--  test Screen -->
      <div id="testScreen" ng-controller="testCtrl" ng-show="screen == 'test'" class="marginTop10">
                
-               <!--  test questions  -->
-               <div id="testField" ng-show="showTest" class="animate-show animate-hide">
+          <!--  test questions  -->
+          <div id="testField" ng-show="showTest" class="animate-show animate-hide">
 
-                        <!-- score & round -->   
-                        <div class="butRow row size3">
-                                <div class="col s4 center">
-                                        <div ng-model="anim_Bads" ng-class="anim_Bads" class="center">
-                                                <h7  >{{bads}}</h7>
-                                                <i class="material-icons margBot3" data-fallback="&#215;" data-or="&#10060;">close</i>
-                                        </div>
-                                </div>
-                                <div class="col s4 center">
-                                        <h7># {{round+1}} / {{testQuestions.length}}</h7>
-                                </div>
-                                <div class="col s4 center">
-                                        <div ng-model="anim_Oks" ng-class="anim_Oks" class="center">
-                                                <h7>{{oks}}</h7>
-                                                <i class="material-icons margBot3" data-fallback="&#10003;">check</i>
-                                        </div>
-                                </div>
-                                
-                        </div>
+                         <!-- score & round -->   
+                         <div class="butRow row size3">
+                                   <div class="col s4 center">
+                                             <div ng-model="anim_Bads" ng-class="anim_Bads" class="center">
+                                                  <h7  >{{bads}}</h7>
+                                                  <i class="material-icons margBot3" data-fallback="&#215;" data-or="&#10060;">close</i>
+                                             </div>
+                                   </div>
+                                   <div class="col s4 center">
+                                             <h7># {{round+1}} / {{testQuestions.length}}</h7>
+                                   </div>
+                                   <div class="col s4 center">
+                                             <div ng-model="anim_Oks" ng-class="anim_Oks" class="center">
+                                                  <h7>{{oks}}</h7>
+                                                  <i class="material-icons margBot3" data-fallback="&#10003;">check</i>
+                                             </div>
+                                   </div>           
+                         </div>
                         
-                        <div class="single marginTop10" style="display: block; padding-left: 20px; padding-right: 20px;">
-                                <!--div-->
-                                    <h6 class="size2">{{testWord}}</h6>
-                                    <h6 class="size3" ng-class="{true: 'corrAnswer-hide', false: 'corrAnswer-show'}[answerHide]"
-                                    >{{corrAnswer}}</h6>
-                                <!--/div-->
-                        </div>
+                         <div class="single marginTop10" style="display: block; padding-left: 20px; padding-right: 20px;">
+                              <h6 class="size2">{{testWord}}</h6>
+                              <h6 class="size3" ng-class="{true: 'corrAnswer-hide', false: 'corrAnswer-show'}[answerHide]"
+                                   >{{corrAnswer}}</h6>
+                         </div>
                         
-                        <!-- user input -->
-                        <form name="test" ng-submit="submit(currIndex, user.input,round)">
+                         <!-- user input -->
+                         <form name="test" ng-submit="submit(currIndex, user.input,round)">
                               <input type="text" name="input"
                                    ng-model="user.input" ng-value="inpVal" 
                                    inp-focus   data-myfocus="true"   autocomplete="off" 
                                    ng-disabled="nextGo =='next'" >
-                        </form>
+                         </form>
 
-                        <!--  Next, Go & IDK buttons  -->  
-                        <div class="butRow" ng-model="nextGo"> 
-                                <button ng-click="submit(currIndex,user.input,round,'idk')" 
-                                        ng-disabled="nextGo == 'next'"
-                                        >idk</button>
+                         <!--  Next, Go & IDK buttons  -->  
+                         <div class="butRow" ng-model="nextGo"> 
+                                   <button ng-click="submit(currIndex,user.input,round,'idk')" 
+                                             ng-disabled="nextGo == 'next'"
+                                             >idk</button>
 
-                                <button ng-show="nextGo == 'go'" 
-                                        ng-click="submit(currIndex,user.input,round)"
-                                        >go</button>
-                                <button ng-show="nextGo == 'next'"
-                                        ng-click="next()"
-                                        ng-disabled="finalResult"
-                                        >next</button>
-                        </div>
-               </div>
+                                   <button ng-show="nextGo == 'go'" 
+                                             ng-click="submit(currIndex,user.input,round)"
+                                             >go</button>
 
-               <!-- final result -->
-               <div ng-show="finalResult === 1" class="animate-show animate-hide"
+                                   <button ng-show="nextGo == 'next'"
+                                             ng-click="next()"
+                                             ng-disabled="finalResult"
+                                             >next</button>
+                         </div>
+          </div>
+
+          <!-- final result -->
+          <div ng-show="finalResult === 1" class="animate-show animate-hide"
                     style="width: 100%; max-height: 87vh; 
                            display: flex; flex-direction: column; align-items: center;" >
-
 
                          <h5 class="size3 five" style="text-align: center">congrats you had {{oks}} of {{testQuestions.length}} correct</h5>
                          <div ng-show="feedback.length===1" class="size3">{{bads}} answer was incorrect</div>
@@ -479,15 +467,17 @@
                          </div>
                          <button class="marginTop15 margBot20" ng-click="home()"
                               >home</button>
-               </div>
+          </div>
      </div>
      
-     <script src="./app/js/service-register.js"></script>
+
      <noscript>
-               <h3>Sorry, this app has no arms or legs without JavaScript enabled :(</h3>
-               <!--h3>Sorry, this app will not work without Javascript enabled :(</h3-->
-               <h5>You can enable JavaScript in your browser settings.</h5>
-               <a href="https://twitter.com/okram_ovic" target="_blank" rel="noopener noreferrer">@</a>
+          <h3>Sorry, this app has no arms or legs without JavaScript enabled :(</h3>
+          <!--h3>Sorry, this app will not work without Javascript enabled :(</h3-->
+          <h5>You can enable JavaScript in your browser settings.</h5>
+          <a href="https://twitter.com/okram_ovic" target="_blank" rel="noopener noreferrer">@</a>
      </noscript>
+
+     <script src="./app/js/service-register.js"></script>
 </body>
 </html>

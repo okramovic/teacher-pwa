@@ -10,6 +10,7 @@
 
 
 not that important? try when fresh
+⁃ when opening new tab with words, try setting language to have properly encoded characters
 - enable auto-updating cached files to newest version
 - add mtrlz preloader when i tap on show vocab, bcs people might get confused that its not reacting
 - make sure no nonsense words (bug-giving) are in loaded dict/file

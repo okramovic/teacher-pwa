@@ -70,8 +70,12 @@
      textarea, textarea::placeholder {
        font-size: 13px;
      }
+     
      a, button{
        font-size: 16px;
+     }
+     .butRow > button{
+          min-height: 30px;
      }
      select{
        font-size: 16px;
