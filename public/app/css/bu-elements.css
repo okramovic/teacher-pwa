@@ -17,37 +17,27 @@
 }
 
 body {
-     display: -webkit-box;
-     display: -ms-flexbox;
      display: flex; 
-     -webkit-box-orient: vertical; 
-     -webkit-box-direction: normal; 
-         -ms-flex-direction: column; 
-             flex-direction: column; 
-     -webkit-box-align: center; 
-         -ms-flex-align: center; 
-             align-items: center;
+     flex-direction: column; 
+     align-items: center;
  
      padding: 0px;
 }
 
 i{
      content: attr(data-fallback);
-     -ms-user-select: none;
-         user-select: none;
+     user-select: none;
      -webkit-user-select: none;
      -moz-user-select: none;
 }
 label{
-     -ms-user-select: none;
-         user-select: none;
+     user-select: none;
      -webkit-user-select: none;
      -moz-user-select: none;
 }
 
 br{
-     -ms-user-select: none;
-         user-select: none;
+     user-select: none;
      -webkit-user-select: none;
      -moz-user-select: none;
 }
@@ -61,8 +51,7 @@ form input[type="text"]{
 }
 form input[type="text"]:focus{
      border-bottom: 1px solid dodgerblue !important;
-     -webkit-box-shadow: 0 1px 0 0 dodgerblue !important;
-             box-shadow: 0 1px 0 0 dodgerblue !important; 
+     box-shadow: 0 1px 0 0 dodgerblue !important; 
 }
 
 input[type='checkbox']:not(:checked), 
@@ -99,8 +88,7 @@ a{
 a, button {
     -webkit-user-select: none;
     -moz-user-select: none;
-    -ms-user-select: none;
-        user-select: none;
+    user-select: none;
 
     min-height: 30px;
     text-decoration: none;
@@ -121,9 +109,7 @@ button:active, button:focus {
 }
 a:link, a:visited, a:active{
     color: black;
-    -moz-user-select: none;
-     -ms-user-select: none;
-         user-select: none;
+    user-select: none;
     -webkit-user-select: none;
 }
 
@@ -148,8 +134,7 @@ select:focus, select:active{
 
 h3, h4, h5{
     cursor: initial;
-    -ms-user-select: none;
-        user-select: none;
+    user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
 }
@@ -164,15 +149,6 @@ h6{
 textarea{
     padding: 8px;
 }
-textarea::-webkit-input-placeholder{
-    text-align: center;    
-}
-textarea:-ms-input-placeholder{
-    text-align: center;    
-}
-textarea::-ms-input-placeholder{
-    text-align: center;    
-}
 textarea::placeholder{
     text-align: center;    
 }
@@ -180,8 +156,6 @@ textarea::placeholder{
 /*  for confetti  */
 canvas{
      opacity: 1;
-     -webkit-transition: opacity  0.3s;
-     -o-transition: opacity  0.3s;
      transition: opacity  0.3s;
      -webkit-transition: opacity 0.3s;
 }
@@ -189,23 +163,15 @@ canvas{
 /* id's */
 #mainScreen{
      width: 100%;
+     
  
      margin: 0px;
      padding: 0px;
  
-     display: -webkit-box;
-     display: -ms-flexbox;
      display: flex;
-     -webkit-box-orient: vertical;
-     -webkit-box-direction: normal;
-         -ms-flex-direction: column;
-             flex-direction: column;
-     -webkit-box-pack: justify;
-         -ms-flex-pack: justify;
-             justify-content: space-between;
-     -webkit-box-align: center;
-         -ms-flex-align: center;
-             align-items: center;
+     flex-direction: column;
+     justify-content: space-between;
+     align-items: center;
 }
 
 
@@ -216,21 +182,17 @@ canvas{
 /*  test screen  */
 #testScreen{
      width: 100%;
+
      border: 1px solid rgb(42, 108, 252);
 }
  
 #testField{
      width: 100%;
-     display: -webkit-box;
-     display: -ms-flexbox;
      display: flex;
-     -webkit-box-orient: vertical;
-     -webkit-box-direction: normal;
-         -ms-flex-direction: column;
-             flex-direction: column;
-     -webkit-box-align: center;
-         -ms-flex-align: center;
-             align-items: center;
+     flex-direction: column;
+     align-items: center;   
+ 
+     /*border- 1px dashed red;*/
 }
 
 noscript{

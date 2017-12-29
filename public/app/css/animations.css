@@ -1,89 +1,115 @@
-@keyframes bads{
-    0% { transform: rotate(0deg) scale(1);
-            color: black;  }
-    50%  { transform: rotate(360deg) scale(1.5);
-            color: red;  }
-    100% { transform: rotate(720deg) scale(1);
-            color: black;  }
+@-webkit-keyframes bads{
+     0% { -webkit-transform: rotate(0deg) scale(1); transform: rotate(0deg) scale(1);
+             color: black; }
+     50%  { -webkit-transform: rotate(360deg) scale(1.5); transform: rotate(360deg) scale(1.5);
+             color: red; }
+     100% { -webkit-transform: rotate(720deg) scale(1); transform: rotate(720deg) scale(1);
+             color: black; }
 }
-@keyframes oks{
-    0%  {   color: black; 
-            transform: scale(1) }
-    50% {   color: green; 
-            transform: scale(2) rotate(120deg); }
-    100%{   color: black; 
-            transform: scale(1) }
+ @keyframes bads{
+     0% { -webkit-transform: rotate(0deg) scale(1); transform: rotate(0deg) scale(1);
+             color: black; }
+     50%  { -webkit-transform: rotate(360deg) scale(1.5); transform: rotate(360deg) scale(1.5);
+             color: red; }
+     100% { -webkit-transform: rotate(720deg) scale(1); transform: rotate(720deg) scale(1);
+             color: black; }
 }
-/*@keyframes fadeout{
-    0%   {color: black; visibility: visible;}
-    100% {color: yellow; visibility: hidden;}
+ @-webkit-keyframes oks{
+     0%  {   color: black; 
+             -webkit-transform: scale(1); 
+                     transform: scale(1)}
+     50% {   color: green; 
+             -webkit-transform: scale(2) rotate(120deg); 
+                     transform: scale(2) rotate(120deg);}
+     100%{   color: black; 
+             -webkit-transform: scale(1); 
+                     transform: scale(1)}
 }
-.fadeout{   
-     animation: fadeout 2s linear;
-}*/
+ @keyframes oks{
+     0%  {   color: black; 
+             -webkit-transform: scale(1); 
+                     transform: scale(1)}
+     50% {   color: green; 
+             -webkit-transform: scale(2) rotate(120deg); 
+                     transform: scale(2) rotate(120deg);}
+     100%{   color: black; 
+             -webkit-transform: scale(1); 
+                     transform: scale(1)}
+}
 
+ 
 
 .visible{
-    color: black;
-    display: flex;
+     color: black;
+     display: -webkit-box;
+     display: -ms-flexbox;
+     display: flex;
 }
-
-.invisible{
-    display: none;
+ 
+ .invisible{
+     display: none;
 }
 .anim-ok{
-    color: black;
-    transform: rotate(0deg);
-    -webkit-transform: rotate(0deg);
+     color: black;
+     -ms-transform: rotate(0deg);
+         transform: rotate(0deg);
+     -webkit-transform: rotate(0deg);
 }
 .anim-ok.live{
-    animation: oks .5s linear;
+     -webkit-animation: oks .5s linear;
+             animation: oks .5s linear;
 }
 .anim-bad{ 
-    color: black;
-    transform: rotate(0deg);
-    -webkit-transform: rotate(0deg);
+     color: black;
+     -ms-transform: rotate(0deg);
+         transform: rotate(0deg);
+     -webkit-transform: rotate(0deg);
 }
 .anim-bad.live{
-    animation: bads .5s linear;
+     -webkit-animation: bads .5s linear;
+             animation: bads .5s linear;
 }
-
-
-
+ 
+ 
+ 
 .animate-show,
 .animate-hide {
-  -webkit-transition:all linear 1s;
-  -moz-transition:all linear 1s;
-  -ms-transition:all linear 1s;
-  -o-transition:all linear 1s;
-  transition:all linear 1s;
+   -webkit-transition:all linear 1s;
+   -o-transition:all linear 1s;
+   transition:all linear 1s;
 }
-
+ 
 .animate-show.ng-hide-remove,
 .animate-hide.ng-hide-add.ng-hide-add-active {
-  opacity: 0;
-  display: flex !important;
+   opacity: 0;
+   display: -webkit-box !important;
+   display: -ms-flexbox !important;
+   display: flex !important;
 }
-
+ 
 .animate-hide.ng-hide-add,
 .animate-show.ng-hide-remove.ng-hide-remove-active {
-  opacity: 1;
-  display: flex !important;
+   opacity: 1;
+   display: -webkit-box !important;
+   display: -ms-flexbox !important;
+   display: flex !important;
 }
-
-
+ 
+ 
 .animatediv{
-     opacity:1;
+      opacity:1;
 }
 .animatediv.ng-hide{
-     opacity: 0;
+      opacity: 0;
 }
 .animatediv.ng-hide-add,
 .animatediv.ng-hide-remove{
-     transition: all linear 1s;
+      -webkit-transition: all linear 1s;
+      -o-transition: all linear 1s;
+      transition: all linear 1s;
 }
-
-
-.confettiHidden{
-     opacity: 0;
+ 
+ 
+ .confettiHidden{
+      opacity: 0;
 }

@@ -1,38 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
      <head>
-        <meta charset="UTF-8" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge"/ >
-        <meta name="description" content="vocab teacher v1" />
-        <title>teacher</title>
+        <meta name="description" content="Helps you practice vocabulary like in mountain monastery." />
+        <title>Vocabulary teacher</title>
         
         <link rel="shortcut icon" href="./resources/icons/favicon.ico" type="image/x-icon" />
         <link rel="manifest" href="./manifest.json" />
         <meta name="theme-color" content="#040072"/>
         
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-title" content="Teacher">
+        <meta name="apple-mobile-web-app-status-bar-style" content="white">
+               <meta name="format-detection" content="telephone=no">
+
         <link rel="apple-touch-icon" sizes="57x57"   href="./resources/icons/icon57.png"  />
         <link rel="apple-touch-icon" sizes="72x72"   href="./resources/icons/icon72.png"  />
         <link rel="apple-touch-icon" sizes="114x114" href="./resources/icons/icon114.png" />
         <link rel="apple-touch-icon" sizes="144x144" href="./resources/icons/icon144-apple.png" />
         
         
-
-        <!--script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script-->
-        <script type="text/javascript" src="./app/libs/jquery-3.1.1.min.js"></script>
-        
+        <script src="./app/libs/jquery-3.1.1.min.js"></script>
         
         <script src="./app/libs/angular.1.5.5.min.js"></script>
-
-        <!--script src="https://code.angularjs.org/1.5.5/angular-animate.min.js" ></script-->
         <script src="./app/libs/angular-animate.1.5.5.min.js" ></script>
         
-
-        <!--script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script-->
         <script src="./app/libs/materialize.0.98.1.min.js"></script>
         <link rel="stylesheet"  href="./app/libs/materialize.0.98.1.min.css">
 
-        <!--script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script-->
         <script src="./app/libs/angular-materialize.0.2.2.min.js"></script>
         
         
@@ -45,14 +42,13 @@
 
         
         <script src="./app/js/teacherApp.js"></script>
-          <script src="./app/js/services.js"></script>
-          <script src="./app/js/controllers.js"></script>
-                
-          <script src="./app/js/directives.js"></script>     
+        <script src="./app/js/services.js"></script>
+        <script src="./app/js/controllers.js"></script>        
+        <script src="./app/js/directives.js"></script>     
 </head>
-<body ng-app='teacherApp'>
-        
-     <div class="" ng-controller="teacherCtr"
+<body ng-app='teacherApp' dir="ltr">
+     
+     <div ng-controller="teacherCtr"
           style="height: auto; width: 100%;
                display: flex; flex-direction: column; align-items: center;
                padding: 0px; margin: 0px;">
@@ -63,9 +59,9 @@
                 <div class="col sm2" style="display:flex; align-items: center; 
                                             border: 0px solid; width: 15%">
                     <div ng-show="screen =='main'" 
-                        ng-click="screenChange('initial')"
-                        class="alignCenter size2">
-                            <i class="material-icons hvrb" data-fallback="&#8592;">first_page</i>    
+                         ng-click="screenChange('initial')"
+                         class="alignCenter size2">
+                         <i class="material-icons hvrb" data-fallback="&#8592;">first_page</i>    
                     </div>
 
                     <div ng-show="screen =='words'" 
@@ -133,7 +129,9 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <a href="https://twitter.com/okram_ovic" target="_blank" class="size2 modal-action modal-close waves-effect waves-green btn-flat">@</a>
+                                        <a href="https://twitter.com/okram_ovic" target="_blank" 
+                                             rel="noopener noreferrer"
+                                           class="size2 modal-action modal-close waves-effect waves-green btn-flat">@</a>
                                         <a href="#!" class="size2 modal-action modal-close waves-effect waves-green btn-flat">ok</a>
                                     </div>
                             </div>
@@ -147,7 +145,7 @@
 
                                     <div class="collection-item">
                                         <button ng-click="loadLSDict(dict.name)">
-                                            <div class="size3">{{dict.name | replace_ }}</div> <!-- | replace_ -->
+                                            <div class="size3">{{dict.name | replace_ }}</div>
                                             <div class="size5 date">{{dict.date}}</div>
                                         </button>
                                         <button class="thumb-sized alignCenter" 
@@ -213,8 +211,7 @@
 
                                     <!-- copy/paste div -->
                                     <div ng-if="loadDictWay == 'copyPaste'" class="center vertical">
-                                            <textarea type="text" 
-                                                    ng-model="txt"  cols="80" rows="10"
+                                            <textarea ng-model="txt"  cols="80" rows="10"
                                                     style="height: 150px; width: 80%; 
                                                            margin: 20px 10px;"
                                                     placeholder="paste in content from another file (check the hint)"
@@ -229,8 +226,6 @@
                                                 <button class="size2"
                                                         ng-click="uploadPasted(txt)">Go</button>
                                             </div>
-                                            <!--br class="size4">
-                                            <br class="size4"-->
                                     </div>
                                     
                                     <!-- instructions Modal -->
@@ -246,7 +241,7 @@
                                                     <p class="size4 example">spring. der Frühling</p>
                                                     <p class="size4 example">strong. stark, kräftig</p>
                                                     <p class="size4 example">calm, quiet. ruhig</p>
-                                                    <!--br-->
+
                                                     <span class="size3 example" 
                                                           style="color: rgb(181, 181, 181); padding-top: 10px;">
                                                           (first line stands for languages)</span>
@@ -368,22 +363,13 @@
                         
                         <!--  buttons  -->
                         <div class="butRow marginTop15" >
-                             <!-- style="display: flex;
-                                   justify-content: space-around;
-                                   align-items: center;" -->
+                              <button   style="height: 100%;"
+                                   ng-click="downloadDict(userNotes,true)" 
+                                   >see data</button>
 
-
-                            <!--button ng-show="screen=='words'" ng-click="showVocab(false)">return</button-->
-                            <!--div ng-click="()" ></div> < wAscen = !wAscen -->
-                            <!--button ng-show="screen == 'words'" ng-click="" 
-                                    disabled>switch order</button  href="#"--> 
-                            <button   style="height: 100%;"
-                               ng-click="downloadDict(userNotes,true)" 
-                               >see data</button> <!-- target="_blank"  ng-href="{{myURL}}"  download="{{currentFilename}}"  -->
-
-                            <button ng-model="showUserNotes" 
-                                    ng-click="showUserNotes=!showUserNotes"
-                                    >back-up</button>
+                              <button ng-model="showUserNotes" 
+                                        ng-click="showUserNotes=!showUserNotes"
+                                        >back-up</button>
                         </div>
                         <!--  user notes  -->
                         <div ng-show="showUserNotes" 
@@ -396,34 +382,19 @@
                                       placeholder="Add your notes to the file here:">ahoj</textarea>
                             
                             <div style="margin: 20px 0px;">
-
-                                 <!-- a had attribute: download-file  -->
-                                 <!--  actionzz="downloadDict(userNotes)"  -->
-                                <a href="#" 
-                                   ng-click="downloadDict(userNotes)"
-                                   ng-href="{{myURL}}"  download="{{currentFilename}}"
+                                   <a href="#" ng-href="{{myURL}}"
+                                        ng-click="downloadDict(userNotes)"
+                                        download="{{currentFilename}}"
                                    >download the file</a>
                             </div>
                         </div>
                         <!--  words list  -->
-                        <div id="vocab" style="width: 100%;
-                                    display: flex; 
-                                    flex-direction: column; 
-                                    align-items: center;
-                                    overflow-y: auto;
-                                    ">
+                        <div id="vocab" style="width: 100%; overflow-y: auto;
+                                    display: flex; flex-direction: column; align-items: center;">
 
-                            <!--h4 class="size2">vocabulary:</h4-->
-
-                              <!-- not used attributes:   slct="slct"   al="al"   len="words.length"   max="words.length"  -->
-                            <vocabulary words="words" ch="change"
-                                        class="dictionary"
-                            ></vocabulary>
-                            <!--div style="height: 30px">&nbsp;</div-->
+                              <vocabulary words="words" ch="change" class="dictionary"></vocabulary>
                         </div>
-
                </div>
-                
           </div>
      </div>
         
@@ -510,6 +481,13 @@
                               >home</button>
                </div>
      </div>
-     <script type="text/javascript" src="./app/js/service-register.js"></script>
+     
+     <script src="./app/js/service-register.js"></script>
+     <noscript>
+               <h3>Sorry, this app has no arms or legs without JavaScript enabled :(</h3>
+               <!--h3>Sorry, this app will not work without Javascript enabled :(</h3-->
+               <h5>You can enable JavaScript in your browser settings.</h5>
+               <a href="https://twitter.com/okram_ovic" target="_blank" rel="noopener noreferrer">@</a>
+     </noscript>
 </body>
 </html>

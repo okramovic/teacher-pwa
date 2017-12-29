@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta content="ie=edge" http-equiv="X-UA-Compatible">
+	<meta content="width=device-width, initial-scale=1, user-scalable=no" name="viewport">
+	<meta content="Helps you practice vocabulary like in mountain monastery." name="description">
+
+	<title>Vocabulary teacher</title>
+	<link href="./resources/icons/favicon.ico" rel="shortcut icon" type="image/x-icon">
+	<link href="./manifest.json" rel="manifest">
+	<meta content="#040072" name="theme-color">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="white" name="apple-mobile-web-app-status-bar-style">
+     
+	<link href="./resources/icons/icon57.png" rel="apple-touch-icon" sizes="57x57">
+	<link href="./resources/icons/icon72.png" rel="apple-touch-icon" sizes="72x72">
+	<link href="./resources/icons/icon114.png" rel="apple-touch-icon" sizes="114x114">
+     <link href="./resources/icons/icon144-apple.png" rel="apple-touch-icon" sizes="144x144">
+     
+	<!--script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script-->
+	<script src="./app/libs/jquery-3.1.1.min.js"></script>
+	<script src="./app/libs/angular.1.5.5.min.js"></script>
+     
+     <!--script src="https://code.angularjs.org/1.5.5/angular-animate.min.js" ></script-->
+
+	<script src="./app/libs/angular-animate.1.5.5.min.js">
+	</script>
+	<!--script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script-->
+
+	<script src="./app/libs/materialize.0.98.1.min.js">
+	</script>
+	<link href="./app/libs/materialize.0.98.1.min.css" rel="stylesheet">
+	<!--script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script-->
+
+	<script src="./app/libs/angular-materialize.0.2.2.min.js">
+	</script>
+	<link href="./app/css/elements.css" rel="stylesheet">
+	<link href="./app/css/classes.css" rel="stylesheet">
+	<link href="./app/css/animations.css" rel="stylesheet">
+	<link href="./app/css/mediaQuerries.css" rel="stylesheet">
+     <link href="./app/css/material-icons.css" rel="stylesheet" type="text/css">
+     
+	<script src="./app/js/teacherApp.js">
+	</script>
+	<script src="./app/js/services.js">
+	</script>
+	<script src="./app/js/controllers.js">
+	</script>
+	<script src="./app/js/directives.js">
+	</script>
+</head>
+
+<body>
+	<div class="" style=
+	"height: auto; width: 100%; display: flex; flex-direction: column; align-items: center; padding: 0px; margin: 0px;">
+		<!-- "navbar" -->
+
+
+		<div class="myNav row in_row full_width">
+			<div class="col sm2" style="display:flex; align-items: center; border: 0px solid; width: 15%">
+				<div class="alignCenter size2">
+					<i class="material-icons hvrb" data-fallback="&#8592;">first_page</i>
+				</div>
+
+
+				<div class="alignCenter size2">
+					<i class="material-icons hvrb" data-fallback="&#8592;">keyboard_arrow_left</i>
+				</div>
+
+
+				<div class="alignCenter size2">
+					<i class="material-icons hvrb" data-fallback="&#8592;">keyboard_arrow_left</i>
+				</div>
+			</div>
+			<!--  the teacher -->
+
+
+			<h4 class="col sm8 size1" id="header" style="width: 65%; border: 0px dashed">the Teacher</h4>
+			<!--  zen & modal -->
+
+
+			<div class="col sm2" style=
+			"width: 15%; border: 0px dashed; display: flex; justify-content: center; align-items: center">
+				<div>
+					<a class='btn btn-sm' data-target='introModal'><i class="medium material-icons" data-fallback=
+					"&#9993;" id="fontTester">local_post_office</i></a> 
+					<!-- another? flight_takeoff, pets, weekend -->
+				</div>
+
+
+				<div style="display: flex; align-items: center;">
+                         <i class="material-icons size2" data-fallback="&#9975;">location_city</i>
+                         <i class="material-icons size2" data-fallback="&#9969;" data-or="&#9749;">terrain</i>
+                         <label for="zen">
+                         <input class="browser-default" id="zen" type="checkbox"><!-- --></label>
+				</div>
+			</div>
+		</div>
+
+
+		<div id="mainScreen">
+			<!--  loading words  -->
+
+
+			<div style="width: 100%">
+				<div class="modal" id="introModal">
+					<div class="modal-content" style="padding: 16px 24px 8px;">
+						<div class="center vertical">
+							<h4 class="size1">Welcome</h4>
+
+
+							<p class="size3 marginTop10 margBot8">This app was made so everyone can practice vocabulary
+							when learning new languages. You can actually practice any word or text pairs you can think
+							of!<br>
+							<br>
+							May the force be with you.</p>
+						</div>
+					</div>
+
+
+					<div class="modal-footer">
+						<a class="size2 modal-action modal-close waves-effect waves-green btn-flat" href=
+						"https://twitter.com/okram_ovic" rel="noopener noreferrer" target="_blank">@</a> <a class=
+						"size2 modal-action modal-close waves-effect waves-green btn-flat" href="#!">ok</a>
+					</div>
+				</div>
+				<!--  dicts from Local Storage  -->
+
+
+				<div>
+					<div class="center vertical">
+						<h5 class="size2">previous dictionaries</h5>
+
+
+						<div class="collection">
+							<div class="collection-item">
+								<button>
+								<div class="size3">
+									{{dict.name | replace_ }}
+								</div>
+
+
+								<div class="size5 date">
+									{{dict.date}}
+								</div></button> <button class="thumb-sized alignCenter"><i class="material-icons"
+								data-fallback="&#215;" data-or="&#9940;" data-or2="&#10054;">delete</i></button>
+							</div>
+						</div>
+						<br>
+					</div>
+				</div>
+				<!-- load new words -->
+
+
+				<div class="center vertical" style="padding-bottom: 30px;">
+					<br>
+					<button class="size2">load new words</button><br class="size4">
+
+
+					<div>
+						<div class="center vertical">
+							<button class="size3" style="margin: 10px 0px;">try example</button> <button class="size3"
+							style="margin: 10px 0px;">open file</button> <!-- input type file div -->
+
+
+							<div class="center" style=
+							"width: 100%; display: flex; flex-direction: column; justify-content: flex-start; align-items: center">
+								<span class="size4 example" style="color: rgb(181, 181, 181); padding-top: 5px;">(only .txt
+								files accepted)</span> <input accept=".txt" style=
+								"width: 80px; margin: auto; margin-top: 20px; margin-bottom: 10px; display: flex; flex-wrap: wrap; flex-direction: column; justify-content: center; align-items: center;"
+								type="file">
+							</div>
+							<!-- choose copy/paste -->
+							<button class="size3" style="margin: 10px 0px 10px;">copy/paste</button>
+						</div>
+						<!-- copy/paste div -->
+
+
+						<div class="center vertical">
+							<textarea cols="80" placeholder="paste in content from another file (check the hint)" rows=
+							"10" style="height: 150px; width: 80%; margin: 20px 10px;"></textarea>
+
+							<div style=
+							"width: 80%; margin: auto; display: flex; justify-content: space-around; align-items: center;">
+								<a class='btn btn-sm size2' data-target='instructionsModal' style=
+								"padding-left: 20px; padding-right: 20px">?</a> <button class="size2">Go</button>
+							</div>
+						</div>
+						<!-- instructions Modal -->
+
+
+						<div class="modal" id="instructionsModal" style="width: 90%">
+							<div class="modal-content">
+								<div class="" style=
+								"display: flex; flex-direction: column; align-items: center; justify-content: flex-start">
+									<h4 class="size1">example:</h4>
+
+
+									<p class="size4 example">eng.de</p>
+
+
+									<p class="size4 example">good morning. guten morgen</p>
+
+
+									<p class="size4 example">spring. der Frühling</p>
+
+
+									<p class="size4 example">strong. stark, kräftig</p>
+
+
+									<p class="size4 example">calm, quiet. ruhig</p>
+									<span class="size3 example" style="color: rgb(181, 181, 181); padding-top: 10px;">(first
+									line stands for languages)</span> <span class="size3 example" style=
+									"color: rgb(181, 181, 181); margin-bottom: 0px">(each word pair must be on separate
+									line)</span>
+								</div>
+							</div>
+
+
+							<div class="modal-footer size2" style="padding-bottom: 20px;">
+								<a class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">ok</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--  mainScreen  -->
+
+
+			<div style=
+			" width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: space-between; align-items: center;">
+				<div style="width: 100%;">
+					<div class="butRow row marginTop15">
+						<div class="col s6 center">
+							<!--div style="height: 100%;"-->
+							<!--button ng-show="screen=='main'" 
+                                                ng-click="showVocab(true)">dictionary</button-->
+							<button>dictionary</button> <!--/div-->
+						</div>
+
+
+						<div class="col s6">
+							<!-- test length selection -->
+							<select class="browser-default">
+							</select>
+						</div>
+					</div>
+
+
+					<div class="butRow row marginTop15">
+						<div class="col s6 center">
+							<button>{{lang1}} to {{lang2}}</button>
+						</div>
+
+
+						<div class="col s6 center">
+							<!-- test length selection -->
+							<select class="browser-default">
+							</select>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="single_center" style="">
+					<button class="size1-5">practice</button>
+				</div>
+				<!--div ng-show="screen == 'main'"-->
+				<!-- voices settings -->
+
+
+				<div class="center vertical">
+					<div>
+						<h6 class="center gray size5">your browser doesn't support Speech ability</h6>
+					</div>
+
+
+					<h6 class="center gray size5">you could use Speech, try refreshing</h6>
+
+
+					<div style="width: 100%;">
+						<!--div class="center" style="margin-top: 15px;"-->
+
+
+						<div class="flexend margBot5">
+							<label class="size5 gray">voice for {{lang1}}</label> <input class="margBot3" type=
+							"checkbox">
+						</div>
+						<select class="browser-default">
+						</select><br>
+
+
+						<div class="flexend margBot5">
+							<label class="size5 gray">voice for {{lang2}}</label> <input class="margBot3" type=
+							"checkbox">
+						</div>
+						<select class="browser-default">
+						</select>
+					</div>
+				</div>
+				<!--/div-->
+			</div>
+			<!--  showing vocab  -->
+
+
+			<div style="width: 100%; height:auto;">
+				<!--  buttons  -->
+
+
+				<div class="butRow marginTop15">
+					<button style="height: 100%;">see data</button> <button>back-up</button>
+				</div>
+				<!--  user notes  -->
+
+
+				<div class="center vertical" style="margin: 20px 0px 30px;">
+					<textarea cols="80" placeholder="Add your notes to the file here:" rows="10" style=
+					"width:90%; height: 80px; font-size:15px;">ahoj</textarea>
+
+					<div style="margin: 20px 0px;">
+						<a href="#">download the file</a>
+					</div>
+				</div>
+				<!--  words list  -->
+
+
+				<div id="vocab" style=
+				"width: 100%; overflow-y: auto; display: flex; flex-direction: column; align-items: center;">
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--  test Screen -->
+
+
+	<div class="marginTop10" id="testScreen">
+		<!--  test questions  -->
+
+
+		<div class="animate-show animate-hide" id="testField">
+			<!-- score & round -->
+
+
+			<div class="butRow row size3">
+				<div class="col s4 center">
+					<div class="center">
+						{{bads}} <i class="material-icons margBot3" data-fallback="&#215;" data-or=
+						"&#10060;">close</i>
+					</div>
+				</div>
+
+
+				<div class="col s4 center">
+					# {{round+1}} / {{testQuestions.length}}
+				</div>
+
+
+				<div class="col s4 center">
+					<div class="center">
+						{{oks}} <i class="material-icons margBot3" data-fallback="&#10003;">check</i>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="single marginTop10" style=
+			"display: block; padding-left: 20px; padding-right: 20px;">
+				<!--div-->
+
+
+				<h6 class="size2">{{testWord}}</h6>
+
+
+				<h6 class="size3">{{corrAnswer}}</h6>
+				<!--/div-->
+			</div>
+			<!-- user input -->
+
+
+			<form id="test" name="test">
+				<input autocomplete="off" data-myfocus="true" name="input" type="text">
+			</form>
+			<!--  Next, Go & IDK buttons  -->
+
+
+			<div class="butRow">
+				<button>idk</button> <button>go</button> <button>next</button>
+			</div>
+		</div>
+		<!-- final result -->
+
+
+		<div class="animate-show animate-hide" style=
+		"width: 100%; max-height: 87vh; display: flex; flex-direction: column; align-items: center;">
+			<h5 class="size3 five" style="text-align: center">congrats you had {{oks}} of
+			{{testQuestions.length}} correct</h5>
+
+
+			<div class="size3">
+				{{bads}} answer was incorrect
+			</div>
+
+
+			<div class="size3">
+				{{bads}} answers were incorrect
+			</div>
+
+
+			<div class="marginTop15 centerstart" style=
+			"width: 90%; max-height: 70vh; overflow: auto; border-bottom: 1px solid gray">
+				<div style="text-align: center;">
+					<div class="size3" style="margin-top: 0px">
+						{{word.original.word[0]}}. {{word.original.word[1]}}
+					</div>
+
+
+					<div class="size4" style="margin-bottom: 15px">
+						your answer: {{word.input}}
+					</div>
+				</div>
+			</div>
+			<button class="marginTop15 margBot20">home</button>
+		</div>
+	</div>
+	<script src="./app/js/service-register.js">
+	</script>
+</body>
+</html>

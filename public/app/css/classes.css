@@ -8,51 +8,80 @@
     color: rgb(200, 200, 200);
     cursor: initial;
 
-    user-select: none;
+    -ms-user-select: none;
+
+        user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
 }
 
 .alignCenter{
+     display: -webkit-box;
+     display: -ms-flexbox;
      display: flex;
-     justify-content: center;
-     align-items: center;
- }
+     -webkit-box-pack: center;
+         -ms-flex-pack: center;
+             justify-content: center;
+     -webkit-box-align: center;
+         -ms-flex-align: center;
+             align-items: center;
+}
 .container{
      width: 100%;
      border: 1 px solid;
      margin: 0px;
- }
+}
 .collection{
      width: 100%;
+     display: -webkit-box;
+     display: -ms-flexbox;
      display: flex;
-     flex-direction: column;
-     justify-content: space-between;
-     align-items: center;
+     -webkit-box-orient: vertical;
+     -webkit-box-direction: normal;
+         -ms-flex-direction: column;
+             flex-direction: column;
+     -webkit-box-pack: justify;
+         -ms-flex-pack: justify;
+             justify-content: space-between;
+     -webkit-box-align: center;
+         -ms-flex-align: center;
+             align-items: center;
  
      border: none;
  
      margin: 5px 0px 0px;
- }
+}
 .collection-item{
+     display: -webkit-box;
+     display: -ms-flexbox;
      display: flex;
-     justify-content: space-between;
-     align-items: center;
+     -webkit-box-pack: justify;
+         -ms-flex-pack: justify;
+             justify-content: space-between;
+     -webkit-box-align: center;
+         -ms-flex-align: center;
+             align-items: center;
  
      width: 95%;
      margin: auto;
  
      border-top: 1px solid;
- }
+}
 .collection-item.thumb-sized{
      
      min-width: 48px;
      min-height: 48px;
- }
+}
 .modal-footer{
+     display: -webkit-box;
+     display: -ms-flexbox;
      display: flex;
-     justify-content: space-between;
-     align-items: center;
+     -webkit-box-pack: justify;
+         -ms-flex-pack: justify;
+             justify-content: space-between;
+     -webkit-box-align: center;
+         -ms-flex-align: center;
+             align-items: center;
      float: left;
 }
 
@@ -60,9 +89,17 @@
 .single{
      width: 100%;
  
+     display: -webkit-box;
+ 
+     display: -ms-flexbox;
+ 
      display: flex;
-     justify-content: center;
-     align-items: center;
+     -webkit-box-pack: center;
+         -ms-flex-pack: center;
+             justify-content: center;
+     -webkit-box-align: center;
+         -ms-flex-align: center;
+             align-items: center;
      text-align: center;
 }
  
@@ -74,24 +111,40 @@
 }
 .butRow{
      width: 100%;
+     display: -webkit-box;
+     display: -ms-flexbox;
      display: flex;
-     justify-content: space-around;
-     align-items: center;
+     -ms-flex-pack: distribute;
+         justify-content: space-around;
+     -webkit-box-align: center;
+         -ms-flex-align: center;
+             align-items: center;
 }
 .single_center{
+     display: -webkit-box;
+     display: -ms-flexbox;
      display: flex;
-     justify-content: center;
-     align-items: center;
- }
+     -webkit-box-pack: center;
+         -ms-flex-pack: center;
+             justify-content: center;
+     -webkit-box-align: center;
+         -ms-flex-align: center;
+             align-items: center;
+}
  
- .in_row {
+.in_row {
+     display: -webkit-box;
+     display: -ms-flexbox;
      display: flex;
-     justify-content: space-around;
-     align-items: center;
- }
- .full_width{
+     -ms-flex-pack: distribute;
+         justify-content: space-around;
+     -webkit-box-align: center;
+         -ms-flex-align: center;
+             align-items: center;
+}
+.full_width{
      width: 100%;
- }
+}
 
 
 .date{
@@ -101,15 +154,15 @@
 .btn{
      background-color: rgba(63, 120, 254,.6);
      border-radius: 4px;
- }
+}
 .btn-sm{
      padding-left: 15px;
      padding-right: 15px;
- }
+}
  
 .gray{
      color: rgba(193, 193, 193, 0.5);
- }
+}
  
 .hvrb:hover{
      text-shadow: 1px 1px 0px rgb(193, 193, 193);
@@ -121,23 +174,47 @@
  
  
 .center{
+     display: -webkit-box;
+     display: -ms-flexbox;
      display: flex;
-     justify-content: center;
-     align-items: center;
+     -webkit-box-pack: center;
+         -ms-flex-pack: center;
+             justify-content: center;
+     -webkit-box-align: center;
+         -ms-flex-align: center;
+             align-items: center;
 }
 .vertical{
+     display: -webkit-box;
+     display: -ms-flexbox;
      display: flex;
-     flex-direction: column;
+     -webkit-box-orient: vertical;
+     -webkit-box-direction: normal;
+         -ms-flex-direction: column;
+             flex-direction: column;
 }
 .centerstart{
+     display: -webkit-box;
+     display: -ms-flexbox;
      display: flex;
-     flex-direction: column;
-     align-items: center;   
+     -webkit-box-orient: vertical;
+     -webkit-box-direction: normal;
+         -ms-flex-direction: column;
+             flex-direction: column;
+     -webkit-box-align: center;
+         -ms-flex-align: center;
+             align-items: center;   
 }
 .flexend{
+     display: -webkit-box;
+     display: -ms-flexbox;
      display: flex;
-     justify-content: center;
-     align-items: flex-end;
+     -webkit-box-pack: center;
+         -ms-flex-pack: center;
+             justify-content: center;
+     -webkit-box-align: end;
+         -ms-flex-align: end;
+             align-items: flex-end;
 }
 
 .margBot20{
@@ -147,8 +224,8 @@
 
 .corrAnswer-hide{
      color: white;
- }
- .corrAnswer-show{
+}
+.corrAnswer-show{
      color: dodgerblue;
 }
 
@@ -156,10 +233,10 @@
 
 .zero{
      color: red;
- }
+}
 .one{
      color: orange;
- }
+}
 .two{
      color: rgb(255, 240, 0);
 }
@@ -184,11 +261,11 @@
 .dictionary{
      text-align: center;
      width: 100%;
- }
- #vocab .word{
+}
+#vocab .word{
      width: 80%;
      margin: auto;
- }
+}
 
 .forWords{
     width: 95%;
@@ -197,5 +274,5 @@
 .picked{ 
     /*position: relative;
     left: 20px;*/
-    border-left: 1px solid black;
+    border-left: 2px solid black;
 }

@@ -182,7 +182,7 @@ app
                                         },100)     
                                         
                               }
-                              utterThis.onerror = function(){ console.error('speech error'); resolve() }
+                              utterThis.onerror = function(ev){ console.error('speech error', ev); resolve() }
                               window.speechSynthesis.speak(utterThis);
                     } else resolve()
 

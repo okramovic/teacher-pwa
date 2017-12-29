@@ -4,14 +4,7 @@
 
 - remove non-used code
 
-
-     using postCss and autoprefixer?
-- do styling for safari as well
-- do styling for IE (it could be gotcha) - they'd see i didnt finish my work
-
 - hide word rating number
-
-
 
 
 
@@ -22,11 +15,6 @@ not that important? try when fresh
 - make sure no nonsense words (bug-giving) are in loaded dict/file
 - add dropbox get file and upload file functionality
 - when user clicks on word (test Q / A or in dict), it's copied to clipboard and small anouncement pops up
-
-
-
-- if there’s duplicates in newly added dict, clear them
-
 - when loading words - alert user on each wrong word in his file until all are fine? (seems like hell for a person, but it ll prevent error later)
 
 
@@ -35,12 +23,11 @@ not that important? try when fresh
 
 not neccessary
 - change initial menu “load new words” - make it a material. dropdown so it looks better and is organized
-- ?? voice says hi on every app start to check voice availability
   https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis
 ⁃	add this? (desktop safari throws errors)
 	⁃	https://theteacher.herokuapp.com/app/libs/angular.min.js.map
 	⁃	https://theteacher.herokuapp.com/app/libs/angular-animate.min.js.map
-
+- if there’s duplicates in newly added dict, clear them
 
 some notes on checkboxes
      //  getting selected checkboxes
@@ -149,3 +136,10 @@ some notes on checkboxes
      -    if previous test was 100% without wrong answers, next test it shows up
      -    added See data button (for situations when downloading file isnt possible)
      ⁃	when some words in Dict are checked and Dict gets reloaded, words stay marked as chosen
+
+
+29 dec
+⁃    first speak, then animate, not both at same time (corrupts attention / learning )
+-    using postCss and autoprefixer?
+          - do styling for safari as well
+          - do styling for IE (it could be my gotcha)
