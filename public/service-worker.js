@@ -1,7 +1,6 @@
-const shellName = "teacher_v00";
-const origin = "https://theteacher.herokuapp.com"
-//"/",
-const shellFiles = [
+const shellName = "teacher_v01",
+     origin = "https://theteacher.herokuapp.com",
+     shellFiles = [
   "/index.html",
 
   "/app/css/animations.css",
@@ -20,6 +19,7 @@ const shellFiles = [
   "/app/libs/angular-animate.1.5.5.min.js",
   
   "/app/js/service-register.js",
+  "/app/js/font-check.js",
   "/app/js/controllers.js",
   "/app/js/directives.js",
   "/app/js/services.js",
@@ -50,6 +50,7 @@ self.addEventListener('activate', e =>{
      console.log('[SW activate]');
      console.log('Cache newest version:', shellName);
 
+     // deleting old caches
      e.waitUntil(
           caches.keys().then( cacheNames =>{
                return Promise.all(
@@ -67,7 +68,6 @@ self.addEventListener('activate', e =>{
 })
 
 
-// offline serving
 self.addEventListener('fetch', e =>{
 
      e.respondWith(
@@ -97,16 +97,5 @@ self.addEventListener('fetch', e =>{
                                    return matching || Promise.reject('no-match');
                               });
           });
-     }
-     function useCache(e){
-
-               return  e.respondWith(
-          
-                    caches.match(e.request)
-                    .then(response =>{
-                              console.log(response)
-                              return fetch(e.request) || response
-                    })
-               );
-     }       
+     }     
 });

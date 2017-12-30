@@ -352,39 +352,40 @@
                <!--  showing vocab  -->
                <div ng-show="screen == 'words'" ng-class="" style="width: 100%; height:auto;">
                         
-                        <!--  buttons  -->
-                        <div class="butRow marginTop15" >
-                              <button   style="height: 100%;"
-                                   ng-click="downloadDict(userNotes,true)" 
-                                   >see data</button>
+                         <!--  buttons  -->
+                         <div class="full_width single_center" >
+                                   
+                                   <button ng-model="showUserNotes" ng-show="showUserNotes===false"
+                                             ng-click="showUserNotes=true"
+                                             >create back-up</button>
+                                   <button ng-model="showUserNotes" ng-show="showUserNotes===true"
+                                             ng-click="showUserNotes=false"
+                                             >hide back-up</button>
+                         </div>
+                         <!--  user notes  -->
+                         <div ng-show="showUserNotes" 
+                              class="center vertical marginTop20">
+                              
+                              <textarea cols="80" rows="10" 
+                                        ng-model="userNotes"
+                                        style="width:90%; height: 80px; font-size:15px;" 
+                                        placeholder="Add your notes to the file here:">ahoj</textarea>
+                              
+                              <div class="full_width in_row marginTop15 margBot20">
+                                        <button style="height: 100%;"
+                                                ng-click="downloadDict(userNotes,true)" 
+                                        >see data</button>
 
-                              <button ng-model="showUserNotes" 
-                                        ng-click="showUserNotes=!showUserNotes"
-                                        >back-up</button>
-                        </div>
-                        <!--  user notes  -->
-                        <div ng-show="showUserNotes" 
-                             class="center vertical" 
-                             style="margin: 20px 0px 30px;">
-                            
-                            <textarea cols="80" rows="10" 
-                                      ng-model="userNotes"
-                                      style="width:90%; height: 80px; font-size:15px;" 
-                                      placeholder="Add your notes to the file here:">ahoj</textarea>
-                            
-                            <div style="margin: 20px 0px;">
-                                   <a href="#" ng-href="{{myURL}}"
-                                        ng-click="downloadDict(userNotes)"
-                                        download="{{currentFilename}}"
-                                   >download the file</a>
-                            </div>
-                        </div>
-                        <!--  words list  -->
-                        <div id="vocab" style="width: 100%; overflow-y: auto;
-                                    display: flex; flex-direction: column; align-items: center;">
-
-                              <vocabulary words="words" ch="change" class="dictionary"></vocabulary>
-                        </div>
+                                        <a href="#" ng-href="{{myURL}}"
+                                           ng-click="downloadDict(userNotes)"
+                                           download="{{currentFilename}}"
+                                        >download file</a>
+                              </div>
+                         </div>
+                         <!--  words list  -->
+                         <div id="vocab" class="full_width centerstart" style="overflow-y: auto;">
+                                   <vocabulary words="words" ch="change" class="dictionary"></vocabulary>
+                         </div>
                </div>
           </div>
      </div>
@@ -479,5 +480,6 @@
      </noscript>
 
      <script src="./app/js/service-register.js"></script>
+     <script src="./app/js/font-check.js"></script>
 </body>
 </html>

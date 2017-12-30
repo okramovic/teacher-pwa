@@ -21,22 +21,53 @@ app
      }
      })
 .service('voiceLoader',['$timeout',function($timeout){
-        
-     this.autoChooseVoices = autoChooseVoices
+
+     // auto-selects voices for EN, DE and CS
+     this.autoChooseVoices = function autoChooseVoices(){
+               //console.log('autoChooseVoices =>',this.voices) 
+               console.log('[this.lang1, this.lang2]',this.lang1, this.lang2)
+     
+               var self = this
+     
+               let languages = [this.lang1, this.lang2]
+     
+               languages.forEach(function(lang, ind){
+             
+                             if (lang === 'cz' ){
+                                     self.defaultVoiceIndexes[ind] = self.voices.findIndex(function(voice){
+                     
+                                                     return voice.lang.toLowerCase().includes('cz') || voice.lang.toLowerCase().includes('cs')
+                                                     })                
+             
+                             } else if (lang === 'en'){
+             
+                                     self.defaultVoiceIndexes[ind] = self.voices.findIndex(function(voice){
+                     
+                                                                     return voice.lang.toLowerCase().includes('gb') //|| voice.lang.toLowerCase().includes('cs')
+                                                                     })
+                             } else if (lang === 'de'){
+     
+                                     self.defaultVoiceIndexes[ind] = self.voices.findIndex(function(voice){
+                     
+                                                                     //console.log(voice.name)
+                                                                     return voice.name ==="Google Deutsch"  || 
+                                                                            voice.name === "German Germany" ||
+                                                                            voice.lang.startsWith('de')
+                                                                     })
+                             }
+               })
+               console.log('this.defaultVoice1Index', this.defaultVoiceIndexes)
+     
+               this.defaultVoice1 = this.voices[this.defaultVoiceIndexes[0]]
+               this.defaultVoice2 = this.voices[this.defaultVoiceIndexes[1]]
+     }
      }])
 .service('vocabfile', [function(){
 
           this.parseText = parseText
      }])
-.service('exam', ['$timeout','$window',function($timeout,$window){
+.service('downloader', ['$timeout','$window',function($timeout,$window){
 
-          this.prepareExam = prepareExam
-          this.newRound = newRound
-          this.changeLevel = changeLevel
-
-          this.next = next
-          this.home = home
-          
 
           // to get txt file with dictionary and progress
           this.downloadDict = function downloadDict(notes, newTab){
@@ -104,6 +135,18 @@ app
 
                     window.open("", "_blank").document.write(data);                    
           }
+     }])
+.service('exam', ['$timeout','$window',function($timeout,$window){
+
+          this.prepareExam = prepareExam
+          this.newRound = newRound
+          this.changeLevel = changeLevel
+
+          this.next = next
+          this.home = home
+          
+
+          
 
           this.makeTest = function(words, indexes){
      
@@ -186,7 +229,8 @@ app
                               window.speechSynthesis.speak(utterThis);
                     } else resolve()
 
-               }).then(() => new Promise( resolve =>{
+               })
+               .then(() => new Promise( resolve =>{
 
                          var res = { dir: dir}
                          res.res = self.correct(input,curWord,round,to,from)  
@@ -200,7 +244,8 @@ app
                                                        resolve(res.res)
                                              },200)
                                    })
-                         } else if (res.res === 1 && !self.zen){ console.log('1 + no-zen')
+                         } else if (res.res === 1 && !self.zen){ 
+                                   //console.log('1 + no-zen')
 
                                    self.animateOk(function(){
 
@@ -217,7 +262,7 @@ app
                                    })
 
                          } else if (res.res === 1 && self.zen){
-                                        console.log('1 + zen')
+                                        //console.log('1 + zen')
 
                                         self.animateOk(function(){
 
@@ -231,7 +276,7 @@ app
                                         })                                      
 
                          } else if (res.res === 0 && !self.zen) {     
-                                        console.log('\n\n  idk or 0')
+                                        //console.log('\n\n  idk or 0')
                                         
                                         self.animateBad()
 
@@ -243,7 +288,7 @@ app
                                         })
 
                          } else if (res.res === 0 && self.zen) {     
-                                   console.log('\n\n  idk or 0')
+                                   //console.log('\n\n  idk or 0')
                                    
                                    self.animateBad()
 
@@ -257,7 +302,8 @@ app
                          } else alert('error Promise\nresult >> ' + res.res + "<<")
                     })
                )
-               .then(function(answer){ console.log('correct?', answer)
+               .then(function(answer){ 
+                    console.log('correct?', answer)
 
                          // possibilities:
                          //  1) ok answer & no zen  >>> ok point, next round, rating up
@@ -366,46 +412,6 @@ function stopConfetti(){
      //console.log('canvas', canvas)
 }
 
-
-// auto-selects voices for EN, DE and CS
-function autoChooseVoices(){
-          //console.log('autoChooseVoices =>',this.voices) 
-          console.log('[this.lang1, this.lang2]',this.lang1, this.lang2)
-
-          var self = this
-
-          let languages = [this.lang1, this.lang2]
-
-          languages.forEach(function(lang, ind){
-        
-                        if (lang === 'cz' ){
-                                self.defaultVoiceIndexes[ind] = self.voices.findIndex(function(voice){
-                
-                                                return voice.lang.toLowerCase().includes('cz') || voice.lang.toLowerCase().includes('cs')
-                                                })                
-        
-                        } else if (lang === 'en'){
-        
-                                self.defaultVoiceIndexes[ind] = self.voices.findIndex(function(voice){
-                
-                                                                return voice.lang.toLowerCase().includes('gb') //|| voice.lang.toLowerCase().includes('cs')
-                                                                })
-                        } else if (lang === 'de'){
-
-                                self.defaultVoiceIndexes[ind] = self.voices.findIndex(function(voice){
-                
-                                                                //console.log(voice.name)
-                                                                return voice.name ==="Google Deutsch"  || 
-                                                                       voice.name === "German Germany" ||
-                                                                       voice.lang.startsWith('de')
-                                                                })
-                        }
-          })
-          console.log('this.defaultVoice1Index', this.defaultVoiceIndexes)
-
-          this.defaultVoice1 = this.voices[this.defaultVoiceIndexes[0]]
-          this.defaultVoice2 = this.voices[this.defaultVoiceIndexes[1]]
-}
 
 
 function next(){

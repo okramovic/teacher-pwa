@@ -131,7 +131,7 @@
          -ms-flex-align: center;
              align-items: center;
 }
- 
+
 .in_row {
      display: -webkit-box;
      display: -ms-flexbox;
@@ -216,11 +216,15 @@
          -ms-flex-align: end;
              align-items: flex-end;
 }
-
+.marginTop20{
+     margin-top: 20px;
+}
 .margBot20{
      margin-bottom: 20px;
 }
-
+.margBot30{
+     margin-bottom: 30px;
+}
 
 .corrAnswer-hide{
      color: white;
@@ -264,7 +268,7 @@
 }
 #vocab .word{
      width: 80%;
-     margin: auto;
+     margin: auto;    
 }
 
 .forWords{
@@ -275,4 +279,7 @@
     /*position: relative;
     left: 20px;*/
     border-left: 2px solid black;
+}
+.notpicked{
+     border-left: 2px solid transparent;
 }

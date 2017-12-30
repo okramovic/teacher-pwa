@@ -1,8 +1,8 @@
 app
 .controller('teacherCtr',['$scope','$rootScope','$timeout',
                '$window', // used for local storage access (saving dicts & progress)
-               'exam', 'vocabfile', 'testShare','voiceLoader',
-          function($scope, $rootScope, $timeout, $window, exam,vocabfile, testShare,voiceLoader){
+               'downloader','exam', 'vocabfile', 'testShare','voiceLoader',
+          function($scope, $rootScope, $timeout, $window, downloader, exam, vocabfile, testShare, voiceLoader){
 
                //$scope.storedDicts = [] //$scope.p1
 
@@ -11,7 +11,7 @@ app
                // functions shared from Services
                     $scope.autoChooseVoices = voiceLoader.autoChooseVoices
 
-                    $scope.downloadDict = exam.downloadDict
+                    $scope.downloadDict = downloader.downloadDict
                     $scope.prepareExam = exam.prepareExam
                
                     $scope.getWords = testShare.getWords

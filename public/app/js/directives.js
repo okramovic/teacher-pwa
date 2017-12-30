@@ -3,11 +3,10 @@ app
 // to display current Dictionary
 .directive('vocabulary',function($timeout){
      return {
-          restrict: 'EA',
+          restrict: 'E',
           replace: true,
           scope: {
                words: '=',
-                //,change: '&'
                ch: '&'
           },
           template: '<div id="" ng-repeat="w in words " >'+
@@ -47,7 +46,8 @@ app
                                         ' &quot;four&quot;  : w[2] == 4, '+
                                         ' &quot;five&quot;  : w[2] == 5, '+
                                         ' &quot;six&quot;   : w[2] == 6, '+
-                                        ' &quot;picked&quot;: picked($index)}"'+
+                                        ' &quot;picked&quot;: picked($index),'+
+                                        ' &quot;notpicked&quot;: !picked($index)}"'+
                                                 '>' +
                                         '{{w[0]}} {{w[1]}} {{w[2]}}'+
                                 '</div>'+
@@ -56,7 +56,6 @@ app
           link: function(scope, el, att){
 
                scope.groupCheck = 1
-               //scope.wx = true; scope.i-dk = 1
           }
      }
 })
