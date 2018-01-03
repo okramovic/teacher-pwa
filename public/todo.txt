@@ -144,3 +144,8 @@ some notes on checkboxes
 -    using postCss and autoprefixer?
           - do styling for safari as well
           - do styling for IE (it could be my gotcha)
+
+
+3 Jan 2018
+	- 	select jazyky odstranit kody, nechat jen nazev
+	- 	loc storage ukladat jazyky ne v blbem poradi

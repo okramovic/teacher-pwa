@@ -424,8 +424,10 @@ app
                          
                     } else {
                               $scope.voices= null;
-                              $scope.v1on= false // $scope.voice1On,
-                              $scope.v2on= false // $scope.voice2On,
+                              $scope.voice1On = false;
+                              $scope.voice2On = false;
+                              //$scope.v1on= false 
+                              //$scope.v2on= false
                     }
 
 
@@ -451,7 +453,6 @@ app
                                         $timeout(function(){
                                                   $scope.voice1 = getVoiceIndex(v)
                                                   console.log("new voice1\n\n",v, $scope.voice1)
-                                                  //alert("on? " + $scope.voice1On +" v1 " + $scope.voice1)
                                         })                                
                     }
                     $scope.voice2Select = function(v){
@@ -492,6 +493,13 @@ app
 
                                         //so languages are in proper order for new screen
                                         if ($scope.direction === 'ba') $scope.changeDir()
+
+                                        // resetting voices settings for new dict's defaults
+                                        $scope.defaultVoiceIndexes = [null, null]
+                                        $scope.voice1 = null
+                                        $scope.voice2 = null
+                                        $scope.defaultVoice1 = null
+                                        $scope.defaultVoice2 = null
                               }) 
 
                               $timeout(function(){
@@ -581,25 +589,25 @@ app
                                              let rslt = $scope.prepareExam($scope.selectedType, $scope.testLength, $scope.words)
                                              $scope.setPrevTest(rslt)
 
-                                             resolve(rslt)
+                                             resolve()
                                    })
-                                   .then(function(test){
+                                   .then(function(){
                                              console.log('- - - - - - - - - - - - - -\nnew test')
                                              
                                              $timeout(function(){
                                                   //$scope.showWords = false
                                                   $scope.screen = "test"
-                                                  //$scope.shared = test
-                                                  //$scope.setTest(test)
                                                   $scope.mainScreen = false
                                              })
+                                             let toSend = {
+                                                  v1on: $scope.voice1On,
+                                                  v2on: $scope.voice2On,
+                                                  v1: ($scope.voice1) ? $scope.voice1 : $scope.defaultVoiceIndexes[0],
+                                                  v2: ($scope.voice2) ? $scope.voice2 : $scope.defaultVoiceIndexes[1]
+                                             }
+                                             console.log('ctrl1 voices sent:',toSend)
                                              $rootScope//.$parent
-                                             .$broadcast('newTest', {
-                                                            v1on: $scope.voice1On,
-                                                            v2on: $scope.voice2On,
-                                                            v1: ($scope.voice1) ? $scope.voice1 : $scope.defaultVoiceIndexes[0],
-                                                            v2: ($scope.voice2) ? $scope.voice2 : $scope.defaultVoiceIndexes[1]
-                                             })
+                                             .$broadcast('newTest', toSend)
                                    })
                }
                $scope.$on('endOfTest', function(){
@@ -788,13 +796,11 @@ app
 
                $scope.newRound = exam.newRound
                $scope.submit = exam.submit
-               //$scope.getNextGo = exam.getNextGo
-
                $scope.next = exam.next
           //
 
-          $scope.changeLevel = changeLevel
-          $scope.timeout = $timeout     // needed for Service functions
+          $scope.changeLevel = changeLevel   // to change words rating
+          $scope.timeout = $timeout          // needed for Service functions
 
 
           if (window.speechSynthesis){
@@ -802,7 +808,7 @@ app
                $scope.$on('voicesArrived',()=>{
 
                          $scope.voices = window.speechSynthesis.getVoices()                                       
-                         console.log('CTRL 2', $scope.voices, 'len',$scope.voices.length)    
+                         //console.log('CTRL 2', $scope.voices, 'len',$scope.voices.length)    
                })
 
           } else $scope.voices = null
@@ -894,18 +900,17 @@ app
                })     
           })
           $scope.$on('endOfTest',()=>{
-               //console.log('- - - - - - -  endoftest  - - - - - - -')
-
                // without this testscreen and main menu overlap
-               //$scope.screen = ''
                $scope.screen = ''
+
+               // so directive (inpFocus) $watch autofocuses input for next test // in case of early quit
+               $scope.blur = false
           })
 
-          // returns if test had the last question
+          // returns if this was last question of test
           $scope.endCheck = function(cb){
 
                if ($scope.round === $scope.testQuestions.length-1) cb(true)
                else cb(false)
-
           }     
 }])

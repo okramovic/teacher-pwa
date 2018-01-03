@@ -60,6 +60,7 @@ app
      
                this.defaultVoice1 = this.voices[this.defaultVoiceIndexes[0]]
                this.defaultVoice2 = this.voices[this.defaultVoiceIndexes[1]]
+               console.log('default voices:',this.defaultVoice1, this.defaultVoice2)
      }
      }])
 .service('vocabfile', [function(){
@@ -587,26 +588,25 @@ function newRound(string){
           let self = this
         
           this.timeout(()=>{
-                    if (self.addRound) self.round ++
+                    //console.log('this', this)
+                    if (this.addRound) this.round ++
 
-                    self.testWord = self.testQuestions[self.round].word[self.from] 
-                    self.corrAnswer = self.testQuestions[self.round].word[self.to] 
-                    self.answerHide = true
+                    this.testWord = this.testQuestions[this.round].word[this.from] 
+                    this.corrAnswer = this.testQuestions[this.round].word[this.to] 
+                    this.answerHide = true
                 
-                    self.user.input = ""
-                    self.blur = true    // actually auto-focuses the input
+                    this.user.input = ""
+                    this.blur = true    // actually auto-focuses the input
 
-                    if (window.speechSynthesis && self.voice1On){
-                                let toSay = self.testWord
+                    if (window.speechSynthesis && this.voice1On){
+                                let toSay = this.testWord
                                 let utterThis = new SpeechSynthesisUtterance(toSay);
-                                //console.log('this.voices', this.voices[this.voice1])
-                                utterThis.voice = self.voice1
-                                utterThis.lang  = self.voice1.lang
+                                utterThis.voice = this.voice1
+                                utterThis.lang  = this.voice1.lang
         
                                 window.speechSynthesis.speak(utterThis);
                     }
           })
-          //console.log('this.voice1On', this.voice1On)
 }
 
 
@@ -983,4 +983,3 @@ class Confetti {
      if (window.confettiACTIVE === true) requestAnimationFrame(this.render);
      }
 }
-   
