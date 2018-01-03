@@ -326,7 +326,7 @@
                                              class="margBot3">
                                    </div>    
                                    <select class="browser-default" ng-model="defaultVoice1"
-                                             ng-options="voi.name +' '+ voi.lang for voi in voices"
+                                             ng-options="voi.name for voi in voices"
                                              ng-change="voice1Select(defaultVoice1.name)" >
                                    </select>
                                    
@@ -340,7 +340,7 @@
                                         
                                    </div>
                                    <select class="browser-default" ng-model="defaultVoice2"
-                                             ng-options="voi.name + ' ' + voi.lang for voi in voices"
+                                             ng-options="voi.name for voi in voices"
                                              ng-change="voice2Select(defaultVoice2.name)">
                                    </select>
                               </div>

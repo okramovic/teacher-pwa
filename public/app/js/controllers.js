@@ -163,7 +163,7 @@ app
                          "use strict"
 
                          if (newName && lang1 && lang2 && Array.isArray(save) && save.length>0){
-                              console.log(" can save, have all data")
+                              console.log(" can save, have all data", lang1, lang2)
 
                               newName = newName.toString()
 
@@ -489,6 +489,9 @@ app
                               } else if (screen == 'initial') $timeout(()=>{
                                         $scope.slct = []
                                         $scope.selectedType = $scope.testTypes[2]  // i.e. Newest
+
+                                        //so languages are in proper order for new screen
+                                        if ($scope.direction === 'ba') $scope.changeDir()
                               }) 
 
                               $timeout(function(){
@@ -549,9 +552,10 @@ app
                               let helper = $scope.lang1
                               $scope.lang1 = $scope.lang2
                               $scope.lang2 = helper
+                              console.log('l1',$scope.lang1,'l2',$scope.lang2)
 
                               if ($scope.direction ==='ab') $scope.direction = 'ba'
-                              else /*if ($scope.direction ==='ba')*/ $scope.direction = 'ab'
+                              else $scope.direction = 'ab'
 
                               $scope.$parent.$broadcast('dirChange',$scope.direction)
                          })
@@ -606,6 +610,7 @@ app
                                    $scope.screen = "main"
                          })
 
+                         console.log('direction', $scope.direction)
                          // save progress to Local Storage
                               // so languages dont get switched
                               if ($scope.direction=='ab') saveLocSto( userFile.currentFilename,
@@ -617,7 +622,7 @@ app
                                                $scope.words)
                          
                          
-                         console.log("to save into local storage\n", userFile.currentFilename, $scope.lang1, $scope.lang2)
+                         //console.log("to save into local storage\n", userFile.currentFilename, $scope.lang1, $scope.lang2)
                })
                
                     
