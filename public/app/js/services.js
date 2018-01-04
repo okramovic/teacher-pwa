@@ -9,6 +9,7 @@ app
      }
      this.setWords = function(array){
           shared.words = array
+          console.log('shared.words',shared.words)
      }
 
      // to be able to do previous test again
@@ -181,8 +182,6 @@ app
 
                this.blur= false
 
-               //let zis = this
-
                const curWord = this.testQuestions[round],
                     dir = this.direction
 
@@ -205,104 +204,96 @@ app
                
                let self = this
 
-               new Promise( resolve => {        console.log("voice2On?", self.voice2On )
 
-                    if (window.speechSynthesis && this.voice2On){
-
-                              let toSay = curWord.word[to]
-                              let utterThis = new SpeechSynthesisUtterance(toSay);
-                              utterThis.voice = self.voice2
-                              utterThis.lang = self.voice2.lang
-                              utterThis.onstart = function(ev){
-                                   //console.log('start speech')
-                              }
-                              utterThis.onpause = function(ev){
-                                   console.log('speech pause')
-                              }
-                              utterThis.onend = function(ev){
-                                        console.log('end speech')
-                                        setTimeout(function(){
-                                             resolve()
-                                        },100)     
-                                        
-                              }
-                              utterThis.onerror = function(ev){ console.error('speech error', ev); resolve() }
-                              window.speechSynthesis.speak(utterThis);
-                    } else resolve()
-
-               })
-               .then(() => new Promise( resolve =>{
+               //speak().then(() => 
+               new Promise( resolve =>{
 
                          var res = { dir: dir}
-                         res.res = self.correct(input,curWord,round,to,from)  
+                         res.res = self.correct(input,curWord,round,to,from) 
+                         console.log('result ',res.res)
 
-                         if (res.res === 2) { 
-                                   self.answerHide = true
-                                   self.animateOk(function(){
+                         if (res.res === 2) 
+                              speak()
+                                   .then(() => 
+                                             $timeout(() =>
+                                                  self.animateOk(()=>
+                                                       $timeout(()=>{
+                                                                 self.addRound = true
+                                                                 resolve(res.res)
+                                                       },750)     
+                                                  )
+                                             ,250)      
+                                   )
+                         else if (res.res === 1 && !self.zen){ 
+                              console.log('result: 1  zen no')
+                              $timeout(()=>{
+                                   self.answerHide = false
+                                   self.nextGo = "next"
+                                   self.addRound = true
+                              })
 
-                                             self.timeout(function(){
-                                                       self.addRound = true;
+                              speak()
+                                   .then(()=>
+                                        $timeout(()=>
+                                             self.animateOk(()=>
+
+                                                  $timeout(()=>
                                                        resolve(res.res)
-                                             },200)
-                                   })
-                         } else if (res.res === 1 && !self.zen){ 
-                                   //console.log('1 + no-zen')
-
-                                   self.animateOk(function(){
-
-                                                  $timeout(function(){
-                                                            self.nextGo = "next"
-                                                            self.answerHide = false
-                                                            self.addRound = true;
-                                                  })
-
-                                                  self.timeout(function(){
-
-                                                            resolve(res.res)
-                                                  },200)
-                                   })
-
+                                                  ,750)
+                                             )
+                                        ,250)
+                              )
                          } else if (res.res === 1 && self.zen){
-                                        //console.log('1 + zen')
+                              console.log('result: 1  zen active')
+                              $timeout(()=>{
+                                        self.answerHide = false
+                                        self.nextGo = "next"
+                                        self.addRound = false
+                              })
 
-                                        self.animateOk(function(){
+                              speak()
+                                   .then(()=>
+                                        $timeout(()=>
+                                             self.animateOk(()=>
 
-                                             $timeout(function(){
-                                                  self.nextGo = "next"
-                                                  self.answerHide = false
-                                                  self.addRound = false
-                                                  
-                                             })
-                                             resolve(res.res)
-                                        })                                      
-
+                                                  $timeout(()=>
+                                                       resolve(res.res)     
+                                                  ,500)
+                                             )
+                                        ,500)
+                                   )
                          } else if (res.res === 0 && !self.zen) {     
-                                        //console.log('\n\n  idk or 0')
-                                        
-                                        self.animateBad()
-
-                                        $timeout(function(){
-                                             self.nextGo ='next'
+                                        console.log('0   zen no')
+                                        $timeout(() => {
                                              self.answerHide = false
+                                             self.nextGo ='next'
                                              self.addRound = true
-                                             resolve(res.res)
                                         })
 
+                                        speak()
+                                        .then(() => $timeout(() => {
+                                                            //self.addRound = true
+                                                            self.animateBad()
+                                                            resolve(res.res)
+                                                    },400)
+                                        )
                          } else if (res.res === 0 && self.zen) {     
-                                   //console.log('\n\n  idk or 0')
-                                   
-                                   self.animateBad()
+                                        console.log('0 + zen active')
+                                        $timeout(() => {
+                                             self.answerHide = false
+                                             self.nextGo ='next'
+                                             self.addRound = false
+                                        })
 
-                                   $timeout(function(){
-                                        self.nextGo ='next'
-                                        self.answerHide = false
-                                        self.addRound = false
-                                        resolve(res.res)  
-                                   })
-
+                                        speak()
+                                        .then(() => $timeout(() => {
+                                                            self.animateBad()
+                                                            resolve(res.res)
+                                                    },400)
+                                        )
                          } else alert('error Promise\nresult >> ' + res.res + "<<")
-                    })
-               )
+               })
+               //)
                .then(function(answer){ 
                     console.log('correct?', answer)
 
@@ -380,6 +371,36 @@ app
                          })  
                          })
                })
+
+               function speak(){
+                    //console.log('speak started\n', this, self)
+                    return new Promise( resolve => {
+
+                         if (window.speechSynthesis && self.voice2On){
+
+                                   let toSay = curWord.word[to]
+                                   let utterThis = new SpeechSynthesisUtterance(toSay);
+                                   utterThis.voice = self.voice2
+                                   utterThis.lang = self.voice2.lang
+                                   utterThis.onstart = function(ev){
+                                        console.log('start speech')
+                                   }
+                                   utterThis.onpause = function(ev){
+                                        console.log('speech pause')
+                                   }
+                                   utterThis.onend = function(ev){
+                                             console.log('end speech')
+                                             setTimeout(function(){
+                                                  resolve()
+                                             },100)               
+                                   }
+                                   utterThis.onerror = function(ev){ 
+                                        console.error('speech error', ev); resolve() 
+                                   }
+                                   window.speechSynthesis.speak(utterThis);
+                         } else resolve()
+                    })
+               }
           }
 }])
 //duration in milliseconds, best 10000 and 80 particles
@@ -490,86 +511,93 @@ function animateBad(cb){
     
           if (cb) cb()
 }
-// return if user input was correct
+// returns if user input was correct
 function correct(input, word, round, to, from){
         
-     // make it so at least one non-article word is required as input
+     // todo: make it so at least one non-article word is required as input
 
      //console.log('word', word)
 
+     // indicates that IDK was pressed
      if (input.trim() ==="") return 0
-
+     
+     input = input.toLowerCase().trim()
      let w = word.word
-     const INDEX = word.ind
-
-     if (w[to].toLowerCase().includes(input.toLowerCase())) {
-               console.log("found directly = ",2)
-               return 2
-
-     } else if (! w[to].toLowerCase().includes(input.toLowerCase())){
-
-                let found = 0, where = null
-
-                let thisWord = w[from].split(/,/g) 
-
-                              // clear them, ignore Uppercases
-                              .map(item=> item.toString().toLowerCase().trim() )
-
-               console.log("thisWord", thisWord)
-
-               for (let i=0; i < this.localWords.length; i++){
-
-                        // skip checking itself again
-                        if (i === INDEX) continue
-
-                        let dictWord = this.localWords[i][from].split(/,/g)            //toString().toLowerCase().trim()
+     const ownIndex = word.ind
 
 
-                        //  only look for answer in words that have same word on from side
-                        
-                        let fits = thisWord.some((word, ind) =>
+     if ( w[to].toLowerCase().includes(input) )  return 2
+
+     else { //if (! w[to].toLowerCase().includes(input))
+          
+
+          let found = 0,      // result to be returned
+              where = null    // index in Dict
+
+          let originalWords = w[from]
+                         .split(/,/g) 
+                         .map(item => item.toString().toLowerCase().trim() )  // clear them, ignore Uppercases
+          console.log( this.localWords )
+          console.log("looking for", w[from], w[to])
+
+          for (let i=0; i < this.localWords.length; i++){
+               console.log(i, ownIndex)
+               if (i === ownIndex) {  console.log('skipping', i, ownIndex);
+                        continue;
+               }     // to skip checking itself again
+
+               if (i<=4) console.log(i, this.localWords[i] )
+               
+                    //  only look for answer in words that have same word on 'from' side //
+                    
+                    let dictWords_from = this.localWords[i][from].split(/,/g)
+
+                    let hasSameFromWord = originalWords.some( word =>
                                 
-                                             dictWord.some(w =>
+                              dictWords_from.some(w =>{
+                                             console.log(word, w, w.toString().toLowerCase().trim() === word.toString().toLowerCase().trim() )
+                                             // ignore emptySpace and upperCase noise
+                                             return w.toString().toLowerCase().trim() === word.toString().toLowerCase().trim()
+                                             })
+                              )
 
-                                                  // ignore emptySpace and upperCase noise
-                                                  w.toString().toLowerCase().trim() 
-                                                            === word.toString().toLowerCase().trim()
-                                             )
-                                   )
+               if (hasSameFromWord){
+                    //return 1
 
-                        if (fits){
+                    console.log("cw check", dictWords_from,"fits", w[from])
 
-                             console.log("cw check", dictWord,"fits", fits, input)
+                    // vocabulary word   
+                    let targetDictWords = this.localWords[i][to]
+                                        .split(/,/g)
+                                        .map(w => w.toString().toLowerCase().trim() )
+                    console.log('    targetDictWords', this.localWords[i][to])
 
-                             // vocabulary word   
-                             let word = this.localWords[i][to].split(/,/g)
-                                
-                                             .map(w=> w.toString().toLowerCase().trim() )
+                    // does this vocabulary word equal to input?   
+                    let rslt = targetDictWords.some( word =>{ 
+                                        //console.log(word, input)
+                                        return word === input })
 
-                             //console.log("     -  ", word)           
-                             // does this vocabulary word equal to input?   
-                             if (word.some((w, ind)=>w === input.toLowerCase().trim() ) === true) {
+                    console.log('    rslt', rslt)
+                    if (rslt === true) {
 
-                                        //console.log("found this:", word)
-                                        found = 1; 
-                                        where = i
+                                   found = 1;  where = i
 
-                                        console.log("found?",found,"alternative @", where, word)
+                                   console.log("\n\nfound?",found,"alternative @", where, targetDictWords)
                                                         
-                                        return found
-                                        break
-                             }
-                        }            
-                        
-                        if (i === this.localWords.length -1 ){
-
-                              //console.log("havent found",found,"alternative @", where)
-                                
-                              return found
-                        }       
+                                   return found
+                                   break
+                    }
                }
-        }
-        else alert("correct fn Error")
+               
+               
+
+               if (i === this.localWords.length - 1 ){
+                         console.log("\n\nhavent found")
+                         return found
+               }       
+          }
+     }
+     //else alert("correct Error")
 }
 // changes words knowledge level (rating)
 function changeLevel(word, change){

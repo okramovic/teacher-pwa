@@ -126,7 +126,6 @@ app
                               //console.log("dict to load", dict)
 
                               userFile.currentFilename = dict.toString()
-                              
 
                               let data = angular.fromJson( $window.localStorage.getItem(dict) )
                               let langs = data[0]
@@ -152,10 +151,10 @@ app
                                         $scope.mainScreen = true
                                         $scope.screen = "main"
 
-                                        $scope.setWords(data.slice(1))
+                                        //$scope.setWords(data.slice(1))
+                                        $scope.setWords(data)
 
                                         $scope.autoChooseVoices()
-                                        
                               })
                     }
 
@@ -312,8 +311,6 @@ app
                               userFile.currentFilename = "_words_" + langs.a.toString() + "_-_" + langs.b.toString()
                               $scope.currentFilename = userFile.currentFilename
                               //mergeToSave([ $scope.lang1, $scope.lang2 ],)
-                              //$scope.$broadcast('newDict', parseText(txt))
-                              
 
                               $timeout(function(){
                                                   $scope.words = WORDS//parseText(txt)
@@ -584,7 +581,7 @@ app
                //  main button: PRACTICE (take test)
                $scope.practice = function practice(){
                                    //$scope.showWords = false
-                                   
+                                   console.log('words', $scope.words)
                                    new Promise(function(resolve,rej){
                                              let rslt = $scope.prepareExam($scope.selectedType, $scope.testLength, $scope.words)
                                              $scope.setPrevTest(rslt)
@@ -873,7 +870,7 @@ app
                          $scope.nextGo = 'go'
                          
 
-                         // to have access to Dictionary words
+                         // to have access to Dictionary words when checking
                          $scope.localWords = $scope.getWords()
 
                          // voices

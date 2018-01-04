@@ -74,7 +74,7 @@ app
 
                                 //console.log('round',scope.round,'\n$watch - scope.blur - vals old, new', o, n)
                                 if (scope.blur){
-                                        console.log('focus')
+                                        //console.log('focus')
                                         $timeout(()=>{
                                                 el[0].focus()
                                         },time)
