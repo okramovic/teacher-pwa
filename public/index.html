@@ -9,7 +9,7 @@
           
           <link rel="shortcut icon" href="./resources/icons/favicon.ico" type="image/x-icon" />
           <link rel="manifest" href="./manifest.json" />
-          <meta name="theme-color" content="#040072"/>
+          <meta name="theme-color" content="#000000"/>
           
           <meta name="apple-mobile-web-app-capable" content="yes">
           <meta name="apple-mobile-web-app-title" content="Teacher">
@@ -55,7 +55,7 @@
             
           <!-- "navbar" -->
           <div class="myNav row in_row full_width">
-
+               
                <div class="col sm2" style="display:flex; align-items: center; width: 15%">
                     <div ng-show="screen =='main'" ng-click="screenChange('initial')" class="alignCenter size2">
                          <i class="material-icons hvrb" data-fallback="&#8592;">first_page</i>    
@@ -254,11 +254,9 @@
 
                <!--  mainScreen  -->
                <div ng-show="screen == 'main'" 
-                     style=" width: 100%; height: 100%;
-                            display: flex; 
-                            flex-direction: column;
-                            justify-content: space-between;
-                            align-items: center;">
+                     style="width: 100%; height: 100%;
+                            display: flex; flex-direction: column;
+                            justify-content: space-between; align-items: center;">
                     <div style="width: 100%;">
                         <div class="butRow row marginTop15" >
                             <div class="col s6 center" >
@@ -290,8 +288,8 @@
                                                     ng-click="changeDir()"
                                                     >{{lang1}} to {{lang2}}</button>
                                 </div>
+                                <!-- test length selection -->
                                 <div class="col s6 center" >
-                                        <!-- test length selection -->
                                         <select ng-model="selectedType" 
                                             ng-options="t disable when (t ==='repeat previous' && getPrevTest()=== null) ||
                                                         (t==='checked ones' && slct.length<1) for t in testTypes"
@@ -387,6 +385,21 @@
                                    <vocabulary words="words" ch="change" class="dictionary"></vocabulary>
                          </div>
                </div>
+               <!--  editing words  -->
+               <div id="editWord" class="center vertical" ng-show="editWordShow">
+                         <p class="size3 marginTop15" >edit the word</p>
+                         <form name="editWordForm">
+                              <input type="text" ng-model="editWordA" required> <!-- ="true" -->
+                              <input type="text" ng-model="editWordB" required>
+                         </form>
+                         <div class="full_width in_row marginTop15 margBot20"> <!-- butRow ? -->
+                              <button class="size2" ng-click="cancelWordEdit()">cancel</button>
+                              <button class="size2" ng-click="confirmWordEdit()"
+                                      ng-disabled="editWordForm.$pristine || editWordForm.$invalid"
+                              >confirm</button>
+                         </div>
+               </div>
+               <div id="screenCover" ng-show="editWordShow"></div>
           </div>
      </div>
         

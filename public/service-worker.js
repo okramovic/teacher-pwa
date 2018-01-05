@@ -1,4 +1,4 @@
-const shellName = "teacher_v1.0.0",
+const shellName = "teacher_v1.1.0",
      origin = "https://theteacher.herokuapp.com",
      shellFiles = [
   "/index.html",

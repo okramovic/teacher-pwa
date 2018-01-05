@@ -80,7 +80,7 @@ app
                               $scope.chooseNew = false
                          })
 
-                         saveLocSto(userFile.currentFilename, 'en', 'de',$scope.example2)
+                         saveLocSto(userFile.currentFilename, 'en', 'de',$scope.example2, $scope)
                          loadLocalStorage()
                          
                     }
@@ -158,33 +158,35 @@ app
                               })
                     }
 
-                    function saveLocSto(newName, lang1,lang2, save){
+                    function saveLocSto(newName, lang1,lang2, save, $scope){
                          "use strict"
-
-                         if (newName && lang1 && lang2 && Array.isArray(save) && save.length>0){
+                         
+                         if (newName && lang1 && lang2 && Array.isArray(save) && save.length>0 ){
                               console.log(" can save, have all data", lang1, lang2)
 
-                              newName = newName.toString()
+                              if ($scope.direction === 'ba'){
+                                        const helper = lang1
+                                        lang1 = lang2
+                                        lang2 = helper
+                                        //console.log('>> direction ba', lang1, lang2)
+                              }
 
+                              newName = newName.toString()
                               let savedFilenames = $window.localStorage.getItem("userFileNames")
                               
 
                               const dataToSave = mergeToSave([lang1, lang2], save)
                               //console.log('data to save \n\n', toSave)
 
-
                               if (!savedFilenames){
-
                                         //console.log("no stored filenames", savedFilenames)
 
                                         let names = [  {name: newName, date: $scope.dateIt()}  ]
                                         
                                         $window.localStorage.setItem("userFileNames", angular.toJson(names))
 
-                                        $window.localStorage.setItem(
-                                                                      newName,
-                                                                      angular.toJson( dataToSave )
-                                        )
+                                        $window.localStorage.setItem( newName,
+                                                                      angular.toJson( dataToSave ) )
 
                               // look for newName among stored ones
                               } else if (savedFilenames){
@@ -195,9 +197,7 @@ app
 
 
                                         for (let i=0; i <savedFilenames.length; i++){
-
                                                   if (savedFilenames[i].name === newName) { 
-
                                                             newNameInStorage = true;
                                                             break  
                                                   }
@@ -229,7 +229,7 @@ app
                                                                                    )
                                                   
                                                   // save date to show on initial screen
-                                                       let currentFile = savedFilenames.find(obj=>obj.name==newName)
+                                                       let currentFile = savedFilenames.find(file=>file.name==newName)
                                                        currentFile.date = $scope.dateIt()
                                                        console.log('updated filenames', savedFilenames)
                                                        $window.localStorage.setItem("userFileNames", angular.toJson(savedFilenames))
@@ -239,7 +239,6 @@ app
                                         }
                               }
                          }
-
                     }
                     $scope.deleteLSDict = function(dict, ind){
 
@@ -322,11 +321,10 @@ app
                                                   // to hide open file / copy-paste div on initial screen
                                                   $scope.chooseNew = false
                                                   
-                                                  $scope.autoChooseVoices()
-                                                  
+                                                  $scope.autoChooseVoices()                  
                               })
 
-                              saveLocSto(userFile.currentFilename, langs.a, langs.b, WORDS)
+                              saveLocSto(userFile.currentFilename, langs.a, langs.b, WORDS, this)
                               loadLocalStorage()
                     }
 
@@ -376,7 +374,7 @@ app
 
                               })
 
-                              saveLocSto(d.filename,d.langs.a, d.langs.b, WORDS)
+                              saveLocSto(d.filename,d.langs.a, d.langs.b, WORDS, $scope)
                               loadLocalStorage()
                               
                     })
@@ -530,24 +528,6 @@ app
                          })  
                }
                
-
-               //$scope.showWords = false
-               /*$scope.showVocab = function(show){
-                         
-                         //$scope.$broadcast('screen', 'words')
-                         
-                         $timeout(function(){
-                                   //$scope.showWords = !$scope.showWords
-                                   if (show) $scope.screen = "words"
-                                   else if (!show) {
-                                             $scope.screen = "main"
-                                             $scope.showUserNotes = false;
-                                   }
-     
-                                   console.log("screen", $scope.screen)
-                         })
-               }*/               
-
                
                
                // change test direction e.g.: 'EN to DE' to 'DE to EN'
@@ -602,7 +582,6 @@ app
                                                   v1: ($scope.voice1) ? $scope.voice1 : $scope.defaultVoiceIndexes[0],
                                                   v2: ($scope.voice2) ? $scope.voice2 : $scope.defaultVoiceIndexes[1]
                                              }
-                                             console.log('ctrl1 voices sent:',toSend)
                                              $rootScope//.$parent
                                              .$broadcast('newTest', toSend)
                                    })
@@ -615,18 +594,11 @@ app
                                    $scope.screen = "main"
                          })
 
-                         console.log('direction', $scope.direction)
-                         // save progress to Local Storage
-                              // so languages dont get switched
-                              if ($scope.direction=='ab') saveLocSto( userFile.currentFilename,
-                                                                      $scope.lang1, $scope.lang2,
-                                                                      $scope.words)
+                         // save progress to Local Storage     
+                         saveLocSto( userFile.currentFilename,
+                                             $scope.lang1, $scope.lang2,
+                                             $scope.words, $scope)
 
-                              else saveLocSto( userFile.currentFilename,
-                                               $scope.lang2, $scope.lang1,
-                                               $scope.words)
-                         
-                         
                          //console.log("to save into local storage\n", userFile.currentFilename, $scope.lang1, $scope.lang2)
                })
                
@@ -728,6 +700,57 @@ app
      
                }
 
+               // editing words directly in Dict (fixing typos etc)
+                    $scope.editWordShow = false
+                    $scope.editWord = (i,w)=>{
+                         $scope.wordToEdit = $scope.getWords()[i]//words[i]
+
+                         //console.log('word to edit', $scope.wordToEdit)
+
+                         $timeout(()=>{
+                              $scope.editWordShow = true
+                              $scope.editWordA = $scope.wordToEdit[0]
+                              $scope.editWordB = $scope.wordToEdit[1]
+                              
+                         })
+                    }
+
+                    $scope.confirmWordEdit = ()=>{
+                         if (!$scope.editWordA || !$scope.editWordB){
+                              alert('You cannot delete words...')
+                              return
+                         }
+
+                         //console.log('>> new', $scope.editWordForm, '\n',$scope.editWordA, $scope.editWordB)
+
+                         $scope.wordToEdit[0] = $scope.editWordA.toString().trim()
+                         $scope.wordToEdit[1] = $scope.editWordB.toString().trim()
+                         
+
+                         $scope.setWords($scope.words)
+                         delete $scope.wordToEdit
+
+                         $timeout(()=>{ 
+                              $scope.editWordShow = false 
+                              $scope.editWordForm.$setPristine()
+                         })
+
+                         saveLocSto(userFile.currentFilename, 
+                                        $scope.lang1, $scope.lang2, 
+                                        $scope.getWords(), $scope )
+
+                         
+                    }
+
+                    $scope.cancelWordEdit = ()=>{
+                         $timeout(()=>{
+                              $scope.editWordA = null
+                              $scope.editWordB = null
+                              $scope.editWordShow = false
+                              $scope.editWordForm.$setPristine()
+                              delete $scope.wordToEdit
+                         })
+                    }
                     
                // to append Date to Local storage dictionary
                $scope.dateIt = function(){

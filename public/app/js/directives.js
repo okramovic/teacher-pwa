@@ -37,7 +37,7 @@ app
                                         '</label>'  +
                                 '</div>' +
 
-                                '<div class="word" ng-model="w[2]"  '  +
+                                '<div class="word" ng-model="w[2]"  ng-click="editWord($index,w)"'  +
                                      'ng-class="{&quot;zero&quot;: w[2]==0, '  +
 
                                         ' &quot;one&quot;   : w[2] == 1, '+
@@ -135,7 +135,7 @@ app
 // this is for locally stored dictionary names on initial screen
 .filter('replace_',function(){
         return function(name){
-                return name.replace(/_/g," ")
+                return name.replace(/_/g," ")//.trim()
         }
 })
 
