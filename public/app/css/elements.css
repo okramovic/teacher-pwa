@@ -208,17 +208,27 @@ canvas{
              align-items: center;
 }
 
+/*@keyframes slideIn{
+     from{ left: -100vw};
+     to { left: 0;}
+}*/
+
 
 #editWord{
      position: fixed;
      top: 13vh;
-     left: 0;
+     left: -120vw;
      width: 100%;
      z-index: 2;
 
      background-color: rgb(255, 255, 255);
      -webkit-box-shadow: 0px 10px 15px 10px gray;
              box-shadow: 0px 10px 15px 10px gray;
+
+     -webkit-transition: left .3s;
+     -o-transition: left .3s;
+     transition: left .3s;
+
 }
 #editWord > form{
      width: 80%;
@@ -239,8 +249,13 @@ canvas{
 
      position: fixed;
      top: 0;
-     left: 0;
+     left: -120vw;
+
+     -webkit-transition: left .3s;
+     -o-transition: left .3s;
+     transition: left .3s;
 }
+
 
 #vocab{
      padding-bottom: 30px;

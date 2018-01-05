@@ -919,13 +919,15 @@ app
                          $scope.newRound()
                })     
           })
-          $scope.$on('endOfTest',()=>{
-               // without this testscreen and main menu overlap
-               $scope.screen = ''
+          $scope.$on('endOfTest',()=>
+               $timeout(()=>{
+                    // without this testscreen and main menu overlap
+                    $scope.screen = ''
 
-               // so directive (inpFocus) $watch autofocuses input for next test // in case of early quit
-               $scope.blur = false
-          })
+                    // so directive (inpFocus) $watch autofocuses input for next test // in case of early quit
+                    $scope.blur = false
+               })     
+          )
 
           // returns if this was last question of test
           $scope.endCheck = function(cb){

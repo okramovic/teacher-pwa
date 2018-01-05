@@ -6,7 +6,7 @@
      100% { -webkit-transform: rotate(720deg) scale(1); transform: rotate(720deg) scale(1);
              color: black; }
 }
- @keyframes bads{
+@keyframes bads{
      0% { -webkit-transform: rotate(0deg) scale(1); transform: rotate(0deg) scale(1);
              color: black; }
      50%  { -webkit-transform: rotate(360deg) scale(1.5); transform: rotate(360deg) scale(1.5);
@@ -14,7 +14,9 @@
      100% { -webkit-transform: rotate(720deg) scale(1); transform: rotate(720deg) scale(1);
              color: black; }
 }
- @-webkit-keyframes oks{
+
+
+@-webkit-keyframes oks{
      0%  {   color: black; 
              -webkit-transform: scale(1); 
                      transform: scale(1)}
@@ -25,7 +27,7 @@
              -webkit-transform: scale(1); 
                      transform: scale(1)}
 }
- @keyframes oks{
+@keyframes oks{
      0%  {   color: black; 
              -webkit-transform: scale(1); 
                      transform: scale(1)}
@@ -46,7 +48,7 @@
      display: flex;
 }
  
- .invisible{
+.invisible{
      display: none;
 }
 .anim-ok{
@@ -97,19 +99,27 @@
  
  
 .animatediv{
-      opacity:1;
+     opacity:1;
 }
 .animatediv.ng-hide{
-      opacity: 0;
+     opacity: 0;
 }
 .animatediv.ng-hide-add,
 .animatediv.ng-hide-remove{
-      -webkit-transition: all linear 1s;
-      -o-transition: all linear 1s;
-      transition: all linear 1s;
+     -webkit-transition: all linear 1s;
+     -o-transition: all linear 1s;
+     transition: all linear 1s;
 }
  
  
- .confettiHidden{
-      opacity: 0;
+.confettiHidden{
+     opacity: 0;
+}
+
+
+#screenCover.shown, #editWord.shown{
+     left: 0;
+     -webkit-transition: left .3s;
+     -o-transition: left .3s;
+     transition: left .3s;
 }
