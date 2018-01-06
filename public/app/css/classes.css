@@ -9,23 +9,12 @@
     cursor: initial;
 
     -ms-user-select: none;
-
         user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
 }
 
-.alignCenter{
-     display: -webkit-box;
-     display: -ms-flexbox;
-     display: flex;
-     -webkit-box-pack: center;
-         -ms-flex-pack: center;
-             justify-content: center;
-     -webkit-box-align: center;
-         -ms-flex-align: center;
-             align-items: center;
-}
+
 .container{
      width: 100%;
      border: 1 px solid;
@@ -88,11 +77,10 @@
 
 .single{
      width: 100%;
- 
+     text-align: center;
+
      display: -webkit-box;
- 
      display: -ms-flexbox;
- 
      display: flex;
      -webkit-box-pack: center;
          -ms-flex-pack: center;
@@ -100,12 +88,10 @@
      -webkit-box-align: center;
          -ms-flex-align: center;
              align-items: center;
-     text-align: center;
 }
  
 .row{
      width: 100%;
-     
      margin: 0px;
      padding: 0px;
 }
@@ -168,10 +154,8 @@
      text-shadow: 1px 1px 0px rgb(193, 193, 193);
      cursor: pointer;
 }
- 
- 
- 
- 
+
+
  
 .center{
      display: -webkit-box;

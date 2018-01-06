@@ -1,18 +1,26 @@
 @-webkit-keyframes bads{
-     0% { -webkit-transform: rotate(0deg) scale(1); transform: rotate(0deg) scale(1);
-             color: black; }
-     50%  { -webkit-transform: rotate(360deg) scale(1.5); transform: rotate(360deg) scale(1.5);
-             color: red; }
-     100% { -webkit-transform: rotate(720deg) scale(1); transform: rotate(720deg) scale(1);
-             color: black; }
-}
+
+     0%   { -webkit-transform: rotate(0deg) scale(1); 
+            transform: rotate(0deg) scale(1);
+            color: black; }
+     50%  { -webkit-transform: rotate(360deg) scale(1.5); 
+            transform: rotate(360deg) scale(1.5);
+            color: red; }
+     100% { -webkit-transform: rotate(720deg) scale(1); 
+            transform: rotate(720deg) scale(1);
+            color: black; }
+     }
 @keyframes bads{
-     0% { -webkit-transform: rotate(0deg) scale(1); transform: rotate(0deg) scale(1);
-             color: black; }
-     50%  { -webkit-transform: rotate(360deg) scale(1.5); transform: rotate(360deg) scale(1.5);
-             color: red; }
-     100% { -webkit-transform: rotate(720deg) scale(1); transform: rotate(720deg) scale(1);
-             color: black; }
+
+     0%   { -webkit-transform: rotate(0deg) scale(1); 
+            transform: rotate(0deg) scale(1);
+            color: black; }
+     50%  { -webkit-transform: rotate(360deg) scale(1.5); 
+            transform: rotate(360deg) scale(1.5);
+            color: red; }
+     100% { -webkit-transform: rotate(720deg) scale(1); 
+            transform: rotate(720deg) scale(1);
+            color: black; }
 }
 
 
@@ -26,7 +34,7 @@
      100%{   color: black; 
              -webkit-transform: scale(1); 
                      transform: scale(1)}
-}
+     }
 @keyframes oks{
      0%  {   color: black; 
              -webkit-transform: scale(1); 
@@ -76,28 +84,29 @@
  
 .animate-show,
 .animate-hide {
-   -webkit-transition:all linear 1s;
-   -o-transition:all linear 1s;
-   transition:all linear 1s;
+   -webkit-transition:opacity linear 1s;
+   -o-transition:opacity linear 1s;
+   /*was: transition:all linear 1s;*/
+   transition:opacity linear 1s;
 }
  
 .animate-show.ng-hide-remove,
 .animate-hide.ng-hide-add.ng-hide-add-active {
    opacity: 0;
-   display: -webkit-box !important;
+   /*display: -webkit-box !important;
    display: -ms-flexbox !important;
-   display: flex !important;
+   display: flex !important;*/
 }
  
 .animate-hide.ng-hide-add,
 .animate-show.ng-hide-remove.ng-hide-remove-active {
    opacity: 1;
-   display: -webkit-box !important;
+   /*display: -webkit-box !important;
    display: -ms-flexbox !important;
-   display: flex !important;
+   display: flex !important;*/
 }
  
- 
+/*
 .animatediv{
      opacity:1;
 }
@@ -109,7 +118,7 @@
      -webkit-transition: all linear 1s;
      -o-transition: all linear 1s;
      transition: all linear 1s;
-}
+}*/
  
  
 .confettiHidden{
@@ -117,9 +126,17 @@
 }
 
 
-#screenCover.shown, #editWord.shown{
+#editWord.shown{
      left: 0;
      -webkit-transition: left .3s;
-     -o-transition: left .3s;
-     transition: left .3s;
+          -o-transition: left .3s;
+             transition: left .3s;
+}
+#screenCover.shown{
+     z-index: 1;
+     opacity: 0.8;
+
+     -webkit-transition: opacity .3s;
+          -o-transition: opacity .3s;
+             transition: opacity .3s;
 }

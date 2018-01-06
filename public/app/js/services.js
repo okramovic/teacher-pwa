@@ -9,7 +9,6 @@ app
      }
      this.setWords = function(array){
           shared.words = array
-          console.log('shared.words',shared.words)
      }
 
      // to be able to do previous test again

@@ -224,7 +224,7 @@
      .margBot8{
        margin-bottom: 8px;
      }
-   
+     
      .myNav{
        /*--min-height: 65px;*/
        height: 13vh;
@@ -272,12 +272,17 @@
      .myNav{
        /*--min-height: 65px;*/
        padding-top: 0px;
-       height: 13vh;
-       
+       height: 13vh; 
      }
+
      #mainScreen{
        /*--height: calc(100% - 65px);*/
        height: 87vh;
+     }
+     #loadingWordsContainer,
+     #dictContainer{
+          max-height: 57vh;
+          overflow-y: auto;
      }
      #vocab{
        height: calc(57vh - 15px);

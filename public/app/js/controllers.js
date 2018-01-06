@@ -114,9 +114,7 @@ app
                                         if (names!== null) $scope.storedDicts = names
                                         else $scope.storedDicts = []
                                         $scope.mainScreen = true
-                                        
-                                        console.log("storage dicts\n",$scope.storedDicts)
-                                        //console.log('dict names', names)
+                                        //console.log("storage dicts\n",$scope.storedDicts)
                               })
                     }            
 
@@ -231,7 +229,7 @@ app
                                                   // save date to show on initial screen
                                                        let currentFile = savedFilenames.find(file=>file.name==newName)
                                                        currentFile.date = $scope.dateIt()
-                                                       console.log('updated filenames', savedFilenames)
+                                                       //console.log('updated filenames', savedFilenames)
                                                        $window.localStorage.setItem("userFileNames", angular.toJson(savedFilenames))
 
                                                   // to update data on initial screen
@@ -592,7 +590,7 @@ app
                          $timeout(function(){
                                    $scope.mainScreen = true
                                    $scope.screen = "main"
-                         })
+                         },1000)
 
                          // save progress to Local Storage     
                          saveLocSto( userFile.currentFilename,
@@ -880,8 +878,14 @@ app
                console.log('--------------------------------------')
                $timeout(function(){
 
-                         $scope.screen = 'test'
-                         $scope.showTest = true
+                         
+                         $timeout(()=>{
+                              
+                              
+                              $scope.newRound()
+                              $scope.screen = 'test'
+                              $scope.showTest = true
+                         },1000)
 
                          // reset the state for new test
                          $scope.feedback = []; $scope.finalResult = 0
@@ -897,7 +901,7 @@ app
                          $scope.localWords = $scope.getWords()
 
                          // voices
-                              console.log("voice settings", voiceData)
+                              //console.log("voice settings", voiceData)
                               if (window.speechSynthesis && $scope.voices){
                                              
                                         $scope.voice1On = voiceData.v1on
@@ -916,18 +920,19 @@ app
                          $scope.currIndex = $scope.testQuestions[$scope.round].ind
                         
                          // starts the actual test
-                         $scope.newRound()
+                         
+                         
                })     
           })
-          $scope.$on('endOfTest',()=>
-               $timeout(()=>{
-                    // without this testscreen and main menu overlap
+          $scope.$on('endOfTest',()=>{ $timeout(()=>{
+                         // without this testscreen and main menu overlap
                     $scope.screen = ''
-
+                    $scope.showTest = false
                     // so directive (inpFocus) $watch autofocuses input for next test // in case of early quit
                     $scope.blur = false
-               })     
-          )
+                    })
+                    
+          })
 
           // returns if this was last question of test
           $scope.endCheck = function(cb){
