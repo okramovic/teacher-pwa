@@ -443,13 +443,13 @@ app
                                         $scope.finalResult = 0;
                                         $scope.$parent.$broadcast('endOfTest')
 
-                              // if going to initial screen - to reset possibly checkbox-selected words in Dictionary
+                              // if going to initial screen
                               } else if (screen == 'initial') $timeout(()=>{
-                                        $scope.slct = []
+                                        $scope.slct = []    // to reset possibly checkbox-selected words in Dictionary
                                         $scope.selectedType = $scope.testTypes[2]  // i.e. Newest
-
-                                        //so languages are in proper order for new screen
-                                        if ($scope.direction === 'ba') $scope.changeDir()
+                                        $scope.setPrevTest(null) // to prevent error if user would try to repeat previous test with different words
+                                        
+                                        if ($scope.direction === 'ba') $scope.changeDir() //so languages are in proper order for new screen
 
                                         // resetting voices settings for new dict's defaults
                                         $scope.defaultVoiceIndexes = [null, null]
@@ -459,9 +459,7 @@ app
                                         $scope.defaultVoice2 = null
                               }) 
 
-                              $timeout(function(){
-                                        $scope.screen = screen;        
-                              })
+                              $timeout(() => $scope.screen = screen)
                     }
                //
 

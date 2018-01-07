@@ -1,7 +1,8 @@
-const shellName = "teacher_v1.1.2",
+const shellName = "teacher_v1.1.3",
      origin = "https://theteacher.herokuapp.com",
      shellFiles = [
   "/index.html",
+  "/resources/icons/favicon.ico",
 
   "/app/css/animations.css",
   "/app/css/elements.css",

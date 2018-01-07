@@ -787,8 +787,8 @@ function prepareExam (type,len,words,cb){
 }
 
 /*
-// when opening new Dict, get only langs from input data
-function getLangs(string){
+     // when opening new Dict, get only langs from input data
+     function getLangs(string){
 
         let langs = stringToArr(string)[0]
         
@@ -796,9 +796,9 @@ function getLangs(string){
                 a: langs[0],
                 b: langs[1]
                }
-}
-// return only words for vocab
-function parseText(string){
+     }
+     // return only words for vocab
+     function parseText(string){
      return stringToArr(string).slice(1)
 }*/
 
@@ -819,11 +819,13 @@ function lineToArray(line){
 
         line = line.split(".")
 
-        if (line[2]!=undefined && line[2].toString().trim() == "") {
+        if (line[2]!=undefined && line[2].toString().trim() == "") line.pop()
+        /*{
              let replacement = [line[0],line[1]]
              console.log('bad line repaired',replacement)
              return replacement.map(toProperType) 
-        }
+             // or just do 
+        }*/
 
         return line.map(toProperType)
 }
