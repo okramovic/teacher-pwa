@@ -93,41 +93,39 @@ app
 // file reader - to input new Dictionary
 .directive('fileSelect', ['$window',function($window){
      return{
-               restrict: 'A',
-               link: function(scope, el, attr){
-                        "use strict"
+          restrict: 'A',
+          link: function(scope, el, attr){
+              "use strict"
 
-                        el.bind("change", function(e){
+              el.bind("change", e =>{
 
-                              if (e.target.files[0].type !== 'text/plain'){
-                                        alert("only .txt files accepted\n" + 
-                                              "if you can't change this, try option to copy + paste"+
-                                              " the text of the file itself")
-                                        return null
-                              }
-                              const r = new FileReader()
+                    if (e.target.files[0].type !== 'text/plain')
+                              return alert("only .txt files accepted\n" + 
+                                    "if you can't change this, try option to copy + paste"+
+                                    " the text of the file itself")
 
-                              let filename = e.target.files[0].name
-                              console.log(e.target.files[0])
+                    const r = new FileReader()
 
-                              r.onloadend = function(e){
+                    let filename = e.target.files[0].name
+                    console.log(e.target.files[0])
 
-                                        let withoutNotes = clearNotes(e.target.result)
+                    r.onloadend = e =>{
 
-                                        scope.$emit('newDict', 
-                                                      {
-                                                       filename: filename, 
-                                                       words: parseText( withoutNotes ),
-                                                       langs: getLangs ( withoutNotes )
-                                                      }
-                                        )
-                               }
-                              r.onerror = function(e){
-                                       alert("error while reading file")
-                              }
-                              r.readAsText(e.target.files[0])
-                        })
-               }
+                              let data = stringToArr( clearNotes(e.target.result) )
+
+                              scope.$emit('newDict', 
+                                            {
+                                             filename: filename, 
+                                             langs: data.shift(),
+                                             words: data
+                                            }
+                              )
+                    }
+                    r.onerror = e => alert("error while reading file")
+
+                    r.readAsText(e.target.files[0])
+               })
+          }
      }
 }])
 
@@ -135,15 +133,14 @@ app
 // this is for locally stored dictionary names on initial screen
 .filter('replace_',function(){
         return function(name){
-                return name.replace(/_/g," ")//.trim()
+               if (name) return name.replace(/_/g," ").trim()
         }
 })
 
 function clearNotes(text){
 
-        text = text.slice(
+     return text.slice(
 
-                text.indexOf("- - - (do not remove this line) - - -") + 
-                "- - - (do not remove this line) - - -".length )
-        return text
+               text.indexOf("- - - (do not remove this line) - - -") + 
+                            "- - - (do not remove this line) - - -".length )
 }

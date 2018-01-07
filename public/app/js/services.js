@@ -63,10 +63,10 @@ app
                console.log('default voices:',this.defaultVoice1, this.defaultVoice2)
      }
      }])
-.service('vocabfile', [function(){
+/*.service('vocabfile', [function(){
 
           this.parseText = parseText
-     }])
+     }])*/
 .service('downloader', ['$timeout','$window',function($timeout,$window){
 
 
@@ -786,43 +786,52 @@ function prepareExam (type,len,words,cb){
                }
 }
 
-
+/*
 // when opening new Dict, get only langs from input data
 function getLangs(string){
 
-        let res = stringToArr(string)[0]
+        let langs = stringToArr(string)[0]
         
         return {
-                a: res[0],
-                b: res[1]
+                a: langs[0],
+                b: langs[1]
                }
 }
 // return only words for vocab
 function parseText(string){
      return stringToArr(string).slice(1)
-}
+}*/
 
 function stringToArr(str){
 
         let filteredArray = str.split(/\n/g)
         
         // filter out empty lines
-        filteredArray = filteredArray.filter(function(el){        
+        filteredArray = filteredArray
+                         .filter(el => el.toString().trim() !== "")
+                         .map(lineToArray)
+        console.log('filteredArray', filteredArray)
 
-                        return el.toString().trim() !== ""
-        })
-        .map(lineToArray)
         return filteredArray
 }
 
 function lineToArray(line){
 
         line = line.split(".")
+
+        if (line[2]!=undefined && line[2].toString().trim() == "") {
+             let replacement = [line[0],line[1]]
+             console.log('bad line repaired',replacement)
+             return replacement.map(toProperType) 
+        }
+
         return line.map(toProperType)
 }
 
 // turn string numbers to Integers for proper word-rating changes
 function toProperType(el){
+
+        //if (el.toString().trim()==="") return undefined
 
         if ( isNaN(parseInt(el))===true ) return el.toString().trim()
         else return parseInt(el)

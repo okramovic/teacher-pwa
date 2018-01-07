@@ -1,8 +1,9 @@
 app
 .controller('teacherCtr',['$scope','$rootScope','$timeout',
                '$window', // used for local storage access (saving dicts & progress)
-               'downloader','exam', 'vocabfile', 'testShare','voiceLoader',
-          function($scope, $rootScope, $timeout, $window, downloader, exam, vocabfile, testShare, voiceLoader){
+               'downloader','exam',
+               'testShare','voiceLoader',
+          function($scope, $rootScope, $timeout, $window, downloader, exam, testShare, voiceLoader){
 
                //$scope.storedDicts = [] //$scope.p1
 
@@ -18,8 +19,6 @@ app
                     $scope.setWords = testShare.setWords
                     $scope.setPrevTest = testShare.setPrevTest
                     $scope.getPrevTest = testShare.getPrevTest
-
-                    $scope.parseText = vocabfile.parseText
                //
 
 
@@ -76,8 +75,7 @@ app
 
                               $scope.autoChooseVoices()
 
-                              // to hide open file / copy-paste div on initial screen
-                              $scope.chooseNew = false
+                              $scope.chooseNew = false // to hide open file / copy-paste div on initial screen
                          })
 
                          saveLocSto(userFile.currentFilename, 'en', 'de',$scope.example2, $scope)
@@ -121,26 +119,18 @@ app
                     $scope.loadLSDict = function(dict){
                               "use strict"
 
-                              //console.log("dict to load", dict)
-
                               userFile.currentFilename = dict.toString()
 
                               let data = angular.fromJson( $window.localStorage.getItem(dict) )
-                              let langs = data[0]
-
-                              // remove langs from dict. data
-                              data.splice(0,1)
-                              data = data.map(function(item) {
-
-                                                       item[0] = item[0].trim()
-                                                       item[1] = item[1].trim()
-                                                       if (item[2]) item[2] = parseInt(item[2])
-
-                                                       return item
-                                                       }
-                              );
+                              let langs = data.shift()  // keep only words
+   
+                              data = data.map(item=>{
+                                                  item[0] = item[0].trim()
+                                                  item[1] = item[1].trim()
+                                                  if (item[2]) item[2] = parseInt(item[2])
+                                                  return item
+                              });
                               
-
                               $timeout(function(){
                                         $scope.lang1 = langs[0]; $scope.lang2 = langs[1]
                                         $scope.words = data
@@ -149,7 +139,6 @@ app
                                         $scope.mainScreen = true
                                         $scope.screen = "main"
 
-                                        //$scope.setWords(data.slice(1))
                                         $scope.setWords(data)
 
                                         $scope.autoChooseVoices()
@@ -278,51 +267,40 @@ app
 
                     
                     // when copy pasting
-                    $scope.uploadPasted =  function(txt){  //vocabfile.upload
+                    $scope.uploadPasted =  function(txt){
                               "use strict"
 
-                              console.log("pasting")
+                              let data = stringToArr(txt),
+                                  langs = data.shift()
+                              $scope.lang1 = langs[0]
+                              $scope.lang2 = langs[1]
+                              const WORDS  = data
+                              
+                              if ($scope.lang1 == undefined || $scope.lang1 == "" || $scope.lang2 == undefined || $scope.lang2 == "" )
+                                   return alert("One of language indications is missing.\n" + 
+                                                "Fill it in please\n(in very first line)");
+                                        
+                              else if (! Array.isArray(WORDS) || WORDS.length == 0 )
+                                   return alert("There seem to be no words in your vocab.\n" +
+                                             "You'll need some to use this app");
+                                        
 
-                              let langs = getLangs(txt)
-                              $scope.lang1 = langs.a
-                              $scope.lang2 = langs.b
-                              const WORDS  = parseText(txt)
-
-                              console.log("langs", $scope.lang1, $scope.lang2)
-
-                              if ($scope.lang1 == undefined || $scope.lang1 == "" || $scope.lang1 === null 
-                                   ||
-                                   $scope.lang2 == undefined || $scope.lang2 == "" || $scope.lang2 === null        
-                              ){
-                                        alert("one of language indications is missing.\n" + 
-                                             "fill it in please\n(in very first line)");
-                                        return
-
-                              } else if (! Array.isArray(WORDS) || WORDS.length === 0 ){
-                                        alert("there seem to be no words in your vocab.\n" +
-                                             "you'll need some to use this app");
-                                        return
-                              }
-
-
-                              userFile.currentFilename = "_words_" + langs.a.toString() + "_-_" + langs.b.toString()
+                              userFile.currentFilename = "_words_" + langs[0] + "_-_" + langs[1]
                               $scope.currentFilename = userFile.currentFilename
-                              //mergeToSave([ $scope.lang1, $scope.lang2 ],)
 
                               $timeout(function(){
-                                                  $scope.words = WORDS//parseText(txt)
+                                                  $scope.words = WORDS
                                                   $scope.setWords(WORDS)
+                                                  $scope.autoChooseVoices()
 
                                                   $scope.mainScreen = true
                                                   $scope.screen = "main"
 
                                                   // to hide open file / copy-paste div on initial screen
                                                   $scope.chooseNew = false
-                                                  
-                                                  $scope.autoChooseVoices()                  
                               })
 
-                              saveLocSto(userFile.currentFilename, langs.a, langs.b, WORDS, this)
+                              saveLocSto(userFile.currentFilename, langs[0], langs[1], WORDS, this)
                               loadLocalStorage()
                     }
 
@@ -331,36 +309,24 @@ app
                     $scope.$on('newDict', function(e,d){
                               "use strict"
 
-                              // get fileName and store it into local storage under key userFileNames
-
-                              const WORDS = d.words
-
-                              // this can be simplified!!
-
-                              if (d.langs.a == undefined || d.langs.a == "" || d.langs.a === null 
-                                   ||
-                                   d.langs.b == undefined || d.langs.b == "" || d.langs.b === null        
-                              ){
-                                        alert("one of language indications is missing.\n" + 
+                              // when one of languages is missing
+                              if (d.langs[0] == undefined || d.langs[0]== "" || d.langs[1] == undefined || d.langs[1] == "")
+                                   return alert("one of language indications is missing.\n" + 
                                              "fill it in please\n(in very first line)");
-                                        return
-
-                              } else if (! Array.isArray(WORDS) || WORDS.length === 0 ){
-                                        alert("there seem to be no words in your vocab.\n" +
+                                        
+                              // if words are missing
+                              else if (! Array.isArray(d.words) || d.words.length == 0 )
+                                   return alert("there seem to be no words in your vocab.\n" +
                                              "you'll need some to use this app");
-                                        return
-                              }
-                              //console.log(d)
-
-
-                              //$scope.$apply
+                              
+                              
                               $timeout(function(){
                                         userFile.currentFilename = d.filename
                                         $scope.currentFilename = userFile.currentFilename
                                         $scope.storedDicts.push(d.filename)
                                         $scope.words = d.words
-                                        $scope.lang1 = d.langs.a
-                                        $scope.lang2 = d.langs.b
+                                        $scope.lang1 = d.langs[0]
+                                        $scope.lang2 = d.langs[1]
                                         $scope.screen = "main"
 
                                         $scope.autoChooseVoices()
@@ -369,12 +335,10 @@ app
 
                                         // to hide open file / copy-paste div on initial screen
                                         $scope.chooseNew = false
-
                               })
 
-                              saveLocSto(d.filename,d.langs.a, d.langs.b, WORDS, $scope)
+                              saveLocSto(d.filename,d.langs[0], d.langs[1], d.words, $scope)
                               loadLocalStorage()
-                              
                     })
 
                     // when viewing Dict: to show textArea to add user notes
@@ -872,8 +836,7 @@ app
                     })
           })
           
-        
-        
+
           $scope.$on('newTest',function(ev, voiceData){
                console.log('--------------------------------------')
                $timeout(function(){
