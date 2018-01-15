@@ -520,8 +520,17 @@ app
 
                //  main button: PRACTICE (take test)
                $scope.practice = function practice(){
+
+                    
+
+                    if (window.speechSynthesis &&                                   // this prevents tests from running w errors - when autochoose of voices doesnt succeed
+                         ($scope.voice1On===true && $scope.voice1===undefined) || 
+                         ($scope.voice2On===true && $scope.voice2===undefined))
+                                   return alert('It seems like you have Speech turned on, but you did not choose any voice.\nEither select a voice or turn them off.')
+
+                                   //return console.log('v1', $scope.voice1, 'v2', $scope.voice2, 'on?',$scope.voice1On,$scope.voice2On )
                                    //$scope.showWords = false
-                                   console.log('words', $scope.words)
+                                   //console.log('words', $scope.words)
                                    new Promise(function(resolve,rej){
                                              let rslt = $scope.prepareExam($scope.selectedType, $scope.testLength, $scope.words)
                                              $scope.setPrevTest(rslt)

@@ -19,7 +19,8 @@ app
                if (Array.isArray(shared.prevTest) && shared.prevTest.length > 0) return shared.prevTest
                else return null
      }
-     })
+})
+
 .service('voiceLoader',['$timeout',function($timeout){
 
      // auto-selects voices for EN, DE and CS
@@ -63,10 +64,7 @@ app
                console.log('default voices:',this.defaultVoice1, this.defaultVoice2)
      }
      }])
-/*.service('vocabfile', [function(){
 
-          this.parseText = parseText
-     }])*/
 .service('downloader', ['$timeout','$window',function($timeout,$window){
 
 
@@ -87,7 +85,6 @@ app
 
                // save it as file
                     if (!newTab){
-                        //console.log('using Services line 34')
                         if (!notes) notes = ""
 
                         if ( !this.currentFilename.endsWith('.txt')) this.currentFilename += '.txt'
@@ -121,7 +118,7 @@ app
                // or when text encoding doesnt help
                // open data in new tab so user can copy/paste back it up
                     let currentDate = this.dateIt().toString()
-                    console.log('currentDate', currentDate)
+                    //console.log('currentDate', currentDate)
 
                     let data = [[lang1, lang2], ...this.words]
                               .map( word => word.join(". ") )
@@ -402,6 +399,8 @@ app
                }
           }
 }])
+
+
 //duration in milliseconds, best 10000 and 80 particles
 function startNewConfetti(duration, particles){
 
@@ -786,21 +785,7 @@ function prepareExam (type,len,words,cb){
                }
 }
 
-/*
-     // when opening new Dict, get only langs from input data
-     function getLangs(string){
 
-        let langs = stringToArr(string)[0]
-        
-        return {
-                a: langs[0],
-                b: langs[1]
-               }
-     }
-     // return only words for vocab
-     function parseText(string){
-     return stringToArr(string).slice(1)
-}*/
 
 function stringToArr(str){
 
@@ -814,7 +799,6 @@ function stringToArr(str){
 
         return filteredArray
 }
-
 function lineToArray(line){
 
         line = line.split(".")
@@ -838,7 +822,6 @@ function toProperType(el){
         if ( isNaN(parseInt(el))===true ) return el.toString().trim()
         else return parseInt(el)
 }
-
 // used when saving progress to Local Storage
 function mergeToSave(langs, words){
         
