@@ -2,6 +2,9 @@
 - decide what’s most important things to publish prototype
 
 
+- in how to modal (for Copy/pasting words) add this for reference -   https://www.w3schools.com/tags/ref_language_codes.asp
+     - and to enable autochoose of voices also for other langs than en, de, cs
+
 - remove non-used code
 
 - hide word rating number

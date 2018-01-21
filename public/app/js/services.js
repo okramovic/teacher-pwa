@@ -20,48 +20,45 @@ app
                else return null
      }
 })
-
+// auto-selects voices for EN, DE and CS
 .service('voiceLoader',['$timeout',function($timeout){
 
-     // auto-selects voices for EN, DE and CS
-     this.autoChooseVoices = function autoChooseVoices(){
-               //console.log('autoChooseVoices =>',this.voices) 
-               console.log('[this.lang1, this.lang2]',this.lang1, this.lang2)
+     this.autoChooseVoices = function(){
+          //console.log('autoChooseVoices =>',this.voices) 
+          console.log('[this.lang1, this.lang2]',this.lang1, this.lang2)
      
-               var self = this
+          const self = this
+          let languages = [this.lang1, this.lang2], defaultInds = []
      
-               let languages = [this.lang1, this.lang2]
-     
-               languages.forEach(function(lang, ind){
-             
-                             if (lang === 'cz' ){
-                                     self.defaultVoiceIndexes[ind] = self.voices.findIndex(function(voice){
+          languages.forEach((Lang, ind)=>{
+                    const lang = Lang.toLowerCase()
+
+                    if (lang == 'cz' || lang == 'cs' )
+
+                         defaultInds[ind] = self.voices.findIndex(voice =>
                      
-                                                     return voice.lang.toLowerCase().includes('cz') || voice.lang.toLowerCase().includes('cs')
-                                                     })                
+                                        voice.lang.toLowerCase().includes('cz') || voice.lang.toLowerCase().includes('cs') )                
+          
+
+                    else if (lang == 'en' || lang == 'eng')
              
-                             } else if (lang === 'en'){
-             
-                                     self.defaultVoiceIndexes[ind] = self.voices.findIndex(function(voice){
-                     
-                                                                     return voice.lang.toLowerCase().includes('gb') //|| voice.lang.toLowerCase().includes('cs')
-                                                                     })
-                             } else if (lang === 'de'){
+                         defaultInds[ind] = self.voices.findIndex(voice => voice.lang.toLowerCase().includes('gb') )
+                    
+                    
+                    else if (lang == 'de')
      
-                                     self.defaultVoiceIndexes[ind] = self.voices.findIndex(function(voice){
+                         defaultInds[ind] = self.voices.findIndex(voice =>
                      
-                                                                     //console.log(voice.name)
-                                                                     return voice.name ==="Google Deutsch"  || 
-                                                                            voice.name === "German Germany" ||
-                                                                            voice.lang.startsWith('de')
-                                                                     })
-                             }
-               })
-               console.log('this.defaultVoice1Index', this.defaultVoiceIndexes)
+                                        voice.name == "Google Deutsch"  || voice.name == "German Germany" || voice.lang.startsWith('de') )       
+          })
+          //console.log('this.defaultVoice1Index', this.defaultVoiceIndexes)
      
-               this.defaultVoice1 = this.voices[this.defaultVoiceIndexes[0]]
-               this.defaultVoice2 = this.voices[this.defaultVoiceIndexes[1]]
-               console.log('default voices:',this.defaultVoice1, this.defaultVoice2)
+          //this.defaultVoice1 = this.voices[this.defaultVoiceIndexes[0]]
+          //this.defaultVoice2 = this.voices[this.defaultVoiceIndexes[1]]
+          //console.log('default voices:',this.defaultVoice1, this.defaultVoice2)
+          this.voice1 = this.voices[defaultInds[0]]
+          this.voice2 = this.voices[defaultInds[1]]
+          console.log('v1', this.voice1,'\nv2', this.voice2 )
      }
      }])
 
@@ -117,7 +114,7 @@ app
                // for browsers that don't allow downloads, 
                // or when text encoding doesnt help
                // open data in new tab so user can copy/paste back it up
-                    let currentDate = this.dateIt().toString()
+                    let currentDate = getDate()
                     //console.log('currentDate', currentDate)
 
                     let data = [[lang1, lang2], ...this.words]
@@ -785,7 +782,33 @@ function prepareExam (type,len,words,cb){
                }
 }
 
+// to append Date to Local storage dictionary
+function getDate(){
+                         
+     let d = new Date()
 
+     let month = d.getMonth()+1
+     switch(month){
+          case 1: month = 'Jan'; break;
+          case 2: month = 'Feb'; break;
+          case 3: month = 'Mar'; break;
+          case 4: month = 'Apr'; break;
+          case 5: month = 'May'; break;
+          case 6: month = 'Jun'; break;
+          case 7: month = 'Jul'; break;
+          case 8: month = 'Aug'; break;
+          case 9: month = 'Sep'; break;
+          case 10: month = 'Oct'; break;
+          case 11: month = 'Nov'; break;
+          case 12: month = 'Dec'; break;
+     }
+     let min = d.getMinutes()
+     if (min.toString().length === 1) min = '0' + min.toString()
+
+     let final = d.getDate() + " " + month + " " + d.getFullYear() + "  " + d.getHours() + ":" + min
+
+     return final
+}
 
 function stringToArr(str){
 

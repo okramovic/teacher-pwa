@@ -168,7 +168,7 @@ app
                               if (!savedFilenames){
                                         //console.log("no stored filenames", savedFilenames)
 
-                                        let names = [  {name: newName, date: $scope.dateIt()}  ]
+                                        let names = [  {name: newName, date: getDate()}  ]
                                         
                                         $window.localStorage.setItem("userFileNames", angular.toJson(names))
 
@@ -195,7 +195,7 @@ app
 
                                                   savedFilenames.push({
                                                                       name: newName,
-                                                                      date: $scope.dateIt()
+                                                                      date: getDate()
                                                                       })
 
                                                   $window.localStorage.setItem("userFileNames", angular.toJson(savedFilenames))
@@ -217,7 +217,7 @@ app
                                                   
                                                   // save date to show on initial screen
                                                        let currentFile = savedFilenames.find(file=>file.name==newName)
-                                                       currentFile.date = $scope.dateIt()
+                                                       currentFile.date = getDate()
                                                        //console.log('updated filenames', savedFilenames)
                                                        $window.localStorage.setItem("userFileNames", angular.toJson(savedFilenames))
 
@@ -349,8 +349,6 @@ app
                // voice business
                     $scope.defaultVoiceIndexes = [null, null]
                     
-
-
                     if (window.speechSynthesis){
                          let counter = 0
                          //alert('speech ok')
@@ -392,8 +390,8 @@ app
 
                     $scope.voice1On = true
                     $scope.voice2On = true
-                    $scope.defaultVoice1 = null
-                    $scope.defaultVoice2 = null
+                    //$scope.defaultVoice1 = null
+                    //$scope.defaultVoice2 = null
                     $scope.voice1Switch = function(){
                               $timeout(function(){
                                         $scope.voice1On = !$scope.voice1On
@@ -405,29 +403,14 @@ app
                                         //console.log('now voice2', $scope.voice2On )
                     })}
                     $scope.voice1Select = function(v){
-                         
-                                        //console.log("v", v)
-                                        $timeout(function(){
-                                                  $scope.voice1 = getVoiceIndex(v)
-                                                  console.log("new voice1\n\n",v, $scope.voice1)
-                                        })                                
+                                        $timeout(()=> $scope.voice1 = $scope.voices[ getVoiceIndex(v) ] )              
                     }
                     $scope.voice2Select = function(v){
-
-                                        console.log("v", v)
-                                        $timeout(function(){
-                                                  $scope.voice2 = getVoiceIndex(v)
-                                                  console.log("new voice2\n\n",v, $scope.voice2)
-                                                  //alert("on2 " + $scope.voice2On +" v2 " + $scope.voice2)
-                                        })
+                                        $timeout(()=> $scope.voice2 = $scope.voices[ getVoiceIndex(v) ] )
                     }
                     function getVoiceIndex(name){
-                         
-                              return $scope.voices.findIndex(function(voice){
-                                        //console.log(i, name, voice.name)
-
-                                        return name === voice.name
-                              }) 
+                              //let i = $scope.voices.findIndex(voice=> name === voice.name ) 
+                              return $scope.voices.findIndex(voice=> name === voice.name ) 
                     }
                //
                
@@ -502,6 +485,8 @@ app
                               if ($scope.direction ==='ab') $scope.direction = 'ba'
                               else $scope.direction = 'ab'
 
+                              if (window.speechSynthesis) $scope.autoChooseVoices() // try to re-attach voices to each lang
+
                               $scope.$parent.$broadcast('dirChange',$scope.direction)
                          })
                          
@@ -520,27 +505,27 @@ app
 
                //  main button: PRACTICE (take test)
                $scope.practice = function practice(){
-
+                    console.log('v1', $scope.voice1)
                     
 
-                    if (window.speechSynthesis &&                                   // this prevents tests from running w errors - when autochoose of voices doesnt succeed
-                         ($scope.voice1On===true && $scope.voice1===undefined) || 
-                         ($scope.voice2On===true && $scope.voice2===undefined))
+                    // this prevents tests from running w errors - when autochoose of voices doesnt succeed
+                    if (window.speechSynthesis &&                     
+                         ($scope.voice1On===true && !$scope.voice1) || 
+                         ($scope.voice2On===true && !$scope.voice2))
                                    return alert('It seems like you have Speech turned on, but you did not choose any voice.\nEither select a voice or turn them off.')
 
                                    //return console.log('v1', $scope.voice1, 'v2', $scope.voice2, 'on?',$scope.voice1On,$scope.voice2On )
-                                   //$scope.showWords = false
-                                   //console.log('words', $scope.words)
-                                   new Promise(function(resolve,rej){
+
+                                   new Promise((resolve,rej)=>{
                                              let rslt = $scope.prepareExam($scope.selectedType, $scope.testLength, $scope.words)
                                              $scope.setPrevTest(rslt)
 
                                              resolve()
                                    })
-                                   .then(function(){
+                                   .then(()=>{
                                              console.log('- - - - - - - - - - - - - -\nnew test')
                                              
-                                             $timeout(function(){
+                                             $timeout(()=>{
                                                   //$scope.showWords = false
                                                   $scope.screen = "test"
                                                   $scope.mainScreen = false
@@ -548,11 +533,14 @@ app
                                              let toSend = {
                                                   v1on: $scope.voice1On,
                                                   v2on: $scope.voice2On,
-                                                  v1: ($scope.voice1) ? $scope.voice1 : $scope.defaultVoiceIndexes[0],
-                                                  v2: ($scope.voice2) ? $scope.voice2 : $scope.defaultVoiceIndexes[1]
+                                                  v1: $scope.voice1, 
+                                                  v2: $scope.voice2 
                                              }
-                                             $rootScope//.$parent
-                                             .$broadcast('newTest', toSend)
+                                             //($scope.voice1) ? $scope.voice1 : $scope.defaultVoiceIndexes[0],
+                                             //($scope.voice2) ? $scope.voice2 : $scope.defaultVoiceIndexes[1]
+
+                                             //
+                                             $scope.$parent.$broadcast('newTest', toSend)
                                    })
                }
                $scope.$on('endOfTest', function(){
@@ -669,7 +657,7 @@ app
      
                }
 
-               // editing words directly in Dict (fixing typos etc)
+               // editing of words directly in Dict (fixing typos etc)
                     $scope.editWordShow = false
                     $scope.editWord = (i,w)=>{
                          $scope.wordToEdit = $scope.getWords()[i]//words[i]
@@ -707,8 +695,6 @@ app
                          saveLocSto(userFile.currentFilename, 
                                         $scope.lang1, $scope.lang2, 
                                         $scope.getWords(), $scope )
-
-                         
                     }
 
                     $scope.cancelWordEdit = ()=>{
@@ -720,35 +706,6 @@ app
                               delete $scope.wordToEdit
                          })
                     }
-                    
-               // to append Date to Local storage dictionary
-               $scope.dateIt = function(){
-                         
-                    let d = new Date()
-          
-                    let month = d.getMonth()+1
-                    switch(month){
-                         case 1: month = 'Jan'; break;
-                         case 2: month = 'Feb'; break;
-                         case 3: month = 'Mar'; break;
-                         case 4: month = 'Apr'; break;
-                         case 5: month = 'May'; break;
-                         case 6: month = 'Jun'; break;
-                         case 7: month = 'Jul'; break;
-                         case 8: month = 'Aug'; break;
-                         case 9: month = 'Sep'; break;
-                         case 10: month = 'Oct'; break;
-                         case 11: month = 'Nov'; break;
-                         case 12: month = 'Dec'; break;
-                    }
-                    let min = d.getMinutes()
-                    if (min.toString().length === 1) min = '0' + min.toString()
-
-                    let final = d.getDate() + " " + month + " " + d.getFullYear() + "  " + d.getHours() + ":" + min
-
-                    //console.log(final)
-                    return final
-               }
 
                // not used now - was used when words could be checkbox-chosen separately
                /*$scope.allchecked = function(from){
@@ -848,11 +805,8 @@ app
                console.log('--------------------------------------')
                $timeout(function(){
 
-                         
                          $timeout(()=>{
-                              
-                              
-                              $scope.newRound()
+                              $scope.newRound()             // starts the actual test
                               $scope.screen = 'test'
                               $scope.showTest = true
                          },1000)
@@ -871,13 +825,13 @@ app
                          $scope.localWords = $scope.getWords()
 
                          // voices
-                              //console.log("voice settings", voiceData)
+                              console.log("voice settings received", voiceData)
                               if (window.speechSynthesis && $scope.voices){
                                              
                                         $scope.voice1On = voiceData.v1on
                                         $scope.voice2On = voiceData.v2on
-                                        $scope.voice1 = $scope.voices[voiceData.v1]
-                                        $scope.voice2 = $scope.voices[voiceData.v2]
+                                        $scope.voice1 = voiceData.v1 //$scope.voices[voiceData.v1]
+                                        $scope.voice2 = voiceData.v2 //$scope.voices[voiceData.v2]
 
                                         console.log("speeches: \n", $scope.voice1On, $scope.voice2On, $scope.voice1, $scope.voice2)
                               } else {
@@ -889,9 +843,6 @@ app
                          $scope.testQuestions = $scope.getQuestions()
                          $scope.currIndex = $scope.testQuestions[$scope.round].ind
                         
-                         // starts the actual test
-                         
-                         
                })     
           })
           $scope.$on('endOfTest',()=>{ $timeout(()=>{

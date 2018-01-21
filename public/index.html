@@ -296,7 +296,6 @@
                                    ng-show="voices && voices.length===0">you could use Speech, try refreshing</h6>
 
                               <div ng-show="voices && voices.length>0" class="full_width">
-                                   <!--div class="center" style="margin-top: 15px;"-->
                                    <div class="flexend margBot5">
                                         <label class="size4 gray">voice for {{lang1}}</label>
                                         <input type="checkbox" ng-checked="voice1On"
@@ -304,9 +303,9 @@
                                              ng-click="voice1On = !voice1On"
                                              class="margBot5">
                                    </div>    
-                                   <select class="browser-default" ng-model="defaultVoice1"
+                                   <select class="browser-default" ng-model="voice1"
                                              ng-options="voi.name for voi in voices"
-                                             ng-change="voice1Select(defaultVoice1.name)" >
+                                             ng-change="voice1Select(voice1.name)" >
                                    </select>
                                    
                                    <br>
@@ -318,9 +317,9 @@
                                              class="margBot5">
                                         
                                    </div>
-                                   <select class="browser-default" ng-model="defaultVoice2"
+                                   <select class="browser-default" ng-model="voice2"
                                              ng-options="voi.name for voi in voices"
-                                             ng-change="voice2Select(defaultVoice2.name)">
+                                             ng-change="voice2Select(voice2.name)">
                                    </select>
                               </div>
                     </div>
