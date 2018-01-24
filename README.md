@@ -1,4 +1,4 @@
-![welcome img] (https://raw.githubusercontent.com/okramovic/teacher-pwa/master/other_res/welcome1.png)
+![welcome img](https://raw.githubusercontent.com/okramovic/teacher-pwa/master/other_res/welcome1.png)
 
 # teacher-pwa
 
