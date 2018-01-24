@@ -10,4 +10,6 @@ Progressive web application for those of us who learn (human) languages and need
 * For Android users, after installation, it Works completely offline (Apple will hopefully start supporting Service workers soon...)
 
 
-Built using AngularJS, Materialize (Angular Materialize), Service workers, Speech Synthesis.
+Built using AngularJS, Materialize (Angular Materialize), Service workers, Speech Synthesis. Served by Heroku.
+
+Available at https://theteacher.herokuapp.com/
