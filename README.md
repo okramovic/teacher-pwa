@@ -1,4 +1,4 @@
-![welcome img] (/welcome1.png)
+![welcome img] (welcome1.png)
 
 # teacher-pwa
 
