@@ -12,4 +12,4 @@ Progressive web application for those of us who learn (human) languages and need
 
 Built using AngularJS, Materialize (Angular Materialize), Service workers, Speech Synthesis. Served by Heroku.
 
-Available at https://theteacher.herokuapp.com/
+Try at https://theteacher.herokuapp.com/   (you might need to reload the page if nothing renders at first try)
