@@ -350,9 +350,9 @@ app
                     $scope.defaultVoiceIndexes = [null, null]
                     
                     if (window.speechSynthesis){
-                         let counter = 0
+                         //let counter = 0
                          //console.log('lodaing voices outside')
-                         loadVoices()
+                         //loadVoices()
 
                          //alert('speech ok')
                          //const voices = load
@@ -868,11 +868,6 @@ app
           }     
 }])
 
-
-function getBrowserVoices(){
-
-    //const voices
-}
 
 //async 
 function loadVoices(){
