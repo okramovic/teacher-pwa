@@ -350,13 +350,9 @@ app
                     $scope.defaultVoiceIndexes = [null, null]
                     
                     if (window.speechSynthesis){
-                         //let counter = 0
-                         //console.log('lodaing voices outside')
-                         speechSynthesis.getVoices()
-                         //loadVoices()
-
-                         //alert('speech ok')
-                         //const voices = load
+                        // for slower devices this has to happen just "out of sport" so next time function is called it actually does return voices
+                        speechSynthesis.getVoices()
+                        loadVoices()
 
                          /*if (window.speechSynthesis.onvoiceschanged=== null)
                               window.speechSynthesis.onvoiceschanged = () => {
@@ -373,22 +369,21 @@ app
                                                   })
                               }; 
 
-                         else*/
+                        else*/
                         $timeout(()=>{
                               //console.log('saf voices check')
                               $scope.voices = window.speechSynthesis.getVoices()
                               $rootScope.$broadcast('voicesArrived')
-                              console.log(': voices: ' + window.speechSynthesis.getVoices().length + 
-                                                  '\n scope.voices ' + $scope.voices.length )
+                              console.log(': voices: ' + window.speechSynthesis.getVoices().length + '\n scope.voices ' + $scope.voices.length )
                          })
                               
                          
                     } else {
-                              $scope.voices= null;
-                              $scope.voice1On = false;
-                              $scope.voice2On = false;
-                              //$scope.v1on= false 
-                              //$scope.v2on= false
+                        $scope.voices= null;
+                        $scope.voice1On = false;
+                        $scope.voice2On = false;
+                        //$scope.v1on= false 
+                        //$scope.v2on= false
                     }
 
 
