@@ -344,23 +344,23 @@ app
                     // when viewing Dict: to show textArea to add user notes
                     $scope.showUserNotes = false
                //  
-               console.log('test test')
+
                
                // voice business
                     $scope.defaultVoiceIndexes = [null, null]
                     
                     if (window.speechSynthesis){
                          let counter = 0
-                         console.log('lodaing voices outside')
+                         //console.log('lodaing voices outside')
                          loadVoices()
 
                          //alert('speech ok')
                          //const voices = load
 
-                         if (window.speechSynthesis.onvoiceschanged=== null)
+                         /*if (window.speechSynthesis.onvoiceschanged=== null)
                               window.speechSynthesis.onvoiceschanged = () => {
                                         counter ++
-                                        //alert('onvoiceschanged event')
+
                                         if (!$scope.voices) // <– this is to prevent reloading of voices all the time
                                                   $timeout(()=>{
                                                   $scope.voices = window.speechSynthesis.getVoices()
@@ -372,7 +372,8 @@ app
                                                   })
                               }; 
 
-                         else $timeout(()=>{
+                         else*/
+                        $timeout(()=>{
                               //console.log('saf voices check')
                               $scope.voices = window.speechSynthesis.getVoices()
                               $rootScope.$broadcast('voicesArrived')
@@ -870,7 +871,7 @@ app
 
 function getBrowserVoices(){
 
-    const voices
+    //const voices
 }
 
 async function loadVoices(){
