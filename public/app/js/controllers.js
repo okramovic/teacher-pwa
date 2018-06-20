@@ -344,15 +344,16 @@ app
                     // when viewing Dict: to show textArea to add user notes
                     $scope.showUserNotes = false
                //  
-
+               console.log('test test')
                
                // voice business
                     $scope.defaultVoiceIndexes = [null, null]
                     
                     if (window.speechSynthesis){
                          let counter = 0
+                         console.log('lodaing voices outside')
                          loadVoices()
-                         
+
                          //alert('speech ok')
                          //const voices = load
 
@@ -873,7 +874,7 @@ function getBrowserVoices(){
 }
 
 async function loadVoices(){
-
+      console.log('lodaing voices inside')
 
       const voices = await window.speechSynthesis.getVoices()
 
