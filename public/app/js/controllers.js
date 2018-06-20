@@ -875,9 +875,9 @@ function getBrowserVoices(){
 }
 
 async function loadVoices(){
-      console.log('lodaing voices inside')
+      console.log('loading voices inside')
 
-      const voices = await window.speechSynthesis.getVoices()
+      const voices = window.speechSynthesis.getVoices()
 
       console.log('voices new', voices)
 }
