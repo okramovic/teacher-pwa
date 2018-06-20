@@ -351,7 +351,10 @@ app
                     
                     if (window.speechSynthesis){
                          let counter = 0
+                         loadVoices()
+                         
                          //alert('speech ok')
+                         //const voices = load
 
                          if (window.speechSynthesis.onvoiceschanged=== null)
                               window.speechSynthesis.onvoiceschanged = () => {
@@ -862,3 +865,17 @@ app
                else cb(false)
           }     
 }])
+
+
+function getBrowserVoices(){
+
+    const voices
+}
+
+async function loadVoices(){
+
+
+      const voices = await window.speechSynthesis.getVoices()
+
+      console.log('voices new', voices)
+}
