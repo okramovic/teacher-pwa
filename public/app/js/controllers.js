@@ -352,6 +352,7 @@ app
                     if (window.speechSynthesis){
                          //let counter = 0
                          //console.log('lodaing voices outside')
+                         speechSynthesis.getVoices()
                          //loadVoices()
 
                          //alert('speech ok')
@@ -377,8 +378,8 @@ app
                               //console.log('saf voices check')
                               $scope.voices = window.speechSynthesis.getVoices()
                               $rootScope.$broadcast('voicesArrived')
-                              console.log('b: voices: ' + window.speechSynthesis.getVoices().length + 
-                                                  '\n scope.v ' + $scope.voices.length )
+                              console.log(': voices: ' + window.speechSynthesis.getVoices().length + 
+                                                  '\n scope.voices ' + $scope.voices.length )
                          })
                               
                          
@@ -875,5 +876,5 @@ function loadVoices(){
 
       const myvoices = speechSynthesis.getVoices()
 
-      console.log('voices new', myvoices)
+      console.log('voices nju', myvoices)
 }
