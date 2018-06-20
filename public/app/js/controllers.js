@@ -871,5 +871,5 @@ function loadVoices(){
 
       const myvoices = speechSynthesis.getVoices()
 
-      console.log('voices nju', myvoices)
+      console.log('voices nju', myvoices, speechSynthesis.getVoices().length, '<')
 }
