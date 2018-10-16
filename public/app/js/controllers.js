@@ -659,7 +659,9 @@ app
                }
 
                // editing of words directly in Dict (fixing typos etc)
-                    $scope.editWordShow = false
+                    $scope.editWordShow  = false;
+                    $scope.addingNewWord = false;
+                    //$scoep.editWordHeader= 'edit the word'
                     $scope.editWord = (i,w)=>{
                          $scope.wordToEdit = $scope.getWords()[i]//words[i]
 
@@ -673,29 +675,56 @@ app
                          })
                     }
 
-                    $scope.confirmWordEdit = ()=>{
-                         if (!$scope.editWordA || !$scope.editWordB){
+                    $scope.confirmWordEdit = (type)=>{
+                        console.log('confirming type', type)
+
+                         if (!$scope.editWordA || !$scope.editWordB
+                             //|| !$scope.editWordA.toString().trim() || !$scope.editWordB.toString().trim()
+                             ){
                               alert('You cannot delete words...')
                               return
                          }
 
-                         //console.log('>> new', $scope.editWordForm, '\n',$scope.editWordA, $scope.editWordB)
+                         if (type == 'modify') {
+                            //console.log('>> new', $scope.editWordForm, '\n',$scope.editWordA, $scope.editWordB)
 
-                         $scope.wordToEdit[0] = $scope.editWordA.toString().trim()
-                         $scope.wordToEdit[1] = $scope.editWordB.toString().trim()
-                         
+                            $scope.wordToEdit[0] = $scope.editWordA.toString().trim()
+                            $scope.wordToEdit[1] = $scope.editWordB.toString().trim()
+                            
 
-                         $scope.setWords($scope.words)
-                         delete $scope.wordToEdit
+                            $scope.setWords($scope.words)
+                            delete $scope.wordToEdit
 
-                         $timeout(()=>{ 
-                              $scope.editWordShow = false 
+                            $timeout(()=>{ 
+                                  $scope.editWordShow = false 
+                                  $scope.editWordForm.$setPristine()
+                            })
+
+                            saveLocSto(userFile.currentFilename, 
+                                            $scope.lang1, $scope.lang2, 
+                                            $scope.getWords(), $scope )
+                        } else {
+
+                            $scope.editWordA = $scope.editWordA.toString().trim()
+                            $scope.editWordB = $scope.editWordB.toString().trim()
+
+                            const newWord = [ $scope.editWordA, $scope.editWordB ]
+                            $scope.words.push(newWord)
+                            console.log('new words', $scope.words)
+                            $scope.setWords($scope.words)
+
+                            $timeout(()=>{ 
+                              $scope.addingNewWord= false
+                              $scope.editWordShow = false
                               $scope.editWordForm.$setPristine()
-                         })
+                              delete $scope.wordToEdit
+                            })
 
-                         saveLocSto(userFile.currentFilename, 
-                                        $scope.lang1, $scope.lang2, 
-                                        $scope.getWords(), $scope )
+                            saveLocSto(userFile.currentFilename, 
+                                            $scope.lang1, $scope.lang2, 
+                                            $scope.getWords(), $scope )
+                            //location.reload()
+                        }
                     }
 
                     $scope.cancelWordEdit = ()=>{
@@ -703,11 +732,20 @@ app
                               $scope.editWordA = null
                               $scope.editWordB = null
                               $scope.editWordShow = false
+                              $scope.addingNewWord= false
                               $scope.editWordForm.$setPristine()
                               delete $scope.wordToEdit
                          })
                     }
+                    $scope.addWord = () => {
 
+                      $timeout(()=>{
+                        $scope.addingNewWord= true
+                        $scope.editWordShow = true
+                        $scope.editWordA = '' // $scope.wordToEdit[0]
+                        $scope.editWordB = '' // $scope.wordToEdit[1]
+                      })
+                    }
                // not used now - was used when words could be checkbox-chosen separately
                /*$scope.allchecked = function(from){
                          let till

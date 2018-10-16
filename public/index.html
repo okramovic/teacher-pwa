@@ -365,20 +365,27 @@
                          </div>
                </div>
                <!--  editing words  -->
-               <div id="editWord" class="center vertical" ng-class="{true: 'shown', false: ''}[editWordShow]" 
-                         > <!-- ng-show="editWordShow" -->
-                         <p class="size3 marginTop15" >edit the word</p>
+               <div id="editWord" class="center vertical" ng-class="{true: 'shown', false: ''}[editWordShow]" >
+                         <p class="size3 marginTop15" ng-show="!addingNewWord">edit the word</p>
+                         <p class="size3 marginTop15" ng-show="addingNewWord" >add new word
+                              <span ng-model="lang1">({{lang1}},</span>
+                              <span ng-model="lang2"> {{lang2}})</span>
+                         </p>
                          <form name="editWordForm">
                               <input type="text" ng-model="editWordA" required> <!-- ="true" -->
                               <input type="text" ng-model="editWordB" required>
                          </form>
                          <div class="full_width in_row marginTop15 margBot20"> <!-- butRow ? -->
                               <button class="size2" ng-click="cancelWordEdit()">cancel</button>
-                              <button class="size2" ng-click="confirmWordEdit()"
+                              <button class="size2" ng-click="confirmWordEdit('modify')" ng-show="addingNewWord == false"
                                       ng-disabled="editWordForm.$pristine || editWordForm.$invalid"
                               >confirm</button>
+                              <button class="size2" ng-click="confirmWordEdit('add')" ng-show="addingNewWord == true"
+                                      ng-disabled="editWordForm.$pristine || editWordForm.$invalid"
+                              >add</button>
                          </div>
                </div>
+               <div id='addWordButton' ng-show="screen == 'words'" ng-click="addWord()">+</div> <!--div>+</div-->
                <div id="screenCover" ng-class="{true: 'shown', false: ''}[editWordShow]"></div><!-- ng-show="editWordShow" -->
           </div>
      </div>

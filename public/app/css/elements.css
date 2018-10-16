@@ -256,6 +256,28 @@ canvas{
 }
 
 
+#addWordButton{
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1;
+
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+    background-color: rgba(63, 120, 254,.6);
+
+    color: white;
+    font-size: 29px;
+    cursor: pointer;
+}
+
 #vocab{
      padding-bottom: 30px;
 }
