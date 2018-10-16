@@ -1,0 +1,18 @@
+place your comments here:
+
+- add new words at the beginning, just after languages line. its easier and app was made this way
+- 3rd column represents how well you know the word. 1 means weak, 5 strong.no number is necessary
+
+
+
+- - - (do not remove this line) - - -
+cz.de
+Pročež, proto. deshalb.
+Proto. deswegen.0
+Čímž, proto.dadurch.1
+Na to, na tom.darauf.2
+Alespoň, přinejmenším. wenigstens
+Louka.die Weise
+Podporovat, těžit.fördern
+Pro to, neboť, za to.dafür
+Přesto.trotzdem

@@ -1,0 +1,704 @@
+place your comments here:
+
+
+- 3rd column represents how well you know the word. 1 means weak, 5 strong.
+
+- - - (do not remove this line) - - -
+cz,de
+Čímž, proto. dadurch
+Podporovat, těžit. fördern
+
+
+
+Srovnávat. vergleichen
+Nazývat, jmenovat. nennen
+Louka. die Weise
+Jezdit (na koni). reiten
+Veverka. das Eichhörnchen
+Chytat. fängen
+
+
+
+Pamatovat, připomínat. errineren
+Pruh. der Streif
+Proto, pročež. deshalb
+Asi, snad, ovšem. wohl
+Alespoň, přinejmenším. wenigstens
+Na to, na tom. darauf
+Přesto. trotzdem
+Vlastně. eigentlich
+Pro to, neboť, za to. dafür
+Kyselý, nevrlý. sauer
+Spolupráce. die Zusammenarbeit
+Příběh, historie. die Geschichte
+Přes, navzdor. trotz
+Právo, zákon. das Gesetz
+Politik. der Politiker
+Odpovědný. zuständig
+Hlas. die Stimme
+Hlasovat. stimmen
+Čarodějnice. die Hexe
+Vesmír. der Weltraum
+Drak. der Drache
+Zmizet. verschwinden
+Neuvěřitelný. unglaublich
+Jednorožec. der Einhorn
+Přeměnit. verwandeln
+Zachránit. retten
+Převzít. übernehmen
+Vyhnout se. vermeiden
+Starat se, pečovat, zajistit. sorgen
+Odstranit, vyjmout. entfernen
+Určit. festlegen
+Cena, odměna. der Preis
+Vlastnit. besitzen
+Přinést. holen
+Dívat se. anschauen
+Odměnit. lohnen
+Podrobit, oddaný. ergeben
+Působit. wirken
+Doporučit. empfehlen
+Činnost, zaměstnání. die Tätigkeit
+Potřebovat, vyžadovat. benötigen
+Modlitba. das Gebet
+Mnich. der Mönch
+Důkladný, přesný. genau
+Přesně. genau
+Viditelný, vizuální. sichtbar
+Svatý. heilig
+Dřívě, spíše. eher
+Právě, přímo. gerade
+Normálně. normalerweise
+Asi, přibližně. etwa
+Zpravidla, obvykle. gewohnlich
+Dovědět se. erfahren
+Zvláštní. besondere
+Různý, rozdílný. verschieden
+Následovat, poslechnout. fogen
+Majitel. der Inhaber
+Člen. das Mitglied
+Potvrdit. bestätigen
+Spotřebitel. der Verbraucher
+Odpovědět. beantworten
+Kopnout. treten 
+Zjistit, odhadnout. ermitteln
+Krok, stopa. der Tritt
+Výrobce. der Hersteller
+Pohybovat, hnout. bewegen
+Způsob. der Weise
+Výběr, volba. die Auswahl
+Použití, využití. der Gebrauch
+Jednání, počínání. das Verhalten
+Nyní, nuže. nun
+Tímto. hiermit
+K tomu. dazu
+Zvětšit. vergrössern
+Hořet, spálit. brennen
+Kromě toho, mimoto. ausserdem
+Pravda. die Wahrheit
+Osud. das Schicksal
+Naděje. die Hoffnung
+Vláda. die Regierung
+Strana (polit). die Partei
+Měřit. messen
+Občan, měšťan. der Bürger
+Nebezpečí. die Gefahr
+Objevit, nalézt. entdecken
+Úspěch. der Erfolg
+Malovat. malen
+Správa. die Verwaltung
+Podmínka. die Bedingung
+Smlouva. der Vertrag
+Dodání. die Lieferung
+Modlit se. beten
+Bavit. unterhalten
+Oblast, pole. das Feld
+Vývoj. der Verlauf
+Podpořit. unterstützen
+Prasklina, škvíra. die Spalte
+Význam, smysl. der Sinn
+Čtverec. der Felder
+Odstranit, oddálit. entfernen
+Ukončit. beenden
+Vysvětlit. erklären
+Zacházet, pojednat. behandeln
+Zpracovávat. bearbeiten
+Opětovat. erwidern
+Řešení, roztok. die Lösung
+Pocit, tušení. das Gefühl
+Zázrak. das Wunder
+Jasný, zřetelný. deutlich
+Anketa, průzkum. die Umfrage
+Sloužit. dienen
+Dojem. der Eindrück
+Zmeškat. verpassen
+Veletrh, mše. die Messe
+Údaj, indikace. die Anzeige
+Výsledek. das Ergebnis
+Nejprve. zuerst
+Studio. das Studio
+Návrh, koncept. der Entwurf
+Umělec. der Künstler
+Nadšený. begeistert
+Dospělý. erwachsen
+Zabránit. verhindern
+Čekat. warten
+Lyže. der Ski
+Hráč. der Spieler
+Vidět, dívat se. sehen
+Pohyb, hnutí. der Bewegung
+Vítězství. der Sieg
+Volno. die Freizeit
+Jak to, proč. Wieso
+Cesta, plavba. die Reise
+Zaručený. gewiss
+Pomalý, pomalu. Langsam
+Předpis. die Vorschrift
+Ohled, zřetel. die Berücksichtigung
+Král. der König
+Povolení. die Genehmigung
+Zákon, oprávnění. das Recht
+Mír, klid. der Friede
+Válka, konflikt. der Krieg
+Souhlas. die Zustimmung
+Možná, snad. vielleicht
+Mimozemský. auserirdische
+Evropský. europäisch
+Čištění. die Reinigung
+Domácnost. der Haushalt
+Topění. die Heizung
+Potrubí, žízení. die Leitung
+Škoda. der Schade
+Doporučení. die Empfehlung
+Obvod, rozsah. der Umfang
+Region, oblast. der Region
+Okres, čtvrť. der Bezirk
+Povrch, rozloha. die Fläche
+Naproti, vůči. gegenüber
+Vzbudit. wecken
+Opakovat. wiederholen
+Chtěli. wollten
+Mohli. konnten
+Překlad. die Übersetzung
+Koho. wen
+Rušit. stören
+Zboží. die Ware
+Koš. der Korb
+Čí. wessen
+Hruška. die Birne
+Ihned, okamžitě. sofort
+Chudý. arm
+Přízemí. das Erdgeschoss
+Poschodí. der Stock
+Kostkovaný. kariert
+Spokojený. zufrieden
+Vyzkoušet si. anprobieren
+Cvičení. die Übung
+Komu. wem
+Potopit se, zaniknout. untergehen
+Obložit, obsadit. belegen
+Večer (příslovce). am Abend
+Odpoledne. der Nachmittag
+Spěchat. hasten
+Ráno (přísl). am Morgen
+Sněženka. das Schneeglöckchen
+Obchodní dům. das Warenhaus
+Zkusit. Mitmachen, versuchen
+Podlaha. der Boden
+Strop. die Decke
+Ačkoliv. obwohl
+Jestli, ať. ob
+Okolnost. der Umstand
+V opačném případě. anderenfalls
+Časopis. das Magazin
+Radost. die Freude
+Setkat se, trefit. treffen
+Skoro, málem. beinahe
+Kus, část. das Stuck
+Hnojivo. der Dünger
+Popletený. verschroben
+Názor, myšlenka. der Gedanke
+Celkový, všechen. gesamt
+Dokonce, zcela. gar
+Zlý, špatný. schlimm
+Vtipný. witzig
+Hrozivý, cizí. unheimlich
+Typ, způsob. die Art
+Zvuk, jíl. der Ton
+Plocha, úroveň. die Ebene
+Vzdálenost, odstranění. die Entfernung
+Hodnocení. die Wertung
+Obsluha, péče. die Betreuung
+Řada, série. die Reihe
+Vlastnost, atribut. die Eigenschaft
+Název, označení, značka. die Bezeichnung
+Délka. die Länge
+Vliv, účinek, dojem. die Wirkung
+Váha. das Gewicht
+Rozdíl. der Unterschied
+Zkušenost, praxe. die Erfahrung
+Kolem, okolo. herum
+Políbit. küssen
+Pozvat. einladen
+Výlet. der Ausflug
+Drobné. das Kleingeld
+Šroub. die Schraube
+Protože. weil
+Chytrý. Klug, schlau
+Úkol, zadání. die Aufgabe
+Pryč, okolo. vorbei
+Povrch.die Oberfläche
+Styk, zacházení. der Umgang
+Nebezpečí. die Gefahr
+Násilí. die Gewalt
+Tehdy, teď. derzeit
+Proto, tudíž. deswegen
+Naproti tomu. hingegen
+Zase. nochmals
+S tím, tímto. hiermit
+Přesto, nicméně. dennoch
+Nápodobně. ebenfalls
+Také, taktéž. ebenfalls
+K tomu. hinzu
+Existovat, skládat se. bestehen
+Odtud, tedy. daher
+Běh, tok. der Lauf
+Podobný. ähnlich
+Záznam. die Aufnahme
+Výměna. der Austausch
+Šířka. die Breite
+Rozhodnutí. die Entscheidung
+Kolem, okolo. um
+Ovšem, zajisté. allerdings
+Slavit. feiern
+Výzkum. die Forschung
+Rada. der Rat
+Úřad. das Amt
+Uspořádání. die Veranstaltung
+Daň. das Steuer
+Úděl, cíl. die Bestimmung
+Síla, moc. die Kraft
+Platnost. die Kraft
+Seznam. die Liste
+Preferovaný. bevorzugt
+Rám. der Rahmen
+Obor, sféra. der Bereich
+Prohra, ztráta. der Verlust
+Oprava. die Reparatur
+Pobavit. vergnügen
+Eskalátor. die Rolltreppe
+Daleko. weit
+Výhled, vyhlídka. die Aussicht
+Hraničit. grenzen
+Trvalý, stálý. ständig
+Pohřeb. die Beerdigung
+Svatba. die Hochzeit
+Oklamat. täuschen
+Dost. genug
+Srnka. das Reh
+Významný. wesentlich
+Nikde. nirgendwo
+Točit se. drehen
+Pravidelný. regelmäsig
+Namísto. statt
+Bankovka. der Schein, die Banknote
+Příjmený. angenehm
+Vonět. reichen
+Zvědavý. neugierig
+Příslušet, náležet. gehören
+K tomu. dazu
+Prostředí, okolí. die Umgebung
+Výhoda, přednost. der Vorteil
+Nevýhoda, nedostatek. der Nachteil
+I. sowohl
+Prospívat, dařit se. gedeihen
+Zdánlivý. quasi
+Tušit, cítit. spüren
+Obálka, pokrývka. die Hülle
+Nechat. lassen
+Některý. manch
+Oznámit, hlásit. melden
+Znít, cinkat. klingen
+Zařídit, založit. eingerichten
+Nalézat se. befinden
+Roh, hrana. die Ecke
+Nádobí. das Geschirr
+Brzy, ráno. früh
+Spěchat, chvátat. eilen
+Bavit, udržovat. unterhalten
+Drsný, přísný. hart
+Příklad. das Beispiel
+Vzrůstat. steigen
+Udatný. brav
+Totiž. nämlich
+Zasloužit, vydělat. verdienen
+Jinak, mimoto. sonst
+Znovu, zase. wieder
+Blízký. nah
+Temný. dunkel
+Horlivý. eifrig
+Vlastnit, mít. besitzen
+Bohatý, hojný. reich
+Údaj. die Angabe
+Povinnost, závazek. die Schuld
+
+
+Dostat.kriegen, empfanden, erhalten.
+Dostat, obdržet.kriegen.
+Volat, křičet.rufen.
+Pomazánka.der Aufstrich.
+Vlastně, všeobecně.überhaupt.
+Rozšířit.erweitern.
+Vzdát, opustit.aufgeben
+Zachovat, ponechat.behalten
+Potom, jakmile.nachdem
+Asi, pravděpodobně.wahrscheinlich
+Dostupný.verfügbar
+Nadšený.begeistert
+Zatím, dosud.soweit
+Usmát se.anlächeln
+Oznámit.anmelden
+Obrátit.kehren
+Chycený.gefangen
+Kdysi, jednou.einst
+Rozvrátit.zerütten
+Vybudován.aufgebaut
+Vztah.das Verhältnis
+Pocházet, vzniknout.stammen
+Spíše, dříve, raději.eher
+Shromážděné.scharten
+Věřit, důvěřovat.trauen
+Pochopit, vyjádřit.fassen
+Fraška.der Schwank
+Pocítit.empfunden
+Přispět.beitragen
+Uvěznění.die Gefangenschaft
+Připravený.bereitet
+Pohodlný.gemütlich
+Viset.hängen
+Kout, úhel.der Winkel
+Ani.weder
+Ošálit.trügen
+Případ, událost.der Fall
+Viník, pachatel.der Täter
+Trest.die Strafe
+Trestat.strafen
+Odňat.entzogen
+Sloužit.dienen
+Zvláštní.seltsam
+Dychtivost, lačnost.die Gier
+Běhna.die Schlampe
+Označit, naznačit.bezeichnen
+Hladomorna.das Verlies
+Vylíčit.schildern
+Četný, často.häufig
+Přidělit.zuteilen
+Plivat.spucken
+Sotva.kaum
+Představit.vorstellen
+Střih, řez.der Schnitt
+Koukat, hledět.schauen
+Výzkumník.der Forscher
+Klapat.klappen
+Smíšenina.die Mischung
+Zlom.der Bruch
+Výrobce.der Hersteller
+Ohromný.riesig
+Úkol, objednávka, zakázka.der Auftrag
+Průzkum.die Umfrage
+Přece jen.immerhin
+Ovšem, zajisté, ano.allerdings
+Čin.die Tat
+Nechat.lassen
+Takový.solch
+Rozepnout.aufmachen
+Zabývat.beschäftigen
+Kresba.die Zeichnung
+Zhotovený.angefertigt
+Tak, i.so
+Neustálý.andauernd, ständig
+Uvědomovat si.realisieren
+Buňka.die Zelle
+Léčit, hojit.heilen
+Znázornit, zobrazit.darstellen
+Významný.bedeutend
+Odlišný, rozdílný.unterschiedlich
+Pořadí, řada.die Reihe
+Založen.anhand
+Po ruce, k dispozici.vorhanden
+Zvedat.heben
+Konečný.schlussendlich
+Skrze.mittels
+Vyměnit.ersetzen
+Rozjímání.die Betrachtung
+Úspěšný.erfolgreich.
+Růst.wachsen.
+Dostat.kriegen, erhalten.
+Rozmanitost.die Vielfalt.
+Důvěra, důvěřovat. das Vertrauen
+Stoupat. steigen
+Zvlášť. besonders
+Váha. das Gewicht
+Přijít, nastat. eintreffen
+Tak, takže. also
+Služba. der Dienst
+Sice. zwar
+Bojovat. kampfen
+Tehdy. damals
+Zařídit. einrichten
+Dřívější. ehemalig
+Stav, poměry. der Zustand
+Krajina, prostředí. die Landschaft
+Ohled. der Betracht
+Uvážit. betrachten
+Vzniknout. entstehen
+Průběh, postup. der Verlauf
+Podmiňovat. bedingen
+Určité, jisté. gewissen
+Svlečený, vytažený. ausgezogen
+Použít. verwenden
+Příliš, téměř. ziemlich
+Hádka, boj. der Streit
+Výchova. die Erziehung
+Opravdový. tatsächlich
+Skrývat, kašírovat. kaschieren
+Odpudovivý. abstossend
+Měnit. tauschen
+Odborně, pracovně. beruflich
+Představit si. Vorstellen
+Odstrašit, prudce zchladit. abschrecken
+Vychovat. erziehen
+Stejně, rovněž tak. genauso
+Podniknout. unternehmen
+Podnik. das Unternehmen
+Zprostředkovat. vermitteln
+Údajně, pravděpodobně. vermutlich
+Mzda. der Lohn
+Skládat. ausladen, falzen
+Rozverný. ausgelasen
+Rozum, intelekt. der Verstand
+Prudký. heftig
+Přijmout. aufnehmen
+Co se dějě. was ist los
+Hmatat, cítit. fühlen
+Rozhodnout. entschieden
+Pozorovat. beobachten
+Matný, tupý. stupmf
+Jindy, mimoto. sonst
+Příbuznost. die Verwandtschaft
+Distribuovat. verteilen
+Zúčastnit se. beteiligen
+Laskavý, milostivý. gnädig
+Zvažovat. überlegen
+Ukončit. beschliessen
+Předtím. vorher
+Trvat. nehmen
+Koukat. schauen
+Pohánět. treiben
+Dělal. getan
+Znenadání, zčistajasna. plötzlich
+Tahat. ziehen
+Poznat, seznámit se. kennenlernen
+Náladový. launisch
+Upřímný, čestný. ehrlich
+Bolestivý. schmerzlich
+Téměř, skoro. fast
+Pěkný. hübsch
+Zranit. verletzen
+Udivující. erstaunlich
+Neustálý. ständig
+Litovat. bereuen
+Poselství. die Botschaft
+Shodit, svrhnout. stürzen
+Dostat, obdržet. empfangen
+Nápad, vpád. der Einfall
+Zvednout. heben, abheben
+Pamatovat, vzpomenout. erinnern
+Žehlit. bügeln
+Zřetelný, jasný. deutlich
+Chyba. der Fehl
+Zdroj, pramen. die Quelle
+Zaměstnání. die Beschäftigung
+Hodit. schmeissen
+Řešení, zrušení. die Auflösung
+Vstát, povstat. aufstehen
+Zaprášený. staubig
+Zastavit. anhalten
+Odepřít. weigern
+Strašlivý. schrecklich
+Společnost. die Gesellschaft
+Nedbalost. die Lassigkeit
+Překvapit. überrasch
+Spousta, množina. die Menge
+Klapnout. klappen
+Opustit. verlassen
+Maskovaný. getarnt
+Zoufale. verzweifelt
+Sehnat. aufbringen
+Příchod. die Ankunft
+Úřad. die Behörde, der Amt
+Vybudovat. aufbauen
+Žádost, nabídka. der Antrag
+Doprovázet. begleiten
+Postarat. kümmern
+Vyřídit. ausrichten
+Vyjednat. verhandeln
+Vychrtlý. abgemagert
+Úkol, příkaz. der Auftrag
+Pomatený. verrückt
+Obrátit. kehren
+Lovit, pronásledovat. jagen
+Náhodou, náhodně. zufälligerweise
+Obsahovat. enthalten
+Pohodlný, útulný. gemütlich
+Vychutnat. geniessen
+Vykonat. leisten
+Zostudit. blamieren
+Žádat. fordern
+Dost, dostatek. genug
+Mimochodem. übrigens
+Dokonce. sogar
+Vyčerpávající. anstrengend
+Prokázat, dokázat. beweisen
+Bolest. der Schmerz
+Dokázat, vytvořit. schaffen
+Odhadnout. schätzen
+Prosba, dotaz. die Anfrage
+Chamtivý. gierig
+Umřít. sterben
+Záměr. die Absicht
+Milý, příjemný. angenehm
+Objevit se. erscheinen
+Stížnost. die Beschwerde
+Pozdravit. begrüssen
+Maličký. winzig
+Výsledek, východisko. der Ausgang
+Poměr, vztah. das Verhältnis
+Proslulý. berühmt
+Náhodou. beiläufig
+Bezpodmínečně, stůj co stůj. unbedingt
+Vydatný. deftig
+Prominutí. verzeihung
+Dotknout se. berühren
+Rozepnout. aufzumachen
+Zastrčit, vězet. stecken
+Chápat. begreifen
+Ponětí, představa. der Begriff
+Realizován. umgesetzt
+Řídit, ovládat. regieren
+Zároveň. gleichzeitig
+Zvyk. die Gewohnheit
+Nadávat, hubovat. schimpfen
+Bezcitný. lieblos
+Napomenout, kárat. ermahnen
+Horečka. das Fieber
+Zacházení, terapie. die Behandlung
+Oblouk, luk. der Bogen
+Pouze, jedině, holý. bloss
+Šeptat. flüstern
+Odříznout. abschneiden
+Trapný. peinlich
+Smělý. keck
+Vzrušující. aufregend
+Běžný. üblich
+Lesk, jas. der Glanz
+Spolu, vzájemně. miteinander
+Stejné. selbe
+Lepit. kleben
+Kupit. stapeln
+Bdělý. wach
+Ochrana. die Abwehr
+Stav, situace. der Zustand
+Upřednostňovat. bevorzugen
+Tušit. spüren
+Hluk, ruch. der Rummel
+Ležérní, volný. locker
+Zmačkaný. zerknittert
+Prozradit. verraten
+Jedle. die Tanne
+Možnost, alternativa. die Option
+Vysílání, zásilka. die Sendung
+Nic. nix
+Napnout, zavařit. aufspannen
+Určitý. bestimmt
+Nucení, nátlak. der Zwang
+Konstrukce, osnova. das Gerüst
+Vážnost. der Ernst
+Díra, jáma. das Loch
+Řada, posloupnost. die folge
+Bát se. befürchen
+Svědomí. das Gewissen
+Drzý. frech
+Slíbit. versprechen
+Strávit. verbringen
+Pach, vůně. der Geruch
+Nyní, právě teď. jeweils
+Definitivní, konečný. endgültig
+Vnímat, pozorovat. wahrnehmen
+Vydržet. ausharren
+Klouzat. rutschen
+Odpojit. trennen, losmachen
+Smotat. zusammensetzen
+Složit. erlegen, zusammensetzen
+Oddělat. abmachen
+Třást se. zittern
+Vstříc, naproti. entgegen
+Ohrožení, hrozba. die Bedrohung
+Projev, důkaz. der Beweis
+Trn, hřbet. der Dorn
+Mizera, chlap. der Kerl
+Informovat, uvědomit. benachrichtigen
+Podlý, sprostý. fies
+Zločinec. der Verbrecher
+Zubit se. schmunzeln
+Nemocný. unwohl
+Ponurý. finster
+Vést, řídit. lenken
+Růst. wachsen
+Návrh, námět. der Vorschlag
+Plynný, tekoucí. fliessend
+Sestavit, vyrobit. erstellen
+Přeložit, uvážit. überlegen
+Vyřešit. auflösen
+Zařídit. einrichten
+Napadnout, zřítit se. einfallen
+Trávník. der Rasen
+Středověk. das Mittelalter
+Zavázat. verpflichten
+Poučný. aufschlussreich
+Vzkaz, ambasáda. die Botschaft
+Postupovat. fortschreiten
+Uzdravený. geheilt
+Pokažený. verdorben
+Ctižádostivý. ehrgeizig
+Kluzký. rutschig
+Fronta. die Schlange
+Hrůza. das Grauen
+Příležitost. die Gelegenheit
+Jednohubka. das Häppchen
+Přidat. hinzufügen
+Věnovat. spenden
+Roztržitý. abgelenkt
+Poctivý. bieder
+Křehký, lámavý. zerbrechlich
+Požádat. angehen
+Morous. der Muffel
+Spínat, přepínat. schalten
+Dřímat. schlummern
+Zvyk. der Gewohnheit
+Zvyklý. gewöhnt
+Cvičený, praktikovaný. geübt
+Odpustit, prominout. verzeihen
+Tykat. duzen
+Vykat. siezen
+Mizet. verschwinden
+Pitomý. doof
+Touha. das Sehnen
+Připnout, nakazit. anstecken
+Přísný, tvrdý. streng
+Věrný. treu
+Jed. das Gift
+Udusit. ersticken
+Kulhat. lahmen
+Zácpa. der Stau
+Důvěra. das Vertrauen
